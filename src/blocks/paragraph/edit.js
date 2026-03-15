@@ -4,14 +4,20 @@ import { ToolbarGroup } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useSelect } from '@wordpress/data';
 import { getBlockID, BackgroundHelper } from '../../utils/index.js';
+import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
+import DesignPanel from '../../components/framework/DesignPanel.js';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, name }) {
     const blockProps = useBlockProps({
         id: getBlockID(attributes, clientId),
         className: attributes.classes || '',
     });
 
-    // PRIORITY FIX: Explicit BlockControls so toolbar appears on selection
+    const { inspectortab, pseudoClass } = useSelect((select) => ({
+        inspectortab: select('cwicly/base').getInspectorPosition(),
+        pseudoClass: select('cwicly/base').getPseudoClass(),
+    }), []);
+
     return (
         <>
             <BlockControls>
@@ -21,8 +27,36 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             </BlockControls>
 
             <InspectorControls>
-                {/* All original Cwicly panels (dynamic data, advanced classes, background, etc.) */}
-                {/* Reuse components from src/components/ as you extract them */}
+                <CwiclyInspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    name={name}
+                />
+
+                {inspectortab.tab === 'primary' && (
+                    <div className="cwicly-primary-tab">
+                        {/* Standard WP/Cwicly primary controls */}
+                        <p style={{ padding: '0 16px', fontSize: '12px' }}>
+                            {__('Primary content controls go here.', 'cwicly')}
+                        </p>
+                    </div>
+                )}
+
+                {inspectortab.tab === 'design' && (
+                    <DesignPanel
+                        attributes={attributes}
+                        setAttributes={setAttributes}
+                        pseudoClass={pseudoClass}
+                    />
+                )}
+
+                {inspectortab.tab === 'advanced' && (
+                    <div className="cwicly-advanced-tab">
+                        <p style={{ padding: '0 16px', fontSize: '12px' }}>
+                            {__('Advanced Cwicly settings (Classes, Custom CSS).', 'cwicly')}
+                        </p>
+                    </div>
+                )}
             </InspectorControls>
 
             <RichText
@@ -35,11 +69,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     'core/bold',
                     'core/italic',
                     'core/link',
-                    // + any Cwicly format extensions you already have
                 ]}
             />
 
-            {/* Original Cwicly background & helper features preserved */}
             <BackgroundHelper attributes={attributes} />
         </>
     );

@@ -1,15 +1,77 @@
-import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks, InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import { useSelect } from '@wordpress/data';
+import { getBlockID, BackgroundHelper } from '../../utils/index.js';
+import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
+import DesignPanel from '../../components/framework/DesignPanel.js';
 
-export default function Edit() {
-  const blockProps = useBlockProps({
-    className: 'cwicly-container-placeholder',
-  });
+export default function Edit({ attributes, setAttributes, clientId, name }) {
+    const { containerLayoutTag, classes } = attributes;
 
-  return (
-    <div {...blockProps}>
-      <p>{__('Cwicly Container Placeholder', 'cwicly')}</p>
-      <InnerBlocks />
-    </div>
-  );
+    const blockProps = useBlockProps({
+        id: getBlockID(attributes, clientId),
+        className: classes || '',
+    });
+
+    const { inspectortab, pseudoClass } = useSelect((select) => ({
+        inspectortab: select('cwicly/base').getInspectorPosition(),
+        pseudoClass: select('cwicly/base').getPseudoClass(),
+    }), []);
+
+    const Tag = containerLayoutTag || 'div';
+
+    return (
+        <>
+            <InspectorControls>
+                <CwiclyInspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    name={name}
+                />
+
+                {inspectortab.tab === 'primary' && (
+                    <div className="cwicly-primary-tab">
+                        <PanelBody title={__('Container Settings', 'cwicly')}>
+                            <SelectControl
+                                label={__('HTML Tag', 'cwicly')}
+                                value={containerLayoutTag}
+                                options={[
+                                    { label: 'DIV', value: 'div' },
+                                    { label: 'SECTION', value: 'section' },
+                                    { label: 'HEADER', value: 'header' },
+                                    { label: 'FOOTER', value: 'footer' },
+                                    { label: 'MAIN', value: 'main' },
+                                    { label: 'ARTICLE', value: 'article' },
+                                    { label: 'ASIDE', value: 'aside' },
+                                ]}
+                                onChange={(val) => setAttributes({ containerLayoutTag: val })}
+                            />
+                        </PanelBody>
+                    </div>
+                )}
+
+                {inspectortab.tab === 'design' && (
+                    <DesignPanel
+                        attributes={attributes}
+                        setAttributes={setAttributes}
+                        pseudoClass={pseudoClass}
+                    />
+                )}
+
+                {inspectortab.tab === 'advanced' && (
+                    <div className="cwicly-advanced-tab">
+                        <div style={{ padding: '0 16px', fontSize: '12px' }}>
+                            {__('Advanced Cwicly settings (Classes, Custom CSS).', 'cwicly')}
+                        </div>
+                    </div>
+                )}
+            </InspectorControls>
+
+            <Tag {...blockProps}>
+                <BackgroundHelper attributes={attributes} />
+                <InnerBlocks />
+            </Tag>
+        </>
+    );
 }

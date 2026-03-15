@@ -1,0 +1,88 @@
+import { useSelect, useDispatch } from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
+import { Fragment, useEffect } from '@wordpress/element';
+import classnames from 'classnames';
+
+/**
+ * CwiclyInspector
+ * Handles the tabbed interface in the sidebar (Primary, Design, Advanced).
+ */
+export default function CwiclyInspector({ attributes, setAttributes, name, isComponent, isEditingComponent, noDesign, noAdvanced }) {
+    const { writeInspectorPosition } = useDispatch('cwicly/base');
+    const { inspectortab } = useSelect((select) => ({
+        inspectortab: select('cwicly/base').getInspectorPosition(),
+    }), []);
+
+    // List of blocks that use the Cwicly tabbed interface
+    const cwiclyBlocks = [
+        'cwicly/heading',
+        'cwicly/column',
+        'cwicly/styler',
+        'cwicly/paragraph',
+        'cwicly/section',
+        'cwicly/container',
+        'cwicly/accordionheader',
+        'cwicly/accordioncontent',
+        'cwicly/tab',
+        'cwicly/tabcontents',
+        'cwicly/tabcontent',
+        'cwicly/navitems'
+    ];
+
+    useEffect(() => {
+        // Initial tab logic
+        if (!isComponent && cwiclyBlocks.includes(name) && 'primary' === inspectortab.tab) {
+            writeInspectorPosition({
+                tab: 'design',
+                panel: '',
+                default: true
+            });
+        }
+    }, []);
+
+    const setTab = (tab) => {
+        writeInspectorPosition({
+            tab,
+            panel: ''
+        });
+    };
+
+    if (name === 'cwicly/innerblocks') return null;
+    if (isComponent && !isEditingComponent) return null;
+
+    return (
+        <Fragment>
+            <div className="cwicly-inspector-tabs-container" style={{ position: 'sticky', top: 0, zIndex: 15, background: '#fff', borderBottom: '1px solid #ddd', marginBottom: '10px' }}>
+                <div style={{ display: 'flex', padding: '4px', gap: '8px' }}>
+                    {(!cwiclyBlocks.includes(name) || isComponent) && (
+                        <button
+                            type="button"
+                            className={classnames('cwicly-tab-button', { active: inspectortab.tab === 'primary' })}
+                            onClick={() => setTab('primary')}
+                        >
+                            {__('Primary', 'cwicly')}
+                        </button>
+                    )}
+                    {!noDesign && (
+                        <button
+                            type="button"
+                            className={classnames('cwicly-tab-button', { active: inspectortab.tab === 'design' })}
+                            onClick={() => setTab('design')}
+                        >
+                            {__('Design', 'cwicly')}
+                        </button>
+                    )}
+                    {name !== 'cwicly/styler' && !noAdvanced && (
+                        <button
+                            type="button"
+                            className={classnames('cwicly-tab-button', { active: inspectortab.tab === 'advanced' })}
+                            onClick={() => setTab('advanced')}
+                        >
+                            {__('Advanced', 'cwicly')}
+                        </button>
+                    )}
+                </div>
+            </div>
+        </Fragment>
+    );
+}

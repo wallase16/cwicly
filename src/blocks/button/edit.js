@@ -2,16 +2,24 @@ import { useBlockProps, RichText, InspectorControls, BlockControls, __experiment
 import { PanelBody, TextControl, ToggleControl, Popover } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
 import { getBlockID, BackgroundHelper } from '../../utils/index.js';
+import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
+import DesignPanel from '../../components/framework/DesignPanel.js';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
-    const { content, linkWrapperUrl, linkWrapperNewTab, classes } = attributes;
+export default function Edit({ attributes, setAttributes, clientId, name }) {
+    const { content, linkWrapperUrl, linkWrapperNewTab, classes, linkWrapperActive } = attributes;
     const [isEditingURL, setIsEditingURL] = useState(false);
 
     const blockProps = useBlockProps({
         id: getBlockID(attributes, clientId),
         className: `cc-btn ${classes || ''}`,
     });
+
+    const { inspectortab, pseudoClass } = useSelect((select) => ({
+        inspectortab: select('cwicly/base').getInspectorPosition(),
+        pseudoClass: select('cwicly/base').getPseudoClass(),
+    }), []);
 
     return (
         <>
@@ -26,11 +34,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     {isEditingURL && (
                         <Popover position="bottom center" onClose={() => setIsEditingURL(false)}>
                             <LinkControl
-                                value={{ url: linkWrapperUrl, opensInNewTab: linkWrapperNewTab === '_blank' }}
+                                value={{ url: linkWrapperUrl, opensInNewTab: linkWrapperNewTab }}
                                 onChange={(nextValue) => {
                                     setAttributes({
                                         linkWrapperUrl: nextValue.url,
-                                        linkWrapperNewTab: nextValue.opensInNewTab ? '_blank' : '_self',
+                                        linkWrapperNewTab: nextValue.opensInNewTab,
                                         linkWrapperActive: !!nextValue.url,
                                     });
                                 }}
@@ -40,18 +48,53 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 </div>
             </BlockControls>
             <InspectorControls>
-                <PanelBody title={__('Link Settings', 'cwicly')}>
-                    <TextControl
-                        label={__('URL', 'cwicly')}
-                        value={linkWrapperUrl}
-                        onChange={(newUrl) => setAttributes({ linkWrapperUrl: newUrl })}
+                <CwiclyInspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    name={name}
+                />
+
+                {inspectortab.tab === 'primary' && (
+                    <div className="cwicly-primary-tab">
+                        <PanelBody title={__('Link Settings', 'cwicly')}>
+                            <ToggleControl
+                                label={__('Link active', 'cwicly')}
+                                checked={linkWrapperActive}
+                                onChange={(val) => setAttributes({ linkWrapperActive: val })}
+                            />
+                            {linkWrapperActive && (
+                                <>
+                                    <TextControl
+                                        label={__('URL', 'cwicly')}
+                                        value={linkWrapperUrl}
+                                        onChange={(newUrl) => setAttributes({ linkWrapperUrl: newUrl })}
+                                    />
+                                    <ToggleControl
+                                        label={__('Open in new tab', 'cwicly')}
+                                        checked={linkWrapperNewTab}
+                                        onChange={(isChecked) => setAttributes({ linkWrapperNewTab: isChecked })}
+                                    />
+                                </>
+                            )}
+                        </PanelBody>
+                    </div>
+                )}
+
+                {inspectortab.tab === 'design' && (
+                    <DesignPanel
+                        attributes={attributes}
+                        setAttributes={setAttributes}
+                        pseudoClass={pseudoClass}
                     />
-                    <ToggleControl
-                        label={__('Open in new tab', 'cwicly')}
-                        checked={linkWrapperNewTab === '_blank'}
-                        onChange={(isChecked) => setAttributes({ linkWrapperNewTab: isChecked ? '_blank' : '_self' })}
-                    />
-                </PanelBody>
+                )}
+
+                {inspectortab.tab === 'advanced' && (
+                    <div className="cwicly-advanced-tab">
+                        <div style={{ padding: '0 16px', fontSize: '12px' }}>
+                            {__('Advanced Cwicly settings (Classes, Custom CSS).', 'cwicly')}
+                        </div>
+                    </div>
+                )}
             </InspectorControls>
             <div {...blockProps}>
                 <BackgroundHelper attributes={attributes} />

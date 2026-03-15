@@ -1,10 +1,14 @@
+// src/blocks/heading/edit.js
 import { useBlockProps, RichText, InspectorControls, BlockControls, __experimentalLinkControl as LinkControl } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton, PanelBody, SelectControl, ToggleControl, TextControl, Popover } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
 import { getBlockID, BackgroundHelper } from '../../utils/index.js';
+import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
+import DesignPanel from '../../components/framework/DesignPanel.js';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, name }) {
     const { 
         content, 
         headingTag, 
@@ -20,6 +24,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         id: getBlockID(attributes, clientId),
         className: classes || '',
     });
+
+    const { inspectortab, pseudoClass } = useSelect((select) => ({
+        inspectortab: select('cwicly/base').getInspectorPosition(),
+        pseudoClass: select('cwicly/base').getPseudoClass(),
+    }), []);
 
     const setHeadingTag = (tag) => {
         setAttributes({ headingTag: tag });
@@ -65,42 +74,60 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 </Popover>
             )}
             <InspectorControls>
-                <PanelBody title={__('Heading Settings', 'cwicly')}>
-                    <SelectControl
-                        label={__('Tag', 'cwicly')}
-                        value={headingTag}
-                        options={[
-                            { label: 'H1', value: 'h1' },
-                            { label: 'H2', value: 'h2' },
-                            { label: 'H3', value: 'h3' },
-                            { label: 'H4', value: 'h4' },
-                            { label: 'H5', value: 'h5' },
-                            { label: 'H6', value: 'h6' },
-                        ]}
-                        onChange={setHeadingTag}
-                    />
-                </PanelBody>
-                <PanelBody title={__('Link Settings', 'cwicly')}>
-                    <ToggleControl
-                        label={__('Link active', 'cwicly')}
-                        checked={linkWrapperActive}
-                        onChange={(val) => setAttributes({ linkWrapperActive: val })}
-                    />
-                    {linkWrapperActive && (
-                        <>
-                            <TextControl
-                                label={__('URL', 'cwicly')}
-                                value={linkWrapperUrl}
-                                onChange={(val) => setAttributes({ linkWrapperUrl: val })}
+                <CwiclyInspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    name={name}
+                />
+
+                {inspectortab.tab === 'primary' && (
+                    <div className="cwicly-primary-tab">
+                        <PanelBody title={__('Heading Settings', 'cwicly')}>
+                            <SelectControl
+                                label={__('Tag', 'cwicly')}
+                                value={headingTag}
+                                options={[
+                                    { label: 'H1', value: 'h1' },
+                                    { label: 'H2', value: 'h2' },
+                                    { label: 'H3', value: 'h3' },
+                                    { label: 'H4', value: 'h4' },
+                                    { label: 'H5', value: 'h5' },
+                                    { label: 'H6', value: 'h6' },
+                                ]}
+                                onChange={setHeadingTag}
                             />
+                        </PanelBody>
+                        <PanelBody title={__('Link Settings', 'cwicly')}>
                             <ToggleControl
-                                label={__('Open in new tab', 'cwicly')}
-                                checked={linkWrapperNewTab}
-                                onChange={(val) => setAttributes({ linkWrapperNewTab: val })}
+                                label={__('Link active', 'cwicly')}
+                                checked={linkWrapperActive}
+                                onChange={(val) => setAttributes({ linkWrapperActive: val })}
                             />
-                        </>
-                    )}
-                </PanelBody>
+                            {linkWrapperActive && (
+                                <>
+                                    <TextControl
+                                        label={__('URL', 'cwicly')}
+                                        value={linkWrapperUrl}
+                                        onChange={(val) => setAttributes({ linkWrapperUrl: val })}
+                                    />
+                                    <ToggleControl
+                                        label={__('Open in new tab', 'cwicly')}
+                                        checked={linkWrapperNewTab}
+                                        onChange={(val) => setAttributes({ linkWrapperNewTab: val })}
+                                    />
+                                </>
+                            )}
+                        </PanelBody>
+                    </div>
+                )}
+
+                {inspectortab.tab === 'design' && (
+                    <DesignPanel
+                        attributes={attributes}
+                        setAttributes={setAttributes}
+                        pseudoClass={pseudoClass}
+                    />
+                )}
             </InspectorControls>
             <div {...blockProps}>
                 <BackgroundHelper attributes={attributes} />
@@ -109,6 +136,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     value={content}
                     onChange={(newContent) => setAttributes({ content: newContent })}
                     placeholder={__('Heading content...', 'cwicly')}
+                    allowedFormats={['core/bold', 'core/italic', 'core/link']}
                 />
             </div>
         </>

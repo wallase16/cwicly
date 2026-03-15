@@ -2,9 +2,12 @@ import { useBlockProps, InspectorControls, BlockControls, MediaPlaceholder, Medi
 import { PanelBody, TextareaControl, Button, ToolbarGroup, ToolbarButton, ToggleControl, TextControl, Popover, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
 import { getBlockID, BackgroundHelper } from '../../utils/index.js';
+import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
+import DesignPanel from '../../components/framework/DesignPanel.js';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, name }) {
     const { 
         imageURL, 
         imageID, 
@@ -23,6 +26,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         id: getBlockID(attributes, clientId),
         className: classes || '',
     });
+
+    const { inspectortab, pseudoClass } = useSelect((select) => ({
+        inspectortab: select('cwicly/base').getInspectorPosition(),
+        pseudoClass: select('cwicly/base').getPseudoClass(),
+    }), []);
 
     const onSelectImage = (media) => {
         setAttributes({
@@ -85,56 +93,82 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 </Popover>
             )}
             <InspectorControls>
-                <PanelBody title={__('Image Settings', 'cwicly')}>
-                    <SelectControl
-                        label={__('Size', 'cwicly')}
-                        value={imageThumbnailSize}
-                        options={[
-                            { label: __('Full', 'cwicly'), value: 'full' },
-                            { label: __('Large', 'cwicly'), value: 'large' },
-                            { label: __('Medium', 'cwicly'), value: 'medium' },
-                            { label: __('Thumbnail', 'cwicly'), value: 'thumbnail' },
-                        ]}
-                        onChange={(val) => setAttributes({ imageThumbnailSize: val })}
-                    />
-                    <TextareaControl
-                        label={__('Alternative Text', 'cwicly')}
-                        value={imageAlt}
-                        onChange={(newAlt) => setAttributes({ imageAlt: newAlt })}
-                        help={__('Describe the purpose of the image for accessibility.', 'cwicly')}
-                    />
-                    <ToggleControl
-                        label={__('Lightbox', 'cwicly')}
-                        checked={imageLightbox}
-                        onChange={(val) => setAttributes({ imageLightbox: val })}
-                    />
-                    {imageURL && (
-                        <Button isDestructive onClick={removeImage}>
-                            {__('Remove Image', 'cwicly')}
-                        </Button>
-                    )}
-                </PanelBody>
-                <PanelBody title={__('Link Settings', 'cwicly')}>
-                    <ToggleControl
-                        label={__('Link active', 'cwicly')}
-                        checked={linkWrapperActive}
-                        onChange={(val) => setAttributes({ linkWrapperActive: val })}
-                    />
-                    {linkWrapperActive && (
-                        <>
-                            <TextControl
-                                label={__('URL', 'cwicly')}
-                                value={linkWrapperUrl}
-                                onChange={(val) => setAttributes({ linkWrapperUrl: val })}
+                <CwiclyInspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    name={name}
+                />
+
+                {inspectortab.tab === 'primary' && (
+                    <div className="cwicly-primary-tab">
+                        <PanelBody title={__('Image Settings', 'cwicly')}>
+                            <SelectControl
+                                label={__('Size', 'cwicly')}
+                                value={imageThumbnailSize}
+                                options={[
+                                    { label: __('Full', 'cwicly'), value: 'full' },
+                                    { label: __('Large', 'cwicly'), value: 'large' },
+                                    { label: __('Medium', 'cwicly'), value: 'medium' },
+                                    { label: __('Thumbnail', 'cwicly'), value: 'thumbnail' },
+                                ]}
+                                onChange={(val) => setAttributes({ imageThumbnailSize: val })}
+                            />
+                            <TextareaControl
+                                label={__('Alternative Text', 'cwicly')}
+                                value={imageAlt}
+                                onChange={(newAlt) => setAttributes({ imageAlt: newAlt })}
+                                help={__('Describe the purpose of the image for accessibility.', 'cwicly')}
                             />
                             <ToggleControl
-                                label={__('Open in new tab', 'cwicly')}
-                                checked={linkWrapperNewTab}
-                                onChange={(val) => setAttributes({ linkWrapperNewTab: val })}
+                                label={__('Lightbox', 'cwicly')}
+                                checked={imageLightbox}
+                                onChange={(val) => setAttributes({ imageLightbox: val })}
                             />
-                        </>
-                    )}
-                </PanelBody>
+                            {imageURL && (
+                                <Button isDestructive onClick={removeImage}>
+                                    {__('Remove Image', 'cwicly')}
+                                </Button>
+                            )}
+                        </PanelBody>
+                        <PanelBody title={__('Link Settings', 'cwicly')}>
+                            <ToggleControl
+                                label={__('Link active', 'cwicly')}
+                                checked={linkWrapperActive}
+                                onChange={(val) => setAttributes({ linkWrapperActive: val })}
+                            />
+                            {linkWrapperActive && (
+                                <>
+                                    <TextControl
+                                        label={__('URL', 'cwicly')}
+                                        value={linkWrapperUrl}
+                                        onChange={(val) => setAttributes({ linkWrapperUrl: val })}
+                                    />
+                                    <ToggleControl
+                                        label={__('Open in new tab', 'cwicly')}
+                                        checked={linkWrapperNewTab}
+                                        onChange={(val) => setAttributes({ linkWrapperNewTab: val })}
+                                    />
+                                </>
+                            )}
+                        </PanelBody>
+                    </div>
+                )}
+
+                {inspectortab.tab === 'design' && (
+                    <DesignPanel
+                        attributes={attributes}
+                        setAttributes={setAttributes}
+                        pseudoClass={pseudoClass}
+                    />
+                )}
+
+                {inspectortab.tab === 'advanced' && (
+                    <div className="cwicly-advanced-tab">
+                        <div style={{ padding: '0 16px', fontSize: '12px' }}>
+                            {__('Advanced Cwicly settings (Classes, Custom CSS).', 'cwicly')}
+                        </div>
+                    </div>
+                )}
             </InspectorControls>
             <div {...blockProps}>
                 <BackgroundHelper attributes={attributes} />

@@ -5,12 +5,30 @@ import save from './save.js';
 
 registerBlockType('cwicly/columns', {
   title: __('Columns', 'cwicly'),
-  description: __('Organize your content into multiple columns with flexible layouts.', 'cwicly'),
-  icon: 'columns', // Placeholder icon
-  category: 'layout',
+  icon: 'columns',
+  category: 'cwicly',
+  attributes: {
+    uniqueID: { type: 'string' },
+    classID: { type: 'string' },
+    classes: { type: 'string', default: '' },
+    containerLayoutTag: { type: 'string', default: 'div' },
+    columnsCount: { type: 'number', default: 2 },
+    // Link attributes
+    linkWrapperActive: { type: 'boolean', default: false },
+    linkWrapperUrl: { type: 'string', default: '' },
+    linkWrapperNewTab: { type: 'boolean', default: false },
+    linkWrapperRel: { type: 'string', default: '' },
+    linkWrapperTitle: { type: 'string', default: '' },
+    // Cwicly standard attributes
+    isStyling: { type: 'boolean', default: true },
+    skeletonActive: { type: 'boolean', default: true },
+    htmlAttributes: { type: 'array', default: [] },
+    relativeStyles: { type: 'array', default: [] },
+    customCSS: { type: 'string', default: '' },
+    interactions: { type: 'object', default: { click: [], dbclick: [], scrollinview: [] } },
+  },
   supports: {
     anchor: true,
-    align: true,
     html: false,
   },
   edit,
