@@ -1,0 +1,9 @@
+/* Cwicly Rebuilt Base Styles */
+.cc-btn {
+    padding: 10px 20px;
+    background: #007cba;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+}

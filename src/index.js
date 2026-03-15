@@ -1,6 +1,7 @@
 /**
  * Cwicly Rebuilt Entry Point
  */
+import './style.css';
 import './store/index.js';
 import './blocks/columns/index.js';
 import './blocks/column/index.js';

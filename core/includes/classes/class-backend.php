@@ -34,7 +34,14 @@ class Backend {
 		// LOAD CWICLY JS BLOCKS.
 
 		// LOAD CWICLY CSS BLOCKS.
-		wp_enqueue_style( 'cwicly_blocks_editor', CWICLY_DIR_URL . 'build/index.css', array(), filemtime( CWICLY_DIR_PATH . 'build/index.css' ) );
+		$css_file = 'build/index.css';
+		if ( ! file_exists( CWICLY_DIR_PATH . $css_file ) && file_exists( CWICLY_DIR_PATH . 'build/style-index.css' ) ) {
+			$css_file = 'build/style-index.css';
+		}
+
+		if ( file_exists( CWICLY_DIR_PATH . $css_file ) ) {
+			wp_enqueue_style( 'cwicly_blocks_editor', CWICLY_DIR_URL . $css_file, array(), filemtime( CWICLY_DIR_PATH . $css_file ) );
+		}
 		// LOAD CWICLY CSS BLOCKS.
 
 		// LOAD CWICLY NORMALISER BLOCKS.
