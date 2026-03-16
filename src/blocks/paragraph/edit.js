@@ -6,11 +6,22 @@ import { useSelect } from '@wordpress/data';
 import { getBlockID, BackgroundHelper } from '../../utils/index.js';
 import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
 import DesignPanel from '../../components/framework/DesignPanel.js';
+import DynamicAttributeWrapper from '../../components/framework/DynamicAttributeWrapper.js';
+import { useDynamicData } from '../../hooks/use-dynamic-data.js';
+import { PanelBody, TextControl, ToggleControl } from '@wordpress/components';
 
 export default function Edit({ attributes, setAttributes, clientId, name }) {
+    const { content, classes, linkWrapperActive, linkWrapperUrl, linkWrapperNewTab } = attributes;
+    
+    const resolvedContent = useDynamicData(content);
+    const resolvedLinkURL = useDynamicData(linkWrapperUrl);
+    
+    const displayContent = resolvedContent || content;
+    const displayLinkURL = resolvedLinkURL || linkWrapperUrl;
+
     const blockProps = useBlockProps({
         id: getBlockID(attributes, clientId),
-        className: attributes.classes || '',
+        className: classes || '',
     });
 
     const { inspectortab, pseudoClass } = useSelect((select) => ({
@@ -35,10 +46,46 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
 
                 {inspectortab.tab === 'primary' && (
                     <div className="cwicly-primary-tab">
-                        {/* Standard WP/Cwicly primary controls */}
-                        <p style={{ padding: '0 16px', fontSize: '12px' }}>
-                            {__('Primary content controls go here.', 'cwicly')}
-                        </p>
+                        <PanelBody title={__('Paragraph Settings', 'cwicly')}>
+                            <DynamicAttributeWrapper
+                                attribute="content"
+                                attributes={attributes}
+                                setAttributes={setAttributes}
+                                label={__('Content', 'cwicly')}
+                            >
+                                {/* We keep the RichText as the main editor, but provide a way to bind the entire block */}
+                                <p style={{ fontSize: '11px', color: '#666', margin: '0' }}>
+                                    {__('Use the icon above to bind the entire paragraph to a dynamic source.', 'cwicly')}
+                                </p>
+                            </DynamicAttributeWrapper>
+                        </PanelBody>
+                        <PanelBody title={__('Link Settings', 'cwicly')}>
+                            <ToggleControl
+                                label={__('Link active', 'cwicly')}
+                                checked={linkWrapperActive}
+                                onChange={(val) => setAttributes({ linkWrapperActive: val })}
+                            />
+                            {linkWrapperActive && (
+                                <>
+                                    <DynamicAttributeWrapper
+                                        attribute="linkWrapperUrl"
+                                        attributes={attributes}
+                                        setAttributes={setAttributes}
+                                        label={__('URL', 'cwicly')}
+                                    >
+                                        <TextControl
+                                            value={linkWrapperUrl}
+                                            onChange={(val) => setAttributes({ linkWrapperUrl: val })}
+                                        />
+                                    </DynamicAttributeWrapper>
+                                    <ToggleControl
+                                        label={__('Open in new tab', 'cwicly')}
+                                        checked={linkWrapperNewTab}
+                                        onChange={(val) => setAttributes({ linkWrapperNewTab: val })}
+                                    />
+                                </>
+                            )}
+                        </PanelBody>
                     </div>
                 )}
 
@@ -62,7 +109,7 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
             <RichText
                 {...blockProps}
                 tagName="p"
-                value={attributes.content || ''}
+                value={displayContent || ''}
                 onChange={(content) => setAttributes({ content })}
                 placeholder={__('Write your paragraph here…')}
                 allowedFormats={[

@@ -1,1 +1,4447 @@
-(()=>{var e,t={942(e,t){var a;!function(){"use strict";var i={}.hasOwnProperty;function l(){for(var e="",t=0;t<arguments.length;t++){var a=arguments[t];a&&(e=s(e,r(a)))}return e}function r(e){if("string"==typeof e||"number"==typeof e)return e;if("object"!=typeof e)return"";if(Array.isArray(e))return l.apply(null,e);if(e.toString!==Object.prototype.toString&&!e.toString.toString().includes("[native code]"))return e.toString();var t="";for(var a in e)i.call(e,a)&&e[a]&&(t=s(t,a));return t}function s(e,t){return t?e?e+" "+t:e+t:e}e.exports?(l.default=l,e.exports=l):void 0===(a=function(){return l}.apply(t,[]))||(e.exports=a)}()},460(e,t,a){"use strict";var i={};a.r(i),a.d(i,{writeClasses:()=>m,writeDarkMode:()=>p,writeGlobalClasses:()=>h,writeGlobalDarkMode:()=>d,writeInspectorPosition:()=>n,writeInspectorWindowPosition:()=>y,writeInstances:()=>g,writeNavigatorHeight:()=>u,writePreviewDeviceType:()=>o,writePseudoClass:()=>c,writeSelectedGlobalClass:()=>w,writeTabsState:()=>b});var l={};a.r(l),a.d(l,{getBase:()=>C,getClasses:()=>A,getDarkMode:()=>x,getGlobalClasses:()=>_,getGlobalClassesRendered:()=>N,getGlobalDarkMode:()=>S,getInspectorPosition:()=>k,getInspectorWindowPosition:()=>I,getInstances:()=>W,getNavigatorHeight:()=>j,getPreviewDeviceType:()=>v,getPseudoClass:()=>f,getSelectedGlobalClass:()=>T,getTabsState:()=>L});const r=window.wp.data,s={instances:{},designLibraryOpen:!1,saveDesignLibrary:"",globalActiveStyle:"",globalFonts:"",classes:{},newBlocks:[],prevDevice:{},prevGlobalCount:{},globalClassesBlockEdit:{},shellEdit:{},externalClasses:[],roleEditor:{},navigatorHeight:0,postTemplateSize:!1,tabsState:{},inserterState:{},primaryTabPosition:{},inspectorWindowPosition:localStorage.getItem("cwicly-window-inspector-position")||"right",allImageSizes:{},globalParts:{},postsPerPage:"",copyLinked:"false",saveGlobalStylesheet:!1,sectionDefaults:{},additionalClassesBool:!1,isResolving:[],wooProductTypes:{},wooAttributes:[],wooAttributesTerms:{},wooShippingClasses:[],wooTaxClasses:[],googleFonts:{},wooProducts:{},userCapabilities:{},userRoles:{},hideHooks:localStorage.getItem("cwicly-hook-behaviour")||"false",globalInteractions:{},altKey:!1,hideModals:localStorage.getItem("cwicly-modal-behaviour")||"false",pseudoClass:"",darkMode:localStorage.getItem("cwicly-darkmode")||"inherit",globalClasses:{},globalClassesRendered:{},selectedGlobalClass:"",globalStylesheets:[],inspectorPosition:{tab:"primary",panel:""},popoverRefs:{empty:{}},popoverRefsPrep:[],inspectorHeight:!1,inspectorWidth:!1,localFonts:{},localActiveFonts:[],localFontProcessing:!1,isDownloadingGoogleFont:!1,heartbeat:{},navigation:{},navRelativeStyles:{},classPreview:{},components:{},singleComponents:{},tailwindClasses:[],componentLibraryOpen:!1,componentVariants:{},hoveredBlock:"",componentsFolders:[],globalDarkMode:!1,darkModeSelectors:".dark",previewDeviceType:"undefined"!=typeof cwicly_info&&cwicly_info.clientView?cwicly_info.clientView:"undefined"!=typeof cwicly_info?cwicly_info.mainBreakpoint:"Desktop",designSearch:""},n=e=>({type:"CC_INSPECTOR_POSITION",writeInspectorPosition:e}),o=e=>({type:"CC_PREVIEW_DEVICE_TYPE",writePreviewDeviceType:e}),c=e=>({type:"CC_PSEUDOCLASS",writePseudoClass:e}),p=e=>({type:"CC_DARKMODE",writeDarkMode:e}),d=e=>({type:"CC_GLOBAL_DARK_MODE",writeGlobalDarkMode:e}),u=e=>({type:"CC_NAVIGATOR_HEIGHT",writeNavigatorHeight:e}),y=e=>(localStorage.setItem("cwicly-window-inspector-position",e),{type:"CC_WINDOW_INSPECTOR_POSITION",writeInspectorWindowPosition:e}),g=e=>({type:"CC_INSTANCES",writeInstances:e}),b=e=>({type:"CC_TABS_STATE",writeTabsState:e}),m=(e,t=!0)=>{let a=e;return t&&(a={...wp.data.select("cwicly/base").getClasses()||{},...e}),{type:"CC_CLASSES",writeClasses:a}},h=e=>({type:"CC_GLOBAL_CLASSES",writeGlobalClasses:e}),w=e=>({type:"CC_SELECTED_GLOBAL_CLASS",writeSelectedGlobalClass:e}),C=e=>e,k=e=>e.inspectorPosition,v=e=>e.previewDeviceType,f=e=>e.pseudoClass,x=e=>e.darkMode,S=e=>e.globalDarkMode,A=e=>e.classes,_=e=>e.globalClasses,T=e=>e.selectedGlobalClass,j=e=>e.navigatorHeight,I=e=>e.inspectorWindowPosition,W=e=>e.instances,L=e=>e.tabsState,N=e=>e.globalClassesRendered;(0,r.registerStore)("cwicly/base",{reducer:function(e=s,t){switch(t.type){case"CC_INSPECTOR_POSITION":return{...e,inspectorPosition:t.writeInspectorPosition};case"CC_PREVIEW_DEVICE_TYPE":return{...e,previewDeviceType:t.writePreviewDeviceType};case"CC_PSEUDOCLASS":return{...e,pseudoClass:t.writePseudoClass};case"CC_DARKMODE":return{...e,darkMode:t.writeDarkMode};case"CC_GLOBAL_DARK_MODE":return{...e,globalDarkMode:t.writeGlobalDarkMode};case"CC_CLASSES":return{...e,classes:t.writeClasses};case"CC_GLOBAL_CLASSES":return{...e,globalClasses:t.writeGlobalClasses};case"CC_SELECTED_GLOBAL_CLASS":return{...e,selectedGlobalClass:t.writeSelectedGlobalClass};case"CC_WINDOW_INSPECTOR_POSITION":return{...e,inspectorWindowPosition:t.writeInspectorWindowPosition};case"CC_NAVIGATOR_HEIGHT":return{...e,navigatorHeight:t.writeNavigatorHeight};case"CC_INSTANCES":return{...e,instances:t.writeInstances};case"CC_TABS_STATE":return{...e,tabsState:t.writeTabsState};default:return e}},actions:i,selectors:l});const D=e=>e;(0,r.registerStore)("cwicly/navigator",{reducer:(e=!1,t)=>"CC_NAVIGATOR"===t.type?t.ccNavigator:e,selectors:{getNavigatorState:e=>e},actions:{ccNavigator:e=>({type:"CC_NAVIGATOR",ccNavigator:e})}}),(0,r.registerStore)("cwicly/license",{reducer:(e="",t)=>"CC_LICENSE"===t.type?t.ccLicense:e,selectors:{getLicenseState:e=>e},actions:{ccLicense:e=>({type:"CC_LICENSE",ccLicense:e})}}),(0,r.registerStore)("cwicly/breakpoints",{reducer:(e={},t)=>"CC_BREAKPOINTS"===t.type?t.breakpointer:e,selectors:{getValue:D},actions:{breakpointer:e=>({type:"CC_BREAKPOINTS",breakpointer:e})}}),(0,r.registerStore)("cwicly/blockids",{reducer:(e=[],t)=>"BLOCK_IDS"===t.type?t.blockIds:e,selectors:{getBlockIds:e=>e},actions:{blockIds:e=>({type:"BLOCK_IDS",blockIds:e})}}),(0,r.registerStore)("cwicly/dynamicpreview",{reducer:(e=void 0,t)=>"DYNAMICPREVIEW"===t.type?t.dynamicpreview:e,selectors:{getDynamicPreview:e=>e},actions:{dynamicpreview:e=>({type:"DYNAMICPREVIEW",dynamicpreview:e})}}),(0,r.registerStore)("cwicly/backendback",{reducer:(e=!1,t)=>"BACKENDBACK"===t.type?t.backendBack:e,selectors:{getValue:D},actions:{backendBack:e=>({type:"BACKENDBACK",backendBack:e})}}),(0,r.registerStore)("cwicly/hidemodals",{reducer:(e=!1,t)=>"HIDE_MODALS"===t.type?t.hideModals:e,selectors:{getHideModals:e=>e},actions:{hideModals:e=>({type:"HIDE_MODALS",hideModals:e})}}),(0,r.registerStore)("cwicly/mycollection",{reducer:(e=[],t)=>"MY_COLLECTION"===t.type?t.myCollection:e,selectors:{getMyCollection:e=>e},actions:{myCollection:e=>({type:"MY_COLLECTION",myCollection:e})}}),(0,r.registerStore)("cwicly/sliderids",{reducer:(e=[],t)=>"SLIDER_IDS"===t.type?t.sliderIds:e,selectors:{getSliderIds:e=>e},actions:{sliderIds:e=>({type:"SLIDER_IDS",sliderIds:e})}}),(0,r.registerStore)("cwicly/classes",{reducer:(e={},t)=>{if("CC_CLASSES"===t.type){const a={...e},[i,l]=t.ccClasses;return a[i]=l,a}return"CC_SET_CLASSES"===t.type?{...e,...t.setClasses}:"CC_NO_CLASSES"===t.type?t.noClasses:e},selectors:{getClasses:e=>e},actions:{ccClasses:e=>({type:"CC_CLASSES",ccClasses:e}),setClasses:e=>({type:"CC_SET_CLASSES",setClasses:e}),noClasses:e=>({type:"CC_NO_CLASSES",noClasses:e})}});const P=window.wp.blocks,E=window.wp.i18n,$=window.wp.blockEditor,B=window.wp.components;function O(e,t=""){return"commentcancelreply"===e.linkWrapperSourceDynamic?"cancel-comment-reply-link{idadd}":"true"!==window.cwicly_info?.removeIDsClasses||["nav","popover","querypagination","video","tabcontents","tabcontent","tablist","accordionheader","accordions","accordion","modal","slider","query","queryTemplate","tab","filter","querypaginationnumbers"].includes(t)||e.forceShowID||e.repeaterMasonry||e.interactions&&e.interactions.length||"woocart"===e.dynamicContext?e?.componentConnectors?.id?.ref?`{component=parameter=${e.componentConnectors.id.ref}}{idadd}`:`${e.id}{idadd}`:null}function R(e){const t={};let a="false";e.dynamicStaticFallbackID?a=e.dynamicStaticFallbackID:e.dynamicStaticFallbackURL&&(a=e.dynamicStaticFallbackURL);let i=!1;e.imageThumbnailSize&&(i=e.imageThumbnailSize),e.lightbox&&(i="full");const l=!!e.imageDisableSrcSet,r=[i||"0",e.imageAlt?"0":"1",l?"0":"1","image"];if("static"===e.imageType)e.imageID&&e.imageURL?(t.src=i?`{imagesrc=${e.imageID}=${i}}`:e.imageURL,l||(t.srcset=`{imageset=${e.imageID}}`,t.sizes=`{imagesizes=${e.imageID}=${i}}`),t.width=i?`{imagewidth=${e.imageID}=${i}}`:`{imagewidth=${e.imageID}}`,t.height=i?`{imageheight=${e.imageID}=${i}}`:`{imageheight=${e.imageID}}`):e.imageURL&&(t.src=e.imageURL);else if("dynamic"===e.imageType&&e.dynamic)if("wordpress"===e.dynamic&&e.dynamicWordpressType)switch(e.dynamicWordpressType){case"featuredimage":t.src=`{featuredimage=true=${i}=${l}=${e.imageAlt?"false":"true"}=${a}}`;break;case"authorpicture":t.src="{authorpicture}";break;case"userpicture":t.src="{userpicture}";break;case"attachmenturl":t.src=i?`{imagesrc=attachment=${i}}`:"{imagesrc=attachment}",l||(t.srcset="{imageset=attachment}",t.sizes=`{imagesizes=attachment=${i}}`),t.width="{imagewidth=attachment}",t.height="{imageheight=attachment}"}else if("woocommerce"===e.dynamic&&e.dynamicWordpressType)switch(e.dynamicWordpressType){case"categorythumbnail":t.src=`{woocategorythumbnail=${i}}`,t.srcset="{woocategorythumbnailsrcset}",t.sizes=`{woocategorythumbnailsizes=${i}}`;break;case"cartthumbnail":t.src="{cartthumbnail}",t.srcset="{cartthumbnailsrcset}";break;case"wooimage":t.src="{wooimage}";break;case"woogallery":t.src=i?`{imagesrc=woogallery=${i}}`:"{imagesrc=woogallery}",l||(t.srcset="{imageset=woogallery}",t.sizes=`{imagesizes=woogallery=${i}}`),t.width="{imagewidth=woogallery}",t.height="{imageheight=woogallery}"}else if("acf"===e.dynamic&&e.dynamicACFGroup&&e.dynamicACFField){let i="false";if(e.dynamicACFFieldLocation){const t=e.dynamicACFFieldLocation;"postid"===t&&e.dynamicACFFieldLocationID?i=e.dynamicACFFieldLocationID:"currentuser"===t?i="currentuser":"currentauthor"===t?i="currentauthor":"userid"===t&&e.dynamicACFFieldLocationID?i=`user_${e.dynamicACFFieldLocationID}`:"option"===t?i="option":"termid"===t?i="taxterm":"termquery"===t?i="termquery":"userquery"===t?i="userquery":"currenttaxonomytermarchive"===t?i="currenttaxonomytermarchive":"taxonomyterm"===t&&e.dynamicACFFieldLocationIDObject?.value&&(i=`term_${e.dynamicACFFieldLocationIDObject.value}`)}t.src=`{acffield=${e.dynamicACFField}=${i}=${e.dynamicACFFieldPlus||"false"}=${a}=${r.join("-")}}`}else"repeater"===e.dynamic&&e.dynamicACFField?t.src=`{acfrepeater=${e.dynamicACFField}=${a}=${e.dynamicACFFieldPlus||"false"}=${r.join("-")}}`:"commentquery"===e.dynamic&&e.dynamicWordpressType&&(t.src=`{commentquery=${e.dynamicWordpressType}=${a}}`);return t.src||(t.src=`${window.cwicly_info?.plugin||""}assets/images/placeholder.jpg`),e.imageAlt?e.imageAlt.includes("!ref=")?t.alt=`{component=parameter=${e.imageAlt.replace(/!ref=([\w-]+)!/,"$1")}}`:t.alt=e.imageAlt:e.imageID?t.alt=`{imagealt=${e.imageID}}`:"woogallery"===e.dynamicWordpressType?t.alt="{imagealt=woogallery}":"attachmenturl"===e.dynamicWordpressType?t.alt="{imagealt=attachment}":t.alt="",e.lazyLoadComp?t.loading=`{component=parameter=${e.lazyLoadComp.replace(/!ref=([\w-]+)!/,"$1")}}`:void 0!==e.lazyLoad&&null!==e.lazyLoad&&""!==e.lazyLoad&&(t.loading=e.lazyLoad?"lazy":"eager"),!t.src&&e.componentConnectors?.image?.ref&&(t.src=`{component=image=${e.componentConnectors.image.ref}}`,e.lazyLoadComp&&(t.loading=`{component=parameter=${e.lazyLoadComp.replace(/!ref=([\w-]+)!/,"$1")}}`),e.imageAlt&&(t.alt=e.imageAlt.includes("!ref=")?`{component=parameter=${e.imageAlt.replace(/!ref=([\w-]+)!/,"$1")}}`:e.imageAlt)),t}function F(e,t=""){const a={};if(!e?.linkWrapperActive)return e?.componentConnectors?.link?.ref?{href:`{component=link=${e.componentConnectors.link.ref}}`}:null;let i=e.linkWrapperRel||"",l=e.linkWrapperTitle||"",r=e.linkWrapperAriaLabel||"",s="";if(e.linkWrapperNewTab&&(s="_blank",i?i.includes("noopener")||(i=`${i} noopener`):i="noopener"),"action"===e.linkWrapperType){const t=e.linkWrapperAction;if(e.linkWrapperActionPopoverID){switch(t){case"showPopover":a["data-show-popover"]=e.linkWrapperActionPopoverID;break;case"hidePopover":a["data-hide-popover"]=e.linkWrapperActionPopoverID;break;case"showHidePopover":a["data-showhide-popover"]=e.linkWrapperActionPopoverID,e.linkWrapperActionExtra?.in&&(a["data-popover-delay"]=parseFloat(e.linkWrapperActionExtra.in),a["data-popover-delayOut"]=parseFloat(e.linkWrapperActionExtra.out));break;case"togglePopover":a["data-toggle-popover"]=e.linkWrapperActionPopoverID}a["data-ccp-state"]="closed"}if(e.linkWrapperActionNavID)switch(t){case"showNav":a["data-show-nav"]=e.linkWrapperActionNavID,a["is-open"]="false";break;case"hideNav":a["data-close-nav"]=e.linkWrapperActionNavID,a["is-open"]="false";break;case"toggleNav":a["data-toggle-nav"]=e.linkWrapperActionNavID,a["is-open"]="false"}if("scrolltotop"===t)a["data-scrolltotop"]="",e.linkWrapperActionExtra?.offset&&(a["data-offset"]=e.linkWrapperActionExtra.offset),e.linkWrapperActionExtra?.outoffset&&(a["data-offset-out"]=e.linkWrapperActionExtra.outoffset),e.linkWrapperActionExtra?.intarget&&(a["data-target-in"]=e.linkWrapperActionExtra.intarget),e.linkWrapperActionExtra?.outtarget&&(a["data-target-out"]=e.linkWrapperActionExtra.outtarget);else if("toggleDarkMode"===t)a["data-action"]="dark-mode",a["aria-label"]="Toggle Dark Mode";else if("wooaddtocart"===t)a["data-cc-add-to-cart"]="";else if("wooresetselection"===t)a["data-cc-woo-reset"]="";else if("share"===t){const t=e.linkWrapperShareDescription||"";switch(e.linkWrapperShare){case"twitter":a.href=`https://twitter.com/intent/tweet?url={pageurl}&text=${t}`;break;case"facebook":a.href="https://www.facebook.com/sharer.php?u={pageurl}";break;case"linkedin":a.href=`https://www.linkedin.com/shareArticle?url={pageurl}&title=${t}`;break;case"email":const i=e.linkWrapperActionContactEmailAddress||"";a.href=`mailto:${i}?subject=${t}&body={pageurl=false=encoded}`;break;case"pinterest":a.href=`https://www.pinterest.com/pin/create/button?url={pageurl}&media=&description=${t}`;break;case"reddit":a.href=`https://reddit.com/submit?url={pageurl}&title=${t}`;break;case"whatsapp":a.href="https://wa.me/?text={pageurl}";break;case"sms":a.href="sms:%7Bphone_number%7D?body={pageurl}";break;case"stumbleupon":a.href=`https://www.stumbleupon.com/submit?url={pageurl}&title=${t}`}}else if("nextQuery"===t)a.href="{nextquery}";else if("prevQuery"===t)a.href="{prevquery}";else if("contact"===t){const t=e.linkWrapperActionContactType,i=e.linkWrapperActionContactOneLine||"";switch(t){case"email":const t=e.linkWrapperActionContactEmailAddress||"",l=e.linkWrapperActionContactEmailSubject||"",r=e.linkWrapperActionContactEmailMessage||"";a.href=`mailto:${t}?subject=${l}&body=${r}`;break;case"tel":a.href=`tel:${i}`;break;case"sms":a.href=`sms:${i}`;break;case"whatsapp":a.href=`https://api.whatsapp.com/send?phone=${i}`;break;case"messenger":a.href=`https://m.me/${i}`;break;case"viber":a.href=`viber://${e.linkWrapperActionContactViber}?number=${i}`;break;case"skype":a.href=`skype:${i}?${e.linkWrapperActionContactSkype}`;break;case"waze":a.href=`https://www.waze.com/ul?ll=${i}`;break;case"googlecalendar":let s="";e.linkWrapperActionContactCalendarStart&&!e.linkWrapperActionContactCalendarEnd?s=`&dates=${e.linkWrapperActionContactCalendarStart.replace(/[^A-Za-z0-9]/,"")}`:e.linkWrapperActionContactCalendarStart&&e.linkWrapperActionContactCalendarEnd&&(s=`&dates=${e.linkWrapperActionContactCalendarStart.replace(/[^A-Za-z0-9]/,"")}/${e.linkWrapperActionContactCalendarEnd.replace(/[^A-Za-z0-9]/,"")}`);const n=e.linkWrapperActionContactCalendarLocation?`&location=${e.linkWrapperActionContactCalendarLocation}`:"",o=e.linkWrapperActionContactCalendarDescription?`&details=${e.linkWrapperActionContactCalendarDescription}`:"",c=e.linkWrapperActionContactCalendarTitle?`&text=${e.linkWrapperActionContactCalendarTitle}`:"";a.href=`https://www.google.com/calendar/render?action=TEMPLATE${c}${o}${s}${n}`}}else if("slider"===t&&e.linkWrapperActionSliderType&&e.linkWrapperActionSliderID)"gotoindex"===e.linkWrapperActionSliderType&&null!==e.linkWrapperActionSliderGoTo&&(a["data-gotoindex"]=e.linkWrapperActionSliderGoTo),a["data-slidernav"]="",a["data-slidertype"]=e.linkWrapperActionSliderType,a["data-sliderid"]=e.linkWrapperActionSliderID;else if("lightbox"===t)a["data-lightbox"]="",e.linkWrapperActionLighboxRef&&(a["data-gallery"]=e.linkWrapperActionLighboxRef);else if("modal"===t&&e.linkWrapperActionModalType){const t=e.linkWrapperActionModalType,i=e.linkWrapperActionModalBlockId;i&&(a[`data-modal${"open"===t?"":t}`]="",a["data-modalid"]=i)}}else if("url"===e.linkWrapperType)if("dynamic"===e.linkWrapperSourceType)switch(e.linkWrapperSourceDynamic){case"posturl":a.href="{pageurl}";break;case"attachmenturl":a.href="{attachment_url}";break;case"featuredimage":a.href="{featuredimage}";break;case"homeurl":a.href="{homeurl}"}else"static"===e.linkWrapperSourceType&&(a.href=e.linkWrapperUrl||"");return a.href||Object.keys(a).length>0?(i&&(a.rel=i),s&&(a.target=s),l&&(a.title=l),r&&(a["aria-label"]=r),a):null}function M(e){if(e.interactions){const t=JSON.stringify(e.interactions);if(!['{"click":[],"dbclick":[],"scrollinview":[]}','{"dbclick":[],"scrollinview":[]}'].includes(t))return{"data-interaction":t}}return null}const z=window.wp.element,G=window.ReactJSXRuntime;function U({attributes:e}){const{backgroundYoutubeURL:t,backgroundClipPathContent:a,backgroundClipPathBlob:i,backgroundVideoURL:l,backgroundType:r,backgroundVideoSource:s,backgroundVideoLoop:n,id:o,classID:c,separatorTypeTop:p,separatorTypeBottom:d}=e,u="desktop",y=t?.split("v=")[1]?.substring(0,11);return(0,G.jsxs)(z.Fragment,{children:[a&&i&&(0,G.jsx)("svg",{height:"0",width:"0",children:(0,G.jsx)("defs",{children:(0,G.jsx)("clipPath",{id:`${c}-path`,children:(0,G.jsx)("path",{d:a})})})}),l&&"video"===r?.[u]&&"mp4"===s&&(0,G.jsx)("div",{id:`${o}-player-wrapper`,className:"cc-background-video",children:(0,G.jsx)("video",{id:`${o}-player`,loop:!n||null,muted:!0,autoPlay:!0,playsInline:!0,src:l})}),"video"===r?.[u]&&"youtube"===s&&t&&(0,G.jsxs)(z.Fragment,{children:[(0,G.jsx)("div",{id:`${o}-player-wrapper`,className:"cc-background-video"}),(0,G.jsx)("div",{className:"video-background-container",children:(0,G.jsx)("div",{className:"video-background",children:(0,G.jsx)("iframe",{src:`https://www.youtube-nocookie.com/embed/${y}?controls=0&modestbranding=1&showinfo=0&rel=0&autoplay=1&loop=${n?0:1}&mute=1&playlist=${y}`,frameBorder:"0",allowFullScreen:!0})})})]}),(l||t)&&"video"===r?.[u]&&(0,G.jsx)("div",{className:"cc-overlay-video-background"})]})}var H=a(942);function V({attributes:e,setAttributes:t,name:a,isComponent:i,isEditingComponent:l,noDesign:s,noAdvanced:n}){const{writeInspectorPosition:o}=(0,r.useDispatch)("cwicly/base"),{inspectortab:c}=(0,r.useSelect)(e=>({inspectortab:e("cwicly/base").getInspectorPosition()}),[]),p=["cwicly/heading","cwicly/column","cwicly/styler","cwicly/paragraph","cwicly/section","cwicly/container","cwicly/accordionheader","cwicly/accordioncontent","cwicly/tab","cwicly/tabcontents","cwicly/tabcontent","cwicly/navitems"];(0,z.useEffect)(()=>{!i&&p.includes(a)&&"primary"===c.tab&&o({tab:"design",panel:"",default:!0})},[]);const d=e=>{o({tab:e,panel:""})};return"cwicly/innerblocks"===a||i&&!l?null:(0,G.jsx)(z.Fragment,{children:(0,G.jsx)("div",{className:"cwicly-inspector-tabs-container",style:{position:"sticky",top:0,zIndex:15,background:"#fff",borderBottom:"1px solid #ddd",marginBottom:"10px"},children:(0,G.jsxs)("div",{style:{display:"flex",padding:"4px",gap:"8px"},children:[(!p.includes(a)||i)&&(0,G.jsx)("button",{type:"button",className:H("cwicly-tab-button",{active:"primary"===c.tab}),onClick:()=>d("primary"),children:(0,E.__)("Primary","cwicly")}),!s&&(0,G.jsx)("button",{type:"button",className:H("cwicly-tab-button",{active:"design"===c.tab}),onClick:()=>d("design"),children:(0,E.__)("Design","cwicly")}),"cwicly/styler"!==a&&!n&&(0,G.jsx)("button",{type:"button",className:H("cwicly-tab-button",{active:"advanced"===c.tab}),onClick:()=>d("advanced"),children:(0,E.__)("Advanced","cwicly")})]})})})}function q({label:e,type:t,attributes:a,setAttributes:i,pseudoClass:l}){const{previewDeviceType:s}=(0,r.useSelect)(e=>({previewDeviceType:e("cwicly/base").getPreviewDeviceType()}),[]),[n,o]=(0,z.useState)(!0),c=a[t]||{},p=c[s]||c.Desktop||{top:"",right:"",bottom:"",left:""},d=(e,a)=>{const l={...c};l[s]||(l[s]={...p}),n?l[s]={top:a,right:a,bottom:a,left:a}:l[s][e]=a,i({[t]:l})};return(0,G.jsxs)("div",{className:"cwicly-spacing-control",children:[(0,G.jsxs)("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"8px"},children:[(0,G.jsx)("span",{style:{fontSize:"11px",textTransform:"uppercase",fontWeight:"600"},children:e}),(0,G.jsx)(B.Button,{isSmall:!0,icon:n?"admin-links":"editor-unlink",onClick:()=>o(!n),label:n?(0,E.__)("Unlink Sides","cwicly"):(0,E.__)("Link Sides","cwicly")})]}),(0,G.jsxs)("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"},children:[(0,G.jsxs)("div",{className:"spacing-input-wrap",children:[(0,G.jsx)("label",{children:"T"}),(0,G.jsx)("input",{type:"text",value:p.top,onChange:e=>d("top",e.target.value),placeholder:"-"})]}),(0,G.jsxs)("div",{className:"spacing-input-wrap",children:[(0,G.jsx)("label",{children:"R"}),(0,G.jsx)("input",{type:"text",value:p.right,onChange:e=>d("right",e.target.value),placeholder:"-"})]}),(0,G.jsxs)("div",{className:"spacing-input-wrap",children:[(0,G.jsx)("label",{children:"B"}),(0,G.jsx)("input",{type:"text",value:p.bottom,onChange:e=>d("bottom",e.target.value),placeholder:"-"})]}),(0,G.jsxs)("div",{className:"spacing-input-wrap",children:[(0,G.jsx)("label",{children:"L"}),(0,G.jsx)("input",{type:"text",value:p.left,onChange:e=>d("left",e.target.value),placeholder:"-"})]})]})]})}function K({attributes:e,setAttributes:t,pseudoClass:a}){return(0,G.jsxs)("div",{className:"cwicly-design-panel",children:[(0,G.jsxs)(B.PanelBody,{title:(0,E.__)("Spacing","cwicly"),initialOpen:!0,children:[(0,G.jsx)(q,{label:(0,E.__)("Padding","cwicly"),type:"padding",attributes:e,setAttributes:t,pseudoClass:a}),(0,G.jsx)("hr",{style:{margin:"15px 0",border:"none",borderTop:"1px solid #eee"}}),(0,G.jsx)(q,{label:(0,E.__)("Margin","cwicly"),type:"margin",attributes:e,setAttributes:t,pseudoClass:a})]}),(0,G.jsx)(B.PanelBody,{title:(0,E.__)("Typography","cwicly"),initialOpen:!1,children:(0,G.jsx)("p",{style:{fontSize:"12px",color:"#666"},children:(0,E.__)("Typography controls will be extracted next...","cwicly")})}),(0,G.jsx)(B.PanelBody,{title:(0,E.__)("Background","cwicly"),initialOpen:!1,children:(0,G.jsx)("p",{style:{fontSize:"12px",color:"#666"},children:(0,E.__)("Background controls will be extracted next...","cwicly")})})]})}(0,P.registerBlockType)("cwicly/columns",{title:(0,E.__)("Columns","cwicly"),icon:"columns",category:"cwicly",attributes:{uniqueID:{type:"string"},classID:{type:"string"},classes:{type:"string",default:""},containerLayoutTag:{type:"string",default:"div"},columnsCount:{type:"number",default:2},linkWrapperActive:{type:"boolean",default:!1},linkWrapperUrl:{type:"string",default:""},linkWrapperNewTab:{type:"boolean",default:!1},linkWrapperRel:{type:"string",default:""},linkWrapperTitle:{type:"string",default:""},isStyling:{type:"boolean",default:!0},skeletonActive:{type:"boolean",default:!0},htmlAttributes:{type:"array",default:[]},relativeStyles:{type:"array",default:[]},customCSS:{type:"string",default:""},interactions:{type:"object",default:{click:[],dbclick:[],scrollinview:[]}}},supports:{anchor:!0,html:!1},edit:function({attributes:e,setAttributes:t,clientId:a,name:i}){const{columnsCount:l,containerLayoutTag:s,classes:n}=e,o=(0,$.useBlockProps)({id:O(e,a),className:`cc-columns ${n||""}`}),{inspectortab:c,pseudoClass:p}=(0,r.useSelect)(e=>({inspectortab:e("cwicly/base").getInspectorPosition(),pseudoClass:e("cwicly/base").getPseudoClass()}),[]),d=s||"div";return(0,G.jsxs)(G.Fragment,{children:[(0,G.jsxs)($.InspectorControls,{children:[(0,G.jsx)(V,{attributes:e,setAttributes:t,name:i}),"primary"===c.tab&&(0,G.jsx)("div",{className:"cwicly-primary-tab",children:(0,G.jsxs)(B.PanelBody,{title:(0,E.__)("Columns Settings","cwicly"),children:[(0,G.jsx)(B.RangeControl,{label:(0,E.__)("Columns","cwicly"),value:l,onChange:e=>t({columnsCount:e}),min:1,max:12}),(0,G.jsx)(B.SelectControl,{label:(0,E.__)("HTML Tag","cwicly"),value:s,options:[{label:"DIV",value:"div"},{label:"SECTION",value:"section"},{label:"HEADER",value:"header"},{label:"FOOTER",value:"footer"}],onChange:e=>t({containerLayoutTag:e})})]})}),"design"===c.tab&&(0,G.jsx)(K,{attributes:e,setAttributes:t,pseudoClass:p}),"advanced"===c.tab&&(0,G.jsx)("div",{className:"cwicly-advanced-tab",children:(0,G.jsx)("div",{style:{padding:"0 16px",fontSize:"12px"},children:(0,E.__)("Advanced Cwicly settings (Classes, Custom CSS).","cwicly")})})]}),(0,G.jsxs)(d,{...o,children:[(0,G.jsx)(U,{attributes:e}),(0,G.jsx)($.InnerBlocks,{allowedBlocks:["cwicly/column"],orientation:"horizontal"})]})]})},save:function({attributes:e}){const t=O(e,"columns"),a=F(e,"columns"),i=M(e),l=e.linkWrapperActive||a?.href?e.containerLayoutTag||"a":e.containerLayoutTag||"div";return(0,G.jsx)(l,{id:t,...a,...i,className:e.className,children:(0,G.jsx)($.InnerBlocks.Content,{})})}}),(0,P.registerBlockType)("cwicly/column",{title:(0,E.__)("Column","cwicly"),parent:["cwicly/columns"],icon:"column",category:"cwicly",attributes:{uniqueID:{type:"string"},classID:{type:"string"},classes:{type:"string",default:""},containerLayoutTag:{type:"string",default:"div"},linkWrapperActive:{type:"boolean",default:!1},linkWrapperUrl:{type:"string",default:""},linkWrapperNewTab:{type:"boolean",default:!1},linkWrapperRel:{type:"string",default:""},linkWrapperTitle:{type:"string",default:""},isStyling:{type:"boolean",default:!0},skeletonActive:{type:"boolean",default:!0},htmlAttributes:{type:"array",default:[]},relativeStyles:{type:"array",default:[]},customCSS:{type:"string",default:""},interactions:{type:"object",default:{click:[],dbclick:[],scrollinview:[]}}},supports:{anchor:!0,html:!1},edit:function({attributes:e,setAttributes:t,clientId:a,name:i}){const{containerLayoutTag:l,classes:s}=e,n=(0,$.useBlockProps)({id:O(e,a),className:`cc-column ${s||""}`}),{inspectortab:o,pseudoClass:c}=(0,r.useSelect)(e=>({inspectortab:e("cwicly/base").getInspectorPosition(),pseudoClass:e("cwicly/base").getPseudoClass()}),[]),p=l||"div";return(0,G.jsxs)(G.Fragment,{children:[(0,G.jsxs)($.InspectorControls,{children:[(0,G.jsx)(V,{attributes:e,setAttributes:t,name:i}),"primary"===o.tab&&(0,G.jsx)("div",{className:"cwicly-primary-tab",children:(0,G.jsx)(B.PanelBody,{title:(0,E.__)("Column Settings","cwicly"),children:(0,G.jsx)(B.SelectControl,{label:(0,E.__)("HTML Tag","cwicly"),value:l,options:[{label:"DIV",value:"div"},{label:"SECTION",value:"section"},{label:"ARTICLE",value:"article"},{label:"ASIDE",value:"aside"}],onChange:e=>t({containerLayoutTag:e})})})}),"design"===o.tab&&(0,G.jsx)(K,{attributes:e,setAttributes:t,pseudoClass:c}),"advanced"===o.tab&&(0,G.jsx)("div",{className:"cwicly-advanced-tab",children:(0,G.jsx)("div",{style:{padding:"0 16px",fontSize:"12px"},children:(0,E.__)("Advanced Cwicly settings (Classes, Custom CSS).","cwicly")})})]}),(0,G.jsxs)(p,{...n,children:[(0,G.jsx)(U,{attributes:e}),(0,G.jsx)($.InnerBlocks,{})]})]})},save:function({attributes:e}){const t=O(e,"column"),a=F(e,"column"),i=M(e),l=e.linkWrapperActive||a?.href?e.containerLayoutTag||"a":e.containerLayoutTag||"div";return(0,G.jsx)(l,{id:t,...a,...i,className:e.className,children:(0,G.jsx)($.InnerBlocks.Content,{})})}}),(0,P.registerBlockType)("cwicly/section",{title:(0,E.__)("Section","cwicly"),icon:"layout",category:"cwicly",attributes:{uniqueID:{type:"string"},classID:{type:"string"},classes:{type:"string",default:""},containerLayoutTag:{type:"string",default:"section"},linkWrapperActive:{type:"boolean",default:!1},linkWrapperUrl:{type:"string",default:""},linkWrapperNewTab:{type:"boolean",default:!1},linkWrapperRel:{type:"string",default:""},linkWrapperTitle:{type:"string",default:""},isStyling:{type:"boolean",default:!0},skeletonActive:{type:"boolean",default:!0},htmlAttributes:{type:"array",default:[]},relativeStyles:{type:"array",default:[]},customCSS:{type:"string",default:""},interactions:{type:"object",default:{click:[],dbclick:[],scrollinview:[]}}},supports:{anchor:!0,html:!1},edit:function({attributes:e,setAttributes:t,clientId:a,name:i}){const{containerLayoutTag:l,classes:s}=e,n=(0,$.useBlockProps)({id:O(e,a),className:s||""}),{inspectortab:o,pseudoClass:c}=(0,r.useSelect)(e=>({inspectortab:e("cwicly/base").getInspectorPosition(),pseudoClass:e("cwicly/base").getPseudoClass()}),[]),p=l||"section";return(0,G.jsxs)(G.Fragment,{children:[(0,G.jsxs)($.InspectorControls,{children:[(0,G.jsx)(V,{attributes:e,setAttributes:t,name:i}),"primary"===o.tab&&(0,G.jsx)("div",{className:"cwicly-primary-tab",children:(0,G.jsx)(B.PanelBody,{title:(0,E.__)("Section Settings","cwicly"),children:(0,G.jsx)(B.SelectControl,{label:(0,E.__)("HTML Tag","cwicly"),value:l,options:[{label:"SECTION",value:"section"},{label:"DIV",value:"div"},{label:"HEADER",value:"header"},{label:"FOOTER",value:"footer"},{label:"MAIN",value:"main"},{label:"ARTICLE",value:"article"},{label:"ASIDE",value:"aside"}],onChange:e=>t({containerLayoutTag:e})})})}),"design"===o.tab&&(0,G.jsx)(K,{attributes:e,setAttributes:t,pseudoClass:c}),"advanced"===o.tab&&(0,G.jsx)("div",{className:"cwicly-advanced-tab",children:(0,G.jsx)("div",{style:{padding:"0 16px",fontSize:"12px"},children:(0,E.__)("Advanced Cwicly settings (Classes, Custom CSS).","cwicly")})})]}),(0,G.jsxs)(p,{...n,children:[(0,G.jsx)(U,{attributes:e}),(0,G.jsx)($.InnerBlocks,{})]})]})},save:function({attributes:e}){const t=O(e,"section"),a=F(e,"section"),i=M(e),l=e.linkWrapperActive||a?.href?e.containerLayoutTag||"a":e.containerLayoutTag||"section";return(0,G.jsx)(l,{id:t,...a,...i,className:e.className,children:(0,G.jsx)($.InnerBlocks.Content,{})})}}),(0,P.registerBlockType)("cwicly/container",{title:(0,E.__)("Container","cwicly"),icon:"editor-table",category:"cwicly",attributes:{uniqueID:{type:"string"},classID:{type:"string"},classes:{type:"string",default:""},containerLayoutTag:{type:"string",default:"div"},linkWrapperActive:{type:"boolean",default:!1},linkWrapperUrl:{type:"string",default:""},linkWrapperNewTab:{type:"boolean",default:!1},linkWrapperRel:{type:"string",default:""},linkWrapperTitle:{type:"string",default:""},isStyling:{type:"boolean",default:!0},skeletonActive:{type:"boolean",default:!0},htmlAttributes:{type:"array",default:[]},relativeStyles:{type:"array",default:[]},customCSS:{type:"string",default:""},interactions:{type:"object",default:{click:[],dbclick:[],scrollinview:[]}}},supports:{anchor:!0,html:!1},edit:function({attributes:e,setAttributes:t,clientId:a,name:i}){const{containerLayoutTag:l,classes:s}=e,n=(0,$.useBlockProps)({id:O(e,a),className:s||""}),{inspectortab:o,pseudoClass:c}=(0,r.useSelect)(e=>({inspectortab:e("cwicly/base").getInspectorPosition(),pseudoClass:e("cwicly/base").getPseudoClass()}),[]),p=l||"div";return(0,G.jsxs)(G.Fragment,{children:[(0,G.jsxs)($.InspectorControls,{children:[(0,G.jsx)(V,{attributes:e,setAttributes:t,name:i}),"primary"===o.tab&&(0,G.jsx)("div",{className:"cwicly-primary-tab",children:(0,G.jsx)(B.PanelBody,{title:(0,E.__)("Container Settings","cwicly"),children:(0,G.jsx)(B.SelectControl,{label:(0,E.__)("HTML Tag","cwicly"),value:l,options:[{label:"DIV",value:"div"},{label:"SECTION",value:"section"},{label:"HEADER",value:"header"},{label:"FOOTER",value:"footer"},{label:"MAIN",value:"main"},{label:"ARTICLE",value:"article"},{label:"ASIDE",value:"aside"}],onChange:e=>t({containerLayoutTag:e})})})}),"design"===o.tab&&(0,G.jsx)(K,{attributes:e,setAttributes:t,pseudoClass:c}),"advanced"===o.tab&&(0,G.jsx)("div",{className:"cwicly-advanced-tab",children:(0,G.jsx)("div",{style:{padding:"0 16px",fontSize:"12px"},children:(0,E.__)("Advanced Cwicly settings (Classes, Custom CSS).","cwicly")})})]}),(0,G.jsxs)(p,{...n,children:[(0,G.jsx)(U,{attributes:e}),(0,G.jsx)($.InnerBlocks,{})]})]})},save:function({attributes:e}){const t=O(e,"container"),a=F(e,"container"),i=M(e),l=e.linkWrapperActive||a?.href?e.containerLayoutTag||"a":e.containerLayoutTag||"div";return(0,G.jsx)(l,{id:t,...a,...i,className:e.className,children:(0,G.jsx)($.InnerBlocks.Content,{})})}}),(0,P.registerBlockType)("cwicly/heading",{title:(0,E.__)("Heading","cwicly"),icon:"heading",category:"cwicly",attributes:{content:{type:"string",source:"html",selector:"h1,h2,h3,h4,h5,h6",default:""},headingTag:{type:"string",default:"h1"},uniqueID:{type:"string"},classID:{type:"string"},classes:{type:"string",default:""},linkWrapperActive:{type:"boolean",default:!1},linkWrapperUrl:{type:"string",default:""},linkWrapperNewTab:{type:"boolean",default:!1},linkWrapperRel:{type:"string",default:""},linkWrapperTitle:{type:"string",default:""},isStyling:{type:"boolean",default:!0},skeletonActive:{type:"boolean",default:!0},htmlAttributes:{type:"array",default:[]},relativeStyles:{type:"array",default:[]},customCSS:{type:"string",default:""},interactions:{type:"object",default:{click:[],dbclick:[],scrollinview:[]}}},supports:{anchor:!0,html:!1},edit:function({attributes:e,setAttributes:t,clientId:a,name:i}){const{content:l,headingTag:s,classes:n,linkWrapperActive:o,linkWrapperUrl:c,linkWrapperNewTab:p}=e,[d,u]=(0,z.useState)(!1),y=(0,$.useBlockProps)({id:O(e,a),className:n||""}),{inspectortab:g,pseudoClass:b}=(0,r.useSelect)(e=>({inspectortab:e("cwicly/base").getInspectorPosition(),pseudoClass:e("cwicly/base").getPseudoClass()}),[]),m=e=>{t({headingTag:e})};return(0,G.jsxs)(G.Fragment,{children:[(0,G.jsxs)($.BlockControls,{children:[(0,G.jsx)(B.ToolbarGroup,{children:[1,2,3,4,5,6].map(e=>(0,G.jsx)(B.ToolbarButton,{icon:"heading",label:(0,E.__)(`Heading ${e}`,"cwicly"),isActive:s===`h${e}`,onClick:()=>m(`h${e}`),children:e},e))}),(0,G.jsx)(B.ToolbarGroup,{children:(0,G.jsx)(B.ToolbarButton,{icon:"admin-links",label:(0,E.__)("Link","cwicly"),onClick:()=>u(!d),isActive:o})})]}),d&&(0,G.jsx)(B.Popover,{position:"bottom center",onClose:()=>u(!1),children:(0,G.jsx)($.__experimentalLinkControl,{value:{url:c,opensInNewTab:p},onChange:e=>{t({linkWrapperUrl:e.url,linkWrapperNewTab:e.opensInNewTab,linkWrapperActive:!!e.url})}})}),(0,G.jsxs)($.InspectorControls,{children:[(0,G.jsx)(V,{attributes:e,setAttributes:t,name:i}),"primary"===g.tab&&(0,G.jsxs)("div",{className:"cwicly-primary-tab",children:[(0,G.jsx)(B.PanelBody,{title:(0,E.__)("Heading Settings","cwicly"),children:(0,G.jsx)(B.SelectControl,{label:(0,E.__)("Tag","cwicly"),value:s,options:[{label:"H1",value:"h1"},{label:"H2",value:"h2"},{label:"H3",value:"h3"},{label:"H4",value:"h4"},{label:"H5",value:"h5"},{label:"H6",value:"h6"}],onChange:m})}),(0,G.jsxs)(B.PanelBody,{title:(0,E.__)("Link Settings","cwicly"),children:[(0,G.jsx)(B.ToggleControl,{label:(0,E.__)("Link active","cwicly"),checked:o,onChange:e=>t({linkWrapperActive:e})}),o&&(0,G.jsxs)(G.Fragment,{children:[(0,G.jsx)(B.TextControl,{label:(0,E.__)("URL","cwicly"),value:c,onChange:e=>t({linkWrapperUrl:e})}),(0,G.jsx)(B.ToggleControl,{label:(0,E.__)("Open in new tab","cwicly"),checked:p,onChange:e=>t({linkWrapperNewTab:e})})]})]})]}),"design"===g.tab&&(0,G.jsx)(K,{attributes:e,setAttributes:t,pseudoClass:b})]}),(0,G.jsxs)("div",{...y,children:[(0,G.jsx)(U,{attributes:e}),(0,G.jsx)($.RichText,{tagName:s||"h1",value:l,onChange:e=>t({content:e}),placeholder:(0,E.__)("Heading content...","cwicly"),allowedFormats:["core/bold","core/italic","core/link"]})]})]})},save:function({attributes:e}){const t=e.headingTag||"h1",a=O(e,"heading"),i=F(e,"heading"),l=M(e),r=e.linkWrapperActive||i?.href,s=!e.containerLayoutTag||"a"!==e.containerLayoutTag&&"button"!==e.containerLayoutTag?"a":e.containerLayoutTag;return(0,G.jsx)(t,{id:a,...l,className:e.className,children:r?(0,G.jsx)(s,{...i,children:(0,G.jsx)($.RichText.Content,{value:e.content})}):(0,G.jsx)($.RichText.Content,{value:e.content})})}}),(0,P.registerBlockType)("cwicly/paragraph",{title:(0,E.__)("Paragraph","cwicly"),icon:"editor-paragraph",category:"cwicly",attributes:{content:{type:"string",source:"html",selector:"p",default:""},uniqueID:{type:"string"},classID:{type:"string"},classes:{type:"string",default:""},linkWrapperActive:{type:"boolean",default:!1},linkWrapperUrl:{type:"string",default:""},linkWrapperNewTab:{type:"boolean",default:!1},linkWrapperRel:{type:"string",default:""},linkWrapperTitle:{type:"string",default:""},isStyling:{type:"boolean",default:!0},skeletonActive:{type:"boolean",default:!0},htmlAttributes:{type:"array",default:[]},relativeStyles:{type:"array",default:[]},customCSS:{type:"string",default:""},interactions:{type:"object",default:{click:[],dbclick:[],scrollinview:[]}}},supports:{anchor:!0,html:!1},edit:function({attributes:e,setAttributes:t,clientId:a,name:i}){const l=(0,$.useBlockProps)({id:O(e,a),className:e.classes||""}),{inspectortab:s,pseudoClass:n}=(0,r.useSelect)(e=>({inspectortab:e("cwicly/base").getInspectorPosition(),pseudoClass:e("cwicly/base").getPseudoClass()}),[]);return(0,G.jsxs)(G.Fragment,{children:[(0,G.jsx)($.BlockControls,{children:(0,G.jsx)(B.ToolbarGroup,{})}),(0,G.jsxs)($.InspectorControls,{children:[(0,G.jsx)(V,{attributes:e,setAttributes:t,name:i}),"primary"===s.tab&&(0,G.jsx)("div",{className:"cwicly-primary-tab",children:(0,G.jsx)("p",{style:{padding:"0 16px",fontSize:"12px"},children:(0,E.__)("Primary content controls go here.","cwicly")})}),"design"===s.tab&&(0,G.jsx)(K,{attributes:e,setAttributes:t,pseudoClass:n}),"advanced"===s.tab&&(0,G.jsx)("div",{className:"cwicly-advanced-tab",children:(0,G.jsx)("p",{style:{padding:"0 16px",fontSize:"12px"},children:(0,E.__)("Advanced Cwicly settings (Classes, Custom CSS).","cwicly")})})]}),(0,G.jsx)($.RichText,{...l,tagName:"p",value:e.content||"",onChange:e=>t({content:e}),placeholder:(0,E.__)("Write your paragraph here…"),allowedFormats:["core/bold","core/italic","core/link"]}),(0,G.jsx)(U,{attributes:e})]})},save:function({attributes:e}){const t=O(e,"paragraph"),a=F(e,"paragraph"),i=M(e),l=e.linkWrapperActive||a?.href?e.containerLayoutTag||"a":e.containerLayoutTag||"p";return(0,G.jsx)(l,{id:t,...a,...i,className:e.className,children:(0,G.jsx)($.RichText.Content,{value:e.content})})}}),(0,P.registerBlockType)("cwicly/image",{title:(0,E.__)("Image","cwicly"),icon:"format-image",category:"cwicly",attributes:{imageURL:{type:"string"},imageID:{type:"number"},imageAlt:{type:"string",default:""},imageType:{type:"string",default:"static"},imageThumbnailSize:{type:"string",default:"full"},imageLightbox:{type:"boolean",default:!1},uniqueID:{type:"string"},classID:{type:"string"},classes:{type:"string",default:""},linkWrapperActive:{type:"boolean",default:!1},linkWrapperUrl:{type:"string",default:""},linkWrapperNewTab:{type:"boolean",default:!1},linkWrapperRel:{type:"string",default:""},linkWrapperTitle:{type:"string",default:""},linkWrapperActionLighboxRef:{type:"string",default:""},isStyling:{type:"boolean",default:!0},skeletonActive:{type:"boolean",default:!0},htmlAttributes:{type:"array",default:[]},relativeStyles:{type:"array",default:[]},customCSS:{type:"string",default:""},interactions:{type:"object",default:{click:[],dbclick:[],scrollinview:[]}}},supports:{anchor:!0,html:!1},edit:function({attributes:e,setAttributes:t,clientId:a,name:i}){const{imageURL:l,imageID:s,imageAlt:n,classes:o,imageLightbox:c,linkWrapperActive:p,linkWrapperUrl:d,linkWrapperNewTab:u,imageThumbnailSize:y}=e,[g,b]=(0,z.useState)(!1),m=(0,$.useBlockProps)({id:O(e,a),className:o||""}),{inspectortab:h,pseudoClass:w}=(0,r.useSelect)(e=>({inspectortab:e("cwicly/base").getInspectorPosition(),pseudoClass:e("cwicly/base").getPseudoClass()}),[]),C=e=>{t({imageURL:e.url,imageID:e.id,imageAlt:e.alt})};return(0,G.jsxs)(G.Fragment,{children:[(0,G.jsxs)($.BlockControls,{children:[l&&(0,G.jsx)(B.ToolbarGroup,{children:(0,G.jsx)($.MediaUploadCheck,{children:(0,G.jsx)($.MediaUpload,{onSelect:C,allowedTypes:["image"],value:s,render:({open:e})=>(0,G.jsx)(B.ToolbarButton,{onClick:e,icon:"edit",label:(0,E.__)("Replace Image","cwicly")})})})}),(0,G.jsx)(B.ToolbarGroup,{children:(0,G.jsx)(B.ToolbarButton,{icon:"admin-links",label:(0,E.__)("Link","cwicly"),onClick:()=>b(!g),isActive:p})})]}),g&&(0,G.jsx)(B.Popover,{position:"bottom center",onClose:()=>b(!1),children:(0,G.jsx)($.__experimentalLinkControl,{value:{url:d,opensInNewTab:u},onChange:e=>{t({linkWrapperUrl:e.url,linkWrapperNewTab:e.opensInNewTab,linkWrapperActive:!!e.url})}})}),(0,G.jsxs)($.InspectorControls,{children:[(0,G.jsx)(V,{attributes:e,setAttributes:t,name:i}),"primary"===h.tab&&(0,G.jsxs)("div",{className:"cwicly-primary-tab",children:[(0,G.jsxs)(B.PanelBody,{title:(0,E.__)("Image Settings","cwicly"),children:[(0,G.jsx)(B.SelectControl,{label:(0,E.__)("Size","cwicly"),value:y,options:[{label:(0,E.__)("Full","cwicly"),value:"full"},{label:(0,E.__)("Large","cwicly"),value:"large"},{label:(0,E.__)("Medium","cwicly"),value:"medium"},{label:(0,E.__)("Thumbnail","cwicly"),value:"thumbnail"}],onChange:e=>t({imageThumbnailSize:e})}),(0,G.jsx)(B.TextareaControl,{label:(0,E.__)("Alternative Text","cwicly"),value:n,onChange:e=>t({imageAlt:e}),help:(0,E.__)("Describe the purpose of the image for accessibility.","cwicly")}),(0,G.jsx)(B.ToggleControl,{label:(0,E.__)("Lightbox","cwicly"),checked:c,onChange:e=>t({imageLightbox:e})}),l&&(0,G.jsx)(B.Button,{isDestructive:!0,onClick:()=>{t({imageURL:void 0,imageID:void 0,imageAlt:""})},children:(0,E.__)("Remove Image","cwicly")})]}),(0,G.jsxs)(B.PanelBody,{title:(0,E.__)("Link Settings","cwicly"),children:[(0,G.jsx)(B.ToggleControl,{label:(0,E.__)("Link active","cwicly"),checked:p,onChange:e=>t({linkWrapperActive:e})}),p&&(0,G.jsxs)(G.Fragment,{children:[(0,G.jsx)(B.TextControl,{label:(0,E.__)("URL","cwicly"),value:d,onChange:e=>t({linkWrapperUrl:e})}),(0,G.jsx)(B.ToggleControl,{label:(0,E.__)("Open in new tab","cwicly"),checked:u,onChange:e=>t({linkWrapperNewTab:e})})]})]})]}),"design"===h.tab&&(0,G.jsx)(K,{attributes:e,setAttributes:t,pseudoClass:w}),"advanced"===h.tab&&(0,G.jsx)("div",{className:"cwicly-advanced-tab",children:(0,G.jsx)("div",{style:{padding:"0 16px",fontSize:"12px"},children:(0,E.__)("Advanced Cwicly settings (Classes, Custom CSS).","cwicly")})})]}),(0,G.jsxs)("div",{...m,children:[(0,G.jsx)(U,{attributes:e}),l?(0,G.jsx)("img",{src:l,alt:n}):(0,G.jsx)($.MediaPlaceholder,{onSelect:C,allowedTypes:["image"],multiple:!1,labels:{title:(0,E.__)("Cwicly Image","cwicly")}})]})]})},save:function({attributes:e}){const t=O(e,"image"),a=R(e),i=M(e),l=(0,G.jsx)("img",{id:t,...a,...i,className:e.className});if(e.imageLightbox){const t=R({...e,lightbox:!0});return(0,G.jsx)("a",{className:"cc-lightbox",href:t.src,"data-gallery":e.linkWrapperActionLighboxRef||null,children:l})}return l}}),(0,P.registerBlockType)("cwicly/button",{title:(0,E.__)("Button","cwicly"),icon:"button",category:"cwicly",attributes:{content:{type:"string",source:"html",selector:".cc-btn",default:""},uniqueID:{type:"string"},classID:{type:"string"},classes:{type:"string",default:""},linkWrapperActive:{type:"boolean",default:!0},linkWrapperUrl:{type:"string",default:""},linkWrapperNewTab:{type:"boolean",default:!1},linkWrapperRel:{type:"string",default:""},linkWrapperTitle:{type:"string",default:""},linkWrapperType:{type:"string",default:"url"},linkWrapperSourceType:{type:"string",default:"static"},isStyling:{type:"boolean",default:!0},skeletonActive:{type:"boolean",default:!0},htmlAttributes:{type:"array",default:[]},relativeStyles:{type:"array",default:[]},customCSS:{type:"string",default:""},interactions:{type:"object",default:{click:[],dbclick:[],scrollinview:[]}}},supports:{anchor:!0,html:!1},edit:function({attributes:e,setAttributes:t,clientId:a,name:i}){const{content:l,linkWrapperUrl:s,linkWrapperNewTab:n,classes:o,linkWrapperActive:c}=e,[p,d]=(0,z.useState)(!1),u=(0,$.useBlockProps)({id:O(e,a),className:`cc-btn ${o||""}`}),{inspectortab:y,pseudoClass:g}=(0,r.useSelect)(e=>({inspectortab:e("cwicly/base").getInspectorPosition(),pseudoClass:e("cwicly/base").getPseudoClass()}),[]);return(0,G.jsxs)(G.Fragment,{children:[(0,G.jsx)($.BlockControls,{children:(0,G.jsxs)("div",{className:"wp-block-button__inline-link",children:[(0,G.jsx)("button",{className:"button wp-block-button__link",onClick:()=>d(!p),children:(0,E.__)("Link","cwicly")}),p&&(0,G.jsx)(B.Popover,{position:"bottom center",onClose:()=>d(!1),children:(0,G.jsx)($.__experimentalLinkControl,{value:{url:s,opensInNewTab:n},onChange:e=>{t({linkWrapperUrl:e.url,linkWrapperNewTab:e.opensInNewTab,linkWrapperActive:!!e.url})}})})]})}),(0,G.jsxs)($.InspectorControls,{children:[(0,G.jsx)(V,{attributes:e,setAttributes:t,name:i}),"primary"===y.tab&&(0,G.jsx)("div",{className:"cwicly-primary-tab",children:(0,G.jsxs)(B.PanelBody,{title:(0,E.__)("Link Settings","cwicly"),children:[(0,G.jsx)(B.ToggleControl,{label:(0,E.__)("Link active","cwicly"),checked:c,onChange:e=>t({linkWrapperActive:e})}),c&&(0,G.jsxs)(G.Fragment,{children:[(0,G.jsx)(B.TextControl,{label:(0,E.__)("URL","cwicly"),value:s,onChange:e=>t({linkWrapperUrl:e})}),(0,G.jsx)(B.ToggleControl,{label:(0,E.__)("Open in new tab","cwicly"),checked:n,onChange:e=>t({linkWrapperNewTab:e})})]})]})}),"design"===y.tab&&(0,G.jsx)(K,{attributes:e,setAttributes:t,pseudoClass:g}),"advanced"===y.tab&&(0,G.jsx)("div",{className:"cwicly-advanced-tab",children:(0,G.jsx)("div",{style:{padding:"0 16px",fontSize:"12px"},children:(0,E.__)("Advanced Cwicly settings (Classes, Custom CSS).","cwicly")})})]}),(0,G.jsxs)("div",{...u,children:[(0,G.jsx)(U,{attributes:e}),(0,G.jsx)($.RichText,{tagName:"span",value:l,onChange:e=>t({content:e}),placeholder:(0,E.__)("Button text...","cwicly")})]})]})},save:function({attributes:e}){const t=O(e,"button"),a=F(e,"button"),i=M(e),l=!e.containerLayoutTag||"a"!==e.containerLayoutTag&&"button"!==e.containerLayoutTag?"a":e.containerLayoutTag;return(0,G.jsx)(l,{id:t,...a,...i,className:e.className,children:(0,G.jsx)($.RichText.Content,{value:e.content})})}})}},a={};function i(e){var l=a[e];if(void 0!==l)return l.exports;var r=a[e]={exports:{}};return t[e](r,r.exports,i),r.exports}i.m=t,e=[],i.O=(t,a,l,r)=>{if(!a){var s=1/0;for(p=0;p<e.length;p++){for(var[a,l,r]=e[p],n=!0,o=0;o<a.length;o++)(!1&r||s>=r)&&Object.keys(i.O).every(e=>i.O[e](a[o]))?a.splice(o--,1):(n=!1,r<s&&(s=r));if(n){e.splice(p--,1);var c=l();void 0!==c&&(t=c)}}return t}r=r||0;for(var p=e.length;p>0&&e[p-1][2]>r;p--)e[p]=e[p-1];e[p]=[a,l,r]},i.d=(e,t)=>{for(var a in t)i.o(t,a)&&!i.o(e,a)&&Object.defineProperty(e,a,{enumerable:!0,get:t[a]})},i.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),i.r=e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},(()=>{var e={57:0,350:0};i.O.j=t=>0===e[t];var t=(t,a)=>{var l,r,[s,n,o]=a,c=0;if(s.some(t=>0!==e[t])){for(l in n)i.o(n,l)&&(i.m[l]=n[l]);if(o)var p=o(i)}for(t&&t(a);c<s.length;c++)r=s[c],i.o(e,r)&&e[r]&&e[r][0](),e[r]=0;return i.O(p)},a=globalThis.webpackChunkcwicly=globalThis.webpackChunkcwicly||[];a.forEach(t.bind(null,0)),a.push=t.bind(null,a.push.bind(a))})();var l=i.O(void 0,[350],()=>i(460));l=i.O(l)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/style.css"
+/*!***********************!*\
+  !*** ./src/style.css ***!
+  \***********************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ },
+
+/***/ "react/jsx-runtime"
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
+(module) {
+
+"use strict";
+module.exports = window["ReactJSXRuntime"];
+
+/***/ },
+
+/***/ "@wordpress/api-fetch"
+/*!**********************************!*\
+  !*** external ["wp","apiFetch"] ***!
+  \**********************************/
+(module) {
+
+"use strict";
+module.exports = window["wp"]["apiFetch"];
+
+/***/ },
+
+/***/ "@wordpress/block-editor"
+/*!*************************************!*\
+  !*** external ["wp","blockEditor"] ***!
+  \*************************************/
+(module) {
+
+"use strict";
+module.exports = window["wp"]["blockEditor"];
+
+/***/ },
+
+/***/ "@wordpress/blocks"
+/*!********************************!*\
+  !*** external ["wp","blocks"] ***!
+  \********************************/
+(module) {
+
+"use strict";
+module.exports = window["wp"]["blocks"];
+
+/***/ },
+
+/***/ "@wordpress/components"
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+(module) {
+
+"use strict";
+module.exports = window["wp"]["components"];
+
+/***/ },
+
+/***/ "@wordpress/data"
+/*!******************************!*\
+  !*** external ["wp","data"] ***!
+  \******************************/
+(module) {
+
+"use strict";
+module.exports = window["wp"]["data"];
+
+/***/ },
+
+/***/ "@wordpress/element"
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
+(module) {
+
+"use strict";
+module.exports = window["wp"]["element"];
+
+/***/ },
+
+/***/ "@wordpress/i18n"
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+(module) {
+
+"use strict";
+module.exports = window["wp"]["i18n"];
+
+/***/ },
+
+/***/ "./node_modules/classnames/index.js"
+/*!******************************************!*\
+  !*** ./node_modules/classnames/index.js ***!
+  \******************************************/
+(module, exports) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	Copyright (c) 2018 Jed Watson.
+	Licensed under the MIT License (MIT), see
+	http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = '';
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (arg) {
+				classes = appendClass(classes, parseValue(arg));
+			}
+		}
+
+		return classes;
+	}
+
+	function parseValue (arg) {
+		if (typeof arg === 'string' || typeof arg === 'number') {
+			return arg;
+		}
+
+		if (typeof arg !== 'object') {
+			return '';
+		}
+
+		if (Array.isArray(arg)) {
+			return classNames.apply(null, arg);
+		}
+
+		if (arg.toString !== Object.prototype.toString && !arg.toString.toString().includes('[native code]')) {
+			return arg.toString();
+		}
+
+		var classes = '';
+
+		for (var key in arg) {
+			if (hasOwn.call(arg, key) && arg[key]) {
+				classes = appendClass(classes, key);
+			}
+		}
+
+		return classes;
+	}
+
+	function appendClass (value, newClass) {
+		if (!newClass) {
+			return value;
+		}
+	
+		if (value) {
+			return value + ' ' + newClass;
+		}
+	
+		return value + newClass;
+	}
+
+	if ( true && module.exports) {
+		classNames.default = classNames;
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+			return classNames;
+		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else // removed by dead control flow
+{}
+}());
+
+
+/***/ },
+
+/***/ "./src/blocks/button/edit.js"
+/*!***********************************!*\
+  !*** ./src/blocks/button/edit.js ***!
+  \***********************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Edit)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var _components_framework_CwiclyInspector_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/framework/CwiclyInspector.js */ "./src/components/framework/CwiclyInspector.js");
+/* harmony import */ var _components_framework_DesignPanel_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/framework/DesignPanel.js */ "./src/components/framework/DesignPanel.js");
+/* harmony import */ var _components_framework_DynamicAttributeWrapper_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/framework/DynamicAttributeWrapper.js */ "./src/components/framework/DynamicAttributeWrapper.js");
+/* harmony import */ var _hooks_use_dynamic_data_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../hooks/use-dynamic-data.js */ "./src/hooks/use-dynamic-data.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+
+
+
+
+
+
+
+
+function Edit({
+  attributes,
+  setAttributes,
+  clientId,
+  name
+}) {
+  const {
+    content,
+    linkWrapperUrl,
+    linkWrapperNewTab,
+    classes,
+    linkWrapperActive
+  } = attributes;
+  const resolvedContent = (0,_hooks_use_dynamic_data_js__WEBPACK_IMPORTED_MODULE_9__.useDynamicData)(content);
+  const resolvedLinkURL = (0,_hooks_use_dynamic_data_js__WEBPACK_IMPORTED_MODULE_9__.useDynamicData)(linkWrapperUrl);
+  const displayContent = resolvedContent || content;
+  const displayLinkURL = resolvedLinkURL || linkWrapperUrl;
+  const [isEditingURL, setIsEditingURL] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
+    id: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_5__.getBlockID)(attributes, clientId),
+    className: `cc-btn ${classes || ''}`
+  });
+  const {
+    inspectortab,
+    pseudoClass
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.useSelect)(select => ({
+    inspectortab: select('cwicly/base').getInspectorPosition(),
+    pseudoClass: select('cwicly/base').getPseudoClass()
+  }), []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.BlockControls, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+        className: "wp-block-button__inline-link",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("button", {
+          className: "button wp-block-button__link",
+          onClick: () => setIsEditingURL(!isEditingURL),
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Link', 'cwicly')
+        }), isEditingURL && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Popover, {
+          position: "bottom center",
+          onClose: () => setIsEditingURL(false),
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.__experimentalLinkControl, {
+            value: {
+              url: linkWrapperUrl,
+              opensInNewTab: linkWrapperNewTab
+            },
+            onChange: nextValue => {
+              setAttributes({
+                linkWrapperUrl: nextValue.url,
+                linkWrapperNewTab: nextValue.opensInNewTab,
+                linkWrapperActive: !!nextValue.url
+              });
+            }
+          })
+        })]
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InspectorControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_framework_CwiclyInspector_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        name: name
+      }), inspectortab.tab === 'primary' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+        className: "cwicly-primary-tab",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Link Settings', 'cwicly'),
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Link active', 'cwicly'),
+            checked: linkWrapperActive,
+            onChange: val => setAttributes({
+              linkWrapperActive: val
+            })
+          }), linkWrapperActive && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_framework_DynamicAttributeWrapper_js__WEBPACK_IMPORTED_MODULE_8__["default"], {
+              attribute: "linkWrapperUrl",
+              attributes: attributes,
+              setAttributes: setAttributes,
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('URL', 'cwicly'),
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+                value: linkWrapperUrl,
+                onChange: newUrl => setAttributes({
+                  linkWrapperUrl: newUrl
+                })
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Open in new tab', 'cwicly'),
+              checked: linkWrapperNewTab,
+              onChange: isChecked => setAttributes({
+                linkWrapperNewTab: isChecked
+              })
+            })]
+          })]
+        })
+      }), inspectortab.tab === 'design' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_framework_DesignPanel_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        pseudoClass: pseudoClass
+      }), inspectortab.tab === 'advanced' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+        className: "cwicly-advanced-tab",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+          style: {
+            padding: '0 16px',
+            fontSize: '12px'
+          },
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Advanced Cwicly settings (Classes, Custom CSS).', 'cwicly')
+        })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+      ...blockProps,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_utils_index_js__WEBPACK_IMPORTED_MODULE_5__.BackgroundHelper, {
+        attributes: attributes
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText, {
+        tagName: "span",
+        value: displayContent || '',
+        onChange: newContent => setAttributes({
+          content: newContent
+        }),
+        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Button text...', 'cwicly')
+      })]
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/blocks/button/index.js"
+/*!************************************!*\
+  !*** ./src/blocks/button/index.js ***!
+  \************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _edit_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit.js */ "./src/blocks/button/edit.js");
+/* harmony import */ var _save_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save.js */ "./src/blocks/button/save.js");
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)('cwicly/button', {
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Button', 'cwicly'),
+  icon: 'button',
+  category: 'cwicly',
+  attributes: {
+    content: {
+      type: 'string',
+      source: 'html',
+      selector: '.cc-btn',
+      default: ''
+    },
+    uniqueID: {
+      type: 'string'
+    },
+    classID: {
+      type: 'string'
+    },
+    classes: {
+      type: 'string',
+      default: ''
+    },
+    // Link attributes (standard across blocks)
+    linkWrapperActive: {
+      type: 'boolean',
+      default: true
+    },
+    // Button is a link by default in Cwicly
+    linkWrapperUrl: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperNewTab: {
+      type: 'boolean',
+      default: false
+    },
+    linkWrapperRel: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperTitle: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperType: {
+      type: 'string',
+      default: 'url'
+    },
+    linkWrapperSourceType: {
+      type: 'string',
+      default: 'static'
+    },
+    // Cwicly standard attributes
+    isStyling: {
+      type: 'boolean',
+      default: true
+    },
+    skeletonActive: {
+      type: 'boolean',
+      default: true
+    },
+    htmlAttributes: {
+      type: 'array',
+      default: []
+    },
+    relativeStyles: {
+      type: 'array',
+      default: []
+    },
+    customCSS: {
+      type: 'string',
+      default: ''
+    },
+    interactions: {
+      type: 'object',
+      default: {
+        click: [],
+        dbclick: [],
+        scrollinview: []
+      }
+    }
+  },
+  supports: {
+    anchor: true,
+    html: false
+  },
+  edit: _edit_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  save: _save_js__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/button/save.js"
+/*!***********************************!*\
+  !*** ./src/blocks/button/save.js ***!
+  \***********************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ save)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+function save({
+  attributes
+}) {
+  const blockID = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getBlockID)(attributes, 'button');
+  const linkAttrs = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getLinkAttributes)(attributes, 'button');
+  const interactions = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getInteractions)(attributes);
+  const Tag = !attributes.containerLayoutTag || attributes.containerLayoutTag !== 'a' && attributes.containerLayoutTag !== 'button' ? 'a' : attributes.containerLayoutTag;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Tag, {
+    id: blockID,
+    ...linkAttrs,
+    ...interactions,
+    className: attributes.className,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
+      value: attributes.content
+    })
+  });
+}
+
+/***/ },
+
+/***/ "./src/blocks/column/edit.js"
+/*!***********************************!*\
+  !*** ./src/blocks/column/edit.js ***!
+  \***********************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Edit)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var _components_framework_CwiclyInspector_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/framework/CwiclyInspector.js */ "./src/components/framework/CwiclyInspector.js");
+/* harmony import */ var _components_framework_DesignPanel_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/framework/DesignPanel.js */ "./src/components/framework/DesignPanel.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+
+
+
+
+
+function Edit({
+  attributes,
+  setAttributes,
+  clientId,
+  name
+}) {
+  const {
+    containerLayoutTag,
+    classes
+  } = attributes;
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
+    id: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.getBlockID)(attributes, clientId),
+    className: `cc-column ${classes || ''}`
+  });
+  const {
+    inspectortab,
+    pseudoClass
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => ({
+    inspectortab: select('cwicly/base').getInspectorPosition(),
+    pseudoClass: select('cwicly/base').getPseudoClass()
+  }), []);
+  const Tag = containerLayoutTag || 'div';
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InspectorControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_framework_CwiclyInspector_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        name: name
+      }), inspectortab.tab === 'primary' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        className: "cwicly-primary-tab",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Column Settings', 'cwicly'),
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('HTML Tag', 'cwicly'),
+            value: containerLayoutTag,
+            options: [{
+              label: 'DIV',
+              value: 'div'
+            }, {
+              label: 'SECTION',
+              value: 'section'
+            }, {
+              label: 'ARTICLE',
+              value: 'article'
+            }, {
+              label: 'ASIDE',
+              value: 'aside'
+            }],
+            onChange: val => setAttributes({
+              containerLayoutTag: val
+            })
+          })
+        })
+      }), inspectortab.tab === 'design' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_framework_DesignPanel_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        pseudoClass: pseudoClass
+      }), inspectortab.tab === 'advanced' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        className: "cwicly-advanced-tab",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          style: {
+            padding: '0 16px',
+            fontSize: '12px'
+          },
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Advanced Cwicly settings (Classes, Custom CSS).', 'cwicly')
+        })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(Tag, {
+      ...blockProps,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.BackgroundHelper, {
+        attributes: attributes
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks, {})]
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/blocks/column/index.js"
+/*!************************************!*\
+  !*** ./src/blocks/column/index.js ***!
+  \************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _edit_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit.js */ "./src/blocks/column/edit.js");
+/* harmony import */ var _save_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save.js */ "./src/blocks/column/save.js");
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)('cwicly/column', {
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Column', 'cwicly'),
+  parent: ['cwicly/columns'],
+  icon: 'column',
+  category: 'cwicly',
+  attributes: {
+    uniqueID: {
+      type: 'string'
+    },
+    classID: {
+      type: 'string'
+    },
+    classes: {
+      type: 'string',
+      default: ''
+    },
+    containerLayoutTag: {
+      type: 'string',
+      default: 'div'
+    },
+    // Link attributes
+    linkWrapperActive: {
+      type: 'boolean',
+      default: false
+    },
+    linkWrapperUrl: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperNewTab: {
+      type: 'boolean',
+      default: false
+    },
+    linkWrapperRel: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperTitle: {
+      type: 'string',
+      default: ''
+    },
+    // Cwicly standard attributes
+    isStyling: {
+      type: 'boolean',
+      default: true
+    },
+    skeletonActive: {
+      type: 'boolean',
+      default: true
+    },
+    htmlAttributes: {
+      type: 'array',
+      default: []
+    },
+    relativeStyles: {
+      type: 'array',
+      default: []
+    },
+    customCSS: {
+      type: 'string',
+      default: ''
+    },
+    interactions: {
+      type: 'object',
+      default: {
+        click: [],
+        dbclick: [],
+        scrollinview: []
+      }
+    }
+  },
+  supports: {
+    anchor: true,
+    html: false
+  },
+  edit: _edit_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  save: _save_js__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/column/save.js"
+/*!***********************************!*\
+  !*** ./src/blocks/column/save.js ***!
+  \***********************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ save)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+function save({
+  attributes
+}) {
+  const blockID = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getBlockID)(attributes, 'column');
+  const linkAttrs = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getLinkAttributes)(attributes, 'column');
+  const interactions = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getInteractions)(attributes);
+  const Tag = attributes.linkWrapperActive || linkAttrs?.href ? attributes.containerLayoutTag || 'a' : attributes.containerLayoutTag || 'div';
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Tag, {
+    id: blockID,
+    ...linkAttrs,
+    ...interactions,
+    className: attributes.className,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks.Content, {})
+  });
+}
+
+/***/ },
+
+/***/ "./src/blocks/columns/edit.js"
+/*!************************************!*\
+  !*** ./src/blocks/columns/edit.js ***!
+  \************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Edit)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var _components_framework_CwiclyInspector_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/framework/CwiclyInspector.js */ "./src/components/framework/CwiclyInspector.js");
+/* harmony import */ var _components_framework_DesignPanel_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/framework/DesignPanel.js */ "./src/components/framework/DesignPanel.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+
+
+
+
+
+function Edit({
+  attributes,
+  setAttributes,
+  clientId,
+  name
+}) {
+  const {
+    columnsCount,
+    containerLayoutTag,
+    classes
+  } = attributes;
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
+    id: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.getBlockID)(attributes, clientId),
+    className: `cc-columns ${classes || ''}`
+  });
+  const {
+    inspectortab,
+    pseudoClass
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => ({
+    inspectortab: select('cwicly/base').getInspectorPosition(),
+    pseudoClass: select('cwicly/base').getPseudoClass()
+  }), []);
+  const Tag = containerLayoutTag || 'div';
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InspectorControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_framework_CwiclyInspector_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        name: name
+      }), inspectortab.tab === 'primary' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        className: "cwicly-primary-tab",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Columns Settings', 'cwicly'),
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Columns', 'cwicly'),
+            value: columnsCount,
+            onChange: val => setAttributes({
+              columnsCount: val
+            }),
+            min: 1,
+            max: 12
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('HTML Tag', 'cwicly'),
+            value: containerLayoutTag,
+            options: [{
+              label: 'DIV',
+              value: 'div'
+            }, {
+              label: 'SECTION',
+              value: 'section'
+            }, {
+              label: 'HEADER',
+              value: 'header'
+            }, {
+              label: 'FOOTER',
+              value: 'footer'
+            }],
+            onChange: val => setAttributes({
+              containerLayoutTag: val
+            })
+          })]
+        })
+      }), inspectortab.tab === 'design' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_framework_DesignPanel_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        pseudoClass: pseudoClass
+      }), inspectortab.tab === 'advanced' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        className: "cwicly-advanced-tab",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          style: {
+            padding: '0 16px',
+            fontSize: '12px'
+          },
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Advanced Cwicly settings (Classes, Custom CSS).', 'cwicly')
+        })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(Tag, {
+      ...blockProps,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.BackgroundHelper, {
+        attributes: attributes
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks, {
+        allowedBlocks: ['cwicly/column'],
+        orientation: "horizontal"
+      })]
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/blocks/columns/index.js"
+/*!*************************************!*\
+  !*** ./src/blocks/columns/index.js ***!
+  \*************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _edit_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit.js */ "./src/blocks/columns/edit.js");
+/* harmony import */ var _save_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save.js */ "./src/blocks/columns/save.js");
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)('cwicly/columns', {
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Columns', 'cwicly'),
+  icon: 'columns',
+  category: 'cwicly',
+  attributes: {
+    uniqueID: {
+      type: 'string'
+    },
+    classID: {
+      type: 'string'
+    },
+    classes: {
+      type: 'string',
+      default: ''
+    },
+    containerLayoutTag: {
+      type: 'string',
+      default: 'div'
+    },
+    columnsCount: {
+      type: 'number',
+      default: 2
+    },
+    // Link attributes
+    linkWrapperActive: {
+      type: 'boolean',
+      default: false
+    },
+    linkWrapperUrl: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperNewTab: {
+      type: 'boolean',
+      default: false
+    },
+    linkWrapperRel: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperTitle: {
+      type: 'string',
+      default: ''
+    },
+    // Cwicly standard attributes
+    isStyling: {
+      type: 'boolean',
+      default: true
+    },
+    skeletonActive: {
+      type: 'boolean',
+      default: true
+    },
+    htmlAttributes: {
+      type: 'array',
+      default: []
+    },
+    relativeStyles: {
+      type: 'array',
+      default: []
+    },
+    customCSS: {
+      type: 'string',
+      default: ''
+    },
+    interactions: {
+      type: 'object',
+      default: {
+        click: [],
+        dbclick: [],
+        scrollinview: []
+      }
+    }
+  },
+  supports: {
+    anchor: true,
+    html: false
+  },
+  edit: _edit_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  save: _save_js__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/columns/save.js"
+/*!************************************!*\
+  !*** ./src/blocks/columns/save.js ***!
+  \************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ save)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+function save({
+  attributes
+}) {
+  const blockID = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getBlockID)(attributes, 'columns');
+  const linkAttrs = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getLinkAttributes)(attributes, 'columns');
+  const interactions = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getInteractions)(attributes);
+  const Tag = attributes.linkWrapperActive || linkAttrs?.href ? attributes.containerLayoutTag || 'a' : attributes.containerLayoutTag || 'div';
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Tag, {
+    id: blockID,
+    ...linkAttrs,
+    ...interactions,
+    className: attributes.className,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks.Content, {})
+  });
+}
+
+/***/ },
+
+/***/ "./src/blocks/container/edit.js"
+/*!**************************************!*\
+  !*** ./src/blocks/container/edit.js ***!
+  \**************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Edit)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var _components_framework_CwiclyInspector_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/framework/CwiclyInspector.js */ "./src/components/framework/CwiclyInspector.js");
+/* harmony import */ var _components_framework_DesignPanel_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/framework/DesignPanel.js */ "./src/components/framework/DesignPanel.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+
+
+
+
+
+function Edit({
+  attributes,
+  setAttributes,
+  clientId,
+  name
+}) {
+  const {
+    containerLayoutTag,
+    classes
+  } = attributes;
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
+    id: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.getBlockID)(attributes, clientId),
+    className: classes || ''
+  });
+  const {
+    inspectortab,
+    pseudoClass
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => ({
+    inspectortab: select('cwicly/base').getInspectorPosition(),
+    pseudoClass: select('cwicly/base').getPseudoClass()
+  }), []);
+  const Tag = containerLayoutTag || 'div';
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InspectorControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_framework_CwiclyInspector_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        name: name
+      }), inspectortab.tab === 'primary' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        className: "cwicly-primary-tab",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Container Settings', 'cwicly'),
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('HTML Tag', 'cwicly'),
+            value: containerLayoutTag,
+            options: [{
+              label: 'DIV',
+              value: 'div'
+            }, {
+              label: 'SECTION',
+              value: 'section'
+            }, {
+              label: 'HEADER',
+              value: 'header'
+            }, {
+              label: 'FOOTER',
+              value: 'footer'
+            }, {
+              label: 'MAIN',
+              value: 'main'
+            }, {
+              label: 'ARTICLE',
+              value: 'article'
+            }, {
+              label: 'ASIDE',
+              value: 'aside'
+            }],
+            onChange: val => setAttributes({
+              containerLayoutTag: val
+            })
+          })
+        })
+      }), inspectortab.tab === 'design' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_framework_DesignPanel_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        pseudoClass: pseudoClass
+      }), inspectortab.tab === 'advanced' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        className: "cwicly-advanced-tab",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          style: {
+            padding: '0 16px',
+            fontSize: '12px'
+          },
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Advanced Cwicly settings (Classes, Custom CSS).', 'cwicly')
+        })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(Tag, {
+      ...blockProps,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.BackgroundHelper, {
+        attributes: attributes
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks, {})]
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/blocks/container/index.js"
+/*!***************************************!*\
+  !*** ./src/blocks/container/index.js ***!
+  \***************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _edit_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit.js */ "./src/blocks/container/edit.js");
+/* harmony import */ var _save_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save.js */ "./src/blocks/container/save.js");
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)('cwicly/container', {
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Container', 'cwicly'),
+  icon: 'editor-table',
+  category: 'cwicly',
+  attributes: {
+    uniqueID: {
+      type: 'string'
+    },
+    classID: {
+      type: 'string'
+    },
+    classes: {
+      type: 'string',
+      default: ''
+    },
+    containerLayoutTag: {
+      type: 'string',
+      default: 'div'
+    },
+    // Link attributes
+    linkWrapperActive: {
+      type: 'boolean',
+      default: false
+    },
+    linkWrapperUrl: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperNewTab: {
+      type: 'boolean',
+      default: false
+    },
+    linkWrapperRel: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperTitle: {
+      type: 'string',
+      default: ''
+    },
+    // Cwicly standard attributes
+    isStyling: {
+      type: 'boolean',
+      default: true
+    },
+    skeletonActive: {
+      type: 'boolean',
+      default: true
+    },
+    htmlAttributes: {
+      type: 'array',
+      default: []
+    },
+    relativeStyles: {
+      type: 'array',
+      default: []
+    },
+    customCSS: {
+      type: 'string',
+      default: ''
+    },
+    interactions: {
+      type: 'object',
+      default: {
+        click: [],
+        dbclick: [],
+        scrollinview: []
+      }
+    }
+  },
+  supports: {
+    anchor: true,
+    html: false
+  },
+  edit: _edit_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  save: _save_js__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/container/save.js"
+/*!**************************************!*\
+  !*** ./src/blocks/container/save.js ***!
+  \**************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ save)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+function save({
+  attributes
+}) {
+  const blockID = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getBlockID)(attributes, 'container');
+  const linkAttrs = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getLinkAttributes)(attributes, 'container');
+  const interactions = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getInteractions)(attributes);
+  const Tag = attributes.linkWrapperActive || linkAttrs?.href ? attributes.containerLayoutTag || 'a' : attributes.containerLayoutTag || 'div';
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Tag, {
+    id: blockID,
+    ...linkAttrs,
+    ...interactions,
+    className: attributes.className,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks.Content, {})
+  });
+}
+
+/***/ },
+
+/***/ "./src/blocks/heading/edit.js"
+/*!************************************!*\
+  !*** ./src/blocks/heading/edit.js ***!
+  \************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Edit)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var _components_framework_CwiclyInspector_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/framework/CwiclyInspector.js */ "./src/components/framework/CwiclyInspector.js");
+/* harmony import */ var _components_framework_DesignPanel_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/framework/DesignPanel.js */ "./src/components/framework/DesignPanel.js");
+/* harmony import */ var _components_framework_DynamicAttributeWrapper_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/framework/DynamicAttributeWrapper.js */ "./src/components/framework/DynamicAttributeWrapper.js");
+/* harmony import */ var _hooks_use_dynamic_data_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../hooks/use-dynamic-data.js */ "./src/hooks/use-dynamic-data.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+// src/blocks/heading/edit.js
+
+
+
+
+
+
+
+
+
+
+
+function Edit({
+  attributes,
+  setAttributes,
+  clientId,
+  name
+}) {
+  const {
+    content,
+    headingTag,
+    classes,
+    linkWrapperActive,
+    linkWrapperUrl,
+    linkWrapperNewTab
+  } = attributes;
+  const resolvedContent = (0,_hooks_use_dynamic_data_js__WEBPACK_IMPORTED_MODULE_9__.useDynamicData)(content);
+  const resolvedLinkURL = (0,_hooks_use_dynamic_data_js__WEBPACK_IMPORTED_MODULE_9__.useDynamicData)(linkWrapperUrl);
+  const displayContent = resolvedContent || content;
+  const displayLinkURL = resolvedLinkURL || linkWrapperUrl;
+  const [isEditingURL, setIsEditingURL] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
+    id: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_5__.getBlockID)(attributes, clientId),
+    className: classes || ''
+  });
+  const {
+    inspectortab,
+    pseudoClass
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.useSelect)(select => ({
+    inspectortab: select('cwicly/base').getInspectorPosition(),
+    pseudoClass: select('cwicly/base').getPseudoClass()
+  }), []);
+  const setHeadingTag = tag => {
+    setAttributes({
+      headingTag: tag
+    });
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.BlockControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarGroup, {
+        children: [1, 2, 3, 4, 5, 6].map(level => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarButton, {
+          icon: `heading`,
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)(`Heading ${level}`, 'cwicly'),
+          isActive: headingTag === `h${level}`,
+          onClick: () => setHeadingTag(`h${level}`),
+          children: level
+        }, level))
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarGroup, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarButton, {
+          icon: "admin-links",
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Link', 'cwicly'),
+          onClick: () => setIsEditingURL(!isEditingURL),
+          isActive: linkWrapperActive
+        })
+      })]
+    }), isEditingURL && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Popover, {
+      position: "bottom center",
+      onClose: () => setIsEditingURL(false),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.__experimentalLinkControl, {
+        value: {
+          url: linkWrapperUrl,
+          opensInNewTab: linkWrapperNewTab
+        },
+        onChange: nextValue => {
+          setAttributes({
+            linkWrapperUrl: nextValue.url,
+            linkWrapperNewTab: nextValue.opensInNewTab,
+            linkWrapperActive: !!nextValue.url
+          });
+        }
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InspectorControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_framework_CwiclyInspector_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        name: name
+      }), inspectortab.tab === 'primary' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+        className: "cwicly-primary-tab",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Heading Settings', 'cwicly'),
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Tag', 'cwicly'),
+            value: headingTag,
+            options: [{
+              label: 'H1',
+              value: 'h1'
+            }, {
+              label: 'H2',
+              value: 'h2'
+            }, {
+              label: 'H3',
+              value: 'h3'
+            }, {
+              label: 'H4',
+              value: 'h4'
+            }, {
+              label: 'H5',
+              value: 'h5'
+            }, {
+              label: 'H6',
+              value: 'h6'
+            }],
+            onChange: setHeadingTag
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Link Settings', 'cwicly'),
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Link active', 'cwicly'),
+            checked: linkWrapperActive,
+            onChange: val => setAttributes({
+              linkWrapperActive: val
+            })
+          }), linkWrapperActive && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_framework_DynamicAttributeWrapper_js__WEBPACK_IMPORTED_MODULE_8__["default"], {
+              attribute: "linkWrapperUrl",
+              attributes: attributes,
+              setAttributes: setAttributes,
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('URL', 'cwicly'),
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+                value: linkWrapperUrl,
+                onChange: val => setAttributes({
+                  linkWrapperUrl: val
+                })
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Open in new tab', 'cwicly'),
+              checked: linkWrapperNewTab,
+              onChange: val => setAttributes({
+                linkWrapperNewTab: val
+              })
+            })]
+          })]
+        })]
+      }), inspectortab.tab === 'design' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_framework_DesignPanel_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        pseudoClass: pseudoClass
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+      ...blockProps,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_utils_index_js__WEBPACK_IMPORTED_MODULE_5__.BackgroundHelper, {
+        attributes: attributes
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText, {
+        tagName: headingTag || 'h1',
+        value: displayContent,
+        onChange: newContent => setAttributes({
+          content: newContent
+        }),
+        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Heading content...', 'cwicly'),
+        allowedFormats: ['core/bold', 'core/italic', 'core/link']
+      })]
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/blocks/heading/index.js"
+/*!*************************************!*\
+  !*** ./src/blocks/heading/index.js ***!
+  \*************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _edit_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit.js */ "./src/blocks/heading/edit.js");
+/* harmony import */ var _save_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save.js */ "./src/blocks/heading/save.js");
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)('cwicly/heading', {
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Heading', 'cwicly'),
+  icon: 'heading',
+  category: 'cwicly',
+  attributes: {
+    content: {
+      type: 'string',
+      source: 'html',
+      selector: 'h1,h2,h3,h4,h5,h6',
+      default: ''
+    },
+    headingTag: {
+      type: 'string',
+      default: 'h1'
+    },
+    uniqueID: {
+      type: 'string'
+    },
+    classID: {
+      type: 'string'
+    },
+    classes: {
+      type: 'string',
+      default: ''
+    },
+    // Link attributes
+    linkWrapperActive: {
+      type: 'boolean',
+      default: false
+    },
+    linkWrapperUrl: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperNewTab: {
+      type: 'boolean',
+      default: false
+    },
+    linkWrapperRel: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperTitle: {
+      type: 'string',
+      default: ''
+    },
+    // Cwicly standard attributes
+    isStyling: {
+      type: 'boolean',
+      default: true
+    },
+    skeletonActive: {
+      type: 'boolean',
+      default: true
+    },
+    htmlAttributes: {
+      type: 'array',
+      default: []
+    },
+    relativeStyles: {
+      type: 'array',
+      default: []
+    },
+    customCSS: {
+      type: 'string',
+      default: ''
+    },
+    interactions: {
+      type: 'object',
+      default: {
+        click: [],
+        dbclick: [],
+        scrollinview: []
+      }
+    }
+  },
+  supports: {
+    anchor: true,
+    html: false
+  },
+  edit: _edit_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  save: _save_js__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/heading/save.js"
+/*!************************************!*\
+  !*** ./src/blocks/heading/save.js ***!
+  \************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ save)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+function save({
+  attributes
+}) {
+  const Tag = attributes.headingTag || 'h1';
+  const blockID = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getBlockID)(attributes, 'heading');
+  const linkAttrs = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getLinkAttributes)(attributes, 'heading');
+  const interactions = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getInteractions)(attributes);
+  const linkWrapperActive = attributes.linkWrapperActive || linkAttrs?.href;
+  const LinkTag = !attributes.containerLayoutTag || attributes.containerLayoutTag !== 'a' && attributes.containerLayoutTag !== 'button' ? 'a' : attributes.containerLayoutTag;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Tag, {
+    id: blockID,
+    ...interactions,
+    className: attributes.className,
+    children: linkWrapperActive ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(LinkTag, {
+      ...linkAttrs,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
+        value: attributes.content
+      })
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
+      value: attributes.content
+    })
+  });
+}
+
+/***/ },
+
+/***/ "./src/blocks/image/edit.js"
+/*!**********************************!*\
+  !*** ./src/blocks/image/edit.js ***!
+  \**********************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Edit)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var _components_framework_CwiclyInspector_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/framework/CwiclyInspector.js */ "./src/components/framework/CwiclyInspector.js");
+/* harmony import */ var _components_framework_DesignPanel_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/framework/DesignPanel.js */ "./src/components/framework/DesignPanel.js");
+/* harmony import */ var _components_framework_DynamicDataControl_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/framework/DynamicDataControl.js */ "./src/components/framework/DynamicDataControl.js");
+/* harmony import */ var _components_framework_DynamicAttributeWrapper_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/framework/DynamicAttributeWrapper.js */ "./src/components/framework/DynamicAttributeWrapper.js");
+/* harmony import */ var _hooks_use_dynamic_data_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../hooks/use-dynamic-data.js */ "./src/hooks/use-dynamic-data.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+
+
+
+
+
+
+
+
+
+function Edit({
+  attributes,
+  setAttributes,
+  clientId,
+  name
+}) {
+  const {
+    imageURL,
+    imageID,
+    imageAlt,
+    classes,
+    imageLightbox,
+    linkWrapperActive,
+    linkWrapperUrl,
+    linkWrapperNewTab,
+    imageThumbnailSize
+  } = attributes;
+  const resolvedImageURL = (0,_hooks_use_dynamic_data_js__WEBPACK_IMPORTED_MODULE_10__.useDynamicData)(imageURL);
+  const resolvedImageAlt = (0,_hooks_use_dynamic_data_js__WEBPACK_IMPORTED_MODULE_10__.useDynamicData)(imageAlt);
+
+  // Use resolved values if they exist, otherwise fallback to static attributes
+  const displayImageURL = resolvedImageURL || imageURL;
+  const displayImageAlt = resolvedImageAlt || imageAlt;
+  const [isEditingURL, setIsEditingURL] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
+    id: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_5__.getBlockID)(attributes, clientId),
+    className: classes || ''
+  });
+  const {
+    inspectortab,
+    pseudoClass
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.useSelect)(select => ({
+    inspectortab: select('cwicly/base').getInspectorPosition(),
+    pseudoClass: select('cwicly/base').getPseudoClass()
+  }), []);
+  const onSelectImage = media => {
+    setAttributes({
+      imageURL: media.url,
+      imageID: media.id,
+      imageAlt: media.alt
+    });
+  };
+  const removeImage = () => {
+    setAttributes({
+      imageURL: undefined,
+      imageID: undefined,
+      imageAlt: ''
+    });
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.BlockControls, {
+      children: [imageURL && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarGroup, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.MediaUploadCheck, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.MediaUpload, {
+            onSelect: onSelectImage,
+            allowedTypes: ['image'],
+            value: imageID,
+            render: ({
+              open
+            }) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarButton, {
+              onClick: open,
+              icon: "edit",
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Replace Image', 'cwicly')
+            })
+          })
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarGroup, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarButton, {
+          icon: "admin-links",
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Link', 'cwicly'),
+          onClick: () => setIsEditingURL(!isEditingURL),
+          isActive: linkWrapperActive
+        })
+      })]
+    }), isEditingURL && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Popover, {
+      position: "bottom center",
+      onClose: () => setIsEditingURL(false),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.__experimentalLinkControl, {
+        value: {
+          url: linkWrapperUrl,
+          opensInNewTab: linkWrapperNewTab
+        },
+        onChange: nextValue => {
+          setAttributes({
+            linkWrapperUrl: nextValue.url,
+            linkWrapperNewTab: nextValue.opensInNewTab,
+            linkWrapperActive: !!nextValue.url
+          });
+        }
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InspectorControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_framework_CwiclyInspector_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        name: name
+      }), inspectortab.tab === 'primary' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+        className: "cwicly-primary-tab",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Image Settings', 'cwicly'),
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_framework_DynamicAttributeWrapper_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+            attribute: "imageThumbnailSize",
+            attributes: attributes,
+            setAttributes: setAttributes,
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Size', 'cwicly'),
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+              value: imageThumbnailSize,
+              options: [{
+                label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Full', 'cwicly'),
+                value: 'full'
+              }, {
+                label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Large', 'cwicly'),
+                value: 'large'
+              }, {
+                label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Medium', 'cwicly'),
+                value: 'medium'
+              }, {
+                label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Thumbnail', 'cwicly'),
+                value: 'thumbnail'
+              }],
+              onChange: val => setAttributes({
+                imageThumbnailSize: val
+              })
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_framework_DynamicAttributeWrapper_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+            attribute: "imageAlt",
+            attributes: attributes,
+            setAttributes: setAttributes,
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Alternative Text', 'cwicly'),
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
+              value: imageAlt,
+              onChange: newAlt => setAttributes({
+                imageAlt: newAlt
+              }),
+              help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Describe the purpose of the image for accessibility.', 'cwicly')
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Lightbox', 'cwicly'),
+            checked: imageLightbox,
+            onChange: val => setAttributes({
+              imageLightbox: val
+            })
+          }), imageURL && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+            isDestructive: true,
+            onClick: removeImage,
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Remove Image', 'cwicly')
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Link Settings', 'cwicly'),
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Link active', 'cwicly'),
+            checked: linkWrapperActive,
+            onChange: val => setAttributes({
+              linkWrapperActive: val
+            })
+          }), linkWrapperActive && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_framework_DynamicAttributeWrapper_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+              attribute: "linkWrapperUrl",
+              attributes: attributes,
+              setAttributes: setAttributes,
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('URL', 'cwicly'),
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+                value: linkWrapperUrl,
+                onChange: val => setAttributes({
+                  linkWrapperUrl: val
+                })
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Open in new tab', 'cwicly'),
+              checked: linkWrapperNewTab,
+              onChange: val => setAttributes({
+                linkWrapperNewTab: val
+              })
+            })]
+          })]
+        })]
+      }), inspectortab.tab === 'design' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_framework_DesignPanel_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        pseudoClass: pseudoClass
+      }), inspectortab.tab === 'advanced' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+        className: "cwicly-advanced-tab",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          style: {
+            padding: '0 16px',
+            fontSize: '12px'
+          },
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Advanced Cwicly settings (Classes, Custom CSS).', 'cwicly')
+        })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+      ...blockProps,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_utils_index_js__WEBPACK_IMPORTED_MODULE_5__.BackgroundHelper, {
+        attributes: attributes
+      }), displayImageURL ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("img", {
+        src: displayImageURL,
+        alt: displayImageAlt
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.MediaPlaceholder, {
+        onSelect: onSelectImage,
+        allowedTypes: ['image'],
+        multiple: false,
+        labels: {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Cwicly Image', 'cwicly')
+        }
+      })]
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/blocks/image/index.js"
+/*!***********************************!*\
+  !*** ./src/blocks/image/index.js ***!
+  \***********************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _edit_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit.js */ "./src/blocks/image/edit.js");
+/* harmony import */ var _save_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save.js */ "./src/blocks/image/save.js");
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)('cwicly/image', {
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Image', 'cwicly'),
+  icon: 'format-image',
+  category: 'cwicly',
+  attributes: {
+    imageURL: {
+      type: 'string'
+    },
+    imageID: {
+      type: 'number'
+    },
+    imageAlt: {
+      type: 'string',
+      default: ''
+    },
+    imageType: {
+      type: 'string',
+      default: 'static'
+    },
+    imageThumbnailSize: {
+      type: 'string',
+      default: 'full'
+    },
+    imageLightbox: {
+      type: 'boolean',
+      default: false
+    },
+    uniqueID: {
+      type: 'string'
+    },
+    classID: {
+      type: 'string'
+    },
+    classes: {
+      type: 'string',
+      default: ''
+    },
+    // Link attributes (standard across blocks)
+    linkWrapperActive: {
+      type: 'boolean',
+      default: false
+    },
+    linkWrapperUrl: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperNewTab: {
+      type: 'boolean',
+      default: false
+    },
+    linkWrapperRel: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperTitle: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperActionLighboxRef: {
+      type: 'string',
+      default: ''
+    },
+    // Cwicly standard attributes
+    isStyling: {
+      type: 'boolean',
+      default: true
+    },
+    skeletonActive: {
+      type: 'boolean',
+      default: true
+    },
+    htmlAttributes: {
+      type: 'array',
+      default: []
+    },
+    relativeStyles: {
+      type: 'array',
+      default: []
+    },
+    customCSS: {
+      type: 'string',
+      default: ''
+    },
+    interactions: {
+      type: 'object',
+      default: {
+        click: [],
+        dbclick: [],
+        scrollinview: []
+      }
+    }
+  },
+  supports: {
+    anchor: true,
+    html: false
+  },
+  edit: _edit_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  save: _save_js__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/image/save.js"
+/*!**********************************!*\
+  !*** ./src/blocks/image/save.js ***!
+  \**********************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ save)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+function save({
+  attributes
+}) {
+  const blockID = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getBlockID)(attributes, 'image');
+  const imageAttrs = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getImageAttributes)(attributes);
+  const interactions = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getInteractions)(attributes);
+  const imgElement = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+    id: blockID,
+    ...imageAttrs,
+    ...interactions,
+    className: attributes.className
+  });
+  if (attributes.imageLightbox) {
+    const lightboxAttrs = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getImageAttributes)({
+      ...attributes,
+      lightbox: true
+    });
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
+      className: "cc-lightbox",
+      href: lightboxAttrs.src,
+      "data-gallery": attributes.linkWrapperActionLighboxRef || null,
+      children: imgElement
+    });
+  }
+  return imgElement;
+}
+
+/***/ },
+
+/***/ "./src/blocks/paragraph/edit.js"
+/*!**************************************!*\
+  !*** ./src/blocks/paragraph/edit.js ***!
+  \**************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Edit)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var _components_framework_CwiclyInspector_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/framework/CwiclyInspector.js */ "./src/components/framework/CwiclyInspector.js");
+/* harmony import */ var _components_framework_DesignPanel_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/framework/DesignPanel.js */ "./src/components/framework/DesignPanel.js");
+/* harmony import */ var _components_framework_DynamicAttributeWrapper_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/framework/DynamicAttributeWrapper.js */ "./src/components/framework/DynamicAttributeWrapper.js");
+/* harmony import */ var _hooks_use_dynamic_data_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../hooks/use-dynamic-data.js */ "./src/hooks/use-dynamic-data.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+// src/blocks/paragraph/edit.js
+
+
+
+
+
+
+
+
+
+
+
+function Edit({
+  attributes,
+  setAttributes,
+  clientId,
+  name
+}) {
+  const {
+    content,
+    classes,
+    linkWrapperActive,
+    linkWrapperUrl,
+    linkWrapperNewTab
+  } = attributes;
+  const resolvedContent = (0,_hooks_use_dynamic_data_js__WEBPACK_IMPORTED_MODULE_8__.useDynamicData)(content);
+  const resolvedLinkURL = (0,_hooks_use_dynamic_data_js__WEBPACK_IMPORTED_MODULE_8__.useDynamicData)(linkWrapperUrl);
+  const displayContent = resolvedContent || content;
+  const displayLinkURL = resolvedLinkURL || linkWrapperUrl;
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
+    id: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.getBlockID)(attributes, clientId),
+    className: classes || ''
+  });
+  const {
+    inspectortab,
+    pseudoClass
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => ({
+    inspectortab: select('cwicly/base').getInspectorPosition(),
+    pseudoClass: select('cwicly/base').getPseudoClass()
+  }), []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.BlockControls, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarGroup, {})
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InspectorControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_framework_CwiclyInspector_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        name: name
+      }), inspectortab.tab === 'primary' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+        className: "cwicly-primary-tab",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Paragraph Settings', 'cwicly'),
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_framework_DynamicAttributeWrapper_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
+            attribute: "content",
+            attributes: attributes,
+            setAttributes: setAttributes,
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Content', 'cwicly'),
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("p", {
+              style: {
+                fontSize: '11px',
+                color: '#666',
+                margin: '0'
+              },
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Use the icon above to bind the entire paragraph to a dynamic source.', 'cwicly')
+            })
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Link Settings', 'cwicly'),
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Link active', 'cwicly'),
+            checked: linkWrapperActive,
+            onChange: val => setAttributes({
+              linkWrapperActive: val
+            })
+          }), linkWrapperActive && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_framework_DynamicAttributeWrapper_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
+              attribute: "linkWrapperUrl",
+              attributes: attributes,
+              setAttributes: setAttributes,
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('URL', 'cwicly'),
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+                value: linkWrapperUrl,
+                onChange: val => setAttributes({
+                  linkWrapperUrl: val
+                })
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Open in new tab', 'cwicly'),
+              checked: linkWrapperNewTab,
+              onChange: val => setAttributes({
+                linkWrapperNewTab: val
+              })
+            })]
+          })]
+        })]
+      }), inspectortab.tab === 'design' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_framework_DesignPanel_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        pseudoClass: pseudoClass
+      }), inspectortab.tab === 'advanced' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+        className: "cwicly-advanced-tab",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("p", {
+          style: {
+            padding: '0 16px',
+            fontSize: '12px'
+          },
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Advanced Cwicly settings (Classes, Custom CSS).', 'cwicly')
+        })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText, {
+      ...blockProps,
+      tagName: "p",
+      value: displayContent || '',
+      onChange: content => setAttributes({
+        content
+      }),
+      placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Write your paragraph here…'),
+      allowedFormats: ['core/bold', 'core/italic', 'core/link']
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.BackgroundHelper, {
+      attributes: attributes
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/blocks/paragraph/index.js"
+/*!***************************************!*\
+  !*** ./src/blocks/paragraph/index.js ***!
+  \***************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _edit_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit.js */ "./src/blocks/paragraph/edit.js");
+/* harmony import */ var _save_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save.js */ "./src/blocks/paragraph/save.js");
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)('cwicly/paragraph', {
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Paragraph', 'cwicly'),
+  icon: 'editor-paragraph',
+  category: 'cwicly',
+  attributes: {
+    content: {
+      type: 'string',
+      source: 'html',
+      selector: 'p',
+      default: ''
+    },
+    uniqueID: {
+      type: 'string'
+    },
+    classID: {
+      type: 'string'
+    },
+    classes: {
+      type: 'string',
+      default: ''
+    },
+    // Link attributes
+    linkWrapperActive: {
+      type: 'boolean',
+      default: false
+    },
+    linkWrapperUrl: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperNewTab: {
+      type: 'boolean',
+      default: false
+    },
+    linkWrapperRel: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperTitle: {
+      type: 'string',
+      default: ''
+    },
+    // Cwicly standard attributes
+    isStyling: {
+      type: 'boolean',
+      default: true
+    },
+    skeletonActive: {
+      type: 'boolean',
+      default: true
+    },
+    htmlAttributes: {
+      type: 'array',
+      default: []
+    },
+    relativeStyles: {
+      type: 'array',
+      default: []
+    },
+    customCSS: {
+      type: 'string',
+      default: ''
+    },
+    interactions: {
+      type: 'object',
+      default: {
+        click: [],
+        dbclick: [],
+        scrollinview: []
+      }
+    }
+  },
+  supports: {
+    anchor: true,
+    html: false
+  },
+  edit: _edit_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  save: _save_js__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/paragraph/save.js"
+/*!**************************************!*\
+  !*** ./src/blocks/paragraph/save.js ***!
+  \**************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ save)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+function save({
+  attributes
+}) {
+  const blockID = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getBlockID)(attributes, 'paragraph');
+  const linkAttrs = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getLinkAttributes)(attributes, 'paragraph');
+  const interactions = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getInteractions)(attributes);
+  const linkWrapperActive = attributes.linkWrapperActive || linkAttrs?.href;
+  const Tag = linkWrapperActive ? attributes.containerLayoutTag || 'a' : attributes.containerLayoutTag || 'p';
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Tag, {
+    id: blockID,
+    ...linkAttrs,
+    ...interactions,
+    className: attributes.className,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
+      value: attributes.content
+    })
+  });
+}
+
+/***/ },
+
+/***/ "./src/blocks/section/edit.js"
+/*!************************************!*\
+  !*** ./src/blocks/section/edit.js ***!
+  \************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Edit)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var _components_framework_CwiclyInspector_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/framework/CwiclyInspector.js */ "./src/components/framework/CwiclyInspector.js");
+/* harmony import */ var _components_framework_DesignPanel_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/framework/DesignPanel.js */ "./src/components/framework/DesignPanel.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+
+
+
+
+
+function Edit({
+  attributes,
+  setAttributes,
+  clientId,
+  name
+}) {
+  const {
+    containerLayoutTag,
+    classes
+  } = attributes;
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
+    id: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.getBlockID)(attributes, clientId),
+    className: classes || ''
+  });
+  const {
+    inspectortab,
+    pseudoClass
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => ({
+    inspectortab: select('cwicly/base').getInspectorPosition(),
+    pseudoClass: select('cwicly/base').getPseudoClass()
+  }), []);
+  const Tag = containerLayoutTag || 'section';
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InspectorControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_framework_CwiclyInspector_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        name: name
+      }), inspectortab.tab === 'primary' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        className: "cwicly-primary-tab",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Section Settings', 'cwicly'),
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('HTML Tag', 'cwicly'),
+            value: containerLayoutTag,
+            options: [{
+              label: 'SECTION',
+              value: 'section'
+            }, {
+              label: 'DIV',
+              value: 'div'
+            }, {
+              label: 'HEADER',
+              value: 'header'
+            }, {
+              label: 'FOOTER',
+              value: 'footer'
+            }, {
+              label: 'MAIN',
+              value: 'main'
+            }, {
+              label: 'ARTICLE',
+              value: 'article'
+            }, {
+              label: 'ASIDE',
+              value: 'aside'
+            }],
+            onChange: val => setAttributes({
+              containerLayoutTag: val
+            })
+          })
+        })
+      }), inspectortab.tab === 'design' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_framework_DesignPanel_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        pseudoClass: pseudoClass
+      }), inspectortab.tab === 'advanced' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        className: "cwicly-advanced-tab",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          style: {
+            padding: '0 16px',
+            fontSize: '12px'
+          },
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Advanced Cwicly settings (Classes, Custom CSS).', 'cwicly')
+        })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(Tag, {
+      ...blockProps,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.BackgroundHelper, {
+        attributes: attributes
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks, {})]
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/blocks/section/index.js"
+/*!*************************************!*\
+  !*** ./src/blocks/section/index.js ***!
+  \*************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _edit_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit.js */ "./src/blocks/section/edit.js");
+/* harmony import */ var _save_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save.js */ "./src/blocks/section/save.js");
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)('cwicly/section', {
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Section', 'cwicly'),
+  icon: 'layout',
+  category: 'cwicly',
+  attributes: {
+    uniqueID: {
+      type: 'string'
+    },
+    classID: {
+      type: 'string'
+    },
+    classes: {
+      type: 'string',
+      default: ''
+    },
+    containerLayoutTag: {
+      type: 'string',
+      default: 'section'
+    },
+    // Link attributes
+    linkWrapperActive: {
+      type: 'boolean',
+      default: false
+    },
+    linkWrapperUrl: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperNewTab: {
+      type: 'boolean',
+      default: false
+    },
+    linkWrapperRel: {
+      type: 'string',
+      default: ''
+    },
+    linkWrapperTitle: {
+      type: 'string',
+      default: ''
+    },
+    // Cwicly standard attributes
+    isStyling: {
+      type: 'boolean',
+      default: true
+    },
+    skeletonActive: {
+      type: 'boolean',
+      default: true
+    },
+    htmlAttributes: {
+      type: 'array',
+      default: []
+    },
+    relativeStyles: {
+      type: 'array',
+      default: []
+    },
+    customCSS: {
+      type: 'string',
+      default: ''
+    },
+    interactions: {
+      type: 'object',
+      default: {
+        click: [],
+        dbclick: [],
+        scrollinview: []
+      }
+    }
+  },
+  supports: {
+    anchor: true,
+    html: false
+  },
+  edit: _edit_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  save: _save_js__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+
+/***/ },
+
+/***/ "./src/blocks/section/save.js"
+/*!************************************!*\
+  !*** ./src/blocks/section/save.js ***!
+  \************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ save)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+function save({
+  attributes
+}) {
+  const blockID = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getBlockID)(attributes, 'section');
+  const linkAttrs = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getLinkAttributes)(attributes, 'section');
+  const interactions = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getInteractions)(attributes);
+  const Tag = attributes.linkWrapperActive || linkAttrs?.href ? attributes.containerLayoutTag || 'a' : attributes.containerLayoutTag || 'section';
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Tag, {
+    id: blockID,
+    ...linkAttrs,
+    ...interactions,
+    className: attributes.className,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks.Content, {})
+  });
+}
+
+/***/ },
+
+/***/ "./src/components/framework/CwiclyInspector.js"
+/*!*****************************************************!*\
+  !*** ./src/components/framework/CwiclyInspector.js ***!
+  \*****************************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ CwiclyInspector)
+/* harmony export */ });
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+
+
+/**
+ * CwiclyInspector
+ * Handles the tabbed interface in the sidebar (Primary, Design, Advanced).
+ */
+
+function CwiclyInspector({
+  attributes,
+  setAttributes,
+  name,
+  isComponent,
+  isEditingComponent,
+  noDesign,
+  noAdvanced
+}) {
+  const {
+    writeInspectorPosition
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.useDispatch)('cwicly/base');
+  const {
+    inspectortab
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.useSelect)(select => ({
+    inspectortab: select('cwicly/base').getInspectorPosition()
+  }), []);
+
+  // List of blocks that use the Cwicly tabbed interface
+  const cwiclyBlocks = ['cwicly/heading', 'cwicly/column', 'cwicly/styler', 'cwicly/paragraph', 'cwicly/section', 'cwicly/container', 'cwicly/accordionheader', 'cwicly/accordioncontent', 'cwicly/tab', 'cwicly/tabcontents', 'cwicly/tabcontent', 'cwicly/navitems'];
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
+    // We no longer force 'design' tab for core blocks, 
+    // as they now have dynamic settings in 'primary'.
+  }, []);
+  const setTab = tab => {
+    writeInspectorPosition({
+      tab,
+      panel: ''
+    });
+  };
+  if (name === 'cwicly/innerblocks') return null;
+  if (isComponent && !isEditingComponent) return null;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "cwicly-inspector-tabs-container",
+      style: {
+        position: 'sticky',
+        top: 0,
+        zIndex: 15,
+        background: '#fff',
+        borderBottom: '1px solid #ddd',
+        marginBottom: '10px'
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        style: {
+          display: 'flex',
+          padding: '4px',
+          gap: '8px'
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+          type: "button",
+          className: classnames__WEBPACK_IMPORTED_MODULE_3__('cwicly-tab-button', {
+            active: inspectortab.tab === 'primary'
+          }),
+          onClick: () => setTab('primary'),
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Primary', 'cwicly')
+        }), !noDesign && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+          type: "button",
+          className: classnames__WEBPACK_IMPORTED_MODULE_3__('cwicly-tab-button', {
+            active: inspectortab.tab === 'design'
+          }),
+          onClick: () => setTab('design'),
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Design', 'cwicly')
+        }), name !== 'cwicly/styler' && !noAdvanced && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+          type: "button",
+          className: classnames__WEBPACK_IMPORTED_MODULE_3__('cwicly-tab-button', {
+            active: inspectortab.tab === 'advanced'
+          }),
+          onClick: () => setTab('advanced'),
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Advanced', 'cwicly')
+        })]
+      })
+    })
+  });
+}
+
+/***/ },
+
+/***/ "./src/components/framework/DesignPanel.js"
+/*!*************************************************!*\
+  !*** ./src/components/framework/DesignPanel.js ***!
+  \*************************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ DesignPanel)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _SpacingControl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SpacingControl.js */ "./src/components/framework/SpacingControl.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+
+/**
+ * DesignPanel
+ * The main container for Cwicly's "Design" tab controls.
+ */
+
+function DesignPanel({
+  attributes,
+  setAttributes,
+  pseudoClass
+}) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "cwicly-design-panel",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Spacing', 'cwicly'),
+      initialOpen: true,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_SpacingControl_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Padding', 'cwicly'),
+        type: "padding",
+        attributes: attributes,
+        setAttributes: setAttributes,
+        pseudoClass: pseudoClass
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("hr", {
+        style: {
+          margin: '15px 0',
+          border: 'none',
+          borderTop: '1px solid #eee'
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_SpacingControl_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Margin', 'cwicly'),
+        type: "margin",
+        attributes: attributes,
+        setAttributes: setAttributes,
+        pseudoClass: pseudoClass
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Typography', 'cwicly'),
+      initialOpen: false,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        style: {
+          fontSize: '12px',
+          color: '#666'
+        },
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Typography controls will be extracted next...', 'cwicly')
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background', 'cwicly'),
+      initialOpen: false,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        style: {
+          fontSize: '12px',
+          color: '#666'
+        },
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background controls will be extracted next...', 'cwicly')
+      })
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/components/framework/DynamicAttributeWrapper.js"
+/*!*************************************************************!*\
+  !*** ./src/components/framework/DynamicAttributeWrapper.js ***!
+  \*************************************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DynamicAttributeWrapper: () => (/* binding */ DynamicAttributeWrapper),
+/* harmony export */   "default": () => (/* binding */ DynamicAttributeWrapper)
+/* harmony export */ });
+/* harmony import */ var _DynamicDataControl_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DynamicDataControl.js */ "./src/components/framework/DynamicDataControl.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+/**
+ * DynamicAttributeWrapper
+ * Wraps a control with a DynamicData icon.
+ */
+
+function DynamicAttributeWrapper({
+  attribute,
+  attributes,
+  setAttributes,
+  children,
+  label
+}) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "cwicly-dynamic-attribute-wrapper",
+    style: {
+      position: 'relative',
+      marginBottom: '15px'
+    },
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      style: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '5px'
+      },
+      children: [label && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+        style: {
+          fontSize: '11px',
+          fontWeight: '500',
+          textTransform: 'uppercase',
+          color: '#757575'
+        },
+        children: label
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_DynamicDataControl_js__WEBPACK_IMPORTED_MODULE_0__["default"], {
+        attribute: attribute,
+        attributes: attributes,
+        setAttributes: setAttributes
+      })]
+    }), children]
+  });
+}
+
+
+/***/ },
+
+/***/ "./src/components/framework/DynamicDataControl.js"
+/*!********************************************************!*\
+  !*** ./src/components/framework/DynamicDataControl.js ***!
+  \********************************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DatabaseIcon: () => (/* binding */ DatabaseIcon),
+/* harmony export */   "default": () => (/* binding */ DynamicDataControl)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+
+
+/**
+ * Database Icon Component (Exported for reuse)
+ */
+
+const DatabaseIcon = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24",
+  width: "16",
+  height: "16",
+  "aria-hidden": "true",
+  focusable: "false",
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("path", {
+    d: "M12 2C6.48 2 2 4.02 2 6.5s4.48 4.5 10 4.5 10-2.02 10-4.5S17.52 2 12 2zm0 18c-5.52 0-10-2.02-10-4.5v-3.48c1.7.98 4.67 1.48 8 1.48s6.3-.5 8-1.48v3.48c0 2.48-4.48 4.5-10 4.5zM2 9.52v2.48c0 2.48 4.48 4.5 10 4.5s10-2.02 10-4.5V9.52c-1.7.98-4.67 1.48-8 1.48s-6.3-.5-8-1.48z"
+  })
+});
+
+/**
+ * DynamicDataControl
+ * Handles selecting dynamic data sources for block attributes.
+ */
+function DynamicDataControl({
+  attribute,
+  attributes,
+  setAttributes,
+  label
+}) {
+  const [isOpen, setIsOpen] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [source, setSource] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [field, setField] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const togglePopover = () => setIsOpen(!isOpen);
+  const applyBinding = () => {
+    if (!source || !field) return;
+    const tag = `{${source}=${field}}`;
+    setAttributes({
+      [attribute]: tag
+    });
+    setIsOpen(false);
+  };
+  const clearBinding = () => {
+    setAttributes({
+      [attribute]: ''
+    });
+    setIsOpen(false);
+  };
+  const currentValue = attributes[attribute] || '';
+  const isDynamic = currentValue.startsWith('{') && currentValue.endsWith('}');
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    className: "cwicly-dynamic-data-control",
+    style: {
+      display: 'inline-block',
+      marginLeft: '5px'
+    },
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+      isSmall: true,
+      icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(DatabaseIcon, {}),
+      onClick: togglePopover,
+      className: isDynamic ? 'is-active' : '',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Dynamic Data', 'cwicly'),
+      style: {
+        color: isDynamic ? '#2271b1' : 'inherit',
+        padding: '0',
+        minWidth: '20px'
+      }
+    }), isOpen && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Popover, {
+      position: "bottom left",
+      onClose: () => setIsOpen(false),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        style: {
+          padding: '15px',
+          width: '250px'
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h4", {
+          style: {
+            margin: '0 0 10px 0',
+            fontSize: '13px'
+          },
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Dynamic Data Source', 'cwicly')
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Source', 'cwicly'),
+          value: source,
+          options: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select Source', 'cwicly'),
+            value: ''
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Post Meta', 'cwicly'),
+            value: 'meta'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('ACF Field', 'cwicly'),
+            value: 'acf'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Site Info', 'cwicly'),
+            value: 'site'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Author Info', 'cwicly'),
+            value: 'author'
+          }],
+          onChange: setSource
+        }), source && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Field Key', 'cwicly'),
+          value: field,
+          onChange: setField,
+          placeholder: source === 'acf' ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('e.g. hero_image', 'cwicly') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('e.g. my_meta_key', 'cwicly')
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          style: {
+            display: 'flex',
+            gap: '10px',
+            marginTop: '15px'
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+            isPrimary: true,
+            onClick: applyBinding,
+            disabled: !source || !field,
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Apply', 'cwicly')
+          }), isDynamic && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+            isDestructive: true,
+            onClick: clearBinding,
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Clear', 'cwicly')
+          })]
+        }), isDynamic && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          style: {
+            marginTop: '10px',
+            fontSize: '11px',
+            color: '#666'
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("strong", {
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Current:', 'cwicly')
+          }), " ", currentValue]
+        })]
+      })
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/components/framework/SpacingControl.js"
+/*!****************************************************!*\
+  !*** ./src/components/framework/SpacingControl.js ***!
+  \****************************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SpacingControl)
+/* harmony export */ });
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+
+
+
+/**
+ * SpacingControl
+ * Reconstructs Cwicly's responsive margin/padding control.
+ */
+
+function SpacingControl({
+  label,
+  type,
+  attributes,
+  setAttributes,
+  pseudoClass
+}) {
+  const {
+    previewDeviceType
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.useSelect)(select => ({
+    previewDeviceType: select('cwicly/base').getPreviewDeviceType()
+  }), []);
+  const [isLinked, setIsLinked] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(true);
+  const values = attributes[type] || {};
+  const currentValues = values[previewDeviceType] || values.Desktop || {
+    top: '',
+    right: '',
+    bottom: '',
+    left: ''
+  };
+  const updateValue = (side, value) => {
+    const newValues = {
+      ...values
+    };
+    if (!newValues[previewDeviceType]) newValues[previewDeviceType] = {
+      ...currentValues
+    };
+    if (isLinked) {
+      newValues[previewDeviceType] = {
+        top: value,
+        right: value,
+        bottom: value,
+        left: value
+      };
+    } else {
+      newValues[previewDeviceType][side] = value;
+    }
+    setAttributes({
+      [type]: newValues
+    });
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    className: "cwicly-spacing-control",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      style: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '8px'
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+        style: {
+          fontSize: '11px',
+          textTransform: 'uppercase',
+          fontWeight: '600'
+        },
+        children: label
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        isSmall: true,
+        icon: isLinked ? 'admin-links' : 'editor-unlink',
+        onClick: () => setIsLinked(!isLinked),
+        label: isLinked ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Unlink Sides', 'cwicly') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Link Sides', 'cwicly')
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      style: {
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gap: '8px'
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "spacing-input-wrap",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+          children: "T"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+          type: "text",
+          value: currentValues.top,
+          onChange: e => updateValue('top', e.target.value),
+          placeholder: "-"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "spacing-input-wrap",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+          children: "R"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+          type: "text",
+          value: currentValues.right,
+          onChange: e => updateValue('right', e.target.value),
+          placeholder: "-"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "spacing-input-wrap",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+          children: "B"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+          type: "text",
+          value: currentValues.bottom,
+          onChange: e => updateValue('bottom', e.target.value),
+          placeholder: "-"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "spacing-input-wrap",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+          children: "L"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+          type: "text",
+          value: currentValues.left,
+          onChange: e => updateValue('left', e.target.value),
+          placeholder: "-"
+        })]
+      })]
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/hooks/use-dynamic-data.js"
+/*!***************************************!*\
+  !*** ./src/hooks/use-dynamic-data.js ***!
+  \***************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useDynamicData: () => (/* binding */ useDynamicData)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+
+
+
+const cache = new Map();
+
+/**
+ * Hook to resolve dynamic data tags in the editor.
+ * @param {string} tag The dynamic tag (e.g., {acffield=hero_image})
+ * @returns {any} The resolved value.
+ */
+function useDynamicData(tag) {
+  const [resolvedValue, setResolvedValue] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const postId = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(select => select('core/editor').getCurrentPostId(), []);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!tag || !tag.startsWith('{') || !tag.endsWith('}')) {
+      setResolvedValue(null);
+      return;
+    }
+    const cacheKey = `${tag}-${postId}`;
+    if (cache.has(cacheKey)) {
+      setResolvedValue(cache.get(cacheKey));
+      return;
+    }
+
+    // Parse tag for batch-style dynamics endpoint
+    // Format: {source=field}
+    const match = tag.match(/^\{([\w-]+)=([\w-]+)\}$/);
+    if (!match) return;
+    const [, source, field] = match;
+
+    // Construct request body matching Backend_API::dynamics expectations
+    const body = {
+      backend_info: [{
+        [Date.now()]: {
+          [source === 'acf' ? 'acffield' : source]: {
+            [source === 'acf' ? 'acffield' : 'field']: field,
+            postid: postId
+          }
+        }
+      }]
+    };
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__({
+      path: 'cwicly/v1/dynamics',
+      method: 'POST',
+      data: body
+    }).then(response => {
+      // response structure: { acffield: { time: { ... } } }
+      // This is a bit complex due to the nested loops in PHP.
+      // We'll try to find the value in the response.
+      let value = null;
+      const sourceKey = source === 'acf' ? 'acffield' : source;
+      if (response[sourceKey]) {
+        const times = Object.values(response[sourceKey]);
+        if (times.length > 0) {
+          value = times[0];
+        }
+      }
+
+      // Handle special cases (e.g., ACF Image object)
+      if (value && typeof value === 'object' && value.url) {
+        value = value.url;
+      }
+      cache.set(cacheKey, value);
+      setResolvedValue(value);
+    }).catch(err => {
+      console.error('Cwicly Dynamic Data Error:', err);
+      setResolvedValue(null);
+    });
+  }, [tag, postId]);
+  return resolvedValue;
+}
+
+/***/ },
+
+/***/ "./src/index.js"
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
+/* harmony import */ var _store_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store/index.js */ "./src/store/index.js");
+/* harmony import */ var _blocks_columns_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./blocks/columns/index.js */ "./src/blocks/columns/index.js");
+/* harmony import */ var _blocks_column_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./blocks/column/index.js */ "./src/blocks/column/index.js");
+/* harmony import */ var _blocks_section_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./blocks/section/index.js */ "./src/blocks/section/index.js");
+/* harmony import */ var _blocks_container_index_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./blocks/container/index.js */ "./src/blocks/container/index.js");
+/* harmony import */ var _blocks_heading_index_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./blocks/heading/index.js */ "./src/blocks/heading/index.js");
+/* harmony import */ var _blocks_paragraph_index_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./blocks/paragraph/index.js */ "./src/blocks/paragraph/index.js");
+/* harmony import */ var _blocks_image_index_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./blocks/image/index.js */ "./src/blocks/image/index.js");
+/* harmony import */ var _blocks_button_index_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./blocks/button/index.js */ "./src/blocks/button/index.js");
+/**
+ * Cwicly Rebuilt Entry Point
+ */
+
+
+
+
+
+
+
+
+
+
+// Add more blocks here as they are rebuilt
+
+/***/ },
+
+/***/ "./src/store/additional-stores.js"
+/*!****************************************!*\
+  !*** ./src/store/additional-stores.js ***!
+  \****************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/**
+ * Cwicly Additional Stores
+ */
+
+const ab = e => e;
+
+// Navigator Store
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.registerStore)('cwicly/navigator', {
+  reducer: (state = false, action) => {
+    return action.type === 'CC_NAVIGATOR' ? action.ccNavigator : state;
+  },
+  selectors: {
+    getNavigatorState: state => state
+  },
+  actions: {
+    ccNavigator: value => ({
+      type: 'CC_NAVIGATOR',
+      ccNavigator: value
+    })
+  }
+});
+
+// License Store
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.registerStore)('cwicly/license', {
+  reducer: (state = '', action) => {
+    return action.type === 'CC_LICENSE' ? action.ccLicense : state;
+  },
+  selectors: {
+    getLicenseState: state => state
+  },
+  actions: {
+    ccLicense: value => ({
+      type: 'CC_LICENSE',
+      ccLicense: value
+    })
+  }
+});
+
+// Breakpoints Store
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.registerStore)('cwicly/breakpoints', {
+  reducer: (state = {}, action) => {
+    return action.type === 'CC_BREAKPOINTS' ? action.breakpointer : state;
+  },
+  selectors: {
+    getValue: ab
+  },
+  actions: {
+    breakpointer: value => ({
+      type: 'CC_BREAKPOINTS',
+      breakpointer: value
+    })
+  }
+});
+
+// Block IDs Store
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.registerStore)('cwicly/blockids', {
+  reducer: (state = [], action) => {
+    return action.type === 'BLOCK_IDS' ? action.blockIds : state;
+  },
+  selectors: {
+    getBlockIds: state => state
+  },
+  actions: {
+    blockIds: value => ({
+      type: 'BLOCK_IDS',
+      blockIds: value
+    })
+  }
+});
+
+// Dynamic Preview Store
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.registerStore)('cwicly/dynamicpreview', {
+  reducer: (state = void 0, action) => {
+    return action.type === 'DYNAMICPREVIEW' ? action.dynamicpreview : state;
+  },
+  selectors: {
+    getDynamicPreview: state => state
+  },
+  actions: {
+    dynamicpreview: value => ({
+      type: 'DYNAMICPREVIEW',
+      dynamicpreview: value
+    })
+  }
+});
+
+// Backend Back Store
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.registerStore)('cwicly/backendback', {
+  reducer: (state = false, action) => {
+    return action.type === 'BACKENDBACK' ? action.backendBack : state;
+  },
+  selectors: {
+    getValue: ab
+  },
+  actions: {
+    backendBack: value => ({
+      type: 'BACKENDBACK',
+      backendBack: value
+    })
+  }
+});
+
+// Hide Modals Store
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.registerStore)('cwicly/hidemodals', {
+  reducer: (state = false, action) => {
+    return action.type === 'HIDE_MODALS' ? action.hideModals : state;
+  },
+  selectors: {
+    getHideModals: state => state
+  },
+  actions: {
+    hideModals: value => ({
+      type: 'HIDE_MODALS',
+      hideModals: value
+    })
+  }
+});
+
+// My Collection Store
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.registerStore)('cwicly/mycollection', {
+  reducer: (state = [], action) => {
+    return action.type === 'MY_COLLECTION' ? action.myCollection : state;
+  },
+  selectors: {
+    getMyCollection: state => state
+  },
+  actions: {
+    myCollection: value => ({
+      type: 'MY_COLLECTION',
+      myCollection: value
+    })
+  }
+});
+
+// Slider IDs Store
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.registerStore)('cwicly/sliderids', {
+  reducer: (state = [], action) => {
+    return action.type === 'SLIDER_IDS' ? action.sliderIds : state;
+  },
+  selectors: {
+    getSliderIds: state => state
+  },
+  actions: {
+    sliderIds: value => ({
+      type: 'SLIDER_IDS',
+      sliderIds: value
+    })
+  }
+});
+
+// Classes Store
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.registerStore)('cwicly/classes', {
+  reducer: (state = {}, action) => {
+    if (action.type === 'CC_CLASSES') {
+      const newState = {
+        ...state
+      };
+      const [key, value] = action.ccClasses;
+      newState[key] = value;
+      return newState;
+    }
+    if (action.type === 'CC_SET_CLASSES') {
+      return {
+        ...state,
+        ...action.setClasses
+      };
+    }
+    return action.type === 'CC_NO_CLASSES' ? action.noClasses : state;
+  },
+  selectors: {
+    getClasses: state => state
+  },
+  actions: {
+    ccClasses: value => ({
+      type: 'CC_CLASSES',
+      ccClasses: value
+    }),
+    setClasses: value => ({
+      type: 'CC_SET_CLASSES',
+      setClasses: value
+    }),
+    noClasses: value => ({
+      type: 'CC_NO_CLASSES',
+      noClasses: value
+    })
+  }
+});
+
+/***/ },
+
+/***/ "./src/store/base/actions.js"
+/*!***********************************!*\
+  !*** ./src/store/base/actions.js ***!
+  \***********************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   writeClasses: () => (/* binding */ writeClasses),
+/* harmony export */   writeDarkMode: () => (/* binding */ writeDarkMode),
+/* harmony export */   writeGlobalClasses: () => (/* binding */ writeGlobalClasses),
+/* harmony export */   writeGlobalDarkMode: () => (/* binding */ writeGlobalDarkMode),
+/* harmony export */   writeInspectorPosition: () => (/* binding */ writeInspectorPosition),
+/* harmony export */   writeInspectorWindowPosition: () => (/* binding */ writeInspectorWindowPosition),
+/* harmony export */   writeInstances: () => (/* binding */ writeInstances),
+/* harmony export */   writeNavigatorHeight: () => (/* binding */ writeNavigatorHeight),
+/* harmony export */   writePreviewDeviceType: () => (/* binding */ writePreviewDeviceType),
+/* harmony export */   writePseudoClass: () => (/* binding */ writePseudoClass),
+/* harmony export */   writeSelectedGlobalClass: () => (/* binding */ writeSelectedGlobalClass),
+/* harmony export */   writeTabsState: () => (/* binding */ writeTabsState)
+/* harmony export */ });
+/**
+ * Cwicly Base Store Actions
+ */
+
+const writeInspectorPosition = position => ({
+  type: 'CC_INSPECTOR_POSITION',
+  writeInspectorPosition: position
+});
+const writePreviewDeviceType = deviceType => ({
+  type: 'CC_PREVIEW_DEVICE_TYPE',
+  writePreviewDeviceType: deviceType
+});
+const writePseudoClass = pseudoClass => ({
+  type: 'CC_PSEUDOCLASS',
+  writePseudoClass: pseudoClass
+});
+const writeDarkMode = darkMode => ({
+  type: 'CC_DARKMODE',
+  writeDarkMode: darkMode
+});
+const writeGlobalDarkMode = enabled => ({
+  type: 'CC_GLOBAL_DARK_MODE',
+  writeGlobalDarkMode: enabled
+});
+const writeNavigatorHeight = height => ({
+  type: 'CC_NAVIGATOR_HEIGHT',
+  writeNavigatorHeight: height
+});
+const writeInspectorWindowPosition = position => {
+  localStorage.setItem('cwicly-window-inspector-position', position);
+  return {
+    type: 'CC_WINDOW_INSPECTOR_POSITION',
+    writeInspectorWindowPosition: position
+  };
+};
+const writeInstances = instances => ({
+  type: 'CC_INSTANCES',
+  writeInstances: instances
+});
+const writeTabsState = tabsState => ({
+  type: 'CC_TABS_STATE',
+  writeTabsState: tabsState
+});
+const writeClasses = (classes, merge = true) => {
+  let finalClasses = classes;
+  if (merge) {
+    // This would typically involve a select() which is better handled in a resolver or middle-ware like logic
+    // For simplicity in this standalone action:
+    const currentClasses = wp.data.select('cwicly/base').getClasses() || {};
+    finalClasses = {
+      ...currentClasses,
+      ...classes
+    };
+  }
+  return {
+    type: 'CC_CLASSES',
+    writeClasses: finalClasses
+  };
+};
+const writeGlobalClasses = globalClasses => ({
+  type: 'CC_GLOBAL_CLASSES',
+  writeGlobalClasses: globalClasses
+});
+const writeSelectedGlobalClass = selectedClass => ({
+  type: 'CC_SELECTED_GLOBAL_CLASS',
+  writeSelectedGlobalClass: selectedClass
+});
+
+/***/ },
+
+/***/ "./src/store/base/index.js"
+/*!*********************************!*\
+  !*** ./src/store/base/index.js ***!
+  \*********************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _reducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducer.js */ "./src/store/base/reducer.js");
+/* harmony import */ var _actions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./actions.js */ "./src/store/base/actions.js");
+/* harmony import */ var _selectors_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./selectors.js */ "./src/store/base/selectors.js");
+/**
+ * Cwicly Base Store
+ */
+
+
+
+
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.registerStore)('cwicly/base', {
+  reducer: _reducer_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  actions: _actions_js__WEBPACK_IMPORTED_MODULE_2__,
+  selectors: _selectors_js__WEBPACK_IMPORTED_MODULE_3__
+});
+
+/***/ },
+
+/***/ "./src/store/base/reducer.js"
+/*!***********************************!*\
+  !*** ./src/store/base/reducer.js ***!
+  \***********************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ reducer)
+/* harmony export */ });
+/**
+ * Cwicly Base Store Reducer
+ */
+
+const lb = {}; // Default inserter state placeholder
+
+const initialState = {
+  instances: {},
+  designLibraryOpen: false,
+  saveDesignLibrary: '',
+  globalActiveStyle: '',
+  globalFonts: '',
+  classes: {},
+  newBlocks: [],
+  prevDevice: {},
+  prevGlobalCount: {},
+  globalClassesBlockEdit: {},
+  shellEdit: {},
+  externalClasses: [],
+  roleEditor: {},
+  navigatorHeight: 0,
+  postTemplateSize: false,
+  tabsState: {},
+  inserterState: lb,
+  primaryTabPosition: {},
+  inspectorWindowPosition: localStorage.getItem('cwicly-window-inspector-position') || 'right',
+  allImageSizes: {},
+  globalParts: {},
+  postsPerPage: '',
+  copyLinked: 'false',
+  saveGlobalStylesheet: false,
+  sectionDefaults: {},
+  additionalClassesBool: false,
+  isResolving: [],
+  wooProductTypes: {},
+  wooAttributes: [],
+  wooAttributesTerms: {},
+  wooShippingClasses: [],
+  wooTaxClasses: [],
+  googleFonts: {},
+  wooProducts: {},
+  userCapabilities: {},
+  userRoles: {},
+  hideHooks: localStorage.getItem('cwicly-hook-behaviour') || 'false',
+  globalInteractions: {},
+  altKey: false,
+  hideModals: localStorage.getItem('cwicly-modal-behaviour') || 'false',
+  pseudoClass: '',
+  darkMode: localStorage.getItem('cwicly-darkmode') || 'inherit',
+  globalClasses: {},
+  globalClassesRendered: {},
+  selectedGlobalClass: '',
+  globalStylesheets: [],
+  inspectorPosition: {
+    tab: 'primary',
+    panel: ''
+  },
+  popoverRefs: {
+    empty: {}
+  },
+  popoverRefsPrep: [],
+  inspectorHeight: false,
+  inspectorWidth: false,
+  localFonts: {},
+  localActiveFonts: [],
+  localFontProcessing: false,
+  isDownloadingGoogleFont: false,
+  heartbeat: {},
+  navigation: {},
+  navRelativeStyles: {},
+  classPreview: {},
+  components: {},
+  singleComponents: {},
+  tailwindClasses: [],
+  componentLibraryOpen: false,
+  componentVariants: {},
+  hoveredBlock: '',
+  componentsFolders: [],
+  globalDarkMode: false,
+  darkModeSelectors: '.dark',
+  // Fallback if cwicly_info is not available (e.g. during testing)
+  previewDeviceType: typeof cwicly_info !== 'undefined' && cwicly_info.clientView ? cwicly_info.clientView : typeof cwicly_info !== 'undefined' ? cwicly_info.mainBreakpoint : 'Desktop',
+  designSearch: ''
+};
+function reducer(state = initialState, action) {
+  switch (action.type) {
+    case 'CC_INSPECTOR_POSITION':
+      return {
+        ...state,
+        inspectorPosition: action.writeInspectorPosition
+      };
+    case 'CC_PREVIEW_DEVICE_TYPE':
+      return {
+        ...state,
+        previewDeviceType: action.writePreviewDeviceType
+      };
+    case 'CC_PSEUDOCLASS':
+      return {
+        ...state,
+        pseudoClass: action.writePseudoClass
+      };
+    case 'CC_DARKMODE':
+      return {
+        ...state,
+        darkMode: action.writeDarkMode
+      };
+    case 'CC_GLOBAL_DARK_MODE':
+      return {
+        ...state,
+        globalDarkMode: action.writeGlobalDarkMode
+      };
+    case 'CC_CLASSES':
+      return {
+        ...state,
+        classes: action.writeClasses
+      };
+    case 'CC_GLOBAL_CLASSES':
+      return {
+        ...state,
+        globalClasses: action.writeGlobalClasses
+      };
+    case 'CC_SELECTED_GLOBAL_CLASS':
+      return {
+        ...state,
+        selectedGlobalClass: action.writeSelectedGlobalClass
+      };
+    case 'CC_WINDOW_INSPECTOR_POSITION':
+      return {
+        ...state,
+        inspectorWindowPosition: action.writeInspectorWindowPosition
+      };
+    case 'CC_NAVIGATOR_HEIGHT':
+      return {
+        ...state,
+        navigatorHeight: action.writeNavigatorHeight
+      };
+    case 'CC_INSTANCES':
+      return {
+        ...state,
+        instances: action.writeInstances
+      };
+    case 'CC_TABS_STATE':
+      return {
+        ...state,
+        tabsState: action.writeTabsState
+      };
+    // Add more cases as needed for full framework support
+    default:
+      return state;
+  }
+}
+
+/***/ },
+
+/***/ "./src/store/base/selectors.js"
+/*!*************************************!*\
+  !*** ./src/store/base/selectors.js ***!
+  \*************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getBase: () => (/* binding */ getBase),
+/* harmony export */   getClasses: () => (/* binding */ getClasses),
+/* harmony export */   getDarkMode: () => (/* binding */ getDarkMode),
+/* harmony export */   getGlobalClasses: () => (/* binding */ getGlobalClasses),
+/* harmony export */   getGlobalClassesRendered: () => (/* binding */ getGlobalClassesRendered),
+/* harmony export */   getGlobalDarkMode: () => (/* binding */ getGlobalDarkMode),
+/* harmony export */   getInspectorPosition: () => (/* binding */ getInspectorPosition),
+/* harmony export */   getInspectorWindowPosition: () => (/* binding */ getInspectorWindowPosition),
+/* harmony export */   getInstances: () => (/* binding */ getInstances),
+/* harmony export */   getNavigatorHeight: () => (/* binding */ getNavigatorHeight),
+/* harmony export */   getPreviewDeviceType: () => (/* binding */ getPreviewDeviceType),
+/* harmony export */   getPseudoClass: () => (/* binding */ getPseudoClass),
+/* harmony export */   getSelectedGlobalClass: () => (/* binding */ getSelectedGlobalClass),
+/* harmony export */   getTabsState: () => (/* binding */ getTabsState)
+/* harmony export */ });
+/**
+ * Cwicly Base Store Selectors
+ */
+
+const getBase = state => state;
+const getInspectorPosition = state => state.inspectorPosition;
+const getPreviewDeviceType = state => state.previewDeviceType;
+const getPseudoClass = state => state.pseudoClass;
+const getDarkMode = state => state.darkMode;
+const getGlobalDarkMode = state => state.globalDarkMode;
+const getClasses = state => state.classes;
+const getGlobalClasses = state => state.globalClasses;
+const getSelectedGlobalClass = state => state.selectedGlobalClass;
+const getNavigatorHeight = state => state.navigatorHeight;
+const getInspectorWindowPosition = state => state.inspectorWindowPosition;
+const getInstances = state => state.instances;
+const getTabsState = state => state.tabsState;
+const getGlobalClassesRendered = state => state.globalClassesRendered;
+
+/***/ },
+
+/***/ "./src/store/index.js"
+/*!****************************!*\
+  !*** ./src/store/index.js ***!
+  \****************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _base_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base/index.js */ "./src/store/base/index.js");
+/* harmony import */ var _additional_stores_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./additional-stores.js */ "./src/store/additional-stores.js");
+/**
+ * Cwicly Stores
+ */
+
+
+// Add more stores here as they are extracted (classes, etc.)
+
+/***/ },
+
+/***/ "./src/utils/background-helper.js"
+/*!****************************************!*\
+  !*** ./src/utils/background-helper.js ***!
+  \****************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   BackgroundHelper: () => (/* binding */ BackgroundHelper)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+/**
+ * Semantic replacement for the Background helper component.
+ */
+
+function BackgroundHelper({
+  attributes
+}) {
+  const {
+    backgroundYoutubeURL,
+    backgroundClipPathContent,
+    backgroundClipPathBlob,
+    backgroundVideoURL,
+    backgroundType,
+    backgroundVideoSource,
+    backgroundVideoLoop,
+    id,
+    classID,
+    separatorTypeTop,
+    separatorTypeBottom
+  } = attributes;
+
+  // Assuming a helper for device pseudo-class (like (0, i.u)() in the original)
+  // This would typically come from a store or a custom hook.
+  const currentDevice = 'desktop'; // Placeholder logic
+
+  const youtubeID = backgroundYoutubeURL?.split("v=")[1]?.substring(0, 11);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    children: [backgroundClipPathContent && backgroundClipPathBlob && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+      height: "0",
+      width: "0",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("defs", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("clipPath", {
+          id: `${classID}-path`,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+            d: backgroundClipPathContent
+          })
+        })
+      })
+    }), backgroundVideoURL && backgroundType?.[currentDevice] === 'video' && backgroundVideoSource === 'mp4' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      id: `${id}-player-wrapper`,
+      className: "cc-background-video",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("video", {
+        id: `${id}-player`,
+        loop: backgroundVideoLoop ? null : true,
+        muted: true,
+        autoPlay: true,
+        playsInline: true,
+        src: backgroundVideoURL
+      })
+    }), backgroundType?.[currentDevice] === 'video' && backgroundVideoSource === 'youtube' && backgroundYoutubeURL && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        id: `${id}-player-wrapper`,
+        className: "cc-background-video"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "video-background-container",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "video-background",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("iframe", {
+            src: `https://www.youtube-nocookie.com/embed/${youtubeID}?controls=0&modestbranding=1&showinfo=0&rel=0&autoplay=1&loop=${backgroundVideoLoop ? 0 : 1}&mute=1&playlist=${youtubeID}`,
+            frameBorder: "0",
+            allowFullScreen: true
+          })
+        })
+      })]
+    }), (backgroundVideoURL || backgroundYoutubeURL) && backgroundType?.[currentDevice] === 'video' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "cc-overlay-video-background"
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/utils/block-id.js"
+/*!*******************************!*\
+  !*** ./src/utils/block-id.js ***!
+  \*******************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getBlockID: () => (/* binding */ getBlockID)
+/* harmony export */ });
+/**
+ * Semantic replacement for the block ID helper.
+ */
+function getBlockID(attributes, blockName = "") {
+  if (attributes.linkWrapperSourceDynamic === 'commentcancelreply') {
+    return 'cancel-comment-reply-link{idadd}';
+  }
+
+  // Check if we should remove IDs and classes based on global info
+  const removeIDsClasses = window.cwicly_info?.removeIDsClasses === 'true';
+  const shouldGenerateID = !removeIDsClasses || ['nav', 'popover', 'querypagination', 'video', 'tabcontents', 'tabcontent', 'tablist', 'accordionheader', 'accordions', 'accordion', 'modal', 'slider', 'query', 'queryTemplate', 'tab', 'filter', 'querypaginationnumbers'].includes(blockName) || attributes.forceShowID || attributes.repeaterMasonry || attributes.interactions && attributes.interactions.length || attributes.dynamicContext === 'woocart';
+  if (shouldGenerateID) {
+    if (attributes?.componentConnectors?.id?.ref) {
+      return `{component=parameter=${attributes.componentConnectors.id.ref}}{idadd}`;
+    }
+    return `${attributes.id}{idadd}`;
+  }
+  return null;
+}
+
+/***/ },
+
+/***/ "./src/utils/image-attributes.js"
+/*!***************************************!*\
+  !*** ./src/utils/image-attributes.js ***!
+  \***************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getImageAttributes: () => (/* binding */ getImageAttributes)
+/* harmony export */ });
+/**
+ * Semantic replacement for image attributes helper.
+ */
+function getImageAttributes(attributes) {
+  const imageAttrs = {};
+  let fallbackValue = "false";
+  if (attributes.dynamicStaticFallbackID) {
+    fallbackValue = attributes.dynamicStaticFallbackID;
+  } else if (attributes.dynamicStaticFallbackURL) {
+    fallbackValue = attributes.dynamicStaticFallbackURL;
+  }
+  let size = false;
+  if (attributes.imageThumbnailSize) {
+    size = attributes.imageThumbnailSize;
+  }
+  if (attributes.lightbox) {
+    size = "full";
+  }
+  const disableSrcSet = !!attributes.imageDisableSrcSet;
+  const config = [size || "0", attributes.imageAlt ? "0" : "1", disableSrcSet ? "0" : "1", "image"];
+  if (attributes.imageType === "static") {
+    if (attributes.imageID && attributes.imageURL) {
+      imageAttrs.src = size ? `{imagesrc=${attributes.imageID}=${size}}` : attributes.imageURL;
+      if (!disableSrcSet) {
+        imageAttrs.srcset = `{imageset=${attributes.imageID}}`;
+        imageAttrs.sizes = `{imagesizes=${attributes.imageID}=${size}}`;
+      }
+      imageAttrs.width = size ? `{imagewidth=${attributes.imageID}=${size}}` : `{imagewidth=${attributes.imageID}}`;
+      imageAttrs.height = size ? `{imageheight=${attributes.imageID}=${size}}` : `{imageheight=${attributes.imageID}}`;
+    } else if (attributes.imageURL) {
+      imageAttrs.src = attributes.imageURL;
+    }
+  } else if (attributes.imageType === "dynamic" && attributes.dynamic) {
+    if (attributes.dynamic === "wordpress" && attributes.dynamicWordpressType) {
+      switch (attributes.dynamicWordpressType) {
+        case "featuredimage":
+          imageAttrs.src = `{featuredimage=true=${size}=${disableSrcSet}=${attributes.imageAlt ? "false" : "true"}=${fallbackValue}}`;
+          break;
+        case "authorpicture":
+          imageAttrs.src = "{authorpicture}";
+          break;
+        case "userpicture":
+          imageAttrs.src = "{userpicture}";
+          break;
+        case "attachmenturl":
+          imageAttrs.src = size ? `{imagesrc=attachment=${size}}` : "{imagesrc=attachment}";
+          if (!disableSrcSet) {
+            imageAttrs.srcset = "{imageset=attachment}";
+            imageAttrs.sizes = `{imagesizes=attachment=${size}}`;
+          }
+          imageAttrs.width = "{imagewidth=attachment}";
+          imageAttrs.height = "{imageheight=attachment}";
+          break;
+      }
+    } else if (attributes.dynamic === "woocommerce" && attributes.dynamicWordpressType) {
+      switch (attributes.dynamicWordpressType) {
+        case "categorythumbnail":
+          imageAttrs.src = `{woocategorythumbnail=${size}}`;
+          imageAttrs.srcset = "{woocategorythumbnailsrcset}";
+          imageAttrs.sizes = `{woocategorythumbnailsizes=${size}}`;
+          break;
+        case "cartthumbnail":
+          imageAttrs.src = "{cartthumbnail}";
+          imageAttrs.srcset = "{cartthumbnailsrcset}";
+          break;
+        case "wooimage":
+          imageAttrs.src = "{wooimage}";
+          break;
+        case "woogallery":
+          imageAttrs.src = size ? `{imagesrc=woogallery=${size}}` : "{imagesrc=woogallery}";
+          if (!disableSrcSet) {
+            imageAttrs.srcset = "{imageset=woogallery}";
+            imageAttrs.sizes = `{imagesizes=woogallery=${size}}`;
+          }
+          imageAttrs.width = "{imagewidth=woogallery}";
+          imageAttrs.height = "{imageheight=woogallery}";
+          break;
+      }
+    } else if (attributes.dynamic === "acf" && attributes.dynamicACFGroup && attributes.dynamicACFField) {
+      let locationId = "false";
+      if (attributes.dynamicACFFieldLocation) {
+        const loc = attributes.dynamicACFFieldLocation;
+        if (loc === "postid" && attributes.dynamicACFFieldLocationID) {
+          locationId = attributes.dynamicACFFieldLocationID;
+        } else if (loc === "currentuser") {
+          locationId = "currentuser";
+        } else if (loc === "currentauthor") {
+          locationId = "currentauthor";
+        } else if (loc === "userid" && attributes.dynamicACFFieldLocationID) {
+          locationId = `user_${attributes.dynamicACFFieldLocationID}`;
+        } else if (loc === "option") {
+          locationId = "option";
+        } else if (loc === "termid") {
+          locationId = "taxterm";
+        } else if (loc === "termquery") {
+          locationId = "termquery";
+        } else if (loc === "userquery") {
+          locationId = "userquery";
+        } else if (loc === "currenttaxonomytermarchive") {
+          locationId = "currenttaxonomytermarchive";
+        } else if (loc === "taxonomyterm" && attributes.dynamicACFFieldLocationIDObject?.value) {
+          locationId = `term_${attributes.dynamicACFFieldLocationIDObject.value}`;
+        }
+      }
+      imageAttrs.src = `{acffield=${attributes.dynamicACFField}=${locationId}=${attributes.dynamicACFFieldPlus || "false"}=${fallbackValue}=${config.join("-")}}`;
+    } else if (attributes.dynamic === "repeater" && attributes.dynamicACFField) {
+      imageAttrs.src = `{acfrepeater=${attributes.dynamicACFField}=${fallbackValue}=${attributes.dynamicACFFieldPlus || "false"}=${config.join("-")}}`;
+    } else if (attributes.dynamic === "commentquery" && attributes.dynamicWordpressType) {
+      imageAttrs.src = `{commentquery=${attributes.dynamicWordpressType}=${fallbackValue}}`;
+    }
+  }
+  if (!imageAttrs.src) {
+    imageAttrs.src = `${window.cwicly_info?.plugin || ''}assets/images/placeholder.jpg`;
+  }
+
+  // Handle Alt Text
+  if (attributes.imageAlt) {
+    if (attributes.imageAlt.includes("!ref=")) {
+      imageAttrs.alt = `{component=parameter=${attributes.imageAlt.replace(/!ref=([\w-]+)!/, "$1")}}`;
+    } else {
+      imageAttrs.alt = attributes.imageAlt;
+    }
+  } else if (attributes.imageID) {
+    imageAttrs.alt = `{imagealt=${attributes.imageID}}`;
+  } else if (attributes.dynamicWordpressType === "woogallery") {
+    imageAttrs.alt = "{imagealt=woogallery}";
+  } else if (attributes.dynamicWordpressType === "attachmenturl") {
+    imageAttrs.alt = "{imagealt=attachment}";
+  } else {
+    imageAttrs.alt = "";
+  }
+
+  // Handle Lazy Loading
+  if (attributes.lazyLoadComp) {
+    imageAttrs.loading = `{component=parameter=${attributes.lazyLoadComp.replace(/!ref=([\w-]+)!/, "$1")}}`;
+  } else if (attributes.lazyLoad !== undefined && attributes.lazyLoad !== null && attributes.lazyLoad !== "") {
+    imageAttrs.loading = attributes.lazyLoad ? "lazy" : "eager";
+  }
+
+  // Handle Component Connectors
+  if (!imageAttrs.src && attributes.componentConnectors?.image?.ref) {
+    imageAttrs.src = `{component=image=${attributes.componentConnectors.image.ref}}`;
+    if (attributes.lazyLoadComp) {
+      imageAttrs.loading = `{component=parameter=${attributes.lazyLoadComp.replace(/!ref=([\w-]+)!/, "$1")}}`;
+    }
+    if (attributes.imageAlt) {
+      imageAttrs.alt = attributes.imageAlt.includes("!ref=") ? `{component=parameter=${attributes.imageAlt.replace(/!ref=([\w-]+)!/, "$1")}}` : attributes.imageAlt;
+    }
+  }
+  return imageAttrs;
+}
+
+/***/ },
+
+/***/ "./src/utils/index.js"
+/*!****************************!*\
+  !*** ./src/utils/index.js ***!
+  \****************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   BackgroundHelper: () => (/* reexport safe */ _background_helper_js__WEBPACK_IMPORTED_MODULE_4__.BackgroundHelper),
+/* harmony export */   getBlockID: () => (/* reexport safe */ _block_id_js__WEBPACK_IMPORTED_MODULE_0__.getBlockID),
+/* harmony export */   getImageAttributes: () => (/* reexport safe */ _image_attributes_js__WEBPACK_IMPORTED_MODULE_1__.getImageAttributes),
+/* harmony export */   getInteractions: () => (/* reexport safe */ _interactions_helper_js__WEBPACK_IMPORTED_MODULE_3__.getInteractions),
+/* harmony export */   getLinkAttributes: () => (/* reexport safe */ _link_helper_js__WEBPACK_IMPORTED_MODULE_2__.getLinkAttributes)
+/* harmony export */ });
+/* harmony import */ var _block_id_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./block-id.js */ "./src/utils/block-id.js");
+/* harmony import */ var _image_attributes_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./image-attributes.js */ "./src/utils/image-attributes.js");
+/* harmony import */ var _link_helper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./link-helper.js */ "./src/utils/link-helper.js");
+/* harmony import */ var _interactions_helper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./interactions-helper.js */ "./src/utils/interactions-helper.js");
+/* harmony import */ var _background_helper_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./background-helper.js */ "./src/utils/background-helper.js");
+
+
+
+
+
+
+/***/ },
+
+/***/ "./src/utils/interactions-helper.js"
+/*!******************************************!*\
+  !*** ./src/utils/interactions-helper.js ***!
+  \******************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getInteractions: () => (/* binding */ getInteractions)
+/* harmony export */ });
+/**
+ * Semantic replacement for interactions helper.
+ */
+function getInteractions(attributes) {
+  if (attributes.interactions) {
+    const interactionsJson = JSON.stringify(attributes.interactions);
+    const emptyInteractions = ['{"click":[],"dbclick":[],"scrollinview":[]}', '{"dbclick":[],"scrollinview":[]}'];
+    if (!emptyInteractions.includes(interactionsJson)) {
+      return {
+        "data-interaction": interactionsJson
+      };
+    }
+  }
+  return null;
+}
+
+/***/ },
+
+/***/ "./src/utils/link-helper.js"
+/*!**********************************!*\
+  !*** ./src/utils/link-helper.js ***!
+  \**********************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getLinkAttributes: () => (/* binding */ getLinkAttributes)
+/* harmony export */ });
+/**
+ * Semantic replacement for link attributes helper.
+ */
+function getLinkAttributes(attributes, blockType = "") {
+  const linkAttrs = {};
+  if (!attributes?.linkWrapperActive) {
+    if (attributes?.componentConnectors?.link?.ref) {
+      return {
+        href: `{component=link=${attributes.componentConnectors.link.ref}}`
+      };
+    }
+    return null;
+  }
+  let rel = attributes.linkWrapperRel || "";
+  let title = attributes.linkWrapperTitle || "";
+  let ariaLabel = attributes.linkWrapperAriaLabel || "";
+  let target = "";
+  if (attributes.linkWrapperNewTab) {
+    target = "_blank";
+    if (rel) {
+      if (!rel.includes("noopener")) {
+        rel = `${rel} noopener`;
+      }
+    } else {
+      rel = "noopener";
+    }
+  }
+  if (attributes.linkWrapperType === "action") {
+    const action = attributes.linkWrapperAction;
+
+    // Popover Actions
+    if (attributes.linkWrapperActionPopoverID) {
+      switch (action) {
+        case "showPopover":
+          linkAttrs["data-show-popover"] = attributes.linkWrapperActionPopoverID;
+          break;
+        case "hidePopover":
+          linkAttrs["data-hide-popover"] = attributes.linkWrapperActionPopoverID;
+          break;
+        case "showHidePopover":
+          linkAttrs["data-showhide-popover"] = attributes.linkWrapperActionPopoverID;
+          if (attributes.linkWrapperActionExtra?.in) {
+            linkAttrs["data-popover-delay"] = parseFloat(attributes.linkWrapperActionExtra.in);
+            linkAttrs["data-popover-delayOut"] = parseFloat(attributes.linkWrapperActionExtra.out);
+          }
+          break;
+        case "togglePopover":
+          linkAttrs["data-toggle-popover"] = attributes.linkWrapperActionPopoverID;
+          break;
+      }
+      linkAttrs["data-ccp-state"] = "closed";
+    }
+
+    // Nav Actions
+    if (attributes.linkWrapperActionNavID) {
+      switch (action) {
+        case "showNav":
+          linkAttrs["data-show-nav"] = attributes.linkWrapperActionNavID;
+          linkAttrs["is-open"] = "false";
+          break;
+        case "hideNav":
+          linkAttrs["data-close-nav"] = attributes.linkWrapperActionNavID;
+          linkAttrs["is-open"] = "false";
+          break;
+        case "toggleNav":
+          linkAttrs["data-toggle-nav"] = attributes.linkWrapperActionNavID;
+          linkAttrs["is-open"] = "false";
+          break;
+      }
+    }
+
+    // Scroll Actions
+    if (action === "scrolltotop") {
+      linkAttrs["data-scrolltotop"] = "";
+      if (attributes.linkWrapperActionExtra?.offset) linkAttrs["data-offset"] = attributes.linkWrapperActionExtra.offset;
+      if (attributes.linkWrapperActionExtra?.outoffset) linkAttrs["data-offset-out"] = attributes.linkWrapperActionExtra.outoffset;
+      if (attributes.linkWrapperActionExtra?.intarget) linkAttrs["data-target-in"] = attributes.linkWrapperActionExtra.intarget;
+      if (attributes.linkWrapperActionExtra?.outtarget) linkAttrs["data-target-out"] = attributes.linkWrapperActionExtra.outtarget;
+    } else if (action === "toggleDarkMode") {
+      linkAttrs["data-action"] = "dark-mode";
+      linkAttrs["aria-label"] = "Toggle Dark Mode";
+    } else if (action === "wooaddtocart") {
+      linkAttrs["data-cc-add-to-cart"] = "";
+    } else if (action === "wooresetselection") {
+      linkAttrs["data-cc-woo-reset"] = "";
+    } else if (action === "share") {
+      const shareDesc = attributes.linkWrapperShareDescription || "";
+      const shareType = attributes.linkWrapperShare;
+      switch (shareType) {
+        case "twitter":
+          linkAttrs.href = `https://twitter.com/intent/tweet?url={pageurl}&text=${shareDesc}`;
+          break;
+        case "facebook":
+          linkAttrs.href = "https://www.facebook.com/sharer.php?u={pageurl}";
+          break;
+        case "linkedin":
+          linkAttrs.href = `https://www.linkedin.com/shareArticle?url={pageurl}&title=${shareDesc}`;
+          break;
+        case "email":
+          const email = attributes.linkWrapperActionContactEmailAddress || "";
+          linkAttrs.href = `mailto:${email}?subject=${shareDesc}&body={pageurl=false=encoded}`;
+          break;
+        case "pinterest":
+          linkAttrs.href = `https://www.pinterest.com/pin/create/button?url={pageurl}&media=&description=${shareDesc}`;
+          break;
+        case "reddit":
+          linkAttrs.href = `https://reddit.com/submit?url={pageurl}&title=${shareDesc}`;
+          break;
+        case "whatsapp":
+          linkAttrs.href = "https://wa.me/?text={pageurl}";
+          break;
+        case "sms":
+          linkAttrs.href = "sms:%7Bphone_number%7D?body={pageurl}";
+          break;
+        case "stumbleupon":
+          linkAttrs.href = `https://www.stumbleupon.com/submit?url={pageurl}&title=${shareDesc}`;
+          break;
+      }
+    } else if (action === "nextQuery") {
+      linkAttrs.href = "{nextquery}";
+    } else if (action === "prevQuery") {
+      linkAttrs.href = "{prevquery}";
+    } else if (action === "contact") {
+      const contactType = attributes.linkWrapperActionContactType;
+      const oneLine = attributes.linkWrapperActionContactOneLine || "";
+      switch (contactType) {
+        case "email":
+          const emailAddr = attributes.linkWrapperActionContactEmailAddress || "";
+          const subject = attributes.linkWrapperActionContactEmailSubject || "";
+          const msg = attributes.linkWrapperActionContactEmailMessage || "";
+          linkAttrs.href = `mailto:${emailAddr}?subject=${subject}&body=${msg}`;
+          break;
+        case "tel":
+          linkAttrs.href = `tel:${oneLine}`;
+          break;
+        case "sms":
+          linkAttrs.href = `sms:${oneLine}`;
+          break;
+        case "whatsapp":
+          linkAttrs.href = `https://api.whatsapp.com/send?phone=${oneLine}`;
+          break;
+        case "messenger":
+          linkAttrs.href = `https://m.me/${oneLine}`;
+          break;
+        case "viber":
+          linkAttrs.href = `viber://${attributes.linkWrapperActionContactViber}?number=${oneLine}`;
+          break;
+        case "skype":
+          linkAttrs.href = `skype:${oneLine}?${attributes.linkWrapperActionContactSkype}`;
+          break;
+        case "waze":
+          linkAttrs.href = `https://www.waze.com/ul?ll=${oneLine}`;
+          break;
+        case "googlecalendar":
+          let dates = "";
+          if (attributes.linkWrapperActionContactCalendarStart && !attributes.linkWrapperActionContactCalendarEnd) {
+            dates = `&dates=${attributes.linkWrapperActionContactCalendarStart.replace(/[^A-Za-z0-9]/, "")}`;
+          } else if (attributes.linkWrapperActionContactCalendarStart && attributes.linkWrapperActionContactCalendarEnd) {
+            dates = `&dates=${attributes.linkWrapperActionContactCalendarStart.replace(/[^A-Za-z0-9]/, "")}/${attributes.linkWrapperActionContactCalendarEnd.replace(/[^A-Za-z0-9]/, "")}`;
+          }
+          const loc = attributes.linkWrapperActionContactCalendarLocation ? `&location=${attributes.linkWrapperActionContactCalendarLocation}` : "";
+          const details = attributes.linkWrapperActionContactCalendarDescription ? `&details=${attributes.linkWrapperActionContactCalendarDescription}` : "";
+          const text = attributes.linkWrapperActionContactCalendarTitle ? `&text=${attributes.linkWrapperActionContactCalendarTitle}` : "";
+          linkAttrs.href = `https://www.google.com/calendar/render?action=TEMPLATE${text}${details}${dates}${loc}`;
+          break;
+      }
+    } else if (action === "slider" && attributes.linkWrapperActionSliderType && attributes.linkWrapperActionSliderID) {
+      if (attributes.linkWrapperActionSliderType === "gotoindex" && attributes.linkWrapperActionSliderGoTo !== null) {
+        linkAttrs["data-gotoindex"] = attributes.linkWrapperActionSliderGoTo;
+      }
+      linkAttrs["data-slidernav"] = "";
+      linkAttrs["data-slidertype"] = attributes.linkWrapperActionSliderType;
+      linkAttrs["data-sliderid"] = attributes.linkWrapperActionSliderID;
+    } else if (action === "lightbox") {
+      // Lightbox logic (simplified for extraction)
+      linkAttrs["data-lightbox"] = "";
+      if (attributes.linkWrapperActionLighboxRef) linkAttrs["data-gallery"] = attributes.linkWrapperActionLighboxRef;
+      // ... more lightbox details can be added here
+    } else if (action === "modal" && attributes.linkWrapperActionModalType) {
+      const type = attributes.linkWrapperActionModalType;
+      const blockId = attributes.linkWrapperActionModalBlockId;
+      if (blockId) {
+        linkAttrs[`data-modal${type === 'open' ? '' : type}`] = "";
+        linkAttrs["data-modalid"] = blockId; // Vo function likely just returns the ID
+      }
+    }
+  } else if (attributes.linkWrapperType === "url") {
+    if (attributes.linkWrapperSourceType === "dynamic") {
+      // Handle dynamic URL tags
+      switch (attributes.linkWrapperSourceDynamic) {
+        case "posturl":
+          linkAttrs.href = "{pageurl}";
+          break;
+        case "attachmenturl":
+          linkAttrs.href = "{attachment_url}";
+          break;
+        case "featuredimage":
+          linkAttrs.href = "{featuredimage}";
+          break;
+        case "homeurl":
+          linkAttrs.href = "{homeurl}";
+          break;
+        // ... more dynamic sources
+      }
+    } else if (attributes.linkWrapperSourceType === "static") {
+      linkAttrs.href = attributes.linkWrapperUrl || "";
+    }
+  }
+  if (linkAttrs.href || Object.keys(linkAttrs).length > 0) {
+    if (rel) linkAttrs.rel = rel;
+    if (target) linkAttrs.target = target;
+    if (title) linkAttrs.title = title;
+    if (ariaLabel) linkAttrs["aria-label"] = ariaLabel;
+    return linkAttrs;
+  }
+  return null;
+}
+
+/***/ }
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		if (!(moduleId in __webpack_modules__)) {
+/******/ 			delete __webpack_module_cache__[moduleId];
+/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
+/******/ 		}
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"index": 0,
+/******/ 			"./style-index": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkcwicly"] = globalThis["webpackChunkcwicly"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["./style-index"], () => (__webpack_require__("./src/index.js")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
+/******/ })()
+;
+//# sourceMappingURL=index.js.map

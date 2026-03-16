@@ -4,7 +4,7 @@ Tags: page builder, editor, landing page, drag-and-drop, elementor, visual edito
 Requires at least: 6.1
 Tested up to: 6.6.2
 Requires PHP: 7.4
-Stable tag: 1.4.8
+Stable tag: 1.5.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -58,4 +58,14 @@ Yes, be sure to download the Cwicly theme from your dashboard. It's with theme t
 
 == Changelog ==
 
-To read the changelog for Cwicly, please navigate to the <a href="https://discourse.cwicly.com/c/changelog/12">changelog page</a>.
+= 1.5.0 =
+*   **Reconstruction Era Release**: Complete architectural overhaul.
+*   **Modern Build System**: Integrated `@wordpress/scripts` and Webpack externals.
+*   **New Redux Store**: Implemented `cwicly/base` for centralized editor state.
+*   **Framework Components**: Reconstructed `CwiclyInspector`, `DesignPanel`, and `SpacingControl`.
+*   **Dynamic Data Binding**: Added full support for ACF and Post Meta binding with live editor preview.
+*   **Block Refactoring**: Paragraph, Heading, Image, and Button blocks now use the common framework.
+*   **Structural Blocks**: Implemented Section, Container, Columns, and Column blocks.
+
+= 1.4.8 =
+*   Legacy maintenance release.

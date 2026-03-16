@@ -30,14 +30,8 @@ export default function CwiclyInspector({ attributes, setAttributes, name, isCom
     ];
 
     useEffect(() => {
-        // Initial tab logic
-        if (!isComponent && cwiclyBlocks.includes(name) && 'primary' === inspectortab.tab) {
-            writeInspectorPosition({
-                tab: 'design',
-                panel: '',
-                default: true
-            });
-        }
+        // We no longer force 'design' tab for core blocks, 
+        // as they now have dynamic settings in 'primary'.
     }, []);
 
     const setTab = (tab) => {
@@ -54,15 +48,13 @@ export default function CwiclyInspector({ attributes, setAttributes, name, isCom
         <Fragment>
             <div className="cwicly-inspector-tabs-container" style={{ position: 'sticky', top: 0, zIndex: 15, background: '#fff', borderBottom: '1px solid #ddd', marginBottom: '10px' }}>
                 <div style={{ display: 'flex', padding: '4px', gap: '8px' }}>
-                    {(!cwiclyBlocks.includes(name) || isComponent) && (
-                        <button
-                            type="button"
-                            className={classnames('cwicly-tab-button', { active: inspectortab.tab === 'primary' })}
-                            onClick={() => setTab('primary')}
-                        >
-                            {__('Primary', 'cwicly')}
-                        </button>
-                    )}
+                    <button
+                        type="button"
+                        className={classnames('cwicly-tab-button', { active: inspectortab.tab === 'primary' })}
+                        onClick={() => setTab('primary')}
+                    >
+                        {__('Primary', 'cwicly')}
+                    </button>
                     {!noDesign && (
                         <button
                             type="button"

@@ -6,6 +6,9 @@ import { useSelect } from '@wordpress/data';
 import { getBlockID, BackgroundHelper } from '../../utils/index.js';
 import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
 import DesignPanel from '../../components/framework/DesignPanel.js';
+import DynamicDataControl from '../../components/framework/DynamicDataControl.js';
+import DynamicAttributeWrapper from '../../components/framework/DynamicAttributeWrapper.js';
+import { useDynamicData } from '../../hooks/use-dynamic-data.js';
 
 export default function Edit({ attributes, setAttributes, clientId, name }) {
     const { 
@@ -19,6 +22,13 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
         linkWrapperNewTab,
         imageThumbnailSize
     } = attributes;
+    
+    const resolvedImageURL = useDynamicData(imageURL);
+    const resolvedImageAlt = useDynamicData(imageAlt);
+    
+    // Use resolved values if they exist, otherwise fallback to static attributes
+    const displayImageURL = resolvedImageURL || imageURL;
+    const displayImageAlt = resolvedImageAlt || imageAlt;
 
     const [isEditingURL, setIsEditingURL] = useState(false);
 
@@ -102,23 +112,36 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
                 {inspectortab.tab === 'primary' && (
                     <div className="cwicly-primary-tab">
                         <PanelBody title={__('Image Settings', 'cwicly')}>
-                            <SelectControl
+                            <DynamicAttributeWrapper
+                                attribute="imageThumbnailSize"
+                                attributes={attributes}
+                                setAttributes={setAttributes}
                                 label={__('Size', 'cwicly')}
-                                value={imageThumbnailSize}
-                                options={[
-                                    { label: __('Full', 'cwicly'), value: 'full' },
-                                    { label: __('Large', 'cwicly'), value: 'large' },
-                                    { label: __('Medium', 'cwicly'), value: 'medium' },
-                                    { label: __('Thumbnail', 'cwicly'), value: 'thumbnail' },
-                                ]}
-                                onChange={(val) => setAttributes({ imageThumbnailSize: val })}
-                            />
-                            <TextareaControl
+                            >
+                                <SelectControl
+                                    value={imageThumbnailSize}
+                                    options={[
+                                        { label: __('Full', 'cwicly'), value: 'full' },
+                                        { label: __('Large', 'cwicly'), value: 'large' },
+                                        { label: __('Medium', 'cwicly'), value: 'medium' },
+                                        { label: __('Thumbnail', 'cwicly'), value: 'thumbnail' },
+                                    ]}
+                                    onChange={(val) => setAttributes({ imageThumbnailSize: val })}
+                                />
+                            </DynamicAttributeWrapper>
+                            
+                            <DynamicAttributeWrapper
+                                attribute="imageAlt"
+                                attributes={attributes}
+                                setAttributes={setAttributes}
                                 label={__('Alternative Text', 'cwicly')}
-                                value={imageAlt}
-                                onChange={(newAlt) => setAttributes({ imageAlt: newAlt })}
-                                help={__('Describe the purpose of the image for accessibility.', 'cwicly')}
-                            />
+                            >
+                                <TextareaControl
+                                    value={imageAlt}
+                                    onChange={(newAlt) => setAttributes({ imageAlt: newAlt })}
+                                    help={__('Describe the purpose of the image for accessibility.', 'cwicly')}
+                                />
+                            </DynamicAttributeWrapper>
                             <ToggleControl
                                 label={__('Lightbox', 'cwicly')}
                                 checked={imageLightbox}
@@ -138,11 +161,17 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
                             />
                             {linkWrapperActive && (
                                 <>
-                                    <TextControl
+                                    <DynamicAttributeWrapper
+                                        attribute="linkWrapperUrl"
+                                        attributes={attributes}
+                                        setAttributes={setAttributes}
                                         label={__('URL', 'cwicly')}
-                                        value={linkWrapperUrl}
-                                        onChange={(val) => setAttributes({ linkWrapperUrl: val })}
-                                    />
+                                    >
+                                        <TextControl
+                                            value={linkWrapperUrl}
+                                            onChange={(val) => setAttributes({ linkWrapperUrl: val })}
+                                        />
+                                    </DynamicAttributeWrapper>
                                     <ToggleControl
                                         label={__('Open in new tab', 'cwicly')}
                                         checked={linkWrapperNewTab}
@@ -172,8 +201,8 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
             </InspectorControls>
             <div {...blockProps}>
                 <BackgroundHelper attributes={attributes} />
-                {imageURL ? (
-                    <img src={imageURL} alt={imageAlt} />
+                {displayImageURL ? (
+                    <img src={displayImageURL} alt={displayImageAlt} />
                 ) : (
                     <MediaPlaceholder
                         onSelect={onSelectImage}

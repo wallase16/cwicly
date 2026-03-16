@@ -6,9 +6,17 @@ import { useSelect } from '@wordpress/data';
 import { getBlockID, BackgroundHelper } from '../../utils/index.js';
 import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
 import DesignPanel from '../../components/framework/DesignPanel.js';
+import DynamicAttributeWrapper from '../../components/framework/DynamicAttributeWrapper.js';
+import { useDynamicData } from '../../hooks/use-dynamic-data.js';
 
 export default function Edit({ attributes, setAttributes, clientId, name }) {
     const { content, linkWrapperUrl, linkWrapperNewTab, classes, linkWrapperActive } = attributes;
+    
+    const resolvedContent = useDynamicData(content);
+    const resolvedLinkURL = useDynamicData(linkWrapperUrl);
+    
+    const displayContent = resolvedContent || content;
+    const displayLinkURL = resolvedLinkURL || linkWrapperUrl;
     const [isEditingURL, setIsEditingURL] = useState(false);
 
     const blockProps = useBlockProps({
@@ -64,11 +72,17 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
                             />
                             {linkWrapperActive && (
                                 <>
-                                    <TextControl
+                                    <DynamicAttributeWrapper
+                                        attribute="linkWrapperUrl"
+                                        attributes={attributes}
+                                        setAttributes={setAttributes}
                                         label={__('URL', 'cwicly')}
-                                        value={linkWrapperUrl}
-                                        onChange={(newUrl) => setAttributes({ linkWrapperUrl: newUrl })}
-                                    />
+                                    >
+                                        <TextControl
+                                            value={linkWrapperUrl}
+                                            onChange={(newUrl) => setAttributes({ linkWrapperUrl: newUrl })}
+                                        />
+                                    </DynamicAttributeWrapper>
                                     <ToggleControl
                                         label={__('Open in new tab', 'cwicly')}
                                         checked={linkWrapperNewTab}
@@ -100,7 +114,7 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
                 <BackgroundHelper attributes={attributes} />
                 <RichText
                     tagName="span"
-                    value={content}
+                    value={displayContent || ''}
                     onChange={(newContent) => setAttributes({ content: newContent })}
                     placeholder={__('Button text...', 'cwicly')}
                 />
