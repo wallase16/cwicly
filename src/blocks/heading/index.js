@@ -41,6 +41,7 @@ registerBlockType('cwicly/heading', {
     relativeStyles: { type: 'array', default: [] },
     customCSS: { type: 'string', default: '' },
     interactions: { type: 'object', default: { click: [], dbclick: [], scrollinview: [] } },
+    globalClasses: { type: 'array', default: [] },
   },
   supports: {
     anchor: true,

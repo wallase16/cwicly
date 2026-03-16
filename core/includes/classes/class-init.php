@@ -45,7 +45,9 @@ class Init {
 			new WooCommerce();
 		}
 		new Svg();
+		new Global_Styles();
 		new Actions();
+
 		if ( is_admin() ) {
 			new Backend();
 		}

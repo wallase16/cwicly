@@ -27,4 +27,6 @@ require_once CWICLY_DIR_PATH . 'core/includes/classes/class-comments.php';
 require_once CWICLY_DIR_PATH . 'core/includes/classes/class-wpml.php';
 require_once CWICLY_DIR_PATH . 'core/includes/classes/class-polylang.php';
 require_once CWICLY_DIR_PATH . 'core/includes/classes/class-svg.php';
+require_once CWICLY_DIR_PATH . 'core/includes/classes/class-global-styles.php';
 require_once CWICLY_DIR_PATH . 'core/includes/classes/class-init.php';
+

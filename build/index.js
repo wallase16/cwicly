@@ -242,7 +242,7 @@ function Edit({
   const [isEditingURL, setIsEditingURL] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
     id: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_5__.getBlockID)(attributes, clientId),
-    className: `cc-btn ${classes || ''}`
+    className: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_5__.getCombinedClassName)(attributes, `cc-btn ${classes || ''}`)
   });
   const {
     inspectortab,
@@ -433,6 +433,10 @@ __webpack_require__.r(__webpack_exports__);
       type: 'string',
       default: ''
     },
+    globalClasses: {
+      type: 'array',
+      default: []
+    },
     interactions: {
       type: 'object',
       default: {
@@ -480,7 +484,7 @@ function save({
     id: blockID,
     ...linkAttrs,
     ...interactions,
-    className: attributes.className,
+    className: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getCombinedClassName)(attributes, attributes.className),
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
       value: attributes.content
     })
@@ -528,7 +532,7 @@ function Edit({
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
     id: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.getBlockID)(attributes, clientId),
-    className: `cc-column ${classes || ''}`
+    className: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.getCombinedClassName)(attributes, `cc-column ${classes || ''}`)
   });
   const {
     inspectortab,
@@ -672,6 +676,10 @@ __webpack_require__.r(__webpack_exports__);
       type: 'string',
       default: ''
     },
+    globalClasses: {
+      type: 'array',
+      default: []
+    },
     interactions: {
       type: 'object',
       default: {
@@ -719,7 +727,7 @@ function save({
     id: blockID,
     ...linkAttrs,
     ...interactions,
-    className: attributes.className,
+    className: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getCombinedClassName)(attributes, attributes.className),
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks.Content, {})
   });
 }
@@ -766,7 +774,7 @@ function Edit({
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
     id: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.getBlockID)(attributes, clientId),
-    className: `cc-columns ${classes || ''}`
+    className: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.getCombinedClassName)(attributes, `cc-columns ${classes || ''}`)
   });
   const {
     inspectortab,
@@ -924,6 +932,10 @@ __webpack_require__.r(__webpack_exports__);
       type: 'string',
       default: ''
     },
+    globalClasses: {
+      type: 'array',
+      default: []
+    },
     interactions: {
       type: 'object',
       default: {
@@ -971,7 +983,7 @@ function save({
     id: blockID,
     ...linkAttrs,
     ...interactions,
-    className: attributes.className,
+    className: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getCombinedClassName)(attributes, attributes.className),
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks.Content, {})
   });
 }
@@ -1017,7 +1029,7 @@ function Edit({
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
     id: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.getBlockID)(attributes, clientId),
-    className: classes || ''
+    className: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.getCombinedClassName)(attributes, classes || '')
   });
   const {
     inspectortab,
@@ -1169,6 +1181,10 @@ __webpack_require__.r(__webpack_exports__);
       type: 'string',
       default: ''
     },
+    globalClasses: {
+      type: 'array',
+      default: []
+    },
     interactions: {
       type: 'object',
       default: {
@@ -1216,7 +1232,7 @@ function save({
     id: blockID,
     ...linkAttrs,
     ...interactions,
-    className: attributes.className,
+    className: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getCombinedClassName)(attributes, attributes.className),
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks.Content, {})
   });
 }
@@ -1278,7 +1294,7 @@ function Edit({
   const [isEditingURL, setIsEditingURL] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
     id: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_5__.getBlockID)(attributes, clientId),
-    className: classes || ''
+    className: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_5__.getCombinedClassName)(attributes, classes || '')
   });
   const {
     inspectortab,
@@ -1502,6 +1518,10 @@ __webpack_require__.r(__webpack_exports__);
         dbclick: [],
         scrollinview: []
       }
+    },
+    globalClasses: {
+      type: 'array',
+      default: []
     }
   },
   supports: {
@@ -1543,7 +1563,7 @@ function save({
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Tag, {
     id: blockID,
     ...interactions,
-    className: attributes.className,
+    className: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getCombinedClassName)(attributes, attributes.className),
     children: linkWrapperActive ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(LinkTag, {
       ...linkAttrs,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
@@ -1618,7 +1638,7 @@ function Edit({
   const [isEditingURL, setIsEditingURL] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
     id: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_5__.getBlockID)(attributes, clientId),
-    className: classes || ''
+    className: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_5__.getCombinedClassName)(attributes, classes || '')
   });
   const {
     inspectortab,
@@ -1901,6 +1921,10 @@ __webpack_require__.r(__webpack_exports__);
       type: 'string',
       default: ''
     },
+    globalClasses: {
+      type: 'array',
+      default: []
+    },
     interactions: {
       type: 'object',
       default: {
@@ -1947,7 +1971,7 @@ function save({
     id: blockID,
     ...imageAttrs,
     ...interactions,
-    className: attributes.className
+    className: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getCombinedClassName)(attributes, attributes.className)
   });
   if (attributes.imageLightbox) {
     const lightboxAttrs = (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getImageAttributes)({
@@ -2018,7 +2042,7 @@ function Edit({
   const displayLinkURL = resolvedLinkURL || linkWrapperUrl;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
     id: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.getBlockID)(attributes, clientId),
-    className: classes || ''
+    className: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.getCombinedClassName)(attributes, classes || '')
   });
   const {
     inspectortab,
@@ -2192,6 +2216,10 @@ __webpack_require__.r(__webpack_exports__);
       type: 'string',
       default: ''
     },
+    globalClasses: {
+      type: 'array',
+      default: []
+    },
     interactions: {
       type: 'object',
       default: {
@@ -2240,7 +2268,7 @@ function save({
     id: blockID,
     ...linkAttrs,
     ...interactions,
-    className: attributes.className,
+    className: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getCombinedClassName)(attributes, attributes.className),
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
       value: attributes.content
     })
@@ -2288,7 +2316,7 @@ function Edit({
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
     id: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.getBlockID)(attributes, clientId),
-    className: classes || ''
+    className: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_4__.getCombinedClassName)(attributes, classes || '')
   });
   const {
     inspectortab,
@@ -2440,6 +2468,10 @@ __webpack_require__.r(__webpack_exports__);
       type: 'string',
       default: ''
     },
+    globalClasses: {
+      type: 'array',
+      default: []
+    },
     interactions: {
       type: 'object',
       default: {
@@ -2487,7 +2519,7 @@ function save({
     id: blockID,
     ...linkAttrs,
     ...interactions,
-    className: attributes.className,
+    className: (0,_utils_index_js__WEBPACK_IMPORTED_MODULE_1__.getCombinedClassName)(attributes, attributes.className),
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks.Content, {})
   });
 }
@@ -2509,7 +2541,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var _GlobalStylesPanel_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./GlobalStylesPanel.js */ "./src/components/framework/GlobalStylesPanel.js");
+/* harmony import */ var _GlobalClassPicker_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./GlobalClassPicker.js */ "./src/components/framework/GlobalClassPicker.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
 
 
 
@@ -2552,8 +2588,20 @@ function CwiclyInspector({
   };
   if (name === 'cwicly/innerblocks') return null;
   if (isComponent && !isEditingComponent) return null;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      className: "cwicly-inspector-header",
+      style: {
+        padding: '10px',
+        borderBottom: '1px solid #ddd'
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_GlobalClassPicker_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        selectedClasses: attributes.globalClasses,
+        onChange: classes => setAttributes({
+          globalClasses: classes
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       className: "cwicly-inspector-tabs-container",
       style: {
         position: 'sticky',
@@ -2563,27 +2611,34 @@ function CwiclyInspector({
         borderBottom: '1px solid #ddd',
         marginBottom: '10px'
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         style: {
           display: 'flex',
           padding: '4px',
           gap: '8px'
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
           type: "button",
           className: classnames__WEBPACK_IMPORTED_MODULE_3__('cwicly-tab-button', {
             active: inspectortab.tab === 'primary'
           }),
           onClick: () => setTab('primary'),
           children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Primary', 'cwicly')
-        }), !noDesign && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+          type: "button",
+          className: classnames__WEBPACK_IMPORTED_MODULE_3__('cwicly-tab-button', {
+            active: inspectortab.tab === 'global'
+          }),
+          onClick: () => setTab('global'),
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Global', 'cwicly')
+        }), !noDesign && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
           type: "button",
           className: classnames__WEBPACK_IMPORTED_MODULE_3__('cwicly-tab-button', {
             active: inspectortab.tab === 'design'
           }),
           onClick: () => setTab('design'),
           children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Design', 'cwicly')
-        }), name !== 'cwicly/styler' && !noAdvanced && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+        }), name !== 'cwicly/styler' && !noAdvanced && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
           type: "button",
           className: classnames__WEBPACK_IMPORTED_MODULE_3__('cwicly-tab-button', {
             active: inspectortab.tab === 'advanced'
@@ -2592,7 +2647,7 @@ function CwiclyInspector({
           children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Advanced', 'cwicly')
         })]
       })
-    })
+    }), inspectortab.tab === 'global' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_GlobalStylesPanel_js__WEBPACK_IMPORTED_MODULE_4__["default"], {})]
   });
 }
 
@@ -2891,6 +2946,292 @@ function DynamicDataControl({
           }), " ", currentValue]
         })]
       })
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/components/framework/GlobalClassPicker.js"
+/*!*******************************************************!*\
+  !*** ./src/components/framework/GlobalClassPicker.js ***!
+  \*******************************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ GlobalClassPicker)
+/* harmony export */ });
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+
+/**
+ * GlobalClassPicker
+ * Allows selecting and applying global classes to a block.
+ */
+
+function GlobalClassPicker({
+  selectedClasses = [],
+  onChange
+}) {
+  const {
+    globalClasses
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.useSelect)(select => ({
+    globalClasses: select('cwicly/base').getGlobalClasses()
+  }), []);
+  const classNames = Object.keys(globalClasses);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    className: "cwicly-global-class-picker",
+    style: {
+      marginBottom: '20px'
+    },
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Global Classes', 'cwicly'),
+      help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Apply reusable global classes to this block.', 'cwicly'),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FormTokenField, {
+        value: selectedClasses,
+        suggestions: classNames,
+        onChange: onChange,
+        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Search or select classes...', 'cwicly')
+      })
+    })
+  });
+}
+
+/***/ },
+
+/***/ "./src/components/framework/GlobalStylesPanel.js"
+/*!*******************************************************!*\
+  !*** ./src/components/framework/GlobalStylesPanel.js ***!
+  \*******************************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ GlobalStylesPanel)
+/* harmony export */ });
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+
+
+
+
+
+
+/**
+ * GlobalStylesPanel
+ * Provides UI for managing global classes, variables, and pseudo-states.
+ */
+
+function GlobalStylesPanel() {
+  const {
+    globalClasses,
+    globalVariables,
+    activePseudoState,
+    pseudoStates
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.useSelect)(select => ({
+    globalClasses: select('cwicly/base').getGlobalClasses(),
+    globalVariables: select('cwicly/base').getGlobalVariables(),
+    activePseudoState: select('cwicly/base').getActivePseudoState(),
+    pseudoStates: select('cwicly/base').getPseudoStates()
+  }), []);
+  const {
+    addGlobalClass,
+    updateGlobalVariable,
+    setActivePseudoState,
+    removeGlobalClass,
+    saveGlobalStyles
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.useDispatch)('cwicly/base');
+  const [activeTab, setActiveTab] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)('classes');
+  const [newClassName, setNewClassName] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)('');
+  const [newVarName, setNewVarName] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)('');
+  const [newVarValue, setNewVarValue] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)('');
+  const handleAddClass = () => {
+    if (!newClassName) return;
+    const formattedName = newClassName.startsWith('.') ? newClassName : `.${newClassName}`;
+    addGlobalClass(formattedName, {});
+    setNewClassName('');
+    saveGlobalStyles();
+  };
+  const handleAddVariable = () => {
+    if (!newVarName || !newVarValue) return;
+    const formattedName = newVarName.startsWith('--') ? newVarName : `--${newVarName}`;
+    updateGlobalVariable(formattedName, newVarValue);
+    setNewVarName('');
+    setNewVarValue('');
+    saveGlobalStyles();
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    className: "cwicly-global-styles-panel",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "panel-header",
+      style: {
+        padding: '10px',
+        background: '#f0f0f0',
+        borderBottom: '1px solid #ccc'
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
+        style: {
+          margin: 0,
+          fontSize: '13px'
+        },
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Global Styles', 'cwicly')
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      className: "panel-tabs",
+      style: {
+        display: 'flex',
+        borderBottom: '1px solid #ccc'
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        isTertiary: true,
+        className: classnames__WEBPACK_IMPORTED_MODULE_4__({
+          'is-active': activeTab === 'classes'
+        }),
+        onClick: () => setActiveTab('classes'),
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Classes', 'cwicly')
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        isTertiary: true,
+        className: classnames__WEBPACK_IMPORTED_MODULE_4__({
+          'is-active': activeTab === 'variables'
+        }),
+        onClick: () => setActiveTab('variables'),
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Variables', 'cwicly')
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      className: "panel-content",
+      style: {
+        padding: '10px'
+      },
+      children: [activeTab === 'classes' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "classes-tab",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          style: {
+            display: 'flex',
+            gap: '5px',
+            marginBottom: '15px'
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+            value: newClassName,
+            onChange: setNewClassName,
+            placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Enter class name...', 'cwicly'),
+            hideLabelFromVision: true
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            isPrimary: true,
+            onClick: handleAddClass,
+            children: "+"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          className: "global-classes-list",
+          children: Object.keys(globalClasses).map(name => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            style: {
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: '5px',
+              borderBottom: '1px solid #eee'
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+              style: {
+                fontSize: '12px',
+                fontFamily: 'monospace'
+              },
+              children: name
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+              isDestructive: true,
+              isSmall: true,
+              icon: "no-alt",
+              onClick: () => removeGlobalClass(name)
+            })]
+          }, name))
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          className: "pseudo-state-manager",
+          style: {
+            marginTop: '20px'
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Active Pseudo-State', 'cwicly'),
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("select", {
+              value: activePseudoState,
+              onChange: e => setActivePseudoState(e.target.value),
+              style: {
+                width: '100%',
+                padding: '5px'
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+                value: "",
+                children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('None', 'cwicly')
+              }), pseudoStates.map(state => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+                value: state.id,
+                children: state.label
+              }, state.id))]
+            })
+          })
+        })]
+      }), activeTab === 'variables' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "variables-tab",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          style: {
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr auto',
+            gap: '5px',
+            marginBottom: '15px'
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+            value: newVarName,
+            onChange: setNewVarName,
+            placeholder: "--name",
+            hideLabelFromVision: true
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+            value: newVarValue,
+            onChange: setNewVarValue,
+            placeholder: "#000",
+            hideLabelFromVision: true
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            isPrimary: true,
+            onClick: handleAddVariable,
+            children: "+"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          className: "global-variables-list",
+          children: Object.entries(globalVariables).map(([name, value]) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            style: {
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr auto',
+              alignItems: 'center',
+              padding: '5px',
+              borderBottom: '1px solid #eee'
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+              style: {
+                fontSize: '11px',
+                fontFamily: 'monospace'
+              },
+              children: name
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+              style: {
+                fontSize: '11px'
+              },
+              children: value
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+              isSmall: true,
+              icon: "no-alt",
+              onClick: () => updateGlobalVariable(name, null)
+            })]
+          }, name))
+        })]
+      })]
     })]
   });
 }
@@ -3467,6 +3808,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducer.js */ "./src/store/base/reducer.js");
 /* harmony import */ var _actions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./actions.js */ "./src/store/base/actions.js");
 /* harmony import */ var _selectors_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./selectors.js */ "./src/store/base/selectors.js");
+/* harmony import */ var _global_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../global/index.js */ "./src/store/global/index.js");
 /**
  * Cwicly Base Store
  */
@@ -3474,10 +3816,45 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+// Combine reducers – keeping base at top level for compatibility
+// but adding global as a dedicated slice might be safer.
+// However, existing blocks might expect flat state.
+// Let's use a custom root reducer to merge them.
+
+const rootReducer = (state, action) => {
+  // If we want to keep it flat:
+  const nextBaseState = (0,_reducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(state, action);
+  const nextGlobalState = (0,_global_index_js__WEBPACK_IMPORTED_MODULE_4__.reducer)(state, action);
+
+  // We should probably partition the state if we want true modularity, 
+  // but the user said "Merge global slice".
+  // For now, let's keep it simple and just run both across the same state.
+  // This allows the global reducer to manage its specific keys.
+
+  // Actually, a better way for @wordpress/data is separate slices if we use combineReducers,
+  // but that changes state structure (state.global.classes).
+  // The user's selectors expect state.classes (based on base selectors).
+
+  return {
+    ...nextBaseState,
+    ...nextGlobalState
+  };
+};
 (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.registerStore)('cwicly/base', {
-  reducer: _reducer_js__WEBPACK_IMPORTED_MODULE_1__["default"],
-  actions: _actions_js__WEBPACK_IMPORTED_MODULE_2__,
-  selectors: _selectors_js__WEBPACK_IMPORTED_MODULE_3__
+  reducer: rootReducer,
+  actions: {
+    ..._actions_js__WEBPACK_IMPORTED_MODULE_2__,
+    ..._global_index_js__WEBPACK_IMPORTED_MODULE_4__.actions
+  },
+  selectors: {
+    ..._selectors_js__WEBPACK_IMPORTED_MODULE_3__,
+    ..._global_index_js__WEBPACK_IMPORTED_MODULE_4__.selectors
+  },
+  resolvers: {
+    ..._global_index_js__WEBPACK_IMPORTED_MODULE_4__.resolvers
+  }
 });
 
 /***/ },
@@ -3692,6 +4069,261 @@ const getGlobalClassesRendered = state => state.globalClassesRendered;
 
 /***/ },
 
+/***/ "./src/store/global/actions.js"
+/*!*************************************!*\
+  !*** ./src/store/global/actions.js ***!
+  \*************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   addGlobalClass: () => (/* binding */ addGlobalClass),
+/* harmony export */   removeGlobalClass: () => (/* binding */ removeGlobalClass),
+/* harmony export */   saveGlobalStyles: () => (/* binding */ saveGlobalStyles),
+/* harmony export */   setActivePseudoState: () => (/* binding */ setActivePseudoState),
+/* harmony export */   updateGlobalClass: () => (/* binding */ updateGlobalClass),
+/* harmony export */   updateGlobalVariable: () => (/* binding */ updateGlobalVariable)
+/* harmony export */ });
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+
+const addGlobalClass = (className, styles = {}) => ({
+  type: 'CC_GLOBAL_ADD_CLASS',
+  className,
+  styles
+});
+const updateGlobalClass = (className, styles) => ({
+  type: 'CC_GLOBAL_UPDATE_CLASS',
+  className,
+  styles
+});
+const removeGlobalClass = className => ({
+  type: 'CC_GLOBAL_REMOVE_CLASS',
+  className
+});
+const updateGlobalVariable = (name, value) => ({
+  type: 'CC_GLOBAL_UPDATE_VARIABLE',
+  name,
+  value
+});
+const setActivePseudoState = pseudoState => ({
+  type: 'CC_GLOBAL_ACTIVE_PSEUDO_STATE',
+  pseudoState
+});
+
+/**
+ * Persistence action
+ */
+const saveGlobalStyles = () => async (dispatch, getState) => {
+  const state = getState();
+  const globalStyles = {
+    classes: state.classes || [],
+    variables: state.variables || [],
+    pseudoStates: state.pseudoStates || {}
+  };
+  try {
+    await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__({
+      path: '/cwicly/v1/options',
+      method: 'POST',
+      data: {
+        option: 'cwicly_global_styles',
+        value: JSON.stringify(globalStyles)
+      }
+    });
+  } catch (error) {
+    console.error('Failed to save global styles:', error);
+  }
+};
+
+/***/ },
+
+/***/ "./src/store/global/index.js"
+/*!***********************************!*\
+  !*** ./src/store/global/index.js ***!
+  \***********************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   actions: () => (/* reexport module object */ _actions_js__WEBPACK_IMPORTED_MODULE_1__),
+/* harmony export */   reducer: () => (/* reexport safe */ _reducer_js__WEBPACK_IMPORTED_MODULE_0__["default"]),
+/* harmony export */   resolvers: () => (/* reexport module object */ _resolvers_js__WEBPACK_IMPORTED_MODULE_3__),
+/* harmony export */   selectors: () => (/* reexport module object */ _selectors_js__WEBPACK_IMPORTED_MODULE_2__)
+/* harmony export */ });
+/* harmony import */ var _reducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./reducer.js */ "./src/store/global/reducer.js");
+/* harmony import */ var _actions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actions.js */ "./src/store/global/actions.js");
+/* harmony import */ var _selectors_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./selectors.js */ "./src/store/global/selectors.js");
+/* harmony import */ var _resolvers_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./resolvers.js */ "./src/store/global/resolvers.js");
+/**
+ * Global Store Exports
+ */
+
+
+
+
+
+
+/***/ },
+
+/***/ "./src/store/global/reducer.js"
+/*!*************************************!*\
+  !*** ./src/store/global/reducer.js ***!
+  \*************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ reducer)
+/* harmony export */ });
+/**
+ * Cwicly Global Store Reducer
+ */
+
+const initialState = {
+  classes: {},
+  variables: {},
+  activePseudoState: '',
+  // Reusable pseudo-states configuration
+  pseudoStates: [{
+    id: 'hover',
+    label: 'Hover'
+  }, {
+    id: 'focus',
+    label: 'Focus'
+  }, {
+    id: 'active',
+    label: 'Active'
+  }, {
+    id: 'before',
+    label: 'Before'
+  }, {
+    id: 'after',
+    label: 'After'
+  }]
+};
+function reducer(state = initialState, action) {
+  switch (action.type) {
+    case 'CC_GLOBAL_SET_DATA':
+      return {
+        ...state,
+        ...action.data
+      };
+    case 'CC_GLOBAL_ADD_CLASS':
+      return {
+        ...state,
+        classes: {
+          ...state.classes,
+          [action.className]: {
+            styles: action.styles || {},
+            id: action.id || action.className
+          }
+        }
+      };
+    case 'CC_GLOBAL_UPDATE_CLASS':
+      return {
+        ...state,
+        classes: {
+          ...state.classes,
+          [action.className]: {
+            ...(state.classes[action.className] || {}),
+            styles: action.styles
+          }
+        }
+      };
+    case 'CC_GLOBAL_REMOVE_CLASS':
+      const newClasses = {
+        ...state.classes
+      };
+      delete newClasses[action.className];
+      return {
+        ...state,
+        classes: newClasses
+      };
+    case 'CC_GLOBAL_UPDATE_VARIABLE':
+      return {
+        ...state,
+        variables: {
+          ...state.variables,
+          [action.name]: action.value
+        }
+      };
+    case 'CC_GLOBAL_ACTIVE_PSEUDO_STATE':
+      return {
+        ...state,
+        activePseudoState: action.pseudoState
+      };
+    default:
+      return state;
+  }
+}
+
+/***/ },
+
+/***/ "./src/store/global/resolvers.js"
+/*!***************************************!*\
+  !*** ./src/store/global/resolvers.js ***!
+  \***************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getGlobalStyles: () => (/* binding */ getGlobalStyles)
+/* harmony export */ });
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.js */ "./src/store/global/index.js");
+
+
+const getGlobalStyles = () => async ({
+  dispatch
+}) => {
+  try {
+    const response = await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__({
+      path: '/cwicly/v1/options?option=cwicly_global_styles'
+    });
+    if (response && response.success && response.settings) {
+      const data = typeof response.settings === 'string' ? JSON.parse(response.settings) : response.settings;
+      dispatch({
+        type: 'CC_GLOBAL_SET_DATA',
+        data
+      });
+    }
+  } catch (error) {
+    console.error('Failed to fetch global styles:', error);
+  }
+};
+
+/***/ },
+
+/***/ "./src/store/global/selectors.js"
+/*!***************************************!*\
+  !*** ./src/store/global/selectors.js ***!
+  \***************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getActivePseudoState: () => (/* binding */ getActivePseudoState),
+/* harmony export */   getClassByName: () => (/* binding */ getClassByName),
+/* harmony export */   getGlobalClasses: () => (/* binding */ getGlobalClasses),
+/* harmony export */   getGlobalVariables: () => (/* binding */ getGlobalVariables),
+/* harmony export */   getPseudoStates: () => (/* binding */ getPseudoStates)
+/* harmony export */ });
+/**
+ * Cwicly Global Store Selectors
+ */
+
+const getGlobalClasses = state => state.classes || {};
+const getClassByName = (state, className) => (state.classes || {})[className];
+const getGlobalVariables = state => state.variables || {};
+const getActivePseudoState = state => state.activePseudoState;
+const getPseudoStates = state => state.pseudoStates;
+
+/***/ },
+
 /***/ "./src/store/index.js"
 /*!****************************!*\
   !*** ./src/store/index.js ***!
@@ -3828,6 +4460,39 @@ function getBlockID(attributes, blockName = "") {
   }
   return null;
 }
+
+/***/ },
+
+/***/ "./src/utils/global-classes-helper.js"
+/*!********************************************!*\
+  !*** ./src/utils/global-classes-helper.js ***!
+  \********************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getCombinedClassName: () => (/* binding */ getCombinedClassName)
+/* harmony export */ });
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+
+
+/**
+ * Merges block attributes into a single className string.
+ * @param {Object} attributes - Block attributes.
+ * @param {string} localClassName - Gutenberg's default className.
+ * @returns {string} - Combined className.
+ */
+const getCombinedClassName = (attributes, localClassName = '') => {
+  const {
+    classes,
+    globalClasses = []
+  } = attributes;
+
+  // Convert global classes (which might be ".class-name") to "class-name"
+  const parsedGlobalClasses = globalClasses.map(cls => cls.startsWith('.') ? cls.slice(1) : cls);
+  return classnames__WEBPACK_IMPORTED_MODULE_0__(localClassName, classes, ...parsedGlobalClasses);
+};
 
 /***/ },
 
@@ -4007,6 +4672,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   BackgroundHelper: () => (/* reexport safe */ _background_helper_js__WEBPACK_IMPORTED_MODULE_4__.BackgroundHelper),
 /* harmony export */   getBlockID: () => (/* reexport safe */ _block_id_js__WEBPACK_IMPORTED_MODULE_0__.getBlockID),
+/* harmony export */   getCombinedClassName: () => (/* reexport safe */ _global_classes_helper_js__WEBPACK_IMPORTED_MODULE_5__.getCombinedClassName),
 /* harmony export */   getImageAttributes: () => (/* reexport safe */ _image_attributes_js__WEBPACK_IMPORTED_MODULE_1__.getImageAttributes),
 /* harmony export */   getInteractions: () => (/* reexport safe */ _interactions_helper_js__WEBPACK_IMPORTED_MODULE_3__.getInteractions),
 /* harmony export */   getLinkAttributes: () => (/* reexport safe */ _link_helper_js__WEBPACK_IMPORTED_MODULE_2__.getLinkAttributes)
@@ -4016,6 +4682,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _link_helper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./link-helper.js */ "./src/utils/link-helper.js");
 /* harmony import */ var _interactions_helper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./interactions-helper.js */ "./src/utils/interactions-helper.js");
 /* harmony import */ var _background_helper_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./background-helper.js */ "./src/utils/background-helper.js");
+/* harmony import */ var _global_classes_helper_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./global-classes-helper.js */ "./src/utils/global-classes-helper.js");
+
 
 
 

@@ -1,5 +1,6 @@
 import { RichText } from '@wordpress/block-editor';
-import { getBlockID, getLinkAttributes, getInteractions } from '../../utils/index.js';
+import { getBlockID, getLinkAttributes, getInteractions, getCombinedClassName } from '../../utils/index.js';
+
 
 export default function save({ attributes }) {
   const Tag = attributes.headingTag || 'h1';
@@ -14,7 +15,8 @@ export default function save({ attributes }) {
     <Tag
       id={blockID}
       {...interactions}
-      className={attributes.className}
+      className={getCombinedClassName(attributes, attributes.className)}
+
     >
       {linkWrapperActive ? (
         <LinkTag {...linkAttrs}>

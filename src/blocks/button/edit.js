@@ -3,7 +3,8 @@ import { PanelBody, TextControl, ToggleControl, Popover } from '@wordpress/compo
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
-import { getBlockID, BackgroundHelper } from '../../utils/index.js';
+import { getBlockID, BackgroundHelper, getCombinedClassName } from '../../utils/index.js';
+
 import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
 import DesignPanel from '../../components/framework/DesignPanel.js';
 import DynamicAttributeWrapper from '../../components/framework/DynamicAttributeWrapper.js';
@@ -21,8 +22,9 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
 
     const blockProps = useBlockProps({
         id: getBlockID(attributes, clientId),
-        className: `cc-btn ${classes || ''}`,
+        className: getCombinedClassName(attributes, `cc-btn ${classes || ''}`),
     });
+
 
     const { inspectortab, pseudoClass } = useSelect((select) => ({
         inspectortab: select('cwicly/base').getInspectorPosition(),

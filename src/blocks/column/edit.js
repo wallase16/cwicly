@@ -2,7 +2,8 @@ import { useBlockProps, InnerBlocks, InspectorControls } from '@wordpress/block-
 import { PanelBody, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useSelect } from '@wordpress/data';
-import { getBlockID, BackgroundHelper } from '../../utils/index.js';
+import { getBlockID, BackgroundHelper, getCombinedClassName } from '../../utils/index.js';
+
 import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
 import DesignPanel from '../../components/framework/DesignPanel.js';
 
@@ -11,8 +12,9 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
 
     const blockProps = useBlockProps({
         id: getBlockID(attributes, clientId),
-        className: `cc-column ${classes || ''}`,
+        className: getCombinedClassName(attributes, `cc-column ${classes || ''}`),
     });
+
 
     const { inspectortab, pseudoClass } = useSelect((select) => ({
         inspectortab: select('cwicly/base').getInspectorPosition(),

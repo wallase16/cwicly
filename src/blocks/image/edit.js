@@ -3,7 +3,8 @@ import { PanelBody, TextareaControl, Button, ToolbarGroup, ToolbarButton, Toggle
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
-import { getBlockID, BackgroundHelper } from '../../utils/index.js';
+import { getBlockID, BackgroundHelper, getCombinedClassName } from '../../utils/index.js';
+
 import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
 import DesignPanel from '../../components/framework/DesignPanel.js';
 import DynamicDataControl from '../../components/framework/DynamicDataControl.js';
@@ -34,8 +35,9 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
 
     const blockProps = useBlockProps({
         id: getBlockID(attributes, clientId),
-        className: classes || '',
+        className: getCombinedClassName(attributes, classes || ''),
     });
+
 
     const { inspectortab, pseudoClass } = useSelect((select) => ({
         inspectortab: select('cwicly/base').getInspectorPosition(),

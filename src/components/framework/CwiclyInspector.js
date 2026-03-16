@@ -2,6 +2,9 @@ import { useSelect, useDispatch } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { Fragment, useEffect } from '@wordpress/element';
 import classnames from 'classnames';
+import GlobalStylesPanel from './GlobalStylesPanel.js';
+import GlobalClassPicker from './GlobalClassPicker.js';
+
 
 /**
  * CwiclyInspector
@@ -46,6 +49,12 @@ export default function CwiclyInspector({ attributes, setAttributes, name, isCom
 
     return (
         <Fragment>
+            <div className="cwicly-inspector-header" style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>
+                <GlobalClassPicker 
+                    selectedClasses={attributes.globalClasses}
+                    onChange={(classes) => setAttributes({ globalClasses: classes })}
+                />
+            </div>
             <div className="cwicly-inspector-tabs-container" style={{ position: 'sticky', top: 0, zIndex: 15, background: '#fff', borderBottom: '1px solid #ddd', marginBottom: '10px' }}>
                 <div style={{ display: 'flex', padding: '4px', gap: '8px' }}>
                     <button
@@ -54,6 +63,13 @@ export default function CwiclyInspector({ attributes, setAttributes, name, isCom
                         onClick={() => setTab('primary')}
                     >
                         {__('Primary', 'cwicly')}
+                    </button>
+                    <button
+                        type="button"
+                        className={classnames('cwicly-tab-button', { active: inspectortab.tab === 'global' })}
+                        onClick={() => setTab('global')}
+                    >
+                        {__('Global', 'cwicly')}
                     </button>
                     {!noDesign && (
                         <button
@@ -75,6 +91,8 @@ export default function CwiclyInspector({ attributes, setAttributes, name, isCom
                     )}
                 </div>
             </div>
+            {inspectortab.tab === 'global' && <GlobalStylesPanel />}
         </Fragment>
+
     );
 }

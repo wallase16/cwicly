@@ -1,5 +1,5 @@
 import { Fragment, createElement } from '@wordpress/element';
-import { getBlockID, getLinkAttributes, getImageAttributes, getInteractions } from '../../utils/index.js';
+import { getBlockID, getLinkAttributes, getImageAttributes, getInteractions, getCombinedClassName } from '../../utils/index.js';
 
 export default function save({ attributes }) {
   const blockID = getBlockID(attributes, 'image');
@@ -11,7 +11,7 @@ export default function save({ attributes }) {
       id={blockID}
       {...imageAttrs}
       {...interactions}
-      className={attributes.className}
+      className={getCombinedClassName(attributes, attributes.className)}
     />
   );
 

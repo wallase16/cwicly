@@ -53,6 +53,7 @@ registerBlockType('cwicly/image', {
     htmlAttributes: { type: 'array', default: [] },
     relativeStyles: { type: 'array', default: [] },
     customCSS: { type: 'string', default: '' },
+    globalClasses: { type: 'array', default: [] },
     interactions: { type: 'object', default: { click: [], dbclick: [], scrollinview: [] } },
   },
   supports: {

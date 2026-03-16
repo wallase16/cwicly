@@ -3,7 +3,7 @@
  * Plugin Name:       Cwicly
  * Plugin URI:        https://cwicly.com/
  * Description:       Take Gutenberg by WordPress to the next level. Design & create professional responsive websites in minutes.
- * Version:           1.5.0
+ * Version:           1.5.1
  * Author:            Cwicly
  * Author URI:        https://cwicly.com/
  * Text Domain:       cwicly
@@ -48,7 +48,8 @@ if ( CWICLY_IS_FREE ) {
 }
 
 // Define Version.
-define( 'CWICLY_VERSION', '1.5.0' );
+define( 'CWICLY_VERSION', '1.5.1' );
+
 
 // Define WordPress.
 define( 'WORDPRESS_VERSION', get_bloginfo( 'version' ) );
