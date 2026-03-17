@@ -1,5 +1,5 @@
 import { RichText } from '@wordpress/block-editor';
-import { getBlockID, getLinkAttributes, getInteractions, getCombinedClassName } from '../../utils/index.js';
+import { getBlockID, getHtmlAttributes, getLinkAttributes, getInteractions, getCombinedClassName } from '../../utils/index.js';
 
 
 export default function save({ attributes }) {
@@ -7,6 +7,7 @@ export default function save({ attributes }) {
   const blockID = getBlockID(attributes, 'heading');
   const linkAttrs = getLinkAttributes(attributes, 'heading');
   const interactions = getInteractions(attributes.interactions);
+  const htmlAttrs = getHtmlAttributes(attributes);
   
   const linkWrapperActive = attributes.linkWrapperActive || linkAttrs?.href;
   const LinkTag = (!attributes.containerLayoutTag || (attributes.containerLayoutTag !== 'a' && attributes.containerLayoutTag !== 'button')) ? 'a' : attributes.containerLayoutTag;
@@ -15,8 +16,8 @@ export default function save({ attributes }) {
     <Tag
       id={blockID}
       {...interactions}
+      {...htmlAttrs}
       className={getCombinedClassName(attributes, attributes.className)}
-
     >
       {linkWrapperActive ? (
         <LinkTag {...linkAttrs}>

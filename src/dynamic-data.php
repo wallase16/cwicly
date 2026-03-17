@@ -1,7 +1,7 @@
 <?php
 /**
  * Dynamic Data resolution logic for Cwicly Rebuild.
- * Mirrored from original Cwicly/render.php
+ * Resolves {source=field} tags in block attributes and rendered HTML.
  */
 
 namespace Cwicly;
@@ -11,22 +11,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Resolves Cwicly dynamic data tags.
- * 
- * @param string $tag The dynamic tag (e.g., {acf=hero_image}).
- * @param array $attributes Block attributes.
- * @param object $block WP_Block object.
- * @return mixed
+ * Resolves a Cwicly dynamic data tag.
+ *
+ * @param string   $tag        The dynamic tag, e.g. {post_title=post_title}.
+ * @param array    $attributes Block attributes.
+ * @param WP_Block $block      WP_Block instance (for loop context).
+ * @return string
  */
 function cc_get_dyn( $tag, $attributes = [], $block = null ) {
-    if ( ! preg_match( '/^\{([\w-]+)=([\w-]+)\}$/', $tag, $matches ) ) {
+    if ( ! preg_match( '/^\{([\w-]+)=([\w-]*)\}$/', $tag, $matches ) ) {
         return $tag;
     }
 
-    $source = $matches[1];
-    $field  = $matches[2];
-    $value  = '';
-
+    $source  = $matches[1];
+    $field   = $matches[2];
+    $value   = '';
     $post_id = get_the_ID();
 
     switch ( $source ) {
@@ -48,27 +47,77 @@ function cc_get_dyn( $tag, $attributes = [], $block = null ) {
             $value = get_the_content( null, false, $post_id );
             break;
 
-        case 'author_name':
-            $value = get_the_author_meta( 'display_name', get_post_field( 'post_author', $post_id ) );
+        case 'post_excerpt':
+            $value = get_the_excerpt( $post_id );
             break;
-            
+
+        case 'author_name':
+            $value = get_the_author_meta( 'display_name', (int) get_post_field( 'post_author', $post_id ) );
+            break;
+
+        case 'featured_image':
+            $image_id = get_post_thumbnail_id( $post_id );
+            if ( $image_id ) {
+                $size  = $field ?: 'full';
+                $src   = wp_get_attachment_image_src( $image_id, $size );
+                $value = $src ? $src[0] : wp_get_attachment_url( $image_id );
+            }
+            break;
+
+        case 'taxonomy':
+            $terms = get_the_terms( $post_id, $field );
+            if ( $terms && ! is_wp_error( $terms ) ) {
+                $value = implode( ', ', wp_list_pluck( $terms, 'name' ) );
+            }
+            break;
+
+        case 'permalink':
+            $value = get_permalink( $post_id );
+            break;
+
         case 'idadd':
-            // Logic for loop indicators (-p-1, -q-2, etc.)
-            $value = '';
+            // Loop indicators (-q-1, etc.)
             if ( isset( $block->context['query_index'] ) ) {
-                $value .= '-q-' . $block->context['query_index'];
+                $value = '-q-' . $block->context['query_index'];
             }
             break;
     }
 
-    // Handle array/object values (e.g., ACF Image)
+    // Handle array/object ACF values (e.g. ACF Image field)
     if ( is_array( $value ) ) {
-        if ( isset( $value['url'] ) ) {
-            $value = $value['url'];
-        } else {
-            $value = implode( ', ', $value );
-        }
+        $value = isset( $value['url'] ) ? $value['url'] : implode( ', ', $value );
     }
 
-    return $value;
+    return (string) $value;
 }
+
+/**
+ * Resolve dynamic tags in Cwicly block HTML at render time.
+ * Handles {source=field} patterns in the serialized block output.
+ */
+add_filter(
+    'render_block',
+    function ( $block_content, $block ) {
+        // Only process Cwicly blocks.
+        if ( strpos( $block['blockName'] ?? '', 'cwicly/' ) !== 0 ) {
+            return $block_content;
+        }
+
+        // Skip if no dynamic tags present (fast path).
+        if ( strpos( $block_content, '{' ) === false ) {
+            return $block_content;
+        }
+
+        $attrs = $block['attrs'] ?? [];
+
+        return preg_replace_callback(
+            '/\{([\w-]+)=([\w-]*)\}/',
+            function ( $matches ) use ( $attrs ) {
+                return cc_get_dyn( $matches[0], $attrs, null );
+            },
+            $block_content
+        );
+    },
+    10,
+    2
+);

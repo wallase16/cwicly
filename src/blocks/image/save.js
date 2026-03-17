@@ -1,4 +1,4 @@
-import { getBlockID, getImageAttributes, getInteractions, getCombinedClassName } from '../../utils/index.js';
+import { getBlockID, getHtmlAttributes, getImageAttributes, getInteractions, getCombinedClassName } from '../../utils/index.js';
 
 export default function save({ attributes }) {
     const {
@@ -15,6 +15,7 @@ export default function save({ attributes }) {
     const blockID      = getBlockID(attributes, 'image');
     const imageAttrs   = getImageAttributes(attributes);
     const interactions = getInteractions(attributes.interactions);
+    const htmlAttrs    = getHtmlAttributes(attributes);
 
     // Inline style for aspect-ratio + focal point
     const imgStyle = {};
@@ -29,6 +30,7 @@ export default function save({ attributes }) {
             id={blockID}
             {...imageAttrs}
             {...interactions}
+            {...htmlAttrs}
             className={getCombinedClassName(attributes, attributes.className)}
             loading={imageLazy !== false ? 'lazy' : undefined}
             width={imageWidth  || undefined}

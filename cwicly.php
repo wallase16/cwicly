@@ -187,3 +187,52 @@ function cc_update_db_check() {
 	}
 }
 add_action( 'plugins_loaded', 'cc_update_db_check' );
+
+/**
+ * Enqueue AOS (Animate on Scroll) library on the frontend.
+ * Cwicly blocks emit data-aos-* attributes when animateOnScrollType is set.
+ */
+add_action( 'wp_enqueue_scripts', function () {
+    wp_enqueue_style(
+        'cwicly-aos',
+        'https://unpkg.com/aos@2.3.4/dist/aos.css',
+        [],
+        '2.3.4'
+    );
+    wp_enqueue_script(
+        'cwicly-aos',
+        'https://unpkg.com/aos@2.3.4/dist/aos.js',
+        [],
+        '2.3.4',
+        true
+    );
+    wp_add_inline_script(
+        'cwicly-aos',
+        'document.addEventListener("DOMContentLoaded", function(){ if(window.AOS){ AOS.init(); } });'
+    );
+} );
+
+/**
+ * Enqueue GLightbox on the frontend.
+ * Cwicly image blocks with imageLightbox:true emit .cc-lightbox anchors.
+ */
+add_action( 'wp_enqueue_scripts', function () {
+    wp_enqueue_style(
+        'cwicly-glightbox',
+        'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css',
+        [],
+        '3.2.0'
+    );
+    wp_enqueue_script(
+        'cwicly-glightbox',
+        'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js',
+        [],
+        '3.2.0',
+        true
+    );
+    wp_add_inline_script(
+        'cwicly-glightbox',
+        'document.addEventListener("DOMContentLoaded", function(){ if(window.GLightbox && document.querySelector(".cc-lightbox")){ GLightbox({ selector: ".cc-lightbox" }); } });'
+    );
+} );
+

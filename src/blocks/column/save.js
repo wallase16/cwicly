@@ -1,10 +1,11 @@
 import { InnerBlocks } from '@wordpress/block-editor';
-import { getBlockID, getLinkAttributes, getInteractions, getCombinedClassName } from '../../utils/index.js';
+import { getBlockID, getHtmlAttributes, getLinkAttributes, getInteractions, getCombinedClassName } from '../../utils/index.js';
 
 export default function save({ attributes }) {
   const blockID = getBlockID(attributes, 'column');
   const linkAttrs = getLinkAttributes(attributes, 'column');
   const interactions = getInteractions(attributes.interactions);
+  const htmlAttrs = getHtmlAttributes(attributes);
   
   const Tag = (attributes.linkWrapperActive || linkAttrs?.href)
     ? (attributes.containerLayoutTag || 'a')
@@ -15,6 +16,7 @@ export default function save({ attributes }) {
       id={blockID}
       {...linkAttrs}
       {...interactions}
+      {...htmlAttrs}
       className={getCombinedClassName(attributes, attributes.className)}
     >
       <InnerBlocks.Content />
