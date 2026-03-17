@@ -70,7 +70,8 @@ class Heartbeat_API extends \WP_REST_Controller {
 			$heartbeat_editor = $body['heartbeat'];
 
 			$heartbeat_editor_new = array();
-			foreach ( $heartbeat as $key => $value ) {
+			if ( is_array( $heartbeat ) ) {
+				foreach ( $heartbeat as $key => $value ) {
 				if ( ! isset( $heartbeat_editor[ $key ] ) || $value > $heartbeat_editor[ $key ] ) {
 					if ( 'cwicly_global_classes' === $key ) {
 						$heartbeat_editor_new[] = array(
@@ -88,8 +89,8 @@ class Heartbeat_API extends \WP_REST_Controller {
 					}
 				}
 			}
-
-			return new \WP_REST_Response( wp_json_encode( $heartbeat_editor_new ), 200 );
+		}
+		return new \WP_REST_Response( wp_json_encode( $heartbeat_editor_new ), 200 );
 		} else {
 			return new \WP_Error( 'no_heartbeat', 'No heartbeat', array( 'status' => 404 ) );
 		}
@@ -109,7 +110,8 @@ class Heartbeat_API extends \WP_REST_Controller {
 			$heartbeat_editor = $body['heartbeat'];
 
 			$heartbeat_editor_new = array();
-			foreach ( $heartbeat as $key => $value ) {
+			if ( is_array( $heartbeat ) ) {
+				foreach ( $heartbeat as $key => $value ) {
 				if ( ! isset( $heartbeat_editor[ $key ] ) || $value > $heartbeat_editor[ $key ] ) {
 					if ( 'cwicly_pre_conditions' === $key ) {
 						$heartbeat_editor_new[] = array(
@@ -127,8 +129,8 @@ class Heartbeat_API extends \WP_REST_Controller {
 					}
 				}
 			}
-
-			return new \WP_REST_Response( wp_json_encode( $heartbeat_editor_new ), 200 );
+		}
+		return new \WP_REST_Response( wp_json_encode( $heartbeat_editor_new ), 200 );
 		} else {
 			return new \WP_REST_Response( false, 200 );
 		}

@@ -28,6 +28,8 @@
               pkgs.php83
               pkgs.php83.packages.composer
               pkgs.nodejs_24
+              pkgs.openssl
+              pkgs.zlib
             ];
           };
         }

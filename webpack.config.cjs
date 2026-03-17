@@ -33,6 +33,8 @@ module.exports = {
     ...defaultConfig.resolve,
     alias: {
       ...defaultConfig.resolve?.alias,
+      'react/jsx-runtime': path.resolve(__dirname, 'src/utils/jsx-runtime.js'),
+      'react/jsx-dev-runtime': path.resolve(__dirname, 'src/utils/jsx-runtime.js'),
       '@components': path.resolve(__dirname, 'src/components/'),
       '@store': path.resolve(__dirname, 'src/store/'),
       '@utils': path.resolve(__dirname, 'src/utils/'),

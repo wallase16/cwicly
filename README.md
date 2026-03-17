@@ -8,16 +8,17 @@ This project upgrades the original Cwicly plugin to use the modern WordPress bui
 ## Getting Started
 
 ### Development Environment
-This project uses **Nix** for a declarative development environment.
+This project uses **Nix** for a declarative development environment. To ensure all system dependencies (like `libssl`) are available for build tools and language servers, work within the Nix shell:
 ```bash
 nix develop
 ```
 
 ### Build Instructions
-To build the plugin assets:
+To build the plugin assets (always run within `nix develop`):
 ```bash
 npm run build
 ```
+Note: Building within `nix develop` ensures that the modern JSX transform dependencies are correctly mapped and system libraries are available.
 
 ### Testing
 #### Backend (PHP)
