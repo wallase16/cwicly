@@ -29,16 +29,25 @@ const initStyleSaver = () => {
             const cssObject = generatePostCSSObject(blocks);
 
             // Construct payload for Cwicly REST API
+            // single_make_css expects arrays for common/global/fontCSS/breakpoints
+            const cssPayload = {
+                common: cssObject.common ? [cssObject.common] : [],
+                global: cssObject.global || [],
+                fontCSS: cssObject.fontCSS || [],
+                lg: cssObject.lg ? [cssObject.lg] : [],
+                md: cssObject.md ? [cssObject.md] : [],
+                sm: cssObject.sm ? [cssObject.sm] : [],
+            };
             const payload = {
                 css: {
-                    [`post-${postId}`]: cssObject
+                    [`post-${postId}`]: cssPayload
                 }
             };
 
             console.log('Cwicly Rebuild: Persisting generated CSS...', payload);
 
             apiFetch({
-                path: '/cwicly/v1/single-make-css',
+                path: '/cwicly/v1/single_make_css',
                 method: 'POST',
                 data: payload,
             }).then((result) => {

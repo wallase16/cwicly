@@ -33,6 +33,11 @@ registerBlockType('cwicly/section', {
     customCSS: { type: 'string', default: '' },
     globalClass: { type: 'array', default: [] },
     interactions: { type: 'object', default: { click: [], dbclick: [], scrollinview: [] } },
+    animateOnScrollType: { type: 'string', default: '' },
+    animateOnScrollOnce: { type: 'boolean', default: false },
+    animateOnScrollDuration: { type: 'string', default: '' },
+    animateOnScrollDelay: { type: 'string', default: '' },
+    animateOnScrollStartAnchor: { type: 'string', default: '' },
   },
   supports: {
     anchor: true,

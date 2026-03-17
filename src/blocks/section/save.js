@@ -1,5 +1,5 @@
 import { InnerBlocks } from '@wordpress/block-editor';
-import { getBlockID, getLinkAttributes, getInteractions, getCombinedClassName } from '../../utils/index.js';
+import { getBlockID, getLinkAttributes, getInteractions, getCombinedClassName, getAOSAttributes } from '../../utils/index.js';
 
 export default function save({ attributes }) {
   const blockID = getBlockID(attributes, 'section');
