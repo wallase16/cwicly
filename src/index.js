@@ -11,4 +11,7 @@ import './blocks/heading/index.js';
 import './blocks/paragraph/index.js';
 import './blocks/image/index.js';
 import './blocks/button/index.js';
+import initStyleSaver from './hooks/style-saver.js';
+
+initStyleSaver();
 // Add more blocks here as they are rebuilt

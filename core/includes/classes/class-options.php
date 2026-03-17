@@ -284,6 +284,11 @@ class Options {
 		);
 		register_setting(
 			'cwicly',
+			'cwicly_global_classes',
+			array( 'show_in_rest' => true )
+		);
+		register_setting(
+			'cwicly',
 			'cwicly_breakpoints',
 			array(
 				'show_in_rest' => true,

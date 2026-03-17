@@ -1,34 +1,66 @@
-import { useSelect, useDispatch } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import { 
-    FormTokenField,
-    BaseControl
-} from '@wordpress/components';
+import { Button, FormTokenField, PanelBody } from '@wordpress/components';
+import { useSelect } from '@wordpress/data';
+import { useState, useEffect } from '@wordpress/element';
 
 /**
  * GlobalClassPicker
- * Allows selecting and applying global classes to a block.
+ * UI for selecting and attaching global classes to blocks.
  */
-export default function GlobalClassPicker({ selectedClasses = [], onChange }) {
-    const { globalClasses } = useSelect((select) => ({
-        globalClasses: select('cwicly/base').getGlobalClasses(),
-    }), []);
+export default function GlobalClassPicker({ attributes, setAttributes }) {
+    const { globalClass = [] } = attributes;
+    
+    // Fetch global classes from the cwicly_global_classes option
+    // In a real scenario, this might be synced via a custom store or pre-loaded.
+    // For now, we'll simulate fetching from site settings or a similar rest source.
+    const [availableClasses, setAvailableClasses] = useState({});
 
-    const classNames = Object.keys(globalClasses);
+    useEffect(() => {
+        // Fetch global classes from REST API
+        wp.apiFetch({ path: '/wp/v2/settings' }).then(settings => {
+            const globals = settings.cwicly_global_classes;
+            if (globals) {
+                try {
+                    setAvailableClasses(JSON.parse(globals));
+                } catch (e) {
+                    console.error('Cwicly Rebuild: Failed to parse global classes', e);
+                }
+            }
+        });
+    }, []);
+
+    const classOptions = Object.keys(availableClasses).map(id => ({
+        id,
+        name: availableClasses[id].name,
+        classID: availableClasses[id].attributes?.classID || id
+    }));
+
+    const tokens = globalClass.map(id => {
+        const found = classOptions.find(opt => opt.id === id);
+        return found ? found.name : id;
+    });
+
+    const onTokenChange = (newTokens) => {
+        const newClassIDs = newTokens.map(token => {
+            const found = classOptions.find(opt => opt.name === token);
+            return found ? found.id : token;
+        });
+        setAttributes({ globalClass: newClassIDs });
+    };
+
+    const suggestions = classOptions.map(opt => opt.name);
 
     return (
         <div className="cwicly-global-class-picker" style={{ marginBottom: '20px' }}>
-            <BaseControl
-                label={__('Global Classes', 'cwicly')}
-                help={__('Apply reusable global classes to this block.', 'cwicly')}
-            >
-                <FormTokenField
-                    value={selectedClasses}
-                    suggestions={classNames}
-                    onChange={onChange}
-                    placeholder={__('Search or select classes...', 'cwicly')}
-                />
-            </BaseControl>
+            <span style={{ fontWeight: '600', fontSize: '11px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+                {__('Global Classes', 'cwicly')}
+            </span>
+            <FormTokenField
+                value={tokens}
+                suggestions={suggestions}
+                onChange={onTokenChange}
+                placeholder={__('Add global class...', 'cwicly')}
+            />
         </div>
     );
 }

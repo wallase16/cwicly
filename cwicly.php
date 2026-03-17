@@ -144,6 +144,7 @@ if ( ! version_compare( PHP_VERSION, '5.4', '>=' ) ) {
 	require_once CWICLY_DIR_PATH . 'core/includes/helpers/theme-maker.php'; // Load Cwicly Themer.
 	require_once CWICLY_DIR_PATH . 'core/includes/api/maker.php'; // Load Cwicly API.
 	require_once CWICLY_DIR_PATH . 'core/includes/dynamic/maker.php'; // Load Cwicly Blocks.
+	require_once CWICLY_DIR_PATH . 'src/dynamic-data.php'; // Load Rebuilt Dynamic Data logic.
 	require_once CWICLY_DIR_PATH . 'core/includes/helpers/maker.php'; // Load Cwicly Helpers Maker.
 	require_once CWICLY_DIR_PATH . 'core/includes/classes/maker.php'; // Load Cwicly Classes.
 }

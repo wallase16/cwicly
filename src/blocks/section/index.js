@@ -12,6 +12,13 @@ registerBlockType('cwicly/section', {
     classID: { type: 'string' },
     classes: { type: 'string', default: '' },
     containerLayoutTag: { type: 'string', default: 'section' },
+    // Consolidated Design Attributes
+    padding: { type: 'object', default: {} },
+    margin: { type: 'object', default: {} },
+    typography: { type: 'object', default: {} },
+    background: { type: 'object', default: {} },
+    border: { type: 'object', default: {} },
+    shadow: { type: 'object', default: {} },
     // Link attributes
     linkWrapperActive: { type: 'boolean', default: false },
     linkWrapperUrl: { type: 'string', default: '' },
@@ -24,7 +31,7 @@ registerBlockType('cwicly/section', {
     htmlAttributes: { type: 'array', default: [] },
     relativeStyles: { type: 'array', default: [] },
     customCSS: { type: 'string', default: '' },
-    globalClasses: { type: 'array', default: [] },
+    globalClass: { type: 'array', default: [] },
     interactions: { type: 'object', default: { click: [], dbclick: [], scrollinview: [] } },
   },
   supports: {

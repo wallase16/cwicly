@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { PanelBody } from '@wordpress/components';
-import SpacingControl from './SpacingControl.js';
+import GlobalClassPicker from './GlobalClassPicker.js';
 
 /**
  * DesignPanel
@@ -9,6 +9,10 @@ import SpacingControl from './SpacingControl.js';
 export default function DesignPanel({ attributes, setAttributes, pseudoClass }) {
     return (
         <div className="cwicly-design-panel">
+            <GlobalClassPicker
+                attributes={attributes}
+                setAttributes={setAttributes}
+            />
             <PanelBody title={__('Spacing', 'cwicly')} initialOpen={true}>
                 <SpacingControl
                     label={__('Padding', 'cwicly')}
@@ -28,15 +32,31 @@ export default function DesignPanel({ attributes, setAttributes, pseudoClass }) 
             </PanelBody>
 
             <PanelBody title={__('Typography', 'cwicly')} initialOpen={false}>
-                <p style={{ fontSize: '12px', color: '#666' }}>
-                    {__('Typography controls will be extracted next...', 'cwicly')}
-                </p>
+                <TypographyControl
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
             </PanelBody>
 
             <PanelBody title={__('Background', 'cwicly')} initialOpen={false}>
-                <p style={{ fontSize: '12px', color: '#666' }}>
-                    {__('Background controls will be extracted next...', 'cwicly')}
-                </p>
+                <BackgroundControl
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            </PanelBody>
+
+            <PanelBody title={__('Border', 'cwicly')} initialOpen={false}>
+                <BorderControl
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            </PanelBody>
+
+            <PanelBody title={__('Shadow', 'cwicly')} initialOpen={false}>
+                <ShadowControl
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
             </PanelBody>
         </div>
     );

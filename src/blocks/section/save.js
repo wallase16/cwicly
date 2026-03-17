@@ -4,7 +4,8 @@ import { getBlockID, getLinkAttributes, getInteractions, getCombinedClassName } 
 export default function save({ attributes }) {
   const blockID = getBlockID(attributes, 'section');
   const linkAttrs = getLinkAttributes(attributes, 'section');
-  const interactions = getInteractions(attributes);
+  const interactions = getInteractions(attributes.interactions);
+  const aos = getAOSAttributes(attributes);
   
   const Tag = (attributes.linkWrapperActive || linkAttrs?.href)
     ? (attributes.containerLayoutTag || 'a')
@@ -15,6 +16,7 @@ export default function save({ attributes }) {
       id={blockID}
       {...linkAttrs}
       {...interactions}
+      {...aos}
       className={getCombinedClassName(attributes, attributes.className)}
     >
       <InnerBlocks.Content />
