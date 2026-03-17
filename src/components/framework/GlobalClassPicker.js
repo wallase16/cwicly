@@ -7,8 +7,8 @@ import { useState, useEffect } from '@wordpress/element';
  * GlobalClassPicker
  * UI for selecting and attaching global classes to blocks.
  */
-export default function GlobalClassPicker({ attributes, setAttributes }) {
-    const { globalClass = [] } = attributes;
+export default function GlobalClassPicker({ selectedClasses, onChange }) {
+    const globalClass = selectedClasses || [];
     
     // Fetch global classes from the cwicly_global_classes option
     // In a real scenario, this might be synced via a custom store or pre-loaded.
@@ -45,7 +45,7 @@ export default function GlobalClassPicker({ attributes, setAttributes }) {
             const found = classOptions.find(opt => opt.name === token);
             return found ? found.id : token;
         });
-        setAttributes({ globalClass: newClassIDs });
+        onChange(newClassIDs);
     };
 
     const suggestions = classOptions.map(opt => opt.name);

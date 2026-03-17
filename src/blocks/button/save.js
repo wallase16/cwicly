@@ -4,7 +4,7 @@ import { getBlockID, getLinkAttributes, getInteractions, getCombinedClassName } 
 export default function save({ attributes }) {
   const blockID = getBlockID(attributes, 'button');
   const linkAttrs = getLinkAttributes(attributes, 'button');
-  const interactions = getInteractions(attributes);
+  const interactions = getInteractions(attributes.interactions);
   
   const Tag = (!attributes.containerLayoutTag || (attributes.containerLayoutTag !== 'a' && attributes.containerLayoutTag !== 'button')) ? 'a' : attributes.containerLayoutTag;
 

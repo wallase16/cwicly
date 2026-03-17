@@ -4,7 +4,7 @@ import { getBlockID, getLinkAttributes, getInteractions, getCombinedClassName } 
 export default function save({ attributes }) {
   const blockID = getBlockID(attributes, 'column');
   const linkAttrs = getLinkAttributes(attributes, 'column');
-  const interactions = getInteractions(attributes);
+  const interactions = getInteractions(attributes.interactions);
   
   const Tag = (attributes.linkWrapperActive || linkAttrs?.href)
     ? (attributes.containerLayoutTag || 'a')

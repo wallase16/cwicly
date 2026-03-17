@@ -6,7 +6,7 @@ export default function save({ attributes }) {
   const Tag = attributes.headingTag || 'h1';
   const blockID = getBlockID(attributes, 'heading');
   const linkAttrs = getLinkAttributes(attributes, 'heading');
-  const interactions = getInteractions(attributes);
+  const interactions = getInteractions(attributes.interactions);
   
   const linkWrapperActive = attributes.linkWrapperActive || linkAttrs?.href;
   const LinkTag = (!attributes.containerLayoutTag || (attributes.containerLayoutTag !== 'a' && attributes.containerLayoutTag !== 'button')) ? 'a' : attributes.containerLayoutTag;

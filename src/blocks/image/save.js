@@ -4,7 +4,7 @@ import { getBlockID, getLinkAttributes, getImageAttributes, getInteractions, get
 export default function save({ attributes }) {
   const blockID = getBlockID(attributes, 'image');
   const imageAttrs = getImageAttributes(attributes);
-  const interactions = getInteractions(attributes);
+  const interactions = getInteractions(attributes.interactions);
   
   const imgElement = (
     <img
