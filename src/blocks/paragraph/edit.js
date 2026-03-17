@@ -3,6 +3,7 @@ import { useBlockProps, RichText, InspectorControls, BlockControls } from '@word
 import { ToolbarGroup } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useSelect } from '@wordpress/data';
+import { useEffect } from '@wordpress/element';
 import { getBlockID, BackgroundHelper, getCombinedClassName } from '../../utils/index.js';
 
 import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
@@ -12,7 +13,14 @@ import { useDynamicData } from '../../hooks/use-dynamic-data.js';
 import { PanelBody, TextControl, ToggleControl } from '@wordpress/components';
 
 export default function Edit({ attributes, setAttributes, clientId, name }) {
-    const { content, classes, linkWrapperActive, linkWrapperUrl, linkWrapperNewTab } = attributes;
+    const { content, classes, linkWrapperActive, linkWrapperUrl, linkWrapperNewTab, classID } = attributes;
+
+    // Auto-generate classID on first insertion
+    useEffect(() => {
+        if (!classID) {
+            setAttributes({ classID: clientId.replace(/-/g, '').substring(0, 8) });
+        }
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
     
     const resolvedContent = useDynamicData(content);
     const resolvedLinkURL = useDynamicData(linkWrapperUrl);

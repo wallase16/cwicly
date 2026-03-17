@@ -2,7 +2,7 @@
 import { useBlockProps, RichText, InspectorControls, BlockControls, __experimentalLinkControl as LinkControl } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton, PanelBody, SelectControl, ToggleControl, TextControl, Popover } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { getBlockID, BackgroundHelper, getCombinedClassName } from '../../utils/index.js';
 
@@ -20,6 +20,13 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
         linkWrapperUrl, 
         linkWrapperNewTab 
     } = attributes;
+
+    // Auto-generate classID on first insertion
+    useEffect(() => {
+        if (!attributes.classID) {
+            setAttributes({ classID: clientId.replace(/-/g, '').substring(0, 8) });
+        }
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
     
     const resolvedContent = useDynamicData(content);
     const resolvedLinkURL = useDynamicData(linkWrapperUrl);

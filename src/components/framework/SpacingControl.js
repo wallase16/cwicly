@@ -1,12 +1,23 @@
 import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import { PanelBody, Popover, Button } from '@wordpress/components';
-import { useState, useRef } from '@wordpress/element';
+import { Button } from '@wordpress/components';
+import { useState } from '@wordpress/element';
 import classnames from 'classnames';
+
+/**
+ * Map Cwicly previewDeviceType → CSS generator breakpoint key.
+ * The store uses 'Desktop', 'Tablet', 'Mobile'; the generator uses 'lg', 'md', 'sm'.
+ */
+const DEVICE_TO_BP = {
+    Desktop: 'lg',
+    Tablet: 'md',
+    Mobile: 'sm',
+};
 
 /**
  * SpacingControl
  * Reconstructs Cwicly's responsive margin/padding control.
+ * Stores values under breakpoint keys (lg/md/sm) for style-generator.js compatibility.
  */
 export default function SpacingControl({ label, type, attributes, setAttributes, pseudoClass }) {
     const { previewDeviceType } = useSelect((select) => ({
@@ -15,22 +26,18 @@ export default function SpacingControl({ label, type, attributes, setAttributes,
 
     const [isLinked, setIsLinked] = useState(true);
 
+    const bp = DEVICE_TO_BP[previewDeviceType] || 'lg';
     const values = attributes[type] || {};
-    const currentValues = values[previewDeviceType] || values.Desktop || { top: '', right: '', bottom: '', left: '' };
+    const currentValues = values[bp] || { top: '', right: '', bottom: '', left: '' };
 
     const updateValue = (side, value) => {
         const newValues = { ...values };
-        if (!newValues[previewDeviceType]) newValues[previewDeviceType] = { ...currentValues };
+        if (!newValues[bp]) newValues[bp] = { ...currentValues };
 
         if (isLinked) {
-            newValues[previewDeviceType] = {
-                top: value,
-                right: value,
-                bottom: value,
-                left: value,
-            };
+            newValues[bp] = { top: value, right: value, bottom: value, left: value };
         } else {
-            newValues[previewDeviceType][side] = value;
+            newValues[bp] = { ...newValues[bp], [side]: value };
         }
 
         setAttributes({ [type]: newValues });
@@ -48,44 +55,18 @@ export default function SpacingControl({ label, type, attributes, setAttributes,
                 />
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-                <div className="spacing-input-wrap">
-                    <label>T</label>
-                    <input
-                        type="text"
-                        value={currentValues.top}
-                        onChange={(e) => updateValue('top', e.target.value)}
-                        placeholder="-"
-                    />
-                </div>
-                <div className="spacing-input-wrap">
-                    <label>R</label>
-                    <input
-                        type="text"
-                        value={currentValues.right}
-                        onChange={(e) => updateValue('right', e.target.value)}
-                        placeholder="-"
-                    />
-                </div>
-                <div className="spacing-input-wrap">
-                    <label>B</label>
-                    <input
-                        type="text"
-                        value={currentValues.bottom}
-                        onChange={(e) => updateValue('bottom', e.target.value)}
-                        placeholder="-"
-                    />
-                </div>
-                <div className="spacing-input-wrap">
-                    <label>L</label>
-                    <input
-                        type="text"
-                        value={currentValues.left}
-                        onChange={(e) => updateValue('left', e.target.value)}
-                        placeholder="-"
-                    />
-                </div>
+                {['top', 'right', 'bottom', 'left'].map((side) => (
+                    <div key={side} className="spacing-input-wrap">
+                        <label>{side[0].toUpperCase()}</label>
+                        <input
+                            type="text"
+                            value={currentValues[side] || ''}
+                            onChange={(e) => updateValue(side, e.target.value)}
+                            placeholder="-"
+                        />
+                    </div>
+                ))}
             </div>
-            {/* Tailwind toggle and pseudo-class support can be added here */}
         </div>
     );
 }

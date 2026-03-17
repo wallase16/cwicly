@@ -1,7 +1,7 @@
 import { useBlockProps, InspectorControls, BlockControls, MediaPlaceholder, MediaUpload, MediaUploadCheck, __experimentalLinkControl as LinkControl } from '@wordpress/block-editor';
 import { PanelBody, TextareaControl, Button, ToolbarGroup, ToolbarButton, ToggleControl, TextControl, Popover, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { getBlockID, BackgroundHelper, getCombinedClassName } from '../../utils/index.js';
 
@@ -23,6 +23,13 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
         linkWrapperNewTab,
         imageThumbnailSize
     } = attributes;
+
+    // Auto-generate classID on first insertion
+    useEffect(() => {
+        if (!attributes.classID) {
+            setAttributes({ classID: clientId.replace(/-/g, '').substring(0, 8) });
+        }
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
     
     const resolvedImageURL = useDynamicData(imageURL);
     const resolvedImageAlt = useDynamicData(imageAlt);

@@ -1,0 +1,23 @@
+.cc-phase8test {
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  font-size: 18px;
+  text-align: center;
+  background-color: #3b82f6;
+}
+@media screen and (max-width: 992px){.cc-phase8test {
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  font-size: 14px;
+}
+}@media screen and (max-width: 576px){.cc-phase8test {
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+}
+}

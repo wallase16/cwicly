@@ -82,3 +82,76 @@
 [17-Mar-2026 01:15:34 UTC] PHP Warning:  foreach() argument must be of type array|object, false given in /wordpress/wp-content/plugins/cwicly/core/includes/api/class-heartbeat-api.php on line 112
 [17-Mar-2026 01:16:42 UTC] PHP Warning:  foreach() argument must be of type array|object, false given in /wordpress/wp-content/plugins/cwicly/core/includes/api/class-heartbeat-api.php on line 112
 [17-Mar-2026 01:17:50 UTC] PHP Warning:  foreach() argument must be of type array|object, false given in /wordpress/wp-content/plugins/cwicly/core/includes/api/class-heartbeat-api.php on line 112
+[17-Mar-2026 19:21:39 UTC] Cwicly Rebuild: single_make_css triggered.
+[17-Mar-2026 19:21:39 UTC] Cwicly Rebuild: CSS Data: Array
+(
+    [post-27] => Array
+        (
+            [common] => Array
+                (
+                )
+
+            [global] => Array
+                (
+                )
+
+            [fontCSS] => Array
+                (
+                )
+
+            [lg] => Array
+                (
+                )
+
+            [md] => Array
+                (
+                )
+
+            [sm] => Array
+                (
+                )
+
+        )
+
+)
+
+[17-Mar-2026 19:24:04 UTC] Cwicly Rebuild: single_make_css triggered.
+[17-Mar-2026 19:24:04 UTC] Cwicly Rebuild: CSS Data: Array
+(
+    [post-29] => Array
+        (
+            [common] => Array
+                (
+                )
+
+            [global] => Array
+                (
+                )
+
+            [fontCSS] => Array
+                (
+                )
+
+            [lg] => Array
+                (
+                    [0] => .cc-styled-section {
+  background-color: #00ff00;
+}
+
+                )
+
+            [md] => Array
+                (
+                )
+
+            [sm] => Array
+                (
+                )
+
+        )
+
+)
+
+[17-Mar-2026 19:25:26 UTC] Cwicly Rebuild: Post ID: 29
+[17-Mar-2026 19:25:26 UTC] Cwicly Rebuild: Checking for CSS file: /home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/sites/rebuilt/wp-content/uploads/cwicly/css/cc-post-29.css
+[17-Mar-2026 19:25:26 UTC] Cwicly Rebuild: CSS file FOUND. Enqueuing...

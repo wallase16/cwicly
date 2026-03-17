@@ -47,6 +47,18 @@ registerBlockType('cwicly/image', {
     linkWrapperRel: { type: 'string', default: '' },
     linkWrapperTitle: { type: 'string', default: '' },
     linkWrapperActionLighboxRef: { type: 'string', default: '' },
+    // Consolidated Design Attributes
+    padding: { type: 'object', default: {} },
+    margin: { type: 'object', default: {} },
+    typography: { type: 'object', default: {} },
+    background: { type: 'object', default: {} },
+    border: { type: 'object', default: {} },
+    shadow: { type: 'object', default: {} },
+    // Phase 8 attributes
+    size: { type: 'object', default: {} },
+    opacity: { type: 'string', default: '' },
+    layout: { type: 'object', default: {} },
+    transition: { type: 'object', default: {} },
     // Cwicly standard attributes
     isStyling: { type: 'boolean', default: true },
     skeletonActive: { type: 'boolean', default: true },

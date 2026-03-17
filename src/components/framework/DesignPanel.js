@@ -1,6 +1,8 @@
 import { __ } from '@wordpress/i18n';
 import { PanelBody } from '@wordpress/components';
 import GlobalClassPicker from './GlobalClassPicker.js';
+import SizeControl from './SizeControl.js';
+import TransitionControl from './TransitionControl.js';
 
 /**
  * DesignPanel
@@ -54,6 +56,20 @@ export default function DesignPanel({ attributes, setAttributes, pseudoClass }) 
 
             <PanelBody title={__('Shadow', 'cwicly')} initialOpen={false}>
                 <ShadowControl
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            </PanelBody>
+
+            <PanelBody title={__('Size & Layout', 'cwicly')} initialOpen={false}>
+                <SizeControl
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            </PanelBody>
+
+            <PanelBody title={__('Transition', 'cwicly')} initialOpen={false}>
+                <TransitionControl
                     attributes={attributes}
                     setAttributes={setAttributes}
                 />

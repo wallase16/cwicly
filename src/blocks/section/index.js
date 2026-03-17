@@ -19,6 +19,11 @@ registerBlockType('cwicly/section', {
     background: { type: 'object', default: {} },
     border: { type: 'object', default: {} },
     shadow: { type: 'object', default: {} },
+    // New Phase 8 attributes
+    size: { type: 'object', default: {} },
+    opacity: { type: 'string', default: '' },
+    layout: { type: 'object', default: {} },
+    transition: { type: 'object', default: {} },
     // Link attributes
     linkWrapperActive: { type: 'boolean', default: false },
     linkWrapperUrl: { type: 'string', default: '' },
