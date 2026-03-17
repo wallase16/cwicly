@@ -91,10 +91,12 @@ function cc_make_global_css( $data ) {
 				$font = $css['font'];
 			}
 
-			foreach ( $breakpoints as $breakpoint => $value ) {
-				$responsive[ $breakpoint ] = array();
-				if ( isset( $value['isMain'] ) && $value['isMain'] ) {
-					$main_breakpoint = $breakpoint;
+			if ( is_array( $breakpoints ) ) {
+				foreach ( $breakpoints as $breakpoint => $value ) {
+					$responsive[ $breakpoint ] = array();
+					if ( isset( $value['isMain'] ) && $value['isMain'] ) {
+						$main_breakpoint = $breakpoint;
+					}
 				}
 			}
 

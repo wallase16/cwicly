@@ -1671,6 +1671,7 @@ class Helpers {
 		global $_wp_additional_image_sizes;
 
 		$default_image_sizes = get_intermediate_image_sizes();
+		$image_sizes         = array();
 
 		foreach ( $default_image_sizes as $size ) {
 			$image_sizes[ $size ]['width']  = intval( get_option( "{$size}_size_w" ) );
@@ -1789,9 +1790,11 @@ class Helpers {
 
 		$main_breakpoint = '';
 
-		foreach ( $breakpoints as $key => $value ) {
-			if ( isset( $value['isMain'] ) && $value['isMain'] ) {
-				$main_breakpoint = $key;
+		if ( is_array( $breakpoints ) ) {
+			foreach ( $breakpoints as $key => $value ) {
+				if ( isset( $value['isMain'] ) && $value['isMain'] ) {
+					$main_breakpoint = $key;
+				}
 			}
 		}
 

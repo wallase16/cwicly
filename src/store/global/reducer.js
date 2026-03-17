@@ -30,6 +30,7 @@ export default function reducer(state = initialState, action) {
                     ...state.classes,
                     [action.className]: {
                         styles: action.styles || {},
+                        pseudoStates: action.pseudoStates || {},
                         id: action.id || action.className
                     }
                 }
@@ -42,6 +43,21 @@ export default function reducer(state = initialState, action) {
                     [action.className]: {
                         ...(state.classes[action.className] || {}),
                         styles: action.styles
+                    }
+                }
+            };
+        case 'CC_GLOBAL_UPDATE_PSEUDO_STYLES':
+            const currentClass = state.classes[action.className] || { styles: {}, pseudoStates: {} };
+            return {
+                ...state,
+                classes: {
+                    ...state.classes,
+                    [action.className]: {
+                        ...currentClass,
+                        pseudoStates: {
+                            ...(currentClass.pseudoStates || {}),
+                            [action.pseudoState]: action.styles
+                        }
                     }
                 }
             };

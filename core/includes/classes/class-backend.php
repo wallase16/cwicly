@@ -30,7 +30,21 @@ class Backend {
 	 */
 	public static function enqueue_block_editor_assets() {
 		// LOAD CWICLY JS BLOCKS.
-		wp_enqueue_script( 'cwicly_editor_blocks', CWICLY_DIR_URL . 'build/index.js', array( 'lodash', 'wp-i18n', 'wp-blocks', 'wp-core-data', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-api' ), CWICLY_VERSION );
+		$asset_file = CWICLY_DIR_PATH . 'build/index.asset.php';
+		$asset      = file_exists( $asset_file )
+			? require $asset_file
+			: array(
+				'dependencies' => array( 'wp-blocks', 'wp-element', 'wp-data', 'wp-i18n', 'wp-components', 'wp-block-editor', 'wp-compose', 'wp-hooks', 'wp-api-fetch' ),
+				'version'      => CWICLY_VERSION,
+			);
+
+		wp_enqueue_script(
+			'cwicly_editor_blocks',
+			CWICLY_DIR_URL . 'build/index.js',
+			$asset['dependencies'],
+			$asset['version'],
+			true
+		);
 		// LOAD CWICLY JS BLOCKS.
 
 		// LOAD CWICLY CSS BLOCKS.

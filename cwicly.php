@@ -1,4 +1,8 @@
 <?php
+@error_reporting(E_ALL);
+@ini_set('display_errors', 0);
+@ini_set('log_errors', 1);
+@ini_set('error_log', dirname(__FILE__) . '/cwicly-errors.log');
 /**
  * Plugin Name:       Cwicly
  * Plugin URI:        https://cwicly.com/
@@ -117,24 +121,6 @@ if (
  */
 function cwicly_set_script_translations() {
 	load_plugin_textdomain( 'cwicly', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-	
-	$asset_file = CWICLY_DIR_PATH . 'build/index.asset.php';
-	$asset      = file_exists( $asset_file )
-		? require $asset_file
-		: array(
-			'dependencies' => array( 'wp-blocks', 'wp-element', 'wp-data', 'wp-i18n', 'wp-components', 'wp-block-editor', 'wp-compose', 'wp-hooks', 'wp-api-fetch' ),
-			'version'      => CWICLY_VERSION,
-		);
-
-	wp_register_script(
-		'cwicly_editor_blocks',
-		CWICLY_DIR_URL . 'build/index.js',
-		$asset['dependencies'],
-		$asset['version'],
-		true
-	);
-	
-	wp_set_script_translations( 'cwicly_editor_blocks', 'cwicly', plugin_dir_path( __FILE__ ) . 'languages' );
 }
 add_action( 'init', 'cwicly_set_script_translations' );
 

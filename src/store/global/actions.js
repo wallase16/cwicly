@@ -17,6 +17,13 @@ export const removeGlobalClass = (className) => ({
     className,
 });
 
+export const updateGlobalClassPseudoStyles = (className, pseudoState, styles) => ({
+    type: 'CC_GLOBAL_UPDATE_PSEUDO_STYLES',
+    className,
+    pseudoState,
+    styles,
+});
+
 export const updateGlobalVariable = (name, value) => ({
     type: 'CC_GLOBAL_UPDATE_VARIABLE',
     name,

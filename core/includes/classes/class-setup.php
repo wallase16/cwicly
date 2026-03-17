@@ -233,10 +233,12 @@ class Setup {
 					update_option( 'cwicly_optimise', $optimise );
 				}
 				$welcome = admin_url( 'admin.php?page=cwicly-welcome' );
-				exit( esc_html( wp_safe_redirect( $welcome ) ) );
+				wp_safe_redirect( $welcome );
+				exit;
 			} else {
 				$settings = admin_url( 'admin.php?page=cwicly-settings' );
-				exit( esc_html( wp_safe_redirect( $settings ) ) );
+				wp_safe_redirect( $settings );
+				exit;
 			}
 		}
 	}
@@ -844,6 +846,9 @@ class Setup {
 	 * @param WP_Block|null $parent_block  If this is a nested block, a reference to the parent block.
 	 */
 	public function render_block_data( $block, $source_block, $parent_block ) {
+		if ( ! $parent_block || ! isset( $parent_block->parsed_block ) ) {
+			return $block;
+		}
 		if ( 'cwicly/tabcontent' === $block['blockName'] && 'cwicly/tabcontents' === $parent_block->parsed_block['blockName'] ) {
 			$inner_blocks = $parent_block->parsed_block['innerBlocks'];
 			foreach ( $inner_blocks as $index => $inner_block ) {
