@@ -155,3 +155,7 @@
 [17-Mar-2026 19:25:26 UTC] Cwicly Rebuild: Post ID: 29
 [17-Mar-2026 19:25:26 UTC] Cwicly Rebuild: Checking for CSS file: /home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/sites/rebuilt/wp-content/uploads/cwicly/css/cc-post-29.css
 [17-Mar-2026 19:25:26 UTC] Cwicly Rebuild: CSS file FOUND. Enqueuing...
+[17-Mar-2026 20:48:36 UTC] PHP Warning:  Undefined array key "id" in /home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/core/includes/dynamic/render.php on line 148
+[17-Mar-2026 20:48:36 UTC] PHP Deprecated:  str_replace(): Passing null to parameter #2 ($replace) of type array|string is deprecated in /home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/core/includes/dynamic/render.php on line 148
+[17-Mar-2026 20:48:36 UTC] PHP Warning:  Undefined array key "id" in /home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/core/includes/dynamic/render.php on line 148
+[17-Mar-2026 20:48:36 UTC] PHP Deprecated:  str_replace(): Passing null to parameter #2 ($replace) of type array|string is deprecated in /home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/core/includes/dynamic/render.php on line 148

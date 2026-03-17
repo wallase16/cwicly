@@ -1,0 +1,11 @@
+.cc-p9head {
+  padding-top: 24px;
+  padding-right: 0px;
+  padding-bottom: 24px;
+  padding-left: 0px;
+}
+.cc-p9cols {
+  gap: 24px;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

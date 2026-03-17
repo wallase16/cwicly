@@ -54,7 +54,15 @@ registerBlockType('cwicly/image', {
     background: { type: 'object', default: {} },
     border: { type: 'object', default: {} },
     shadow: { type: 'object', default: {} },
-    // Phase 8 attributes
+    // Phase 8+9+10+11 attributes
+    flex: { type: 'object', default: {} },
+    grid: { type: 'object', default: {} },
+    imageWidth: { type: 'string', default: '' },
+    imageHeight: { type: 'string', default: '' },
+    imageAspectRatio: { type: 'string', default: '' },
+    imageFocalX: { type: 'number', default: 50 },
+    imageFocalY: { type: 'number', default: 50 },
+    imageLazy: { type: 'boolean', default: true },
     size: { type: 'object', default: {} },
     opacity: { type: 'string', default: '' },
     layout: { type: 'object', default: {} },

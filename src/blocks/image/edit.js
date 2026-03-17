@@ -1,23 +1,30 @@
 import { useBlockProps, InspectorControls, BlockControls, MediaPlaceholder, MediaUpload, MediaUploadCheck, __experimentalLinkControl as LinkControl } from '@wordpress/block-editor';
-import { PanelBody, TextareaControl, Button, ToolbarGroup, ToolbarButton, ToggleControl, TextControl, Popover, SelectControl } from '@wordpress/components';
+import { PanelBody, TextareaControl, Button, ToolbarGroup, ToolbarButton, ToggleControl, TextControl, Popover, SelectControl, __experimentalUnitControl as UnitControl, RangeControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { getBlockID, BackgroundHelper, getCombinedClassName } from '../../utils/index.js';
 
 import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
+import AdvancedPanel from '../../components/framework/AdvancedPanel.js';
 import DesignPanel from '../../components/framework/DesignPanel.js';
 import DynamicDataControl from '../../components/framework/DynamicDataControl.js';
 import DynamicAttributeWrapper from '../../components/framework/DynamicAttributeWrapper.js';
 import { useDynamicData } from '../../hooks/use-dynamic-data.js';
 
 export default function Edit({ attributes, setAttributes, clientId, name }) {
-    const { 
-        imageURL, 
-        imageID, 
-        imageAlt, 
-        classes, 
+    const {
+        imageURL,
+        imageID,
+        imageAlt,
+        imageWidth,
+        imageHeight,
+        classes,
         imageLightbox,
+        imageLazy,
+        imageAspectRatio,
+        imageFocalX,
+        imageFocalY,
         linkWrapperActive,
         linkWrapperUrl,
         linkWrapperNewTab,
@@ -53,9 +60,11 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
 
     const onSelectImage = (media) => {
         setAttributes({
-            imageURL: media.url,
-            imageID: media.id,
-            imageAlt: media.alt,
+            imageURL:    media.url,
+            imageID:     media.id,
+            imageAlt:    media.alt,
+            imageWidth:  media.width  ? String(media.width)  : undefined,
+            imageHeight: media.height ? String(media.height) : undefined,
         });
     };
 
@@ -121,41 +130,77 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
                 {inspectortab.tab === 'primary' && (
                     <div className="cwicly-primary-tab">
                         <PanelBody title={__('Image Settings', 'cwicly')}>
-                            <DynamicAttributeWrapper
-                                attribute="imageThumbnailSize"
-                                attributes={attributes}
-                                setAttributes={setAttributes}
-                                label={__('Size', 'cwicly')}
-                            >
+                            <DynamicAttributeWrapper attribute="imageThumbnailSize" attributes={attributes} setAttributes={setAttributes} label={__('Size', 'cwicly')}>
                                 <SelectControl
                                     value={imageThumbnailSize}
                                     options={[
-                                        { label: __('Full', 'cwicly'), value: 'full' },
-                                        { label: __('Large', 'cwicly'), value: 'large' },
-                                        { label: __('Medium', 'cwicly'), value: 'medium' },
+                                        { label: __('Full', 'cwicly'),      value: 'full' },
+                                        { label: __('Large', 'cwicly'),     value: 'large' },
+                                        { label: __('Medium', 'cwicly'),    value: 'medium' },
                                         { label: __('Thumbnail', 'cwicly'), value: 'thumbnail' },
                                     ]}
                                     onChange={(val) => setAttributes({ imageThumbnailSize: val })}
                                 />
                             </DynamicAttributeWrapper>
-                            
-                            <DynamicAttributeWrapper
-                                attribute="imageAlt"
-                                attributes={attributes}
-                                setAttributes={setAttributes}
-                                label={__('Alternative Text', 'cwicly')}
-                            >
+
+                            <SelectControl
+                                label={__('Aspect Ratio', 'cwicly')}
+                                value={imageAspectRatio || ''}
+                                options={[
+                                    { label: __('None', 'cwicly'),    value: '' },
+                                    { label: '1:1',                   value: '1 / 1' },
+                                    { label: '4:3',                   value: '4 / 3' },
+                                    { label: '16:9',                  value: '16 / 9' },
+                                    { label: '3:2',                   value: '3 / 2' },
+                                    { label: '21:9',                  value: '21 / 9' },
+                                    { label: '9:16 (Portrait)',       value: '9 / 16' },
+                                ]}
+                                onChange={(val) => setAttributes({ imageAspectRatio: val })}
+                            />
+
+                            {imageAspectRatio && (
+                                <div style={{ marginBottom: '10px' }}>
+                                    <p style={{ fontSize: '11px', textTransform: 'uppercase', fontWeight: 600, marginBottom: '4px' }}>
+                                        {__('Focal Point', 'cwicly')}
+                                    </p>
+                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                                        <RangeControl
+                                            label="X"
+                                            value={imageFocalX !== undefined ? imageFocalX : 50}
+                                            min={0} max={100}
+                                            onChange={(val) => setAttributes({ imageFocalX: val })}
+                                        />
+                                        <RangeControl
+                                            label="Y"
+                                            value={imageFocalY !== undefined ? imageFocalY : 50}
+                                            min={0} max={100}
+                                            onChange={(val) => setAttributes({ imageFocalY: val })}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+
+                            <ToggleControl
+                                label={__('Lazy Load', 'cwicly')}
+                                checked={imageLazy !== false}
+                                onChange={(val) => setAttributes({ imageLazy: val })}
+                                help={__('Defers loading until the image enters the viewport.', 'cwicly')}
+                            />
+
+                            <DynamicAttributeWrapper attribute="imageAlt" attributes={attributes} setAttributes={setAttributes} label={__('Alternative Text', 'cwicly')}>
                                 <TextareaControl
                                     value={imageAlt}
                                     onChange={(newAlt) => setAttributes({ imageAlt: newAlt })}
                                     help={__('Describe the purpose of the image for accessibility.', 'cwicly')}
                                 />
                             </DynamicAttributeWrapper>
+
                             <ToggleControl
                                 label={__('Lightbox', 'cwicly')}
                                 checked={imageLightbox}
                                 onChange={(val) => setAttributes({ imageLightbox: val })}
                             />
+
                             {imageURL && (
                                 <Button isDestructive onClick={removeImage}>
                                     {__('Remove Image', 'cwicly')}
@@ -201,12 +246,7 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
                 )}
 
                 {inspectortab.tab === 'advanced' && (
-                    <div className="cwicly-advanced-tab">
-                        <div style={{ padding: '0 16px', fontSize: '12px' }}>
-                            {__('Advanced Cwicly settings (Classes, Custom CSS).', 'cwicly')}
-                        </div>
-                    </div>
-                )}
+                    <AdvancedPanel attributes={attributes} setAttributes={setAttributes} />)}
             </InspectorControls>
             <div {...blockProps}>
                 <BackgroundHelper attributes={attributes} />

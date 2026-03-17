@@ -159,12 +159,80 @@ export const generateBlockCSSObject = (classID, attributes) => {
             bpProps['transition'] = `${trans.property} ${duration} ${easing}`;
         }
 
+        // — Text Transform (from typography global) —
+        if (isMain && attributes.typography?.textTransform) {
+            bpProps['text-transform'] = attributes.typography.textTransform;
+        }
+
+        // — Aspect Ratio + Focal Point (image block) —
+        if (isMain && attributes.imageAspectRatio) {
+            bpProps['aspect-ratio']    = attributes.imageAspectRatio;
+            bpProps['object-fit']      = 'cover';
+            bpProps['object-position'] = `${attributes.imageFocalX ?? 50}% ${attributes.imageFocalY ?? 50}%`;
+        }
+
+        // — Columns Flex Layout —
+        if (isMain) {
+            if (attributes.columnsGap)       bpProps['gap']            = attributes.columnsGap;
+            if (attributes.columnsDirection) bpProps['flex-direction'] = attributes.columnsDirection;
+            if (attributes.columnsWrap)      bpProps['flex-wrap']      = attributes.columnsWrap;
+        }
+
+        // — Column flex-basis (individual column width) —
+        if (isMain && attributes.columnWidth) {
+            bpProps['flex-basis']  = attributes.columnWidth;
+            bpProps['flex-shrink'] = '0';
+        }
+
+        // — Flex Control (container + child) —
+        const flexCtrl = attributes.flex;
+        if (isMain && flexCtrl) {
+            if (flexCtrl.justifyContent) bpProps['justify-content'] = flexCtrl.justifyContent;
+            if (flexCtrl.alignItems)     bpProps['align-items']     = flexCtrl.alignItems;
+            if (flexCtrl.alignContent)   bpProps['align-content']   = flexCtrl.alignContent;
+            if (flexCtrl.flexGrow)       bpProps['flex-grow']       = flexCtrl.flexGrow;
+            if (flexCtrl.flexShrink)     bpProps['flex-shrink']     = flexCtrl.flexShrink;
+            if (flexCtrl.flexBasis)      bpProps['flex-basis']      = flexCtrl.flexBasis;
+            if (flexCtrl.order)          bpProps['order']           = flexCtrl.order;
+            if (flexCtrl.alignSelf)      bpProps['align-self']      = flexCtrl.alignSelf;
+        }
+
+        // — Grid Control (container + child) —
+        const gridCtrl = attributes.grid;
+        if (isMain && gridCtrl) {
+            if (gridCtrl.gridTemplateColumns) bpProps['grid-template-columns'] = gridCtrl.gridTemplateColumns;
+            if (gridCtrl.gridTemplateRows)    bpProps['grid-template-rows']    = gridCtrl.gridTemplateRows;
+            if (gridCtrl.columnGap)           bpProps['column-gap']            = gridCtrl.columnGap;
+            if (gridCtrl.rowGap)              bpProps['row-gap']               = gridCtrl.rowGap;
+            if (gridCtrl.justifyItems)        bpProps['justify-items']         = gridCtrl.justifyItems;
+            if (gridCtrl.alignItems)          bpProps['align-items']           = gridCtrl.alignItems;
+            if (gridCtrl.gridColumn)          bpProps['grid-column']           = gridCtrl.gridColumn;
+            if (gridCtrl.gridRow)             bpProps['grid-row']              = gridCtrl.gridRow;
+            if (gridCtrl.justifySelf)         bpProps['justify-self']          = gridCtrl.justifySelf;
+            if (gridCtrl.alignSelf)           bpProps['align-self']            = gridCtrl.alignSelf;
+        }
+
         cssObject[bp] += buildRuleBlock(sel, bpProps);
         cssObject[bp] += buildRuleBlock(selHover, bpHoverProps);
     });
 
+    // — Drop Cap pseudo-element CSS —
+    if (attributes.dropCap) {
+        cssObject.common += `.cc-${classID}::first-letter {\n  font-size: 3em;\n  font-weight: bold;\n  float: left;\n  line-height: 0.8;\n  margin: 0.1em 0.1em 0 0;\n}\n`;
+    }
+
+    // — Custom CSS (replace &selector macro with the actual class) —
+    if (attributes.customCSS) {
+        const resolved = attributes.customCSS
+            .replace(/&selector/g, `.cc-${classID}`);
+        cssObject.common += resolved + '\n';
+    }
+
     return cssObject;
+
 };
+
+
 
 /**
  * Combine structured CSS objects from all blocks (recursive).

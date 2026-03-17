@@ -7,6 +7,7 @@ import { useEffect } from '@wordpress/element';
 import { getBlockID, BackgroundHelper, getCombinedClassName } from '../../utils/index.js';
 
 import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
+import AdvancedPanel from '../../components/framework/AdvancedPanel.js';
 import DesignPanel from '../../components/framework/DesignPanel.js';
 import DynamicAttributeWrapper from '../../components/framework/DynamicAttributeWrapper.js';
 import { useDynamicData } from '../../hooks/use-dynamic-data.js';
@@ -68,6 +69,12 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
                                     {__('Use the icon above to bind the entire paragraph to a dynamic source.', 'cwicly')}
                                 </p>
                             </DynamicAttributeWrapper>
+                            <ToggleControl
+                                label={__('Drop Cap', 'cwicly')}
+                                checked={attributes.dropCap || false}
+                                onChange={(val) => setAttributes({ dropCap: val })}
+                                help={__('Enlarges the first letter of the paragraph.', 'cwicly')}
+                            />
                         </PanelBody>
                         <PanelBody title={__('Link Settings', 'cwicly')}>
                             <ToggleControl
@@ -108,12 +115,7 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
                 )}
 
                 {inspectortab.tab === 'advanced' && (
-                    <div className="cwicly-advanced-tab">
-                        <p style={{ padding: '0 16px', fontSize: '12px' }}>
-                            {__('Advanced Cwicly settings (Classes, Custom CSS).', 'cwicly')}
-                        </p>
-                    </div>
-                )}
+                    <AdvancedPanel attributes={attributes} setAttributes={setAttributes} />)}
             </InspectorControls>
 
             <RichText

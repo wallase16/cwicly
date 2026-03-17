@@ -1,0 +1,11 @@
+.cc-p10test {
+  border: 2px dashed red;
+}
+.cc-p10test:hover {
+  border-color: blue;
+}
+.cc-p10test {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

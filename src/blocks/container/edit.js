@@ -6,6 +6,7 @@ import { useEffect } from '@wordpress/element';
 import { getBlockID, BackgroundHelper, getCombinedClassName } from '../../utils/index.js';
 
 import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
+import AdvancedPanel from '../../components/framework/AdvancedPanel.js';
 import DesignPanel from '../../components/framework/DesignPanel.js';
 
 export default function Edit({ attributes, setAttributes, clientId, name }) {
@@ -70,12 +71,7 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
                 )}
 
                 {inspectortab.tab === 'advanced' && (
-                    <div className="cwicly-advanced-tab">
-                        <div style={{ padding: '0 16px', fontSize: '12px' }}>
-                            {__('Advanced Cwicly settings (Classes, Custom CSS).', 'cwicly')}
-                        </div>
-                    </div>
-                )}
+                    <AdvancedPanel attributes={attributes} setAttributes={setAttributes} />)}
             </InspectorControls>
 
             <Tag {...blockProps}>

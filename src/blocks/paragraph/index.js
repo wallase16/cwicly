@@ -37,7 +37,10 @@ registerBlockType('cwicly/paragraph', {
     background: { type: 'object', default: {} },
     border: { type: 'object', default: {} },
     shadow: { type: 'object', default: {} },
-    // Phase 8 attributes
+    // Phase 8+9+10+11 attributes
+    flex: { type: 'object', default: {} },
+    grid: { type: 'object', default: {} },
+    dropCap: { type: 'boolean', default: false },
     size: { type: 'object', default: {} },
     opacity: { type: 'string', default: '' },
     layout: { type: 'object', default: {} },

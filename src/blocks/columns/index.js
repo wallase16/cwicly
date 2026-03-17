@@ -26,7 +26,12 @@ registerBlockType('cwicly/columns', {
     background: { type: 'object', default: {} },
     border: { type: 'object', default: {} },
     shadow: { type: 'object', default: {} },
-    // Phase 8 attributes
+    // Phase 8+9+10+11 attributes
+    flex: { type: 'object', default: {} },
+    grid: { type: 'object', default: {} },
+    columnsGap: { type: 'string', default: '' },
+    columnsDirection: { type: 'string', default: 'row' },
+    columnsWrap: { type: 'string', default: 'wrap' },
     size: { type: 'object', default: {} },
     opacity: { type: 'string', default: '' },
     layout: { type: 'object', default: {} },

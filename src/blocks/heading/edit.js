@@ -4,21 +4,22 @@ import { ToolbarGroup, ToolbarButton, PanelBody, SelectControl, ToggleControl, T
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
-import { getBlockID, BackgroundHelper, getCombinedClassName } from '../../utils/index.js';
+import { getBlockID, getCombinedClassName } from '../../utils/index.js';
 
 import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
+import AdvancedPanel from '../../components/framework/AdvancedPanel.js';
 import DesignPanel from '../../components/framework/DesignPanel.js';
 import DynamicAttributeWrapper from '../../components/framework/DynamicAttributeWrapper.js';
 import { useDynamicData } from '../../hooks/use-dynamic-data.js';
 
 export default function Edit({ attributes, setAttributes, clientId, name }) {
-    const { 
-        content, 
-        headingTag, 
-        classes, 
-        linkWrapperActive, 
-        linkWrapperUrl, 
-        linkWrapperNewTab 
+    const {
+        content,
+        headingTag,
+        classes,
+        linkWrapperActive,
+        linkWrapperUrl,
+        linkWrapperNewTab,
     } = attributes;
 
     // Auto-generate classID on first insertion
@@ -27,29 +28,26 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
             setAttributes({ classID: clientId.replace(/-/g, '').substring(0, 8) });
         }
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-    
+
     const resolvedContent = useDynamicData(content);
-    const resolvedLinkURL = useDynamicData(linkWrapperUrl);
-    
+    const resolvedLinkURL  = useDynamicData(linkWrapperUrl);
+
     const displayContent = resolvedContent || content;
-    const displayLinkURL = resolvedLinkURL || linkWrapperUrl;
-    
+
     const [isEditingURL, setIsEditingURL] = useState(false);
 
+    const Tag = headingTag || 'h2';
+
+    // Block root IS the heading tag — no extra div wrapper
     const blockProps = useBlockProps({
         id: getBlockID(attributes, clientId),
         className: getCombinedClassName(attributes, classes || ''),
     });
 
-
     const { inspectortab, pseudoClass } = useSelect((select) => ({
         inspectortab: select('cwicly/base').getInspectorPosition(),
-        pseudoClass: select('cwicly/base').getPseudoClass(),
+        pseudoClass:  select('cwicly/base').getPseudoClass(),
     }), []);
-
-    const setHeadingTag = (tag) => {
-        setAttributes({ headingTag: tag });
-    };
 
     return (
         <>
@@ -58,12 +56,11 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
                     {[1, 2, 3, 4, 5, 6].map((level) => (
                         <ToolbarButton
                             key={level}
-                            icon={`heading`}
                             label={__(`Heading ${level}`, 'cwicly')}
-                            isActive={headingTag === `h${level}`}
-                            onClick={() => setHeadingTag(`h${level}`)}
+                            isActive={Tag === `h${level}`}
+                            onClick={() => setAttributes({ headingTag: `h${level}` })}
                         >
-                            {level}
+                            H{level}
                         </ToolbarButton>
                     ))}
                 </ToolbarGroup>
@@ -72,17 +69,18 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
                         icon="admin-links"
                         label={__('Link', 'cwicly')}
                         onClick={() => setIsEditingURL(!isEditingURL)}
-                        isActive={linkWrapperActive}
+                        isActive={!!linkWrapperUrl}
                     />
                 </ToolbarGroup>
             </BlockControls>
+
             {isEditingURL && (
                 <Popover position="bottom center" onClose={() => setIsEditingURL(false)}>
                     <LinkControl
                         value={{ url: linkWrapperUrl, opensInNewTab: linkWrapperNewTab }}
                         onChange={(nextValue) => {
                             setAttributes({
-                                linkWrapperUrl: nextValue.url,
+                                linkWrapperUrl:    nextValue.url,
                                 linkWrapperNewTab: nextValue.opensInNewTab,
                                 linkWrapperActive: !!nextValue.url,
                             });
@@ -90,28 +88,18 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
                     />
                 </Popover>
             )}
+
             <InspectorControls>
-                <CwiclyInspector
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                    name={name}
-                />
+                <CwiclyInspector attributes={attributes} setAttributes={setAttributes} name={name} />
 
                 {inspectortab.tab === 'primary' && (
                     <div className="cwicly-primary-tab">
                         <PanelBody title={__('Heading Settings', 'cwicly')}>
                             <SelectControl
                                 label={__('Tag', 'cwicly')}
-                                value={headingTag}
-                                options={[
-                                    { label: 'H1', value: 'h1' },
-                                    { label: 'H2', value: 'h2' },
-                                    { label: 'H3', value: 'h3' },
-                                    { label: 'H4', value: 'h4' },
-                                    { label: 'H5', value: 'h5' },
-                                    { label: 'H6', value: 'h6' },
-                                ]}
-                                onChange={setHeadingTag}
+                                value={Tag}
+                                options={[1,2,3,4,5,6].map((l) => ({ label: `H${l}`, value: `h${l}` }))}
+                                onChange={(val) => setAttributes({ headingTag: val })}
                             />
                         </PanelBody>
                         <PanelBody title={__('Link Settings', 'cwicly')}>
@@ -122,16 +110,8 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
                             />
                             {linkWrapperActive && (
                                 <>
-                                    <DynamicAttributeWrapper
-                                        attribute="linkWrapperUrl"
-                                        attributes={attributes}
-                                        setAttributes={setAttributes}
-                                        label={__('URL', 'cwicly')}
-                                    >
-                                        <TextControl
-                                            value={linkWrapperUrl}
-                                            onChange={(val) => setAttributes({ linkWrapperUrl: val })}
-                                        />
+                                    <DynamicAttributeWrapper attribute="linkWrapperUrl" attributes={attributes} setAttributes={setAttributes} label={__('URL', 'cwicly')}>
+                                        <TextControl value={linkWrapperUrl || ''} onChange={(val) => setAttributes({ linkWrapperUrl: val })} />
                                     </DynamicAttributeWrapper>
                                     <ToggleControl
                                         label={__('Open in new tab', 'cwicly')}
@@ -145,23 +125,19 @@ export default function Edit({ attributes, setAttributes, clientId, name }) {
                 )}
 
                 {inspectortab.tab === 'design' && (
-                    <DesignPanel
-                        attributes={attributes}
-                        setAttributes={setAttributes}
-                        pseudoClass={pseudoClass}
-                    />
+                    <DesignPanel attributes={attributes} setAttributes={setAttributes} pseudoClass={pseudoClass} />
                 )}
             </InspectorControls>
-            <div {...blockProps}>
-                <BackgroundHelper attributes={attributes} />
-                <RichText
-                    tagName={headingTag || 'h1'}
-                    value={displayContent}
-                    onChange={(newContent) => setAttributes({ content: newContent })}
-                    placeholder={__('Heading content...', 'cwicly')}
-                    allowedFormats={['core/bold', 'core/italic', 'core/link']}
-                />
-            </div>
+
+            {/* Heading tag rendered directly via RichText tagName — no wrapping div */}
+            <RichText
+                {...blockProps}
+                tagName={Tag}
+                value={displayContent}
+                onChange={(newContent) => setAttributes({ content: newContent })}
+                placeholder={__('Heading content...', 'cwicly')}
+                allowedFormats={['core/bold', 'core/italic', 'core/link']}
+            />
         </>
     );
 }
