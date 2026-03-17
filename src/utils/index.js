@@ -5,5 +5,6 @@ export * from './interactions-helper.js';
 export * from './background-helper.js';
 export * from './global-classes-helper.js';
 export * from './html-attributes.js';
+export * from './migrate-v1-to-v2.js';
 
 

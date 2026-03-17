@@ -1,17 +1,16 @@
 import { __ } from '@wordpress/i18n';
 import { SelectControl, __experimentalUnitControl as UnitControl } from '@wordpress/components';
+import useResponsive from '../../hooks/useResponsive.js';
 
 /**
- * GridControl
- * Cwicly grid-container and grid-child controls.
- * Data stored on `attributes.grid` as a flat object.
- *
- * Container: gridTemplateColumns, gridTemplateRows, gap (column-gap / row-gap handled together)
- * Child:     gridColumn (span), gridRow (span)
+ * GridControl — Responsive
+ * Stores all values under attributes.grid[bp] where bp ∈ { lg, md, sm }.
+ * Shape: { lg: { gridTemplateColumns, gridTemplateRows, columnGap, rowGap, justifyItems, alignItems,
+ *                gridColumn, gridRow, justifySelf, alignSelf }, md: {}, sm: {} }
  */
 export default function GridControl({ attributes, setAttributes }) {
-    const grid = attributes.grid || {};
-    const update = (key, val) => setAttributes({ grid: { ...grid, [key]: val } });
+    const { getValues, updateAttr } = useResponsive(attributes, setAttributes, 'grid');
+    const grid = getValues();
 
     return (
         <div className="cwicly-grid-control">
@@ -23,14 +22,14 @@ export default function GridControl({ attributes, setAttributes }) {
             <UnitControl
                 label={__('Template Columns', 'cwicly')}
                 value={grid.gridTemplateColumns || ''}
-                onChange={(val) => update('gridTemplateColumns', val)}
+                onChange={(val) => updateAttr('gridTemplateColumns', val)}
                 help={__('e.g. repeat(3, 1fr) or 200px 1fr', 'cwicly')}
             />
 
             <UnitControl
                 label={__('Template Rows', 'cwicly')}
                 value={grid.gridTemplateRows || ''}
-                onChange={(val) => update('gridTemplateRows', val)}
+                onChange={(val) => updateAttr('gridTemplateRows', val)}
                 help={__('e.g. auto 1fr', 'cwicly')}
                 style={{ marginTop: '8px' }}
             />
@@ -39,12 +38,12 @@ export default function GridControl({ attributes, setAttributes }) {
                 <UnitControl
                     label={__('Column Gap', 'cwicly')}
                     value={grid.columnGap || ''}
-                    onChange={(val) => update('columnGap', val)}
+                    onChange={(val) => updateAttr('columnGap', val)}
                 />
                 <UnitControl
                     label={__('Row Gap', 'cwicly')}
                     value={grid.rowGap || ''}
-                    onChange={(val) => update('rowGap', val)}
+                    onChange={(val) => updateAttr('rowGap', val)}
                 />
             </div>
 
@@ -58,7 +57,7 @@ export default function GridControl({ attributes, setAttributes }) {
                     { label: 'Center',  value: 'center' },
                     { label: 'Stretch', value: 'stretch' },
                 ]}
-                onChange={(val) => update('justifyItems', val)}
+                onChange={(val) => updateAttr('justifyItems', val)}
                 style={{ marginTop: '8px' }}
             />
 
@@ -67,13 +66,13 @@ export default function GridControl({ attributes, setAttributes }) {
                 value={grid.alignItems || ''}
                 options={[
                     { label: __('Default', 'cwicly'), value: '' },
-                    { label: 'Start',     value: 'start' },
-                    { label: 'End',       value: 'end' },
-                    { label: 'Center',    value: 'center' },
-                    { label: 'Stretch',   value: 'stretch' },
-                    { label: 'Baseline',  value: 'baseline' },
+                    { label: 'Start',    value: 'start' },
+                    { label: 'End',      value: 'end' },
+                    { label: 'Center',   value: 'center' },
+                    { label: 'Stretch',  value: 'stretch' },
+                    { label: 'Baseline', value: 'baseline' },
                 ]}
-                onChange={(val) => update('alignItems', val)}
+                onChange={(val) => updateAttr('alignItems', val)}
             />
 
             {/* ── Child ── */}
@@ -86,13 +85,13 @@ export default function GridControl({ attributes, setAttributes }) {
                 <UnitControl
                     label={__('Column Span', 'cwicly')}
                     value={grid.gridColumn || ''}
-                    onChange={(val) => update('gridColumn', val)}
+                    onChange={(val) => updateAttr('gridColumn', val)}
                     help="e.g. span 2"
                 />
                 <UnitControl
                     label={__('Row Span', 'cwicly')}
                     value={grid.gridRow || ''}
-                    onChange={(val) => update('gridRow', val)}
+                    onChange={(val) => updateAttr('gridRow', val)}
                     help="e.g. span 2"
                 />
             </div>
@@ -108,7 +107,7 @@ export default function GridControl({ attributes, setAttributes }) {
                         { label: 'Center',  value: 'center' },
                         { label: 'Stretch', value: 'stretch' },
                     ]}
-                    onChange={(val) => update('justifySelf', val)}
+                    onChange={(val) => updateAttr('justifySelf', val)}
                 />
                 <SelectControl
                     label={__('Align Self', 'cwicly')}
@@ -121,7 +120,7 @@ export default function GridControl({ attributes, setAttributes }) {
                         { label: 'Stretch',  value: 'stretch' },
                         { label: 'Baseline', value: 'baseline' },
                     ]}
-                    onChange={(val) => update('alignSelf', val)}
+                    onChange={(val) => updateAttr('alignSelf', val)}
                 />
             </div>
         </div>

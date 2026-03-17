@@ -1,29 +1,32 @@
 import { __ } from '@wordpress/i18n';
 import { SelectControl, ColorPalette, __experimentalUnitControl as UnitControl } from '@wordpress/components';
 import { useState } from '@wordpress/element';
+import useResponsive from '../../hooks/useResponsive.js';
 
 /**
- * BorderControl
- * Reconstructs Cwicly's border settings (Width, Style, Color, Radius).
- * Supports unified and per-side border radius (TL/TR/BR/BL).
+ * BorderControl — Responsive
+ * Stores all values under attributes.border[bp] where bp ∈ { lg, md, sm }.
+ * Shape: { lg: { width, style, color, radius, radiusTL, radiusTR, radiusBR, radiusBL }, md: {}, sm: {} }
  */
 export default function BorderControl({ attributes, setAttributes }) {
-    const border = attributes.border || {};
+    const { bp, getValues, updateAttr } = useResponsive(attributes, setAttributes, 'border');
+    const border = getValues();
     const [linkedRadius, setLinkedRadius] = useState(true);
 
-    const updateBorder = (key, value) => {
-        setAttributes({ border: { ...border, [key]: value } });
+    // For "link all" radius we need to update multiple keys in one setAttributes call.
+    const updateRadiusAll = (value) => {
+        const next = { ...(attributes.border || {}) };
+        next[bp] = {
+            ...(next[bp] || {}),
+            radius: value,
+            radiusTL: value,
+            radiusTR: value,
+            radiusBR: value,
+            radiusBL: value,
+        };
+        setAttributes({ border: next });
     };
 
-    const updateRadius = (corner, value) => {
-        if (linkedRadius) {
-            setAttributes({ border: { ...border, radiusTL: value, radiusTR: value, radiusBR: value, radiusBL: value, radius: value } });
-        } else {
-            setAttributes({ border: { ...border, [corner]: value } });
-        }
-    };
-
-    // Determine display value for linked radius
     const sharedRadius = border.radiusTL || border.radius || '';
 
     return (
@@ -32,7 +35,7 @@ export default function BorderControl({ attributes, setAttributes }) {
                 <UnitControl
                     label={__('Border Width', 'cwicly')}
                     value={border.width || ''}
-                    onChange={(val) => updateBorder('width', val)}
+                    onChange={(val) => updateAttr('width', val)}
                 />
                 <SelectControl
                     label={__('Border Style', 'cwicly')}
@@ -44,7 +47,7 @@ export default function BorderControl({ attributes, setAttributes }) {
                         { label: __('Dotted', 'cwicly'), value: 'dotted' },
                         { label: __('Double', 'cwicly'), value: 'double' },
                     ]}
-                    onChange={(val) => updateBorder('style', val)}
+                    onChange={(val) => updateAttr('style', val)}
                 />
             </div>
 
@@ -52,7 +55,7 @@ export default function BorderControl({ attributes, setAttributes }) {
                 <label style={{ display: 'block', marginBottom: '8px', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600' }}>
                     {__('Border Color', 'cwicly')}
                 </label>
-                <ColorPalette value={border.color} onChange={(val) => updateBorder('color', val)} />
+                <ColorPalette value={border.color} onChange={(val) => updateAttr('color', val)} />
             </div>
 
             {/* Border Radius */}
@@ -71,7 +74,7 @@ export default function BorderControl({ attributes, setAttributes }) {
                     <UnitControl
                         label={__('All Corners', 'cwicly')}
                         value={sharedRadius}
-                        onChange={(val) => updateRadius('radius', val)}
+                        onChange={(val) => updateRadiusAll(val)}
                     />
                 ) : (
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
@@ -80,7 +83,7 @@ export default function BorderControl({ attributes, setAttributes }) {
                                 key={key}
                                 label={__(label, 'cwicly')}
                                 value={border[key] || ''}
-                                onChange={(val) => updateRadius(key, val)}
+                                onChange={(val) => updateAttr(key, val)}
                             />
                         ))}
                     </div>

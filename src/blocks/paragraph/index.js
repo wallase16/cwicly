@@ -2,6 +2,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import edit from './edit.js';
 import save from './save.js';
+import deprecated from './deprecated.js';
 
 registerBlockType('cwicly/paragraph', {
   title: __('Paragraph', 'cwicly'),
@@ -30,6 +31,8 @@ registerBlockType('cwicly/paragraph', {
     linkWrapperNewTab: { type: 'boolean', default: false },
     linkWrapperRel: { type: 'string', default: '' },
     linkWrapperTitle: { type: 'string', default: '' },
+    // Schema version — v2 = responsive attrs (Phase 12)
+    version: { type: 'number', default: 2 },
     // Consolidated Design Attributes
     padding: { type: 'object', default: {} },
     margin: { type: 'object', default: {} },
@@ -60,4 +63,5 @@ registerBlockType('cwicly/paragraph', {
   },
   edit,
   save,
+  deprecated,
 });

@@ -1,17 +1,15 @@
 import { __ } from '@wordpress/i18n';
 import { SelectControl, __experimentalUnitControl as UnitControl } from '@wordpress/components';
+import useResponsive from '../../hooks/useResponsive.js';
 
 /**
- * FlexControl
- * Cwicly flex-container and flex-child controls.
- * Data stored on `attributes.flex` as a flat object.
- *
- * Container props: justifyContent, alignItems, alignContent, flexWrap (direction handled in SizeControl display)
- * Child props:     flexGrow, flexShrink, flexBasis, order, alignSelf
+ * FlexControl — Responsive
+ * Stores all values under attributes.flex[bp] where bp ∈ { lg, md, sm }.
+ * Shape: { lg: { justifyContent, alignItems, alignContent, flexGrow, flexShrink, flexBasis, order, alignSelf }, md: {}, sm: {} }
  */
 export default function FlexControl({ attributes, setAttributes }) {
-    const flex = attributes.flex || {};
-    const update = (key, val) => setAttributes({ flex: { ...flex, [key]: val } });
+    const { getValues, updateAttr } = useResponsive(attributes, setAttributes, 'flex');
+    const flex = getValues();
 
     return (
         <div className="cwicly-flex-control">
@@ -24,15 +22,15 @@ export default function FlexControl({ attributes, setAttributes }) {
                 label={__('Justify Content', 'cwicly')}
                 value={flex.justifyContent || ''}
                 options={[
-                    { label: __('Default', 'cwicly'),         value: '' },
-                    { label: 'Flex Start',                    value: 'flex-start' },
-                    { label: 'Flex End',                      value: 'flex-end' },
-                    { label: 'Center',                        value: 'center' },
-                    { label: 'Space Between',                 value: 'space-between' },
-                    { label: 'Space Around',                  value: 'space-around' },
-                    { label: 'Space Evenly',                  value: 'space-evenly' },
+                    { label: __('Default', 'cwicly'),   value: '' },
+                    { label: 'Flex Start',               value: 'flex-start' },
+                    { label: 'Flex End',                 value: 'flex-end' },
+                    { label: 'Center',                   value: 'center' },
+                    { label: 'Space Between',            value: 'space-between' },
+                    { label: 'Space Around',             value: 'space-around' },
+                    { label: 'Space Evenly',             value: 'space-evenly' },
                 ]}
-                onChange={(val) => update('justifyContent', val)}
+                onChange={(val) => updateAttr('justifyContent', val)}
             />
 
             <SelectControl
@@ -40,13 +38,13 @@ export default function FlexControl({ attributes, setAttributes }) {
                 value={flex.alignItems || ''}
                 options={[
                     { label: __('Default', 'cwicly'), value: '' },
-                    { label: 'Flex Start',            value: 'flex-start' },
-                    { label: 'Flex End',              value: 'flex-end' },
-                    { label: 'Center',                value: 'center' },
-                    { label: 'Stretch',               value: 'stretch' },
-                    { label: 'Baseline',              value: 'baseline' },
+                    { label: 'Flex Start',             value: 'flex-start' },
+                    { label: 'Flex End',               value: 'flex-end' },
+                    { label: 'Center',                 value: 'center' },
+                    { label: 'Stretch',                value: 'stretch' },
+                    { label: 'Baseline',               value: 'baseline' },
                 ]}
-                onChange={(val) => update('alignItems', val)}
+                onChange={(val) => updateAttr('alignItems', val)}
             />
 
             <SelectControl
@@ -54,14 +52,14 @@ export default function FlexControl({ attributes, setAttributes }) {
                 value={flex.alignContent || ''}
                 options={[
                     { label: __('Default', 'cwicly'),  value: '' },
-                    { label: 'Flex Start',             value: 'flex-start' },
-                    { label: 'Flex End',               value: 'flex-end' },
-                    { label: 'Center',                 value: 'center' },
-                    { label: 'Space Between',          value: 'space-between' },
-                    { label: 'Space Around',           value: 'space-around' },
-                    { label: 'Stretch',                value: 'stretch' },
+                    { label: 'Flex Start',              value: 'flex-start' },
+                    { label: 'Flex End',                value: 'flex-end' },
+                    { label: 'Center',                  value: 'center' },
+                    { label: 'Space Between',           value: 'space-between' },
+                    { label: 'Space Around',            value: 'space-around' },
+                    { label: 'Stretch',                 value: 'stretch' },
                 ]}
-                onChange={(val) => update('alignContent', val)}
+                onChange={(val) => updateAttr('alignContent', val)}
             />
 
             {/* ── Child ── */}
@@ -74,24 +72,24 @@ export default function FlexControl({ attributes, setAttributes }) {
                 <UnitControl
                     label={__('Grow', 'cwicly')}
                     value={flex.flexGrow || ''}
-                    onChange={(val) => update('flexGrow', val)}
+                    onChange={(val) => updateAttr('flexGrow', val)}
                 />
                 <UnitControl
                     label={__('Shrink', 'cwicly')}
                     value={flex.flexShrink || ''}
-                    onChange={(val) => update('flexShrink', val)}
+                    onChange={(val) => updateAttr('flexShrink', val)}
                 />
                 <UnitControl
                     label={__('Order', 'cwicly')}
                     value={flex.order || ''}
-                    onChange={(val) => update('order', val)}
+                    onChange={(val) => updateAttr('order', val)}
                 />
             </div>
 
             <UnitControl
                 label={__('Basis', 'cwicly')}
                 value={flex.flexBasis || ''}
-                onChange={(val) => update('flexBasis', val)}
+                onChange={(val) => updateAttr('flexBasis', val)}
                 style={{ marginBottom: '8px' }}
             />
 
@@ -100,14 +98,14 @@ export default function FlexControl({ attributes, setAttributes }) {
                 value={flex.alignSelf || ''}
                 options={[
                     { label: __('Default', 'cwicly'), value: '' },
-                    { label: 'Auto',                  value: 'auto' },
-                    { label: 'Flex Start',            value: 'flex-start' },
-                    { label: 'Flex End',              value: 'flex-end' },
-                    { label: 'Center',                value: 'center' },
-                    { label: 'Stretch',               value: 'stretch' },
-                    { label: 'Baseline',              value: 'baseline' },
+                    { label: 'Auto',                   value: 'auto' },
+                    { label: 'Flex Start',             value: 'flex-start' },
+                    { label: 'Flex End',               value: 'flex-end' },
+                    { label: 'Center',                 value: 'center' },
+                    { label: 'Stretch',                value: 'stretch' },
+                    { label: 'Baseline',               value: 'baseline' },
                 ]}
-                onChange={(val) => update('alignSelf', val)}
+                onChange={(val) => updateAttr('alignSelf', val)}
             />
         </div>
     );

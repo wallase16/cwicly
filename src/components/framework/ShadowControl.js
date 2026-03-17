@@ -1,21 +1,15 @@
 import { __ } from '@wordpress/i18n';
 import { ColorPalette, __experimentalUnitControl as UnitControl, ToggleControl } from '@wordpress/components';
+import useResponsive from '../../hooks/useResponsive.js';
 
 /**
- * ShadowControl
- * Reconstructs Cwicly's box-shadow settings.
+ * ShadowControl — Responsive
+ * Stores all values under attributes.shadow[bp] where bp ∈ { lg, md, sm }.
+ * Shape: { lg: { x, y, blur, spread, color, inset }, md: {}, sm: {} }
  */
 export default function ShadowControl({ attributes, setAttributes }) {
-    const shadow = attributes.shadow || {};
-
-    const updateShadow = (key, value) => {
-        setAttributes({
-            shadow: {
-                ...shadow,
-                [key]: value
-            }
-        });
-    };
+    const { getValues, updateAttr } = useResponsive(attributes, setAttributes, 'shadow');
+    const shadow = getValues();
 
     return (
         <div className="cwicly-shadow-control">
@@ -25,7 +19,7 @@ export default function ShadowControl({ attributes, setAttributes }) {
                 </label>
                 <ColorPalette
                     value={shadow.color}
-                    onChange={(val) => updateShadow('color', val)}
+                    onChange={(val) => updateAttr('color', val)}
                 />
             </div>
 
@@ -33,12 +27,12 @@ export default function ShadowControl({ attributes, setAttributes }) {
                 <UnitControl
                     label={__('Offset X', 'cwicly')}
                     value={shadow.x || '0px'}
-                    onChange={(val) => updateShadow('x', val)}
+                    onChange={(val) => updateAttr('x', val)}
                 />
                 <UnitControl
                     label={__('Offset Y', 'cwicly')}
                     value={shadow.y || '0px'}
-                    onChange={(val) => updateShadow('y', val)}
+                    onChange={(val) => updateAttr('y', val)}
                 />
             </div>
 
@@ -46,19 +40,19 @@ export default function ShadowControl({ attributes, setAttributes }) {
                 <UnitControl
                     label={__('Blur', 'cwicly')}
                     value={shadow.blur || '0px'}
-                    onChange={(val) => updateShadow('blur', val)}
+                    onChange={(val) => updateAttr('blur', val)}
                 />
                 <UnitControl
                     label={__('Spread', 'cwicly')}
                     value={shadow.spread || '0px'}
-                    onChange={(val) => updateShadow('spread', val)}
+                    onChange={(val) => updateAttr('spread', val)}
                 />
             </div>
 
             <ToggleControl
                 label={__('Inset Shadow', 'cwicly')}
                 checked={shadow.inset || false}
-                onChange={(val) => updateShadow('inset', val)}
+                onChange={(val) => updateAttr('inset', val)}
             />
         </div>
     );

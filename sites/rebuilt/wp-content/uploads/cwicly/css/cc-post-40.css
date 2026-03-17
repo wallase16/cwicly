@@ -1,0 +1,10 @@
+.cc-7303a17f {
+  background-color: #00ff00;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #ff0000;
+}
+@media screen and (max-width: 992px){.cc-7303a17f {
+  border-width: 0px;
+}
+}

@@ -2,6 +2,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import edit from './edit.js';
 import save from './save.js';
+import deprecated from './deprecated.js';
 
 registerBlockType('cwicly/columns', {
   title: __('Columns', 'cwicly'),
@@ -19,6 +20,8 @@ registerBlockType('cwicly/columns', {
     linkWrapperNewTab: { type: 'boolean', default: false },
     linkWrapperRel: { type: 'string', default: '' },
     linkWrapperTitle: { type: 'string', default: '' },
+    // Schema version — v2 = responsive attrs (Phase 12)
+    version: { type: 'number', default: 2 },
     // Consolidated Design Attributes
     padding: { type: 'object', default: {} },
     margin: { type: 'object', default: {} },
@@ -51,4 +54,5 @@ registerBlockType('cwicly/columns', {
   },
   edit,
   save,
+  deprecated,
 });

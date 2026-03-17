@@ -2,6 +2,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import edit from './edit.js';
 import save from './save.js';
+import deprecated from './deprecated.js';
 
 registerBlockType('cwicly/button', {
   title: __('Button', 'cwicly'),
@@ -32,6 +33,8 @@ registerBlockType('cwicly/button', {
     linkWrapperTitle: { type: 'string', default: '' },
     linkWrapperType: { type: 'string', default: 'url' },
     linkWrapperSourceType: { type: 'string', default: 'static' },
+    // Schema version — v2 = responsive attrs (Phase 12)
+    version: { type: 'number', default: 2 },
     // Consolidated Design Attributes
     padding: { type: 'object', default: {} },
     margin: { type: 'object', default: {} },
@@ -61,4 +64,5 @@ registerBlockType('cwicly/button', {
   },
   edit,
   save,
+  deprecated,
 });

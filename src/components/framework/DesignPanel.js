@@ -5,16 +5,25 @@ import SizeControl from './SizeControl.js';
 import TransitionControl from './TransitionControl.js';
 import FlexControl from './FlexControl.js';
 import GridControl from './GridControl.js';
+import SpacingControl from './SpacingControl.js';
+import TypographyControl from './TypographyControl.js';
+import BackgroundControl from './BackgroundControl.js';
+import BorderControl from './BorderControl.js';
+import ShadowControl from './ShadowControl.js';
 
 /**
  * DesignPanel
  * Main container for Cwicly's "Design" tab controls.
  * Flex and Grid panels appear contextually based on the `display` value in SizeControl.
+ * Reads display from responsive layout attrs (lg slot) with flat-attr fallback.
  */
 export default function DesignPanel({ attributes, setAttributes, pseudoClass }) {
-    const display = attributes.layout?.display || '';
+    // Support both new responsive shape { lg: { display } } and legacy flat { display }
+    const layout = attributes.layout || {};
+    const display = layout.lg?.display ?? layout.display ?? '';
     const showFlex = display === 'flex' || display === 'inline-flex';
     const showGrid = display === 'grid' || display === 'inline-grid';
+
 
     return (
         <div className="cwicly-design-panel">

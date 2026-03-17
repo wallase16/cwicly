@@ -2,6 +2,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import edit from './edit.js';
 import save from './save.js';
+import deprecated from './deprecated.js';
 
 registerBlockType('cwicly/section', {
   title: __('Section', 'cwicly'),
@@ -12,6 +13,8 @@ registerBlockType('cwicly/section', {
     classID: { type: 'string' },
     classes: { type: 'string', default: '' },
     containerLayoutTag: { type: 'string', default: 'section' },
+    // Schema version — v2 = responsive attrs (Phase 12)
+    version: { type: 'number', default: 2 },
     // Consolidated Design Attributes
     padding: { type: 'object', default: {} },
     margin: { type: 'object', default: {} },
@@ -50,4 +53,5 @@ registerBlockType('cwicly/section', {
   },
   edit,
   save,
+  deprecated,
 });

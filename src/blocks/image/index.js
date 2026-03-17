@@ -2,6 +2,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import edit from './edit.js';
 import save from './save.js';
+import deprecated from './deprecated.js';
 
 registerBlockType('cwicly/image', {
   title: __('Image', 'cwicly'),
@@ -47,6 +48,8 @@ registerBlockType('cwicly/image', {
     linkWrapperRel: { type: 'string', default: '' },
     linkWrapperTitle: { type: 'string', default: '' },
     linkWrapperActionLighboxRef: { type: 'string', default: '' },
+    // Schema version — v2 = responsive attrs (Phase 12)
+    version: { type: 'number', default: 2 },
     // Consolidated Design Attributes
     padding: { type: 'object', default: {} },
     margin: { type: 'object', default: {} },
@@ -82,4 +85,5 @@ registerBlockType('cwicly/image', {
   },
   edit,
   save,
+  deprecated,
 });

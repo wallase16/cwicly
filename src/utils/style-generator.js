@@ -1,6 +1,9 @@
 /**
  * Cwicly Style Generator Utility
  * Converts block attributes into structured CSS objects for the REST API.
+ *
+ * Responsive shape: attributes[key][bp] where bp ∈ { lg, md, sm }
+ * Legacy shape:     attributes[key] (flat object) — fallback for old posts, only used at lg.
  */
 
 const breakpoints = {
@@ -16,6 +19,25 @@ const buildRuleBlock = (selector, props) => {
         .map(([k, v]) => `  ${k}: ${v};`)
         .join('\n');
     return lines ? `${selector} {\n${lines}\n}\n` : '';
+};
+
+/**
+ * Read an attribute that may be in the new responsive shape { lg:{}, md:{}, sm:{} }
+ * or the legacy flat shape. Returns the value for the given breakpoint.
+ *
+ * @param {*}      attrValue  The raw attribute value (may be responsive or flat).
+ * @param {string} bp         Breakpoint key: 'lg' | 'md' | 'sm'.
+ * @returns {Object|undefined}
+ */
+const getBpValue = (attrValue, bp) => {
+    if (!attrValue) return undefined;
+    // New responsive shape: value has a 'lg' key
+    if (typeof attrValue === 'object' && ('lg' in attrValue || 'md' in attrValue || 'sm' in attrValue)) {
+        return attrValue[bp] || undefined;
+    }
+    // Legacy flat shape: only use it on the main (lg) breakpoint
+    if (bp === 'lg') return attrValue;
+    return undefined;
 };
 
 /**
@@ -36,7 +58,7 @@ export const generateBlockCSSObject = (classID, attributes) => {
         const bpProps = {};
         const bpHoverProps = {};
 
-        // — Spacing —
+        // — Spacing (already responsive in old shape — read directly) —
         const pad = attributes.padding?.[bp];
         if (pad) {
             if (pad.top)    bpProps['padding-top']    = pad.top;
@@ -51,7 +73,6 @@ export const generateBlockCSSObject = (classID, attributes) => {
             if (padHover.bottom) bpHoverProps['padding-bottom'] = padHover.bottom;
             if (padHover.left)   bpHoverProps['padding-left']   = padHover.left;
         }
-
         const mgn = attributes.margin?.[bp];
         if (mgn) {
             if (mgn.top)    bpProps['margin-top']    = mgn.top;
@@ -63,24 +84,25 @@ export const generateBlockCSSObject = (classID, attributes) => {
         // — Typography (responsive fields) —
         const typo = attributes.typography?.[bp];
         if (typo) {
-            if (typo.fontSize)     bpProps['font-size']     = typo.fontSize;
-            if (typo.lineHeight)   bpProps['line-height']   = typo.lineHeight;
+            if (typo.fontSize)      bpProps['font-size']      = typo.fontSize;
+            if (typo.lineHeight)    bpProps['line-height']    = typo.lineHeight;
             if (typo.letterSpacing) bpProps['letter-spacing'] = typo.letterSpacing;
-            if (typo.fontWeight)   bpProps['font-weight']   = typo.fontWeight;
-            if (typo.textAlign)    bpProps['text-align']    = typo.textAlign;
+            if (typo.fontWeight)    bpProps['font-weight']    = typo.fontWeight;
+            if (typo.textAlign)     bpProps['text-align']     = typo.textAlign;
         }
 
-        // — Typography (global fields, emit only on main breakpoint) —
+        // — Typography (global fields — emit only on main breakpoint) —
         if (isMain && attributes.typography) {
             const t = attributes.typography;
-            if (t.fontFamily)     bpProps['font-family']      = t.fontFamily;
-            if (t.color)          bpProps['color']             = t.color;
-            if (t.textDecoration) bpProps['text-decoration']  = t.textDecoration;
+            if (t.fontFamily)     bpProps['font-family']     = t.fontFamily;
+            if (t.color)          bpProps['color']           = t.color;
+            if (t.textDecoration) bpProps['text-decoration'] = t.textDecoration;
+            if (t.textTransform)  bpProps['text-transform']  = t.textTransform;
         }
 
-        // — Background —
-        const bg = attributes.background;
-        if (isMain && bg) {
+        // — Background — (responsive, with legacy fallback)
+        const bg = getBpValue(attributes.background, bp);
+        if (bg) {
             if (bg.type === 'color' && bg.color) {
                 bpProps['background-color'] = bg.color;
             } else if (bg.type === 'gradient' && bg.gradient) {
@@ -93,14 +115,12 @@ export const generateBlockCSSObject = (classID, attributes) => {
             }
         }
 
-        // — Border —
-        const bdr = attributes.border;
-        if (isMain && bdr) {
-            if (bdr.width) bpProps['border-width'] = bdr.width;
+        // — Border — (responsive, with legacy fallback)
+        const bdr = getBpValue(attributes.border, bp);
+        if (bdr) {
+            if (bdr.width)                      bpProps['border-width'] = bdr.width;
             if (bdr.style && bdr.style !== 'none') bpProps['border-style'] = bdr.style;
-            if (bdr.color) bpProps['border-color'] = bdr.color;
-
-            // Per-side radius support
+            if (bdr.color)                      bpProps['border-color'] = bdr.color;
             if (bdr.radiusTL || bdr.radiusTR || bdr.radiusBR || bdr.radiusBL) {
                 bpProps['border-radius'] = [
                     bdr.radiusTL || '0',
@@ -113,9 +133,9 @@ export const generateBlockCSSObject = (classID, attributes) => {
             }
         }
 
-        // — Box Shadow —
-        const shd = attributes.shadow;
-        if (isMain && shd && (shd.x || shd.y || shd.blur || shd.spread)) {
+        // — Box Shadow — (responsive, with legacy fallback)
+        const shd = getBpValue(attributes.shadow, bp);
+        if (shd && (shd.x || shd.y || shd.blur || shd.spread)) {
             const x      = shd.x      || '0px';
             const y      = shd.y      || '0px';
             const blur   = shd.blur   || '0px';
@@ -125,14 +145,14 @@ export const generateBlockCSSObject = (classID, attributes) => {
             bpProps['box-shadow'] = `${inset}${x} ${y} ${blur} ${spread} ${color}`;
         }
 
-        // — Opacity —
+        // — Opacity — (global / flat, only on main breakpoint)
         if (isMain && attributes.opacity !== undefined && attributes.opacity !== '') {
             bpProps['opacity'] = attributes.opacity;
         }
 
-        // — Size (Width / Height) —
-        const size = attributes.size;
-        if (isMain && size) {
+        // — Size (Width / Height) — (responsive, with legacy fallback)
+        const size = getBpValue(attributes.size, bp);
+        if (size) {
             if (size.width)     bpProps['width']      = size.width;
             if (size.minWidth)  bpProps['min-width']  = size.minWidth;
             if (size.maxWidth)  bpProps['max-width']  = size.maxWidth;
@@ -141,9 +161,9 @@ export const generateBlockCSSObject = (classID, attributes) => {
             if (size.maxHeight) bpProps['max-height'] = size.maxHeight;
         }
 
-        // — Layout (display, overflow, position, z-index, cursor) —
-        const layout = attributes.layout;
-        if (isMain && layout) {
+        // — Layout (display, overflow, position, z-index, cursor) — (responsive, with legacy fallback)
+        const layout = getBpValue(attributes.layout, bp);
+        if (layout) {
             if (layout.display)  bpProps['display']  = layout.display;
             if (layout.overflow) bpProps['overflow']  = layout.overflow;
             if (layout.position) bpProps['position']  = layout.position;
@@ -151,7 +171,7 @@ export const generateBlockCSSObject = (classID, attributes) => {
             if (layout.cursor)   bpProps['cursor']    = layout.cursor;
         }
 
-        // — Transition —
+        // — Transition — (global/flat, only on main breakpoint)
         const trans = attributes.transition;
         if (isMain && trans?.property) {
             const duration = trans.duration || '0.3s';
@@ -159,19 +179,14 @@ export const generateBlockCSSObject = (classID, attributes) => {
             bpProps['transition'] = `${trans.property} ${duration} ${easing}`;
         }
 
-        // — Text Transform (from typography global) —
-        if (isMain && attributes.typography?.textTransform) {
-            bpProps['text-transform'] = attributes.typography.textTransform;
-        }
-
-        // — Aspect Ratio + Focal Point (image block) —
+        // — Aspect Ratio + Focal Point (image block, global) —
         if (isMain && attributes.imageAspectRatio) {
             bpProps['aspect-ratio']    = attributes.imageAspectRatio;
             bpProps['object-fit']      = 'cover';
             bpProps['object-position'] = `${attributes.imageFocalX ?? 50}% ${attributes.imageFocalY ?? 50}%`;
         }
 
-        // — Columns Flex Layout —
+        // — Columns Flex Layout (block-specific flat attrs) —
         if (isMain) {
             if (attributes.columnsGap)       bpProps['gap']            = attributes.columnsGap;
             if (attributes.columnsDirection) bpProps['flex-direction'] = attributes.columnsDirection;
@@ -184,9 +199,9 @@ export const generateBlockCSSObject = (classID, attributes) => {
             bpProps['flex-shrink'] = '0';
         }
 
-        // — Flex Control (container + child) —
-        const flexCtrl = attributes.flex;
-        if (isMain && flexCtrl) {
+        // — Flex Control — (responsive, with legacy fallback)
+        const flexCtrl = getBpValue(attributes.flex, bp);
+        if (flexCtrl) {
             if (flexCtrl.justifyContent) bpProps['justify-content'] = flexCtrl.justifyContent;
             if (flexCtrl.alignItems)     bpProps['align-items']     = flexCtrl.alignItems;
             if (flexCtrl.alignContent)   bpProps['align-content']   = flexCtrl.alignContent;
@@ -197,9 +212,9 @@ export const generateBlockCSSObject = (classID, attributes) => {
             if (flexCtrl.alignSelf)      bpProps['align-self']      = flexCtrl.alignSelf;
         }
 
-        // — Grid Control (container + child) —
-        const gridCtrl = attributes.grid;
-        if (isMain && gridCtrl) {
+        // — Grid Control — (responsive, with legacy fallback)
+        const gridCtrl = getBpValue(attributes.grid, bp);
+        if (gridCtrl) {
             if (gridCtrl.gridTemplateColumns) bpProps['grid-template-columns'] = gridCtrl.gridTemplateColumns;
             if (gridCtrl.gridTemplateRows)    bpProps['grid-template-rows']    = gridCtrl.gridTemplateRows;
             if (gridCtrl.columnGap)           bpProps['column-gap']            = gridCtrl.columnGap;
@@ -229,9 +244,7 @@ export const generateBlockCSSObject = (classID, attributes) => {
     }
 
     return cssObject;
-
 };
-
 
 
 /**

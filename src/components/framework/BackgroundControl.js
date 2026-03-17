@@ -1,51 +1,51 @@
 import { __ } from '@wordpress/i18n';
 import { ColorPalette, MediaUpload, MediaUploadCheck, Button, SelectControl, TextControl } from '@wordpress/components';
+import useResponsive from '../../hooks/useResponsive.js';
 
 /**
- * BackgroundControl
- * Reconstructs Cwicly's background settings (Color, Gradient, Image).
+ * BackgroundControl — Responsive
+ * Stores all values under attributes.background[bp] where bp ∈ { lg, md, sm }.
+ * Shape: { lg: { type, color, gradient, image: { url, id }, imageSize, imagePosition, imageRepeat }, md: {}, sm: {} }
  */
 export default function BackgroundControl({ attributes, setAttributes }) {
-    const background = attributes.background || { type: 'none' };
-
-    const updateBackground = (key, value) => {
-        setAttributes({ background: { ...background, [key]: value } });
-    };
+    const { getValues, updateAttr } = useResponsive(attributes, setAttributes, 'background');
+    const background = getValues();
+    const bgType = background.type || 'none';
 
     return (
         <div className="cwicly-background-control">
             <div style={{ marginBottom: '15px' }}>
                 <SelectControl
                     label={__('Background Type', 'cwicly')}
-                    value={background.type || 'none'}
+                    value={bgType}
                     options={[
                         { label: __('None', 'cwicly'), value: 'none' },
                         { label: __('Color', 'cwicly'), value: 'color' },
                         { label: __('Gradient', 'cwicly'), value: 'gradient' },
                         { label: __('Image', 'cwicly'), value: 'image' },
                     ]}
-                    onChange={(val) => updateBackground('type', val)}
+                    onChange={(val) => updateAttr('type', val)}
                 />
             </div>
 
-            {background.type === 'color' && (
+            {bgType === 'color' && (
                 <div style={{ marginBottom: '15px' }}>
                     <label style={{ display: 'block', marginBottom: '8px', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600' }}>
                         {__('Background Color', 'cwicly')}
                     </label>
                     <ColorPalette
                         value={background.color}
-                        onChange={(val) => updateBackground('color', val)}
+                        onChange={(val) => updateAttr('color', val)}
                     />
                 </div>
             )}
 
-            {background.type === 'gradient' && (
+            {bgType === 'gradient' && (
                 <div style={{ marginBottom: '15px' }}>
                     <TextControl
                         label={__('Gradient CSS', 'cwicly')}
                         value={background.gradient || ''}
-                        onChange={(val) => updateBackground('gradient', val)}
+                        onChange={(val) => updateAttr('gradient', val)}
                         placeholder="linear-gradient(45deg, #ff6b6b, #4ecdc4)"
                         help={__('Enter a full CSS gradient value.', 'cwicly')}
                     />
@@ -60,11 +60,11 @@ export default function BackgroundControl({ attributes, setAttributes }) {
                 </div>
             )}
 
-            {background.type === 'image' && (
+            {bgType === 'image' && (
                 <div style={{ marginBottom: '15px' }}>
                     <MediaUploadCheck>
                         <MediaUpload
-                            onSelect={(media) => updateBackground('image', { url: media.url, id: media.id })}
+                            onSelect={(media) => updateAttr('image', { url: media.url, id: media.id })}
                             allowedTypes={['image']}
                             value={background.image?.id}
                             render={({ open }) => (
@@ -78,7 +78,7 @@ export default function BackgroundControl({ attributes, setAttributes }) {
                                         {background.image?.url ? __('Replace Image', 'cwicly') : __('Select Image', 'cwicly')}
                                     </Button>
                                     {background.image?.url && (
-                                        <Button isLink isDestructive onClick={() => updateBackground('image', null)} style={{ marginLeft: '10px' }}>
+                                        <Button isLink isDestructive onClick={() => updateAttr('image', null)} style={{ marginLeft: '10px' }}>
                                             {__('Remove', 'cwicly')}
                                         </Button>
                                     )}
@@ -95,7 +95,7 @@ export default function BackgroundControl({ attributes, setAttributes }) {
                                 { label: 'Contain', value: 'contain' },
                                 { label: 'Auto', value: 'auto' },
                             ]}
-                            onChange={(val) => updateBackground('imageSize', val)}
+                            onChange={(val) => updateAttr('imageSize', val)}
                         />
                         <SelectControl
                             label={__('Position', 'cwicly')}
@@ -107,7 +107,7 @@ export default function BackgroundControl({ attributes, setAttributes }) {
                                 { label: 'Left', value: 'left' },
                                 { label: 'Right', value: 'right' },
                             ]}
-                            onChange={(val) => updateBackground('imagePosition', val)}
+                            onChange={(val) => updateAttr('imagePosition', val)}
                         />
                         <SelectControl
                             label={__('Repeat', 'cwicly')}
@@ -118,7 +118,7 @@ export default function BackgroundControl({ attributes, setAttributes }) {
                                 { label: 'Repeat X', value: 'repeat-x' },
                                 { label: 'Repeat Y', value: 'repeat-y' },
                             ]}
-                            onChange={(val) => updateBackground('imageRepeat', val)}
+                            onChange={(val) => updateAttr('imageRepeat', val)}
                         />
                     </div>
                 </div>

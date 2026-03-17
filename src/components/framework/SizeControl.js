@@ -1,32 +1,38 @@
 import { __ } from '@wordpress/i18n';
 import { SelectControl, RangeControl, __experimentalUnitControl as UnitControl } from '@wordpress/components';
+import useResponsive from '../../hooks/useResponsive.js';
 
 /**
- * SizeControl
- * Cwicly width, height (with min/max variants), opacity, and layout (display/overflow/position/z-index/cursor).
- * All stored on `attributes.size`, `attributes.opacity`, and `attributes.layout`.
+ * SizeControl — Responsive
+ * `size` and `layout` are both stored per-breakpoint.
+ * `opacity` remains a global (non-responsive) attribute.
+ *
+ * Shape:
+ *   attributes.size   = { lg: { width, height, minWidth, maxWidth, minHeight, maxHeight }, md: {}, sm: {} }
+ *   attributes.layout = { lg: { display, position, overflow, zIndex, cursor }, md: {}, sm: {} }
+ *   attributes.opacity = "0.9"  (flat string, unchanged)
  */
 export default function SizeControl({ attributes, setAttributes }) {
-    const size   = attributes.size   || {};
-    const layout = attributes.layout || {};
-    const opacity = attributes.opacity !== undefined ? attributes.opacity : '';
+    const sizeHook   = useResponsive(attributes, setAttributes, 'size');
+    const layoutHook = useResponsive(attributes, setAttributes, 'layout');
 
-    const updateSize   = (key, val) => setAttributes({ size:   { ...size,   [key]: val } });
-    const updateLayout = (key, val) => setAttributes({ layout: { ...layout, [key]: val } });
+    const size   = sizeHook.getValues();
+    const layout = layoutHook.getValues();
+    const opacity = attributes.opacity !== undefined ? attributes.opacity : '';
 
     return (
         <div className="cwicly-size-control">
-            {/* Width */}
+            {/* Width / Height */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '15px' }}>
-                <UnitControl label={__('Width', 'cwicly')}    value={size.width    || ''} onChange={(v) => updateSize('width', v)} />
-                <UnitControl label={__('Height', 'cwicly')}   value={size.height   || ''} onChange={(v) => updateSize('height', v)} />
-                <UnitControl label={__('Min W', 'cwicly')}    value={size.minWidth || ''} onChange={(v) => updateSize('minWidth', v)} />
-                <UnitControl label={__('Max W', 'cwicly')}    value={size.maxWidth || ''} onChange={(v) => updateSize('maxWidth', v)} />
-                <UnitControl label={__('Min H', 'cwicly')}    value={size.minHeight || ''} onChange={(v) => updateSize('minHeight', v)} />
-                <UnitControl label={__('Max H', 'cwicly')}    value={size.maxHeight || ''} onChange={(v) => updateSize('maxHeight', v)} />
+                <UnitControl label={__('Width', 'cwicly')}     value={size.width     || ''} onChange={(v) => sizeHook.updateAttr('width', v)} />
+                <UnitControl label={__('Height', 'cwicly')}    value={size.height    || ''} onChange={(v) => sizeHook.updateAttr('height', v)} />
+                <UnitControl label={__('Min W', 'cwicly')}     value={size.minWidth  || ''} onChange={(v) => sizeHook.updateAttr('minWidth', v)} />
+                <UnitControl label={__('Max W', 'cwicly')}     value={size.maxWidth  || ''} onChange={(v) => sizeHook.updateAttr('maxWidth', v)} />
+                <UnitControl label={__('Min H', 'cwicly')}     value={size.minHeight || ''} onChange={(v) => sizeHook.updateAttr('minHeight', v)} />
+                <UnitControl label={__('Max H', 'cwicly')}     value={size.maxHeight || ''} onChange={(v) => sizeHook.updateAttr('maxHeight', v)} />
             </div>
 
-            {/* Opacity */}
+            {/* Opacity — global, not per-breakpoint */}
             <div style={{ marginBottom: '15px' }}>
                 <RangeControl
                     label={__('Opacity', 'cwicly')}
@@ -38,22 +44,22 @@ export default function SizeControl({ attributes, setAttributes }) {
                 />
             </div>
 
-            {/* Display & Layout */}
+            {/* Display */}
             <div style={{ marginBottom: '15px' }}>
                 <SelectControl
                     label={__('Display', 'cwicly')}
                     value={layout.display || ''}
                     options={[
                         { label: __('Default', 'cwicly'), value: '' },
-                        { label: 'Block', value: 'block' },
-                        { label: 'Flex', value: 'flex' },
-                        { label: 'Grid', value: 'grid' },
-                        { label: 'Inline', value: 'inline' },
+                        { label: 'Block',        value: 'block' },
+                        { label: 'Flex',         value: 'flex' },
+                        { label: 'Grid',         value: 'grid' },
+                        { label: 'Inline',       value: 'inline' },
                         { label: 'Inline Block', value: 'inline-block' },
-                        { label: 'Inline Flex', value: 'inline-flex' },
-                        { label: 'None', value: 'none' },
+                        { label: 'Inline Flex',  value: 'inline-flex' },
+                        { label: 'None',         value: 'none' },
                     ]}
-                    onChange={(val) => updateLayout('display', val)}
+                    onChange={(val) => layoutHook.updateAttr('display', val)}
                 />
             </div>
 
@@ -63,13 +69,13 @@ export default function SizeControl({ attributes, setAttributes }) {
                     value={layout.position || ''}
                     options={[
                         { label: __('Default', 'cwicly'), value: '' },
-                        { label: 'Static', value: 'static' },
+                        { label: 'Static',   value: 'static' },
                         { label: 'Relative', value: 'relative' },
                         { label: 'Absolute', value: 'absolute' },
-                        { label: 'Fixed', value: 'fixed' },
-                        { label: 'Sticky', value: 'sticky' },
+                        { label: 'Fixed',    value: 'fixed' },
+                        { label: 'Sticky',   value: 'sticky' },
                     ]}
-                    onChange={(val) => updateLayout('position', val)}
+                    onChange={(val) => layoutHook.updateAttr('position', val)}
                 />
                 <SelectControl
                     label={__('Overflow', 'cwicly')}
@@ -77,11 +83,11 @@ export default function SizeControl({ attributes, setAttributes }) {
                     options={[
                         { label: __('Default', 'cwicly'), value: '' },
                         { label: 'Visible', value: 'visible' },
-                        { label: 'Hidden', value: 'hidden' },
-                        { label: 'Scroll', value: 'scroll' },
-                        { label: 'Auto', value: 'auto' },
+                        { label: 'Hidden',  value: 'hidden' },
+                        { label: 'Scroll',  value: 'scroll' },
+                        { label: 'Auto',    value: 'auto' },
                     ]}
-                    onChange={(val) => updateLayout('overflow', val)}
+                    onChange={(val) => layoutHook.updateAttr('overflow', val)}
                 />
             </div>
 
@@ -89,21 +95,21 @@ export default function SizeControl({ attributes, setAttributes }) {
                 <UnitControl
                     label={__('Z-Index', 'cwicly')}
                     value={layout.zIndex || ''}
-                    onChange={(val) => updateLayout('zIndex', val)}
+                    onChange={(val) => layoutHook.updateAttr('zIndex', val)}
                 />
                 <SelectControl
                     label={__('Cursor', 'cwicly')}
                     value={layout.cursor || ''}
                     options={[
                         { label: __('Default', 'cwicly'), value: '' },
-                        { label: 'Pointer', value: 'pointer' },
-                        { label: 'Default', value: 'default' },
+                        { label: 'Pointer',     value: 'pointer' },
+                        { label: 'Default',     value: 'default' },
                         { label: 'Not Allowed', value: 'not-allowed' },
-                        { label: 'Grab', value: 'grab' },
-                        { label: 'Text', value: 'text' },
-                        { label: 'None', value: 'none' },
+                        { label: 'Grab',        value: 'grab' },
+                        { label: 'Text',        value: 'text' },
+                        { label: 'None',        value: 'none' },
                     ]}
-                    onChange={(val) => updateLayout('cursor', val)}
+                    onChange={(val) => layoutHook.updateAttr('cursor', val)}
                 />
             </div>
         </div>

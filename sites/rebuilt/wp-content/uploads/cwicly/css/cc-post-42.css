@@ -1,0 +1,6 @@
+.cc-v1-block {
+  border-width: 3px;
+  border-style: solid;
+  border-color: #ff0000;
+  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.5);
+}

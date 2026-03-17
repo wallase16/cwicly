@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { Button, Popover, SelectControl, TextControl } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { database } from '@wordpress/icons';
+import { blockMeta } from '@wordpress/icons';
 
 /**
  * DynamicDataSelector
@@ -39,7 +39,7 @@ export default function DynamicDataSelector({ value, onSelect }) {
     return (
         <div className="cwicly-dynamic-selector-wrapper" style={{ display: 'inline-block', marginLeft: '5px' }}>
             <Button
-                icon={database}
+                icon={blockMeta}
                 isSmall
                 isPressed={isDynamic}
                 onClick={togglePopover}
