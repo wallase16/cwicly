@@ -7,6 +7,7 @@ import { useEffect } from '@wordpress/element';
 import { getCombinedClassName, getBlockID } from '../../utils/index.js';
 import CwiclyInspector from '../../components/framework/CwiclyInspector.js';
 import DesignPanel from '../../components/framework/DesignPanel.js';
+import AdvancedPanel from '../../components/framework/AdvancedPanel.js';
 
 export default function Edit({ attributes, setAttributes, clientId, name, context }) {
     const { classID, classes, headingTag: Tag, isLink } = attributes;
@@ -57,6 +58,10 @@ export default function Edit({ attributes, setAttributes, clientId, name, contex
 
                 {inspectortab.tab === 'design' && (
                     <DesignPanel attributes={attributes} setAttributes={setAttributes} pseudoClass={pseudoClass} />
+                )}
+
+                {inspectortab.tab === 'advanced' && (
+                    <AdvancedPanel attributes={attributes} setAttributes={setAttributes} />
                 )}
             </InspectorControls>
 

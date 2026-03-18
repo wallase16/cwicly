@@ -1323,6 +1323,14 @@ class Helpers {
 			$custom_tag = '</div>';
 		}
 
+		if ( $open ) {
+			$id = isset( $attributes['id'] ) ? $attributes['id'] : ( isset( $attributes->id ) ? $attributes->id : '' );
+			if ( $id ) {
+				$custom_tag .= ' id="' . esc_attr( $id ) . '"';
+			}
+			$custom_tag .= \cc_get_html_attributes( $attributes );
+		}
+
 		return $custom_tag;
 	}
 

@@ -1,5 +1,5 @@
 import { useBlockProps } from '@wordpress/block-editor';
-import { getCombinedClassName, getBlockID } from '../../utils/index.js';
+import { getCombinedClassName, getBlockID, getHtmlAttributes } from '../../utils/index.js';
 
 /**
  * Post Excerpt save.
@@ -8,9 +8,9 @@ import { getCombinedClassName, getBlockID } from '../../utils/index.js';
 export default function save({ attributes }) {
     const { classID, classes, containerTag: Tag } = attributes;
     const blockProps = useBlockProps.save({
-        id: classID ? `cc-${classID}` : undefined,
+        id: getBlockID(attributes, 'post-excerpt'),
         className: getCombinedClassName(attributes, classes || ''),
     });
 
-    return <Tag {...blockProps}>{'{post_excerpt=post_excerpt}'}</Tag>;
+    return <Tag {...blockProps} {...getHtmlAttributes(attributes)}>{'{post_excerpt=post_excerpt}'}</Tag>;
 }

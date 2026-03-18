@@ -121,7 +121,8 @@ add_filter(
         }
 
         $attrs      = $block['attrs'] ?? [];
-        $block_obj  = isset( $block['wp_block'] ) ? $block['wp_block'] : null;
+        // The 3rd argument of render_block filter is the WP_Block instance ($instance).
+        $block_obj  = $instance; 
 
         return preg_replace_callback(
             '/\{([\w-]+)=([\w-]*)\}/',
@@ -132,5 +133,5 @@ add_filter(
         );
     },
     10,
-    2
+    3
 );

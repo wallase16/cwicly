@@ -1,5 +1,5 @@
 import { useBlockProps } from '@wordpress/block-editor';
-import { getCombinedClassName, getBlockID } from '../../utils/index.js';
+import { getCombinedClassName, getBlockID, getHtmlAttributes } from '../../utils/index.js';
 
 /**
  * Post Title save.
@@ -10,12 +10,12 @@ import { getCombinedClassName, getBlockID } from '../../utils/index.js';
 export default function save({ attributes }) {
     const { headingTag: Tag, isLink, classes, classID } = attributes;
     const blockProps = useBlockProps.save({
-        id: classID ? `cc-${classID}` : undefined,
+        id: getBlockID(attributes, 'post-title'),
         className: getCombinedClassName(attributes, classes || ''),
     });
 
     return (
-        <Tag {...blockProps}>
+        <Tag {...blockProps} {...getHtmlAttributes(attributes)}>
             {isLink ? (
                 <a href="{permalink=permalink}">{'{post_title=post_title}'}</a>
             ) : (

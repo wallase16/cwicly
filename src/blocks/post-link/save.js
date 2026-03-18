@@ -1,5 +1,5 @@
 import { useBlockProps } from '@wordpress/block-editor';
-import { getCombinedClassName, getBlockID } from '../../utils/index.js';
+import { getCombinedClassName, getBlockID, getHtmlAttributes } from '../../utils/index.js';
 
 /**
  * Post Link save.
@@ -9,13 +9,14 @@ import { getCombinedClassName, getBlockID } from '../../utils/index.js';
 export default function save({ attributes }) {
     const { classID, classes, label, showArrow, newTab } = attributes;
     const blockProps = useBlockProps.save({
-        id: classID ? `cc-${classID}` : undefined,
+        id: getBlockID(attributes, 'post-link'),
         className: getCombinedClassName(attributes, classes || ''),
     });
 
     return (
         <a
             {...blockProps}
+            {...getHtmlAttributes(attributes)}
             href="{permalink=permalink}"
             target={newTab ? '_blank' : undefined}
             rel={newTab ? 'noopener noreferrer' : undefined}

@@ -9,6 +9,28 @@
  */
 
 /**
+ * Get HTML attributes string from attributes array.
+ * Mirrors src/utils/html-attributes.js logic.
+ *
+ * @param array $attributes Block attributes.
+ * @return string
+ */
+function cc_get_html_attributes( $attributes ) {
+	$html_attrs = '';
+	if ( isset( $attributes['htmlAttributes'] ) && is_array( $attributes['htmlAttributes'] ) ) {
+		foreach ( $attributes['htmlAttributes'] as $attr ) {
+			$key   = isset( $attr['key'] ) ? $attr['key'] : ( isset( $attr->key ) ? $attr->key : '' );
+			$value = isset( $attr['value'] ) ? $attr['value'] : ( isset( $attr->value ) ? $attr->value : '' );
+			
+			if ( $key && $value ) {
+				$html_attrs .= ' ' . esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
+			}
+		}
+	}
+	return $html_attrs;
+}
+
+/**
  * Condition checker
  *
  * @param array $conditions Conditions.

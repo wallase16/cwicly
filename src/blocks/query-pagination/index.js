@@ -25,6 +25,7 @@ registerBlockType('cwicly/query-pagination', {
         border:           { type: 'object', default: {} },
         shadow:           { type: 'object', default: {} },
         customCSS:        { type: 'string', default: '' },
+        htmlAttributes:   { type: 'array', default: [] },
     },
     supports: { html: false },
     edit,

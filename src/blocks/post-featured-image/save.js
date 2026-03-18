@@ -1,5 +1,5 @@
 import { useBlockProps } from '@wordpress/block-editor';
-import { getCombinedClassName, getBlockID } from '../../utils/index.js';
+import { getCombinedClassName, getBlockID, getHtmlAttributes } from '../../utils/index.js';
 
 /**
  * Post Featured Image save.
@@ -11,7 +11,7 @@ import { getCombinedClassName, getBlockID } from '../../utils/index.js';
 export default function save({ attributes }) {
     const { classID, classes, imageSize, isLink } = attributes;
     const blockProps = useBlockProps.save({
-        id: classID ? `cc-${classID}` : undefined,
+        id: getBlockID(attributes, 'post-featured-image'),
         className: getCombinedClassName(attributes, classes || ''),
     });
 
@@ -24,7 +24,7 @@ export default function save({ attributes }) {
     );
 
     return (
-        <figure {...blockProps} style={{ margin: 0 }}>
+        <figure {...blockProps} {...getHtmlAttributes(attributes)} style={{ margin: 0 }}>
             {isLink ? (
                 <a href="{permalink=permalink}">{img}</a>
             ) : (

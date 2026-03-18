@@ -25,7 +25,6 @@
   "author": "",
   "license": "ISC",
   "type": "module",
-  "sideEffects": false,
   "bugs": {
     "url": "https://github.com/StrangeTechDev/cwicly/issues"
   },

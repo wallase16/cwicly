@@ -1,5 +1,5 @@
 import { useBlockProps } from '@wordpress/block-editor';
-import { getCombinedClassName, getBlockID } from '../../utils/index.js';
+import { getCombinedClassName, getBlockID, getHtmlAttributes } from '../../utils/index.js';
 
 /**
  * Post Date save.
@@ -9,7 +9,7 @@ import { getCombinedClassName, getBlockID } from '../../utils/index.js';
 export default function save({ attributes }) {
     const { classID, classes, containerTag: Tag, dateType } = attributes;
     const blockProps = useBlockProps.save({
-        id: classID ? `cc-${classID}` : undefined,
+        id: getBlockID(attributes, 'post-date'),
         className: getCombinedClassName(attributes, classes || ''),
     });
 
@@ -18,6 +18,7 @@ export default function save({ attributes }) {
     return (
         <Tag
             {...blockProps}
+            {...getHtmlAttributes(attributes)}
             dateTime={Tag === 'time' ? tag : undefined}
         >
             {tag}
