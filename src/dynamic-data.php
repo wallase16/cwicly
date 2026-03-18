@@ -123,6 +123,17 @@ function cc_get_dyn( $tag, $attributes = [], $block = null ) {
 }
 
 /**
+ * Ensure query_index is passed to inner blocks from query loops.
+ * Gutenberg does not automatically propagate all context items deeply.
+ */
+add_filter( 'render_block_context', function( $context, $unparsed_block, $parent_block ) {
+    if ( isset( $parent_block->context['query_index'] ) ) {
+        $context['query_index'] = $parent_block->context['query_index'];
+    }
+    return $context;
+}, 10, 3 );
+
+/**
  * Resolve dynamic tags in Cwicly block HTML at render time.
  * Handles {source=field} patterns in the serialized block output.
  */
