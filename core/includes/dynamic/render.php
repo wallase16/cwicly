@@ -144,8 +144,12 @@ function cc_render( $content, $attributes, $block, $args = array(), $component =
 
 			$is_main_index = array_search( $main_breakpoint, array_keys( $breakpoints ), true );
 
-			$customcss = str_replace( 'blockclass', $attributes['classID'], $css );
-			$customcss = str_replace( 'blockid', $attributes['id'], $customcss );
+			// Pre-extract optional attributes to avoid PHP 8.x "Undefined array key" warnings.
+			$block_class_id = isset( $attributes['classID'] ) ? $attributes['classID'] : '';
+			$block_html_id  = isset( $attributes['id'] ) ? $attributes['id'] : '';
+
+			$customcss = str_replace( 'blockclass', $block_class_id, $css );
+			$customcss = str_replace( 'blockid', $block_html_id, $customcss );
 			$customcss = str_replace( array( "\r", "\n" ), '', $customcss );
 			$customcss = preg_replace( '!\s+!', ' ', $customcss );
 
@@ -170,15 +174,15 @@ function cc_render( $content, $attributes, $block, $args = array(), $component =
 			if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
 				add_action(
 					'wp_head',
-					function () use ( $customcss, $attributes ) {
-						echo '<style id="custom-css-' . esc_attr( $attributes['id'] ) . '">' . $customcss . '</style>' . PHP_EOL;
+					function () use ( $customcss, $block_html_id ) {
+						echo '<style id="custom-css-' . esc_attr( $block_html_id ) . '">' . $customcss . '</style>' . PHP_EOL;
 					}
 				);
 			} else {
 				add_action(
 					'wp_footer',
-					function () use ( $customcss, $attributes ) {
-						echo '<style id="custom-css-' . esc_attr( $attributes['id'] ) . '">' . $customcss . '</style>' . PHP_EOL;
+					function () use ( $customcss, $block_html_id ) {
+						echo '<style id="custom-css-' . esc_attr( $block_html_id ) . '">' . $customcss . '</style>' . PHP_EOL;
 					}
 				);
 			}

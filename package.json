@@ -8,6 +8,8 @@
   },
   "scripts": {
     "build": "wp-scripts build",
+    "build:prod": "NODE_ENV=production wp-scripts build",
+    "analyze": "wp-scripts build --webpack-bundle-analyzer",
     "start": "wp-scripts start",
     "playground": "npx @wp-playground/cli@latest start --blueprint=blueprint.json",
     "playground:server": "npx @wp-playground/cli@latest server --mount=.:/wordpress/wp-content/plugins/cwicly --blueprint=blueprint.json --login",
@@ -23,12 +25,14 @@
   "author": "",
   "license": "ISC",
   "type": "module",
+  "sideEffects": false,
   "bugs": {
     "url": "https://github.com/StrangeTechDev/cwicly/issues"
   },
   "homepage": "https://github.com/StrangeTechDev/cwicly#readme",
   "devDependencies": {
-    "@wordpress/scripts": "^31.6.0"
+    "@wordpress/scripts": "^31.6.0",
+    "webpack-bundle-analyzer": "^4.10.2"
   },
   "dependencies": {
     "@wordpress/block-editor": "^15.14.0",

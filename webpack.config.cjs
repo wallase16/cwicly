@@ -3,6 +3,9 @@ const path = require('path');
 
 module.exports = {
   ...defaultConfig,
+  // Suppress source maps in production builds (npm run build:prod).
+  // Dev builds retain source maps for debugging.
+  devtool: process.env.NODE_ENV === 'production' ? false : defaultConfig.devtool,
   externals: {
     ...defaultConfig.externals,
     'react': 'React',
@@ -28,6 +31,9 @@ module.exports = {
     '@wordpress/keycodes': ['wp', 'keycodes'],
     '@wordpress/date': ['wp', 'date'],
     '@wordpress/primitives': ['wp', 'primitives'],
+    // Lodash: must resolve to WP's bundled copy, never be included in our chunk.
+    'lodash': 'lodash',
+    'lodash-es': 'lodash',
   },
   resolve: {
     ...defaultConfig.resolve,

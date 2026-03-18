@@ -1,5 +1,8 @@
 import { __ } from '@wordpress/i18n';
 import { PanelBody, TextareaControl, TextControl, Button } from '@wordpress/components';
+import { lazy, Suspense } from '@wordpress/element';
+
+const InteractionsPanel = lazy(() => import('./InteractionsPanel.js'));
 
 /**
  * AdvancedPanel
@@ -29,6 +32,9 @@ export default function AdvancedPanel({ attributes, setAttributes }) {
 
     return (
         <div className="cwicly-advanced-panel">
+            <Suspense fallback={null}>
+                <InteractionsPanel attributes={attributes} setAttributes={setAttributes} />
+            </Suspense>
             {/* Extra CSS Classes */}
             <PanelBody title={__('CSS Classes', 'cwicly')} initialOpen={true}>
                 <TextControl

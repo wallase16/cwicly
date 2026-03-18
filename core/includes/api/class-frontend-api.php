@@ -48,6 +48,18 @@ class Frontend_API extends \WP_REST_Posts_Controller {
 				'permission_callback' => array( $this, 'get_items_permissions_check' ),
 			)
 		);
+
+		register_rest_route(
+			'cwicly/v1',
+			'invalidate_all_css',
+			array(
+				'methods'             => \WP_REST_Server::CREATABLE,
+				'callback'            => array( $this, 'invalidate_all_css' ),
+				'permission_callback' => function () {
+					return current_user_can( 'manage_options' );
+				},
+			)
+		);
 	}
 
 	/**
@@ -267,5 +279,39 @@ class Frontend_API extends \WP_REST_Posts_Controller {
 		$response->header( 'X-CC-Uncached', $not_cached ? 'true' : 'false' );
 
 		return $response;
+	}
+
+	/**
+	 * Invalidate all Cwicly CSS files and version options.
+	 *
+	 * @return \WP_REST_Response
+	 */
+	public function invalidate_all_css() {
+		$upload_dir     = wp_upload_dir();
+		$css_dir        = trailingslashit( $upload_dir['basedir'] ) . 'cwicly/css/';
+		$deleted_count  = 0;
+
+		if ( is_dir( $css_dir ) ) {
+			$files = glob( $css_dir . 'cc-post-*.css' );
+			foreach ( $files as $file ) {
+				if ( is_file( $file ) ) {
+					@unlink( $file );
+					$deleted_count++;
+
+					// Extract post ID from filename cc-post-{id}.css
+					if ( preg_match( '/cc-post-(\d+)\.css/', basename( $file ), $matches ) ) {
+						delete_option( 'cwicly_css_v_' . $matches[1] );
+					}
+				}
+			}
+		}
+
+		return new \WP_REST_Response(
+			array(
+				'success' => true,
+				'message' => sprintf( 'Successfully deleted %d CSS files.', $deleted_count ),
+			),
+			200
+		);
 	}
 }

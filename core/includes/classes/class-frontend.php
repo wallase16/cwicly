@@ -74,34 +74,37 @@ class Frontend {
 			if ( CC_WOOCOMMERCE && is_product() ) {
 				wp_enqueue_script( 'CCWoo', CWICLY_DIR_URL . 'assets/js/cc-woocommerce.min.js', null, CWICLY_VERSION, true );
 			}
-			// LOAD GLOBAL STYLES.
-			if ( ! is_admin() ) {
-				$global_css = get_option( 'cwicly_global_css' );
-				wp_register_style( 'cc-global', false, array(), CWICLY_VERSION );
-				wp_enqueue_style( 'cc-global' );
 
-				wp_add_inline_style( 'cc-global', $global_css );
-			}
+			// Memoize upload dir — avoids 4+ repeated filesystem stats per page load.
+			$upload_dir     = wp_upload_dir();
+			$upload_basedir = trailingslashit( $upload_dir['basedir'] );
+
+			// LOAD GLOBAL STYLES.
+			$global_css = get_option( 'cwicly_global_css' );
+			wp_register_style( 'cc-global', false, array(), CWICLY_VERSION );
+			wp_enqueue_style( 'cc-global' );
+			wp_add_inline_style( 'cc-global', $global_css );
 			// LOAD GLOBAL STYLES.
 
 			// LOAD GLOBAL STYLESHEET.
-			if ( ! is_admin() && file_exists( wp_upload_dir()['basedir'] . '/cwicly/cc-global-stylesheets.css' ) ) {
-				wp_enqueue_style( 'cc-global-stylesheets', CC_UPLOAD_URL . '/cwicly/cc-global-stylesheets.css', array(), filemtime( wp_upload_dir()['basedir'] . '/cwicly/cc-global-stylesheets.css' ) );
+			if ( file_exists( $upload_basedir . 'cwicly/cc-global-stylesheets.css' ) ) {
+				wp_enqueue_style( 'cc-global-stylesheets', CC_UPLOAD_URL . '/cwicly/cc-global-stylesheets.css', array(), filemtime( $upload_basedir . 'cwicly/cc-global-stylesheets.css' ) );
 			}
 
 			// LOAD TAILWIND STYLESHEET.
 			$tailwind = get_option( 'cwicly_tailwind' );
-			if ( ! is_admin() && file_exists( wp_upload_dir()['basedir'] . '/cwicly/cc-tailwind.css' ) && $tailwind && 'true' === $tailwind ) {
-				wp_enqueue_style( 'cc-tailwind', CC_UPLOAD_URL . '/cwicly/cc-tailwind.css', array(), filemtime( wp_upload_dir()['basedir'] . '/cwicly/cc-tailwind.css' ) );
+			if ( file_exists( $upload_basedir . 'cwicly/cc-tailwind.css' ) && $tailwind && 'true' === $tailwind ) {
+				wp_enqueue_style( 'cc-tailwind', CC_UPLOAD_URL . '/cwicly/cc-tailwind.css', array(), filemtime( $upload_basedir . 'cwicly/cc-tailwind.css' ) );
 			}
 
 			// LOAD GLOBAL CLASSES.
-			if ( ! is_admin() && file_exists( wp_upload_dir()['basedir'] . '/cwicly/cc-global-classes.css' ) ) {
-				wp_enqueue_style( 'cc-global-classes', CC_UPLOAD_URL . '/cwicly/cc-global-classes.css', array(), filemtime( wp_upload_dir()['basedir'] . '/cwicly/cc-global-classes.css' ) );
+			if ( file_exists( $upload_basedir . 'cwicly/cc-global-classes.css' ) ) {
+				wp_enqueue_style( 'cc-global-classes', CC_UPLOAD_URL . '/cwicly/cc-global-classes.css', array(), filemtime( $upload_basedir . 'cwicly/cc-global-classes.css' ) );
 			}
 
 			// LOAD POST STYLESHEET.
 			$post_id = get_the_ID();
+
 
 			if ( \Cwicly\WPML::is_wpml_active() ) {
 				if ( apply_filters( 'cwicly/frontend/wpml/original_post_stylesheet', true ) ) {
@@ -111,9 +114,17 @@ class Frontend {
 			if ( \Cwicly\Polylang::is_polylang_active() ) {
 				$post_id = \Cwicly\Polylang::get_translated_post_id();
 			}
-			if ( ! is_admin() && $post_id && file_exists( wp_upload_dir()['basedir'] . '/cwicly/css/cc-post-' . $post_id . '.css' ) ) {
-				wp_enqueue_style( 'cc-post-' . $post_id . '', CC_UPLOAD_URL . '/cwicly/css/cc-post-' . $post_id . '.css', array(), filemtime( wp_upload_dir()['basedir'] . '/cwicly/css/cc-post-' . $post_id . '.css' ) );
+			if ( $post_id && file_exists( $upload_basedir . 'cwicly/css/cc-post-' . $post_id . '.css' ) ) {
+				$css_path   = $upload_basedir . 'cwicly/css/cc-post-' . $post_id . '.css';
+				$css_url    = CC_UPLOAD_URL . '/cwicly/css/cc-post-' . $post_id . '.css';
+				// Use option-based stamp first (survives object cache); fall back to filemtime.
+				$cc_version = (int) get_option( 'cwicly_css_v_' . $post_id, 0 );
+				if ( ! $cc_version ) {
+					$cc_version = filemtime( $css_path );
+				}
+				wp_enqueue_style( 'cc-post-' . $post_id, $css_url, array(), $cc_version );
 			}
+
 
 			$cwicly_optimise = get_option( 'cwicly_optimise' );
 			$cwicly_defaults = 'false';

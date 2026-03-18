@@ -11,7 +11,17 @@ import './blocks/heading/index.js';
 import './blocks/paragraph/index.js';
 import './blocks/image/index.js';
 import './blocks/button/index.js';
+// Phase 16: Query Loop & Templates
+import './blocks/query-loop/index.js';
+import './blocks/query-template/index.js';
+import './blocks/query-no-results/index.js';
+import './blocks/query-pagination/index.js';
+import './blocks/post-title/index.js';
+// Phase 16.x: Query child content blocks
+import './blocks/post-featured-image/index.js';
+import './blocks/post-excerpt/index.js';
+import './blocks/post-date/index.js';
+import './blocks/post-link/index.js';
 import initStyleSaver from './hooks/style-saver.js';
 
 initStyleSaver();
-// Add more blocks here as they are rebuilt

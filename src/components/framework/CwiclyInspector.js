@@ -1,8 +1,8 @@
 import { useSelect, useDispatch } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import { Fragment, useEffect } from '@wordpress/element';
+import { Fragment, useEffect, lazy, Suspense } from '@wordpress/element';
 import classnames from 'classnames';
-import GlobalStylesPanel from './GlobalStylesPanel.js';
+const GlobalStylesPanel = lazy(() => import('./GlobalStylesPanel.js'));
 import GlobalClassPicker from './GlobalClassPicker.js';
 
 
@@ -91,7 +91,11 @@ export default function CwiclyInspector({ attributes, setAttributes, name, isCom
                     )}
                 </div>
             </div>
-            {inspectortab.tab === 'global' && <GlobalStylesPanel />}
+            {inspectortab.tab === 'global' && (
+                <Suspense fallback={null}>
+                    <GlobalStylesPanel />
+                </Suspense>
+            )}
         </Fragment>
 
     );

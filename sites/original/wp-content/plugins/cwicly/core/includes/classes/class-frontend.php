@@ -69,8 +69,6 @@ class Frontend {
 		if ( ! is_admin() ) {
 			wp_enqueue_script( 'CCers', CWICLY_DIR_URL . 'assets/js/ccers.min.js', null, CWICLY_VERSION, true );
 
-			wp_register_script( 'cc-interactions', CWICLY_DIR_URL . 'src/frontend/interactions.js', array(), CWICLY_VERSION, true );
-
 			if ( CC_WOOCOMMERCE && is_product() ) {
 				wp_enqueue_script( 'CCWoo', CWICLY_DIR_URL . 'assets/js/cc-woocommerce.min.js', null, CWICLY_VERSION, true );
 			}

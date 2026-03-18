@@ -81,6 +81,18 @@ function cc_get_dyn( $tag, $attributes = [], $block = null ) {
                 $value = '-q-' . $block->context['query_index'];
             }
             break;
+
+        case 'post_date':
+            // {post_date=post_date}     → publish date in site default format
+            // {post_date=post_modified} → modified date in site default format
+            // {post_date=Y-m-d}         → publish date in custom format
+            if ( 'post_modified' === $field ) {
+                $value = get_the_modified_date( get_option( 'date_format' ), $post_id );
+            } else {
+                $fmt   = ( $field && 'post_date' !== $field ) ? $field : get_option( 'date_format' );
+                $value = get_the_date( $fmt, $post_id );
+            }
+            break;
     }
 
     // Handle array/object ACF values (e.g. ACF Image field)
@@ -108,12 +120,13 @@ add_filter(
             return $block_content;
         }
 
-        $attrs = $block['attrs'] ?? [];
+        $attrs      = $block['attrs'] ?? [];
+        $block_obj  = isset( $block['wp_block'] ) ? $block['wp_block'] : null;
 
         return preg_replace_callback(
             '/\{([\w-]+)=([\w-]*)\}/',
-            function ( $matches ) use ( $attrs ) {
-                return cc_get_dyn( $matches[0], $attrs, null );
+            function ( $matches ) use ( $attrs, $block_obj ) {
+                return cc_get_dyn( $matches[0], $attrs, $block_obj );
             },
             $block_content
         );

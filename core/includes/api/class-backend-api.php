@@ -1976,10 +1976,16 @@ class Backend_API extends \WP_REST_Controller {
 					$content = $final_font . $final_global_font . $final_common . $responsive_content;
 
 					if ( $content && $filename ) {
-						file_put_contents( $dir . $filename, $content );
-					} elseif ( file_exists( $dir . $filename ) ) {
-						unlink( $dir . $filename );
-					}
+							file_put_contents( $dir . $filename, $content ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+							// Bump per-post version stamp so object-cached filemtime() is bypassed.
+							// $main_key is e.g. "post-9" → post ID = 9.
+							$post_id_from_key = (int) str_replace( 'post-', '', $main_key );
+							if ( $post_id_from_key > 0 ) {
+								update_option( 'cwicly_css_v_' . $post_id_from_key, time(), false );
+							}
+						} elseif ( file_exists( $dir . $filename ) ) {
+							unlink( $dir . $filename ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+						}
 				}
 			}
 			return array(

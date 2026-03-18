@@ -50,6 +50,7 @@ class Setup {
 		}
 
 		add_action( 'transition_post_status', array( $this, 'new_component' ), 10, 3 );
+		add_action( 'save_post', array( $this, 'clear_post_css' ) );
 	}
 
 	/**
@@ -885,5 +886,24 @@ class Setup {
 			CWICLY_DIR_URL . 'core/assets/css/content.css',
 			array( 'wp-components' )
 		);
+	}
+
+	/**
+	 * Clear post CSS on save.
+	 *
+	 * @param int $post_id The post ID.
+	 */
+	public function clear_post_css( $post_id ) {
+		// Avoid clearing on autosave or revision.
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+
+		$upload_dir = wp_upload_dir();
+		$css_path   = trailingslashit( $upload_dir['basedir'] ) . 'cwicly/css/cc-post-' . $post_id . '.css';
+		if ( file_exists( $css_path ) ) {
+			@unlink( $css_path );
+		}
+		delete_option( 'cwicly_css_v_' . $post_id );
 	}
 }

@@ -1,3 +1,12 @@
 [16-Mar-2026 23:20:57] NOTICE: fpm is running, pid 113234
 [16-Mar-2026 23:20:57] NOTICE: ready to handle connections
 [16-Mar-2026 23:20:57] NOTICE: systemd monitor interval set to 10000ms
+[17-Mar-2026 21:59:54] WARNING: [pool php] server reached pm.max_children setting (5), consider raising it
+[17-Mar-2026 22:00:03] WARNING: [pool php] server reached pm.max_children setting (5), consider raising it
+[17-Mar-2026 22:00:24] WARNING: [pool php] server reached pm.max_children setting (5), consider raising it
+[17-Mar-2026 22:00:54] WARNING: [pool php] server reached pm.max_children setting (5), consider raising it
+[17-Mar-2026 22:02:05] WARNING: [pool php] server reached pm.max_children setting (5), consider raising it
+[17-Mar-2026 22:02:33] NOTICE: Terminating ...
+[17-Mar-2026 22:02:33] NOTICE: Terminating ...
+[17-Mar-2026 22:02:33] NOTICE: Terminating ...
+[17-Mar-2026 22:02:35] NOTICE: exiting, bye-bye!
