@@ -46,4 +46,17 @@
 {"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: Buffer pool(s) load completed at 260317 23:18:10"}
 {"level":"info","process":"mysql-configure","replica":0,"message":"Sleeping 1s while we wait for MySQL to come up"}
 {"level":"error","process":"mysql-configure","replica":0,"message":"/nix/store/fhjcar6z841y22rb5l0sclfxn11gipmb-mariadb-server-11.4.9/bin/mysqladmin: Deprecated program name. It will be removed in a future release, use '/nix/store/fhjcar6z841y22rb5l0sclfxn11gipmb-mariadb-server-11.4.9/bin/mariadb-admin' instead"}
-{"level
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:11 0 [Note] Server socket created on IP: '0.0.0.0', port: '3306'."}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:11 0 [Note] Server socket created on IP: '::', port: '3306'."}
+{"level":"info","process":"mysql","replica":0,"message":"TCP probe succeeded - process ready"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:11 0 [Note] mysqld: Event Scheduler: Loaded 0 events"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:11 0 [Note] /nix/store/fhjcar6z841y22rb5l0sclfxn11gipmb-mariadb-server-11.4.9/bin/mysqld: ready for connections."}
+{"level":"error","process":"mysql","replica":0,"message":"Version: '11.4.9-MariaDB'  socket: '/run/user/1000/devenv-e09cf13/mysql.sock'  port: 3306  MariaDB Server"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:11 3 [Warning] Aborted connection 3 to db: 'unconnected' user: 'unauthenticated' host: 'localhost' (This connection closed normally without authentication)"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:11 4 [Warning] Aborted connection 4 to db: 'unconnected' user: 'unauthenticated' host: 'localhost' (This connection closed normally without authentication)"}
+{"level":"error","process":"mysql-configure","replica":0,"message":"/nix/store/fhjcar6z841y22rb5l0sclfxn11gipmb-mariadb-server-11.4.9/bin/mysqladmin: Deprecated program name. It will be removed in a future release, use '/nix/store/fhjcar6z841y22rb5l0sclfxn11gipmb-mariadb-server-11.4.9/bin/mariadb-admin' instead"}
+{"level":"info","process":"mysql-configure","replica":0,"message":"mysqld is alive"}
+{"level":"error","process":"mysql-configure","replica":0,"message":"/nix/store/fhjcar6z841y22rb5l0sclfxn11gipmb-mariadb-server-11.4.9/bin/mysql: Deprecated program name. It will be removed in a future release, use '/nix/store/fhjcar6z841y22rb5l0sclfxn11gipmb-mariadb-server-11.4.9/bin/mariadb' instead"}
+{"level":"error","process":"mysql-configure","replica":0,"message":"/nix/store/fhjcar6z841y22rb5l0sclfxn11gipmb-mariadb-server-11.4.9/bin/mysql: Deprecated program name. It will be removed in a future release, use '/nix/store/fhjcar6z841y22rb5l0sclfxn11gipmb-mariadb-server-11.4.9/bin/mariadb' instead"}
+{"level":"info","process":"mysql-configure","replica":0,"message":"Database wordpress_original exists, skipping creation."}
+{"level":"info","process":"mysql-configure","replica":0,"message":"Database wordpress_rebuilt exists, skipping creation."}

@@ -22,6 +22,10 @@ import './blocks/post-featured-image/index.js';
 import './blocks/post-excerpt/index.js';
 import './blocks/post-date/index.js';
 import './blocks/post-link/index.js';
+// Phase 19: Accordion
+import './blocks/accordion/index.js';
+import './blocks/accordion-header/index.js';
+import './blocks/accordion-content/index.js';
 import initStyleSaver from './hooks/style-saver.js';
 
 initStyleSaver();

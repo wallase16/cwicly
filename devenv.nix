@@ -2,21 +2,46 @@
 
 {
   # ---------------------------------------------------------------- #
+  # Portability and Root                                             #
+  # ---------------------------------------------------------------- #
+  devenv.root = "/home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly";
+
+  # ---------------------------------------------------------------- #
   # Packages and Languages                                           #
   # ---------------------------------------------------------------- #
   packages = with pkgs; [ 
     wp-cli 
     curl 
     unzip
-    php83.packages.composer
-    nodejs_24
   ];
+
+  languages.javascript = {
+    enable = true;
+    package = pkgs.nodejs_24;
+  };
 
   languages.php = {
     enable = true;
     package = pkgs.php83;
     extensions = [ "mysqli" "pdo_mysql" "gd" "intl" "zip" "openssl" ];
+    fpm.pools.php = {
+      settings = {
+        "pm" = "dynamic";
+        "pm.max_children" = 5;
+        "pm.start_servers" = 2;
+        "pm.min_spare_servers" = 1;
+        "pm.max_spare_servers" = 3;
+      };
+    };
   };
+
+  # Rule 1: Expose the devenv-managed PHP-FPM socket via /run/user/1000/
+  # devenv's socket path is read-only, so we symlink it on shell entry.
+  enterShell = ''
+    if [ -S "${config.languages.php.fpm.pools.php.socket}" ]; then
+      ln -sf "${config.languages.php.fpm.pools.php.socket}" /run/user/1000/cwicly-php.sock
+    fi
+  '';
 
   # ---------------------------------------------------------------- #
   # Services: MySQL (MariaDB)                                        #
@@ -32,12 +57,15 @@
 
   # ---------------------------------------------------------------- #
   # Services: Caddy (Reverse Proxy and PHP handling)                #
+  # Rule 2: Ports 8002/8003 are scratch/dev only (acceptable use)   #
+  # Centralized routing: system Caddy proxies :8000 → :8003         #
   # ---------------------------------------------------------------- #
   services.caddy = {
     enable = true;
     config = ''
       http://localhost:8002 {
         root * ./sites/original
+        # UDS via symlink at /run/user/1000/cwicly-php.sock → devenv socket
         php_fastcgi unix/${config.languages.php.fpm.pools.php.socket}
         file_server
       }
