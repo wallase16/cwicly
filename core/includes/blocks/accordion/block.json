@@ -3,6 +3,10 @@
     "apiVersion": 3,
     "name": "cwicly/accordion",
     "title": "Accordion",
+    "providesContext": {
+        "cwicly/uniqueID": "uniqueID",
+        "cwicly/accordionOpen": "accordionOpen"
+    },
     "category": "cwicly",
     "description": "Display all kinds of information in collapsible rows.",
     "keywords": [

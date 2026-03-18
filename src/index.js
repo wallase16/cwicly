@@ -26,6 +26,11 @@ import './blocks/post-link/index.js';
 import './blocks/accordion/index.js';
 import './blocks/accordion-header/index.js';
 import './blocks/accordion-content/index.js';
+// Phase 20: Tabs
+import './blocks/tab-list/index.js';
+import './blocks/tab/index.js';
+import './blocks/tab-contents/index.js';
+import './blocks/tab-content/index.js';
 import initStyleSaver from './hooks/style-saver.js';
 
 initStyleSaver();

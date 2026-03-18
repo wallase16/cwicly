@@ -33,12 +33,24 @@ add_action( 'init', 'cwicly_accordioncontent_register' );
  */
 function cc_accordion_content_render_callback( $attributes, $content, $block ) {
 	if ( ! is_admin() && isset( $attributes['effectsTiltControl'] ) && $attributes['effectsTiltControl'] ) {
-		wp_enqueue_script( 'cc-tilter', CWICLY_DIR_URL . 'assets/js/tilter.js', null, CWICLY_VERSION, true );
+		wp_enqueue_script( 'cc-tilter', CWICLY_DIR_URL . 'assets/js/tilter.js', array(), CWICLY_VERSION, true );
 	}
 
 	$conditions = \Cwicly\Helpers::block_conditions_check( $attributes, $block );
 
 	if ( $conditions ) {
-		return cc_render( $content, $attributes, $block );
+		$open  = \Cwicly\Helpers::tag_maker( $attributes, $block, true );
+		$close = \Cwicly\Helpers::tag_maker( $attributes, $block, false );
+
+		$parent_id = isset( $block->context['cwicly/uniqueID'] ) ? $block->context['cwicly/uniqueID'] : 'default';
+
+		$content_attrs  = ' data-cc-accordion-content="true"';
+		$content_attrs .= ' role="region"';
+		$content_attrs .= ' aria-labelledby="cc-accordion-header-' . esc_attr( $parent_id ) . '"';
+		$content_attrs .= ' id="cc-accordion-content-' . esc_attr( $parent_id ) . '"';
+
+		return '<' . $open . $content_attrs . '>' . cc_render( $content, $attributes, $block ) . $close;
 	}
+
+	return '';
 }

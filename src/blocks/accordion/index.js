@@ -43,6 +43,10 @@ registerBlockType('cwicly/accordion', {
     anchor: true,
     html: false,
   },
+  providesContext: {
+    'cwicly/uniqueID': 'uniqueID',
+    'cwicly/accordionOpen': 'accordionOpen',
+  },
   edit,
   save,
 });

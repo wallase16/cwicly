@@ -2,6 +2,9 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
     "name": "cwicly/tabcontent",
+    "usesContext": [
+        "cwicly/tabContentsID"
+    ],
     "title": "Tab Content",
     "category": "cwicly",
     "description": "Place and organise your Tab content here.",

@@ -2,6 +2,9 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
     "name": "cwicly/tablist",
+    "providesContext": {
+        "cwicly/tabContentsID": "tabContentsID"
+    },
     "title": "Tab List",
     "category": "cwicly",
     "description": "Organise your different tab blocks in a logical layout.",

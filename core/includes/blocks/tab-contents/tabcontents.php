@@ -1,17 +1,12 @@
 <?php
 /**
- * Register Cwicly block.
- *
- * @package cwicly
+ * Register Cwicly Tab Contents block.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit;
 }
 
-/**
- * Register block render callback.
- */
 function cwicly_tabcontents_register() {
 	register_block_type(
 		__DIR__,
@@ -22,23 +17,11 @@ function cwicly_tabcontents_register() {
 }
 add_action( 'init', 'cwicly_tabcontents_register' );
 
-/**
- * Render callback.
- *
- * @param array  $attributes Block attributes.
- * @param string $content Block content.
- * @param object $block Block data.
- *
- * @return string
- */
 function cc_tabcontents_render_callback( $attributes, $content, $block ) {
-	if ( ! is_admin() && isset( $attributes['effectsTiltControl'] ) && $attributes['effectsTiltControl'] ) {
-		wp_enqueue_script( 'cc-tilter', CWICLY_DIR_URL . 'assets/js/tilter.js', null, CWICLY_VERSION, true );
-	}
+	$open  = \Cwicly\Helpers::tag_maker( $attributes, $block, true );
+	$close = \Cwicly\Helpers::tag_maker( $attributes, $block, false );
 
-	$conditions = \Cwicly\Helpers::block_conditions_check( $attributes, $block );
+	$tab_contents_attrs = ' data-cc-tab-contents="true"';
 
-	if ( $conditions ) {
-		return cc_render( $content, $attributes, $block );
-	}
+	return '<' . $open . $tab_contents_attrs . '>' . cc_render( $content, $attributes, $block ) . $close;
 }

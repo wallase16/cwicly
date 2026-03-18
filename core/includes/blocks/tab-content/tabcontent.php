@@ -1,17 +1,12 @@
 <?php
 /**
- * Register Cwicly block.
- *
- * @package cwicly
+ * Register Cwicly Tab Content block.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit;
 }
 
-/**
- * Register block render callback.
- */
 function cwicly_tabcontent_register() {
 	register_block_type(
 		__DIR__,
@@ -22,23 +17,23 @@ function cwicly_tabcontent_register() {
 }
 add_action( 'init', 'cwicly_tabcontent_register' );
 
-/**
- * Render callback.
- *
- * @param array  $attributes Block attributes.
- * @param string $content Block content.
- * @param object $block Block data.
- *
- * @return string
- */
 function cc_tabcontent_render_callback( $attributes, $content, $block ) {
-	if ( ! is_admin() && isset( $attributes['effectsTiltControl'] ) && $attributes['effectsTiltControl'] ) {
-		wp_enqueue_script( 'cc-tilter', CWICLY_DIR_URL . 'assets/js/tilter.js', null, CWICLY_VERSION, true );
-	}
+	$open  = \Cwicly\Helpers::tag_maker( $attributes, $block, true );
+	$close = \Cwicly\Helpers::tag_maker( $attributes, $block, false );
 
-	$conditions = \Cwicly\Helpers::block_conditions_check( $attributes, $block );
+	$is_active = $attributes['tabActive'] ?? false;
+		$tab_index = isset( $attributes['tabIndex'] ) ? $attributes['tabIndex'] : 1;
+		$is_active = isset( $attributes['tabActive'] ) && $attributes['tabActive'];
+		$contents_id = isset( $block->context['cwicly/tabContentsID'] ) ? $block->context['cwicly/tabContentsID'] : 'default';
 
-	if ( $conditions ) {
-		return cc_render( $content, $attributes, $block );
-	}
+		$content_attrs  = ' role="tabpanel"';
+		$content_attrs .= ' id="cc-tab-content-' . esc_attr( $contents_id ) . '-' . esc_attr( $tab_index ) . '"';
+		$content_attrs .= ' aria-labelledby="cc-tab-' . esc_attr( $contents_id ) . '-' . esc_attr( $tab_index ) . '"';
+		$content_attrs .= ' data-cc-tab-content="true"';
+		$content_attrs .= ' data-tab-index="' . esc_attr( $tab_index ) . '"';
+		if ( $is_active ) {
+			$content_attrs .= ' data-cc-tab-content-active="true"';
+		}
+
+		return '<' . $open . $content_attrs . '>' . cc_render( $content, $attributes, $block ) . $close;
 }

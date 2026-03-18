@@ -2,6 +2,9 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
     "name": "cwicly/tabcontents",
+    "providesContext": {
+        "cwicly/tabContentsID": "uniqueID"
+    },
     "title": "Tab Contents",
     "category": "cwicly",
     "description": "Group together your different Tab Content blocks in a clear and logical layout.",

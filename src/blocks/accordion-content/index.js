@@ -35,10 +35,7 @@ registerBlockType('cwicly/accordion-content', {
     interactions: { type: 'object', default: { click: [], dbclick: [], scrollinview: [] } },
     globalClasses: { type: 'array', default: [] },
   },
-  supports: {
-    anchor: true,
-    html: false,
-  },
+  usesContext: ['cwicly/uniqueID'],
   edit,
   save,
 });

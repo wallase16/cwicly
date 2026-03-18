@@ -1,17 +1,12 @@
 <?php
 /**
- * Register Cwicly block.
- *
- * @package cwicly
+ * Register Cwicly Tab block.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit;
 }
 
-/**
- * Register block render callback.
- */
 function cwicly_tab_register() {
 	register_block_type(
 		__DIR__,
@@ -22,23 +17,19 @@ function cwicly_tab_register() {
 }
 add_action( 'init', 'cwicly_tab_register' );
 
-/**
- * Render callback.
- *
- * @param array  $attributes Block attributes.
- * @param string $content Block content.
- * @param object $block Block data.
- *
- * @return string
- */
 function cc_tab_render_callback( $attributes, $content, $block ) {
-	if ( ! is_admin() && isset( $attributes['effectsTiltControl'] ) && $attributes['effectsTiltControl'] ) {
-		wp_enqueue_script( 'cc-tilter', CWICLY_DIR_URL . 'assets/js/tilter.js', null, CWICLY_VERSION, true );
-	}
+	$open  = \Cwicly\Helpers::tag_maker( $attributes, $block, true );
+	$close = \Cwicly\Helpers::tag_maker( $attributes, $block, false );
 
-	$conditions = \Cwicly\Helpers::block_conditions_check( $attributes, $block );
+	$tab_index = isset( $attributes['tabIndex'] ) ? $attributes['tabIndex'] : 1;
+	$is_active = isset( $attributes['tabActive'] ) && $attributes['tabActive'];
+	$contents_id = isset( $block->context['cwicly/tabContentsID'] ) ? $block->context['cwicly/tabContentsID'] : 'default';
 
-	if ( $conditions ) {
-		return cc_render( $content, $attributes, $block );
-	}
+	$tab_attrs  = ' role="tab"';
+	$tab_attrs .= ' aria-selected="' . ( $is_active ? 'true' : 'false' ) . '"';
+	$tab_attrs .= ' data-tab-index="' . esc_attr( $tab_index ) . '"';
+	$tab_attrs .= ' id="cc-tab-' . esc_attr( $contents_id ) . '-' . esc_attr( $tab_index ) . '"';
+	$tab_attrs .= ' aria-controls="cc-tab-content-' . esc_attr( $contents_id ) . '-' . esc_attr( $tab_index ) . '"';
+
+	return '<' . $open . $tab_attrs . '>' . cc_render( $content, $attributes, $block ) . $close;
 }
