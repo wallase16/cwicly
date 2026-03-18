@@ -18,17 +18,57 @@ wp_set_current_user($user->ID);
 // Block content for a complex section
 $block_content = '<!-- wp:cwicly/section {
     "uniqueID": "parity-section",
-    "padding": {"lg": {"top": "50px", "right": "50px", "bottom": "50px", "left": "50px"}},
+    "padding": {
+        "lg": {"top": "50px", "right": "50px", "bottom": "50px", "left": "50px"},
+        "md": {"top": "30px", "right": "30px", "bottom": "30px", "left": "30px"},
+        "sm": {"top": "15px", "right": "15px", "bottom": "15px", "left": "15px"}
+    },
     "background": {"lg": {"backgroundType": "solid", "backgroundColor": "#f8f9fa"}},
-    "typography": {"lg": {"fontSize": "20px", "fontWeight": "600"}},
+    "typography": {
+        "lg": {"fontSize": "20px", "fontWeight": "600"},
+        "md": {"fontSize": "18px"},
+        "sm": {"fontSize": "16px"}
+    },
     "interactions": {"click": [{"action": "toggleClass", "value": "active-parity", "target": "current"}]},
     "aos": {"animation": "fade-up", "duration": 1000},
-    "globalClass": ["parity-global-class"]
+    "globalClass": ["parity-global-class"],
+    "htmlAttributes": [{"key": "data-parity", "value": "verified-section"}, {"key": "aria-label", "value": "Parity Test Section"}]
 } -->
-<section id="parity-section" class="parity-global-class">
+<section id="parity-section" class="parity-global-class" data-parity="verified-section" aria-label="Parity Test Section">
+    <!-- wp:cwicly/heading {
+        "uniqueID": "parity-h",
+        "content": "Parity Test Heading",
+        "htmlAttributes": [{"key": "data-test", "value": "heading-attr"}]
+    } -->
+    <h1 id="parity-h" class="cc-parity-h" data-test="heading-attr">Parity Test Heading</h1>
+    <!-- /wp:cwicly/heading -->
+
     <!-- wp:cwicly/paragraph {"uniqueID": "parity-p"} -->
     <p id="parity-p">This is a parity test paragraph.</p>
     <!-- /wp:cwicly/paragraph -->
+
+    <!-- wp:cwicly/post-title {
+        "uniqueID": "parity-post-title",
+        "htmlAttributes": [{"key": "data-dynamic", "value": "true"}]
+    } /-->
+
+    <!-- wp:cwicly/query-loop {
+        "uniqueID": "parity-query",
+        "query": {"post_type": "post", "posts_per_page": 2}
+    } -->
+    <div id="parity-query" class="cc-parity-query">
+        <!-- wp:cwicly/query-template {"uniqueID": "parity-template"} -->
+        <div id="parity-template" class="cc-parity-template">
+            <!-- wp:cwicly/paragraph {
+                "uniqueID": "parity-loop-p",
+                "content": "Post Index: {query_index=query_index}"
+            } -->
+            <p id="parity-loop-p">Post Index: {query_index=query_index}</p>
+            <!-- /wp:cwicly/paragraph -->
+        </div>
+        <!-- /wp:cwicly/query-template -->
+    </div>
+    <!-- /wp:cwicly/query-loop -->
 </section>
 <!-- /wp:cwicly/section -->';
 

@@ -39,6 +39,8 @@ function cc_section_render_callback( $attributes, $content, $block ) {
 	$conditions = \Cwicly\Helpers::block_conditions_check( $attributes, $block );
 
 	if ( $conditions ) {
-		return cc_render( $content, $attributes, $block );
+		$open  = \Cwicly\Helpers::tag_maker( $attributes, $block, true );
+		$close = \Cwicly\Helpers::tag_maker( $attributes, $block, false );
+		return '<' . $open . '>' . cc_render( $content, $attributes, $block ) . $close;
 	}
 }

@@ -75,9 +75,28 @@ function cc_get_dyn( $tag, $attributes = [], $block = null ) {
             $value = get_permalink( $post_id );
             break;
 
+        case 'query_index':
+            if ( $block && isset( $block->context['query_index'] ) ) {
+                $value = $block->context['query_index'];
+            } else if ( $block ) {
+                // Check for potential aliases
+                if ( isset( $block->context['queryIndex'] ) ) {
+                    $value = $block->context['queryIndex'];
+                } else if ( isset( $block->context['repeater_row'] ) ) {
+                    $value = $block->context['repeater_row'];
+                } else {
+                    // Fallback to global query index if available
+                    global $wp_query;
+                    if ( isset( $wp_query->current_post ) ) {
+                        $value = $wp_query->current_post + 1;
+                    }
+                }
+            }
+            break;
+
         case 'idadd':
             // Loop indicators (-q-1, etc.)
-            if ( isset( $block->context['query_index'] ) ) {
+            if ( $block && isset( $block->context['query_index'] ) ) {
                 $value = '-q-' . $block->context['query_index'];
             }
             break;
@@ -109,7 +128,7 @@ function cc_get_dyn( $tag, $attributes = [], $block = null ) {
  */
 add_filter(
     'render_block',
-    function ( $block_content, $block ) {
+    function ( $block_content, $block, $instance ) {
         // Only process Cwicly blocks.
         if ( strpos( $block['blockName'] ?? '', 'cwicly/' ) !== 0 ) {
             return $block_content;

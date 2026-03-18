@@ -1,0 +1,49 @@
+{"level":"error","process":"caddy","replica":0,"message":"Running tasks     devenv:processes:caddy"}
+{"level":"error","process":"caddy","replica":0}
+{"level":"error","process":"phpfpm-php","replica":0,"message":"Running tasks     devenv:processes:phpfpm-php"}
+{"level":"error","process":"phpfpm-php","replica":0}
+{"level":"error","process":"mysql","replica":0,"message":"Running tasks     devenv:processes:mysql"}
+{"level":"error","process":"mysql","replica":0}
+{"level":"error","process":"mysql-configure","replica":0,"message":"Running tasks     devenv:processes:mysql-configure"}
+{"level":"error","process":"mysql-configure","replica":0}
+{"level":"error","process":"mysql-configure","replica":0,"message":"/nix/store/fhjcar6z841y22rb5l0sclfxn11gipmb-mariadb-server-11.4.9/bin/mysqladmin: Deprecated program name. It will be removed in a future release, use '/nix/store/fhjcar6z841y22rb5l0sclfxn11gipmb-mariadb-server-11.4.9/bin/mariadb-admin' instead"}
+{"level":"info","process":"mysql-configure","replica":0,"message":"Sleeping 1s while we wait for MySQL to come up"}
+{"level":"error","process":"mysql","replica":0,"message":"/nix/store/fhjcar6z841y22rb5l0sclfxn11gipmb-mariadb-server-11.4.9/bin/mysqld: Deprecated program name. It will be removed in a future release, use '/nix/store/fhjcar6z841y22rb5l0sclfxn11gipmb-mariadb-server-11.4.9/bin/mariadbd' instead"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] Starting MariaDB 11.4.9-MariaDB source revision aa6a2e6bf05d43c3bb44db50566937a5f97a6580 server_uid zkSgCIexxa6wPRLWW64R0X13kiw= as process 26004"}
+{"level":"error","process":"caddy","replica":0,"message":"{\"level\":\"info\",\"ts\":1773803890.6468794,\"msg\":\"maxprocs: Leaving GOMAXPROCS=8: CPU quota undefined\"}"}
+{"level":"error","process":"caddy","replica":0,"message":"{\"level\":\"info\",\"ts\":1773803890.6469476,\"msg\":\"GOMEMLIMIT is updated\",\"GOMEMLIMIT\":29916201369,\"previous\":9223372036854775807}"}
+{"level":"error","process":"caddy","replica":0,"message":"{\"level\":\"info\",\"ts\":1773803890.6469834,\"msg\":\"using config from file\",\"file\":\"/nix/store/76icg6yi53hwgjl9pdf86sm73b646mrx-caddy-config.json\"}"}
+{"level":"error","process":"caddy","replica":0,"message":"{\"level\":\"info\",\"ts\":1773803890.6499543,\"logger\":\"admin\",\"msg\":\"admin endpoint started\",\"address\":\"localhost:2019\",\"enforce_origin\":false,\"origins\":[\"//127.0.0.1:2019\",\"//localhost:2019\",\"//[::1]:2019\"]}"}
+{"level":"error","process":"caddy","replica":0,"message":"{\"level\":\"info\",\"ts\":1773803890.6516657,\"logger\":\"tls.cache.maintenance\",\"msg\":\"started background certificate maintenance\",\"cache\":\"0xc000517580\"}"}
+{"level":"error","process":"caddy","replica":0,"message":"{\"level\":\"warn\",\"ts\":1773803890.6561575,\"logger\":\"http\",\"msg\":\"HTTP/2 skipped because it requires TLS\",\"network\":\"tcp\",\"addr\":\":8003\"}"}
+{"level":"error","process":"caddy","replica":0,"message":"{\"level\":\"warn\",\"ts\":1773803890.6562023,\"logger\":\"http\",\"msg\":\"HTTP/3 skipped because it requires TLS\",\"network\":\"tcp\",\"addr\":\":8003\"}"}
+{"level":"error","process":"caddy","replica":0,"message":"{\"level\":\"info\",\"ts\":1773803890.656216,\"logger\":\"http.log\",\"msg\":\"server running\",\"name\":\"srv1\",\"protocols\":[\"h1\",\"h2\",\"h3\"]}"}
+{"level":"error","process":"caddy","replica":0,"message":"{\"level\":\"warn\",\"ts\":1773803890.6563687,\"logger\":\"http\",\"msg\":\"HTTP/2 skipped because it requires TLS\",\"network\":\"tcp\",\"addr\":\":8002\"}"}
+{"level":"error","process":"caddy","replica":0,"message":"{\"level\":\"warn\",\"ts\":1773803890.6563907,\"logger\":\"http\",\"msg\":\"HTTP/3 skipped because it requires TLS\",\"network\":\"tcp\",\"addr\":\":8002\"}"}
+{"level":"error","process":"caddy","replica":0,"message":"{\"level\":\"info\",\"ts\":1773803890.6564007,\"logger\":\"http.log\",\"msg\":\"server running\",\"name\":\"srv0\",\"protocols\":[\"h1\",\"h2\",\"h3\"]}"}
+{"level":"error","process":"caddy","replica":0,"message":"{\"level\":\"info\",\"ts\":1773803890.6569455,\"msg\":\"autosaved config (load with --resume flag)\",\"file\":\"/home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/.devenv/state/caddy/config/caddy/autosave.json\"}"}
+{"level":"error","process":"caddy","replica":0,"message":"{\"level\":\"info\",\"ts\":1773803890.656972,\"msg\":\"serving initial configuration\"}"}
+{"level":"error","process":"caddy","replica":0,"message":"{\"level\":\"info\",\"ts\":1773803890.6584966,\"logger\":\"tls\",\"msg\":\"storage cleaning happened too recently; skipping for now\",\"storage\":\"FileStorage:/home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/.devenv/state/caddy/data/caddy\",\"instance\":\"93a6985a-1493-4fb9-988f-a94ce960fddd\",\"try_again\":1773890290.6584911,\"try_again_in\":86399.999998175}"}
+{"level":"error","process":"caddy","replica":0,"message":"{\"level\":\"info\",\"ts\":1773803890.6587172,\"logger\":\"tls\",\"msg\":\"finished cleaning storage units\"}"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: Compressed tables use zlib 1.3.1"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: Using transactional memory"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: Number of transaction pools: 1"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: Using crc32 + pclmulqdq instructions"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: Using io_uring"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: innodb_buffer_pool_size_max=128m, innodb_buffer_pool_size=128m"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: Initialized memory pressure event listener"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: Completed initialization of buffer pool"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: File system buffers for log disabled (block size=512 bytes)"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: End of log at LSN=19420902"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: Opened 3 undo tablespaces"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: 128 rollback segments in 3 undo tablespaces are active."}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: Setting file './ibtmp1' size to 12.000MiB. Physically writing the file full; Please wait ..."}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: File './ibtmp1' size is now 12.000MiB."}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: log sequence number 19420902; transaction id 72621"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: Loading buffer pool(s) from /home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/.devenv/state/mysql/ib_buffer_pool"}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] Plugin 'FEEDBACK' is disabled."}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] Plugin 'wsrep-provider' is disabled."}
+{"level":"error","process":"mysql","replica":0,"message":"2026-03-17 23:18:10 0 [Note] InnoDB: Buffer pool(s) load completed at 260317 23:18:10"}
+{"level":"info","process":"mysql-configure","replica":0,"message":"Sleeping 1s while we wait for MySQL to come up"}
+{"level":"error","process":"mysql-configure","replica":0,"message":"/nix/store/fhjcar6z841y22rb5l0sclfxn11gipmb-mariadb-server-11.4.9/bin/mysqladmin: Deprecated program name. It will be removed in a future release, use '/nix/store/fhjcar6z841y22rb5l0sclfxn11gipmb-mariadb-server-11.4.9/bin/mariadb-admin' instead"}
+{"level

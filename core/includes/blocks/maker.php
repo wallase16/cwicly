@@ -67,3 +67,4 @@ require_once CWICLY_DIR_PATH . 'core/includes/blocks/inner-blocks/inner-blocks.p
 
 require_once CWICLY_DIR_PATH . 'core/includes/blocks/container/container.php';
 require_once CWICLY_DIR_PATH . 'core/includes/blocks/svg/svg.php';
+require_once CWICLY_DIR_PATH . 'core/includes/blocks/post-child-blocks.php';

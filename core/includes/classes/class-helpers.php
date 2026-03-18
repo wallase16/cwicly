@@ -1328,6 +1328,13 @@ class Helpers {
 			if ( $id ) {
 				$custom_tag .= ' id="' . esc_attr( $id ) . '"';
 			}
+
+			// Add the automatic Cwicly class for styling
+			$class_id = isset( $attributes['classID'] ) ? $attributes['classID'] : ( isset( $attributes['uniqueID'] ) ? $attributes['uniqueID'] : '' );
+			if ( $class_id ) {
+				$custom_tag .= ' class="cc-' . esc_attr( $class_id ) . '"';
+			}
+
 			$custom_tag .= \cc_get_html_attributes( $attributes );
 		}
 
