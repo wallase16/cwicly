@@ -1,0 +1,7 @@
+/home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/.devenv/bootstrap/bootstrapLib.nix
+/home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/.devenv/bootstrap/default.nix
+/home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/.devenv/bootstrap/resolve-lock.nix
+/home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/devenv.local.nix
+/home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/devenv.lock
+/home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/devenv.nix
+/home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/.env

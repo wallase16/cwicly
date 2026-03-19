@@ -60,10 +60,11 @@ class Setup {
 	 */
 	public function enqueue_block_assets() {
 		if ( is_admin() ) {
+			$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 			wp_enqueue_style( 'CC-styles', CWICLY_DIR_URL . 'build/style-index.css', array( 'CCnorm' ), CWICLY_VERSION );
 			wp_enqueue_style( 'CC-wrapper', CWICLY_DIR_URL . 'core/assets/css/editor-wrapper.css', array( 'CCnorm' ), CWICLY_VERSION );
 			wp_enqueue_style( 'CC-hover-animation', CWICLY_DIR_URL . 'assets/css/hover-animation.css', array( 'CCnorm' ), CWICLY_VERSION );
-			wp_enqueue_style( 'CC-gallery', CWICLY_DIR_URL . 'assets/css/gallery.css', array( 'CCnorm' ), CWICLY_VERSION );
+			wp_enqueue_style( 'CC-gallery', CWICLY_DIR_URL . 'assets/css/gallery' . $suffix . '.css', array( 'CCnorm' ), CWICLY_VERSION );
 			wp_enqueue_style( 'CC-splide', CWICLY_DIR_URL . 'assets/css/splide.css', array( 'CCnorm' ), CWICLY_VERSION );
 			wp_enqueue_style( 'CC-swiper', CWICLY_DIR_URL . 'assets/css/swiper.css', array( 'CCnorm' ), CWICLY_VERSION );
 
@@ -111,7 +112,7 @@ class Setup {
 
 			// Load admin.min.css to add styles to the quick edit links.
 			if ( is_admin_bar_showing() ) {
-				wp_enqueue_style( 'cwicly-admin', CWICLY_DIR_URL . 'core/assets/css/admin.min.css', null, CWICLY_VERSION );
+				wp_enqueue_style( 'cwicly-admin', CWICLY_DIR_URL . 'core/assets/css/admin.min.css', array(), CWICLY_VERSION );
 			}
 
 			$args = array(

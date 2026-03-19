@@ -18,6 +18,7 @@ require_once CWICLY_DIR_PATH . 'core/includes/api/class-admin-api.php';
 require_once CWICLY_DIR_PATH . 'core/includes/api/class-editor-api.php';
 require_once CWICLY_DIR_PATH . 'core/includes/api/class-main-query-api.php';
 require_once CWICLY_DIR_PATH . 'core/includes/api/class-frontend-api.php';
+require_once CWICLY_DIR_PATH . 'core/includes/api/class-interactions-api.php';
 
 if ( CC_WOOCOMMERCE ) {
 	require_once CWICLY_DIR_PATH . 'core/includes/api/class-woocommerce-api.php';
@@ -36,6 +37,7 @@ function cc_api_starter() {
 	static $editor;
 	static $main_query;
 	static $frontend;
+	static $interactions;
 
 	static $woocommerce;
 
@@ -72,6 +74,10 @@ function cc_api_starter() {
 
 	if ( ! $frontend ) {
 		$frontend = new \Cwicly\Frontend_API();
+	}
+
+	if ( ! $interactions ) {
+		$interactions = new \Cwicly\Interactions_API();
 	}
 
 	if ( CC_WOOCOMMERCE ) {

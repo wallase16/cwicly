@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cwicly/wait",
+	"title": "Wait",
+	"category": "cwicly",
+	"parent": ["cwicly/form"],
+	"description": "A feedback block to show during form submission or data loading.",
+	"keywords": [
+		"wait",
+		"loading",
+		"loader",
+		"form",
+		"cwicly"
+	],
+	"textdomain": "cwicly",
+	"attributes": {
+		"uniqueID": { "type": "string" },
+		"classID": { "type": "string" },
+		"message": { "type": "string", "default": "Please wait..." },
+		"showLoader": { "type": "boolean", "default": true },
+		"isOverlay": { "type": "boolean", "default": true },
+		"isStyling": { "type": "boolean", "default": true },
+		"customCSS": { "type": "string", "default": "" }
+	},
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"style": "cwicly-wait-style"
+}

@@ -30,9 +30,13 @@ function cc_render( $content, $attributes, $block, $args = array(), $component =
 		'</ccdyn>',
 	);
 
+	$div_additions = array();
+	$interactions_data = '';
+
 	if ( isset( $attributes['tooltipActive'] ) && $attributes['tooltipActive'] ) {
+		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		wp_enqueue_script( 'cc-popper', CWICLY_DIR_URL . 'assets/js/popper.js', array(), CWICLY_VERSION, false );
-		wp_enqueue_script( 'cc-tooltip', CWICLY_DIR_URL . 'assets/js/tooltip.js', array( 'cc-popper' ), CWICLY_VERSION, true );
+		wp_enqueue_script( 'cc-tooltip', CWICLY_DIR_URL . 'assets/js/tooltip' . $suffix . '.js', array( 'cc-popper' ), CWICLY_VERSION, true );
 
 		if ( isset( $attributes['tooltipAnimation'] ) && $attributes['tooltipAnimation'] ) {
 			if ( 'material' === $attributes['tooltipAnimation'] ) {
@@ -96,20 +100,29 @@ function cc_render( $content, $attributes, $block, $args = array(), $component =
 	}
 
 	if ( isset( $attributes['scrollDirectionActive'] ) && $attributes['scrollDirectionActive'] ) {
-		wp_enqueue_script( 'cc-scrolld', CWICLY_DIR_URL . 'assets/js/cc-scrolld.min.js', array(), CWICLY_VERSION, true );
+		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		wp_enqueue_script( 'cc-scrolld', CWICLY_DIR_URL . 'assets/js/cc-scrolld' . $suffix . '.js', array(), CWICLY_VERSION, true );
 	}
 	if ( isset( $attributes['linkWrapperActive'] ) && $attributes['linkWrapperActive'] && isset( $attributes['linkWrapperType'] ) && 'action' === $attributes['linkWrapperType'] && isset( $attributes['linkWrapperAction'] ) && 'scrolltotop' === $attributes['linkWrapperAction'] ) {
-		wp_enqueue_script( 'cc-backtop', CWICLY_DIR_URL . 'assets/js/cc-backtop.min.js', array(), CWICLY_VERSION, true );
+		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		wp_enqueue_script( 'cc-backtop', CWICLY_DIR_URL . 'assets/js/cc-backtop' . $suffix . '.js', array(), CWICLY_VERSION, true );
 	}
 	if ( isset( $attributes['dynamic'] ) && 'wordpress' === $attributes['dynamic'] && isset( $attributes['dynamicWordPressType'] ) && 'readtime' === $attributes['dynamicWordPressType'] ) { // phpcs:ignore WordPress.WP.CapitalPDangit
-		wp_enqueue_script( 'cc-readtime', CWICLY_DIR_URL . 'assets/js/cc-readtime.min.js', array(), CWICLY_VERSION, true );
+		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		wp_enqueue_script( 'cc-readtime', CWICLY_DIR_URL . 'assets/js/cc-readtime' . $suffix . '.js', array(), CWICLY_VERSION, true );
 	}
 	if ( isset( $attributes['interactions'] ) && $attributes['interactions'] ) {
+		$has_interactions = false;
 		foreach ( $attributes['interactions'] as $key => $value ) {
 			if ( preg_match( '/click|dbclick|mousedown|mouseenter|mouseleave|mouseout|mouseover|mouseup|scrollinview|urlHash/', $key ) && count( $value ) > 0 ) {
-				wp_enqueue_script( 'cc-interactions', CWICLY_DIR_URL . 'assets/js/cc-interactions.min.js', array(), CWICLY_VERSION, true );
+				$has_interactions = true;
+				$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+				wp_enqueue_script( 'cc-interactions', CWICLY_DIR_URL . 'assets/js/cc-interactions' . $suffix . '.js', array(), CWICLY_VERSION, true );
 				break;
 			}
+		}
+		if ( $has_interactions ) {
+			$interactions_data = ' data-cc-interaction=\'' . wp_json_encode( $attributes['interactions'], JSON_HEX_APOS ) . '\'';
 		}
 	}
 
@@ -194,8 +207,9 @@ function cc_render( $content, $attributes, $block, $args = array(), $component =
 	}
 
 	if ( isset( $attributes['animateOnScrollType'] ) && $attributes['animateOnScrollType'] ) {
+		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		wp_enqueue_script( 'cc-aos', CWICLY_DIR_URL . 'assets/js/aos.js', array(), CWICLY_VERSION, false );
-		wp_enqueue_style( 'cc-aos', CWICLY_DIR_URL . 'assets/css/aos.css', array(), CWICLY_VERSION );
+		wp_enqueue_style( 'cc-aos', CWICLY_DIR_URL . 'assets/css/aos' . $suffix . '.css', array(), CWICLY_VERSION );
 	}
 
 	if ( isset( $attributes['interactions'] ) && $attributes['interactions'] ) {
@@ -208,13 +222,15 @@ function cc_render( $content, $attributes, $block, $args = array(), $component =
 
 	if ( isset( $attributes['linkWrapperActive'] ) && $attributes['linkWrapperActive'] ) {
 		if ( isset( $attributes['linkWrapperType'] ) && 'action' === $attributes['linkWrapperType'] && isset( $attributes['linkWrapperAction'] ) && 'lightbox' === $attributes['linkWrapperAction'] ) {
-			wp_enqueue_style( 'cc-lightbox', CWICLY_DIR_URL . 'assets/css/lightbox.css', array(), CWICLY_VERSION );
+			$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+			wp_enqueue_style( 'cc-lightbox', CWICLY_DIR_URL . 'assets/css/lightbox' . $suffix . '.css', array(), CWICLY_VERSION );
 			wp_enqueue_script( 'cc-lightbox', CWICLY_DIR_URL . 'assets/js/lightbox.js', array(), CWICLY_VERSION, true );
 		}
 	}
 
+	$all_data = $interactions_data . ( ! empty( $div_additions ) ? ' ' . implode( ' ', $div_additions ) : '' );
 	if ( $component ) {
-		return cc_parser( $content, $attributes, $block );
+		return cc_inject_data_attributes( cc_parser( $content, $attributes, $block ), $all_data );
 	} elseif ( 'cwicly/query' === $block->parsed_block['blockName'] ) {
 		if ( isset( $attributes['frontendRendering'] ) && $attributes['frontendRendering'] ) {
 			$skeleton_html_no_anim = ( new Cwicly_Skeleton() )->cc_skeleton_block( $block );
@@ -249,7 +265,7 @@ function cc_render( $content, $attributes, $block, $args = array(), $component =
 			}
 		}
 
-		return $content;
+		return cc_inject_data_attributes( $content, $all_data );
 	} elseif ( 'cwicly/query-template' === $block->parsed_block['blockName'] ) {
 		if ( isset( $block->context['frontendRendering'] ) && $block->context['frontendRendering'] ) {
 			return null;
@@ -265,7 +281,7 @@ function cc_render( $content, $attributes, $block, $args = array(), $component =
 			$content = preg_replace( $re, $value, $content );
 		}
 
-		return $content;
+		return cc_inject_data_attributes( $content, $all_data );
 	} elseif ( 'cwicly/filter' === $block->parsed_block['blockName'] ) {
 		$content = cc_parser( $content, $attributes, $block );
 		if ( strpos( $content, '![start]!' ) !== false ) {
@@ -281,7 +297,7 @@ function cc_render( $content, $attributes, $block, $args = array(), $component =
 			$content               = preg_replace( $re, $value, $content );
 		}
 
-		return $content;
+		return cc_inject_data_attributes( $content, $all_data );
 	} elseif ( 'cwicly/repeater' === $block->parsed_block['blockName'] ) {
 		$content = cc_parser( $content, $attributes, $block );
 		$value   = cc_repeater_maker( $attributes, $block );
@@ -292,12 +308,12 @@ function cc_render( $content, $attributes, $block, $args = array(), $component =
 		}
 		$content = preg_replace( $re, $value, $content );
 
-		return $content;
-	} elseif ( 'cwicly/slider' === $block->parsed_block['blockName'] ) {
+		return cc_inject_data_attributes( $content, $all_data );
+	} elseif ( 'cwicly/styler' === $block->parsed_block['blockName'] ) {
 		$content  = cc_parser( $content, $attributes, $block );
 		$content .= cc_slider_maker( $attributes, $block );
 
-		return $content;
+		return cc_inject_data_attributes( $content, $all_data );
 	} elseif ( 'cwicly/taxonomyterms' === $block->parsed_block['blockName'] ) {
 		$content = cc_parser( $content, $attributes, $block );
 		$value   = cc_taxonomyterms_maker( $attributes, $block );
@@ -440,12 +456,17 @@ function cc_render( $content, $attributes, $block, $args = array(), $component =
 					$gallery_html .= '<a class="cc-lightbox cc-gallery-lightbox" href="' . esc_url( $img_url ) . '">';
 				}
 
-				$img_style = 'width: 100%; height: 100%; object-fit: cover;';
-				if ( 'masonry' === $gallery_type ) {
-					$img_style = 'width: 100%; display: block;';
+				$img_width  = isset( $image['width'] ) ? $image['width'] : '';
+				$img_height = isset( $image['height'] ) ? $image['height'] : '';
+				$img_attr   = '';
+				if ( $img_width ) {
+					$img_attr .= ' width="' . esc_attr( $img_width ) . '"';
+				}
+				if ( $img_height ) {
+					$img_attr .= ' height="' . esc_attr( $img_height ) . '"';
 				}
 
-				$gallery_html .= '<img src="' . esc_url( $img_url ) . '" alt="' . esc_attr( $img_alt ) . '" style="' . esc_attr( $img_style ) . '" />';
+				$gallery_html .= '<img src="' . esc_url( $img_url ) . '" alt="' . esc_attr( $img_alt ) . '" style="' . esc_attr( $img_style ) . '"' . $img_attr . ' loading="lazy" />';
 
 				if ( $link_active && 'lightbox' === $link_type ) {
 					$gallery_html .= '</a>';
@@ -517,7 +538,7 @@ function cc_render( $content, $attributes, $block, $args = array(), $component =
 			$content = $map_html;
 		}
 
-		return $content;
+		return cc_inject_data_attributes( $content, $all_data );
 	} elseif ( 'cwicly/code' === $block->parsed_block['blockName'] ) {
 		$content = cc_parser( $content, $attributes, $block );
 
@@ -539,7 +560,45 @@ function cc_render( $content, $attributes, $block, $args = array(), $component =
 			$content = $code_html;
 		}
 
-		return $content;
+		return cc_inject_data_attributes( $content, $all_data );
+	} elseif ( 'cwicly/form' === $block->parsed_block['blockName'] ) {
+		$content = cc_parser( $content, $attributes, $block );
+
+		$action_type     = isset( $attributes['actionType'] ) ? $attributes['actionType'] : 'email';
+		$success_message = isset( $attributes['successMessage'] ) ? $attributes['successMessage'] : '';
+		$error_message   = isset( $attributes['errorMessage'] ) ? $attributes['errorMessage'] : '';
+		$email_to        = isset( $attributes['emailTo'] ) ? $attributes['emailTo'] : '';
+		$webhook_url     = isset( $attributes['webhookUrl'] ) ? $attributes['webhookUrl'] : '';
+		$redirect_url    = isset( $attributes['redirectUrl'] ) ? $attributes['redirectUrl'] : '';
+		$unique_id       = isset( $attributes['uniqueID'] ) ? $attributes['uniqueID'] : '';
+
+		$form_data = 'data-action-type="' . esc_attr( $action_type ) . '" ';
+		$form_data .= 'data-success-message="' . esc_attr( $success_message ) . '" ';
+		$form_data .= 'data-error-message="' . esc_attr( $error_message ) . '" ';
+		$form_data .= 'data-form-id="' . esc_attr( $unique_id ) . '" ';
+		
+		if ( 'email' === $action_type ) {
+			$form_data .= 'data-email-to="' . esc_attr( $email_to ) . '" ';
+		} elseif ( 'webhook' === $action_type ) {
+			$form_data .= 'data-webhook-url="' . esc_url( $webhook_url ) . '" ';
+		} elseif ( 'redirect' === $action_type ) {
+			$form_data .= 'data-redirect-url="' . esc_url( $redirect_url ) . '" ';
+		}
+
+		if ( strpos( $content, '![start]!' ) !== false ) {
+			$re = '/!\[start\]!(.*?)!\[end\]!/s';
+		} else {
+			$re = '/<ccdyn>(.*?)<\/ccdyn>/s';
+		}
+
+		if ( preg_match( $re, $content, $matches ) ) {
+			// Wrap the inner content in a form tag with our data attributes
+			$inner_content = $matches[1];
+			$form_html = '<form class="cc-form" ' . $form_data . ' method="POST">' . $inner_content . '</form>';
+			$content = preg_replace( $re, $form_html, $content );
+		}
+
+		return cc_inject_data_attributes( $content, $all_data );
 	} elseif ( isset( $attributes['dynamicContext'] ) && 'woocart' === $attributes['dynamicContext'] ) {
 		$skeleton_html_no_anim = ( new Cwicly_Skeleton() )->cc_skeleton_block( $block );
 		$content               = cc_parser( $content, $attributes, $block );
@@ -551,9 +610,9 @@ function cc_render( $content, $attributes, $block, $args = array(), $component =
 		$value   = $skeleton_html_no_anim;
 		$content = preg_replace( $re, $value, $content );
 
-		return $content;
+		return cc_inject_data_attributes( cc_parser( $content, $attributes, $block ), $all_data );
 	} else {
-		return cc_parser( $content, $attributes, $block );
+		return cc_inject_data_attributes( cc_parser( $content, $attributes, $block ), $all_data );
 	}
 }
 
@@ -4419,4 +4478,20 @@ function cc_get_dyn( $dyn, $args, $attributes, $block, $match = '', $manual_post
 	}
 
 	return $value;
+}
+
+/**
+ * Inject data attributes into the first tag of the content.
+ *
+ * @param string $content The content.
+ * @param string $data    The data attributes.
+ * @return string
+ */
+function cc_inject_data_attributes( $content, $data ) {
+if ( empty( $data ) ) {
+ $content;
+}
+
+// Find the first tag and inject the data attributes.
+return preg_replace( '/^<([a-z1-6]+)/i', '<$1' . $data, $content, 1 );
 }

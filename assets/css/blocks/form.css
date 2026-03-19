@@ -1,0 +1,88 @@
+/* Form Block Styling */
+.cc-form {
+	position: relative;
+	width: 100%;
+}
+
+/* Field Block Styling */
+.cc-field-container {
+	margin-bottom: 1.5rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.cc-field-label {
+	font-weight: 600;
+	margin-bottom: 0.5rem;
+	font-size: 0.9rem;
+}
+
+.cc-field-input {
+	padding: 0.75rem;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 1rem;
+	transition: border-color 0.2s;
+}
+
+.cc-field-input:focus {
+	outline: none;
+	border-color: #007cba;
+	box-shadow: 0 0 0 2px rgba(0, 124, 186, 0.1);
+}
+
+.cc-field-textarea {
+	min-height: 120px;
+	resize: vertical;
+}
+
+.cc-field-checkbox {
+	width: auto;
+	align-self: flex-start;
+}
+
+/* Wait Block & Loader */
+.cc-wait {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.8);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+	backdrop-filter: blur(2px);
+	border-radius: inherit;
+}
+
+.cc-wait-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 9999;
+}
+
+.cc-wait-message {
+	margin-top: 1rem;
+	font-weight: 500;
+	color: #333;
+}
+
+.cc-loader-spinner {
+	width: 40px;
+	height: 40px;
+	border: 4px solid #f3f3f3;
+	border-top: 4px solid #007cba;
+	border-radius: 50%;
+	animation: cc-spin 1s linear infinite;
+}
+
+@keyframes cc-spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}

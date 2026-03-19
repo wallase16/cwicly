@@ -27,6 +27,7 @@ add_action( 'init', 'cwicly_map_register' );
  */
 function cc_map_render_callback( $attributes, $content, $block ) {
 	if ( ! is_admin() ) {
+		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		wp_enqueue_style( 'leaflet-css', CWICLY_DIR_URL . 'assets/css/leaflet.css', array(), CWICLY_VERSION );
 		wp_enqueue_script( 'leaflet-js', CWICLY_DIR_URL . 'assets/js/leaflet.js', array(), CWICLY_VERSION, true );
 		wp_enqueue_script( 'cwicly-map-js', CWICLY_DIR_URL . 'assets/js/maps-leaflet.js', array( 'leaflet-js' ), CWICLY_VERSION, true );

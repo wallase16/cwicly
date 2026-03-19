@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cwicly/form",
+	"title": "Form",
+	"category": "cwicly",
+	"description": "A powerful form wrapper block for handling submissions and feedback.",
+	"keywords": [
+		"form",
+		"submission",
+		"contact",
+		"cwicly"
+	],
+	"textdomain": "cwicly",
+	"attributes": {
+		"uniqueID": { "type": "string" },
+		"classID": { "type": "string" },
+		"actionType": { "type": "string", "default": "email" },
+		"emailTo": { "type": "string", "default": "" },
+		"emailSubject": { "type": "string", "default": "New Form Submission" },
+		"webhookUrl": { "type": "string", "default": "" },
+		"redirectUrl": { "type": "string", "default": "" },
+		"successMessage": { "type": "string", "default": "Thank you! Your message has been sent." },
+		"errorMessage": { "type": "string", "default": "Oops! Something went wrong. Please try again." },
+		"isStyling": { "type": "boolean", "default": true },
+		"customCSS": { "type": "string", "default": "" }
+	},
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"style": "cwicly-form-style"
+}

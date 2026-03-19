@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cwicly/field",
+	"title": "Field",
+	"category": "cwicly",
+	"parent": ["cwicly/form"],
+	"description": "A versatile input field for Cwicly forms.",
+	"keywords": [
+		"input",
+		"field",
+		"form",
+		"cwicly"
+	],
+	"textdomain": "cwicly",
+	"attributes": {
+		"uniqueID": { "type": "string" },
+		"classID": { "type": "string" },
+		"inputType": { "type": "string", "default": "text" },
+		"label": { "type": "string", "default": "Label" },
+		"name": { "type": "string", "default": "" },
+		"placeholder": { "type": "string", "default": "Placeholder..." },
+		"required": { "type": "boolean", "default": false },
+		"inputValue": { "type": "string", "default": "" },
+		"options": { "type": "array", "default": [] },
+		"isStyling": { "type": "boolean", "default": true },
+		"customCSS": { "type": "string", "default": "" }
+	},
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"style": "cwicly-field-style"
+}
