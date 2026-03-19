@@ -33,16 +33,17 @@ add_action( 'init', 'cwicly_gallery_register' );
  */
 function cc_gallery_render_callback( $attributes, $content, $block ) {
 	if ( isset( $attributes['linkWrapperType'] ) && 'lightbox' === $attributes['linkWrapperType'] && ! is_admin() ) {
-		wp_enqueue_style( 'cc-lightbox', CWICLY_DIR_URL . 'assets/css/lightbox.css', null, CWICLY_VERSION );
-		wp_enqueue_script( 'cc-lightbox', CWICLY_DIR_URL . 'assets/js/lightbox.js', null, CWICLY_VERSION, true );
+		wp_enqueue_style( 'cc-lightbox', CWICLY_DIR_URL . 'assets/css/lightbox.css', array(), CWICLY_VERSION );
+		wp_enqueue_script( 'cc-lightbox', CWICLY_DIR_URL . 'assets/js/lightbox.js', array(), CWICLY_VERSION, true );
 	}
 	if ( ! is_admin() && isset( $attributes['effectsTiltControl'] ) && $attributes['effectsTiltControl'] ) {
-		wp_enqueue_script( 'cc-tilter', CWICLY_DIR_URL . 'assets/js/tilter.js', null, CWICLY_VERSION, false );
+		wp_enqueue_script( 'cc-tilter', CWICLY_DIR_URL . 'assets/js/tilter.js', array(), CWICLY_VERSION, false );
 	}
 
 	if ( ! is_admin() ) {
-		wp_enqueue_style( 'cc-gallery', CWICLY_DIR_URL . 'assets/css/gallery.css', null, CWICLY_VERSION );
-		wp_enqueue_script( 'cc-gallery', CWICLY_DIR_URL . 'assets/js/cc-gallery.min.js', null, CWICLY_VERSION, true );
+		wp_enqueue_script( 'cc-helpers-js', CWICLY_DIR_URL . 'assets/js/ccers.min.js', array(), CWICLY_VERSION, true );
+		wp_enqueue_style( 'cc-gallery', CWICLY_DIR_URL . 'assets/css/gallery.css', array(), CWICLY_VERSION );
+		wp_enqueue_script( 'cc-gallery', CWICLY_DIR_URL . 'assets/js/cc-gallery.min.js', array( 'cc-helpers-js' ), CWICLY_VERSION, true );
 	}
 
 	$conditions = \Cwicly\Helpers::block_conditions_check( $attributes, $block );
@@ -50,4 +51,6 @@ function cc_gallery_render_callback( $attributes, $content, $block ) {
 	if ( $conditions ) {
 		return cc_render( $content, $attributes, $block );
 	}
+
+	return '';
 }

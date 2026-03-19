@@ -45,6 +45,10 @@
     ],
     "style": "Gallery",
     "attributes": {
+        "images": {
+            "type": "array",
+            "default": []
+        },
         "isTopComponentBlock": {
             "type": "boolean"
         },
