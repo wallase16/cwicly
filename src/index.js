@@ -31,6 +31,9 @@ import './blocks/tab-list/index.js';
 import './blocks/tab/index.js';
 import './blocks/tab-contents/index.js';
 import './blocks/tab-content/index.js';
+// Phase 24: Slider
+import './blocks/slider/index.js';
+import './blocks/sliderchild/index.js';
 import initStyleSaver from './hooks/style-saver.js';
 
 initStyleSaver();

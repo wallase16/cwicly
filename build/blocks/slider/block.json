@@ -1,0 +1,101 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "cwicly/slider",
+  "title": "Slider",
+  "category": "cwicly",
+  "description": "A carousel is a slideshow, a component that allows you to browse different elements one after the other.",
+  "keywords": [
+    "slider",
+    "carousel",
+    "slide",
+    "cwicly"
+  ],
+  "textdomain": "cwicly",
+  "supports": {
+    "customClassName": false,
+    "html": false
+  },
+  "usesContext": [
+    "postId",
+    "query_index",
+    "isComponent",
+    "componentIndex"
+  ],
+  "providesContext": {
+    "has_parent": "has_parent"
+  },
+  "attributes": {
+    "id": {
+      "type": "string"
+    },
+    "classID": {
+      "type": "string"
+    },
+    "uniqueID": {
+      "type": "string"
+    },
+    "sliderAutoPlay": {
+      "type": "boolean",
+      "default": false
+    },
+    "sliderAutoPlayDuration": {
+      "type": "string",
+      "default": "3000"
+    },
+    "sliderLoop": {
+      "type": "boolean",
+      "default": false
+    },
+    "sliderDirection": {
+      "type": "string",
+      "default": "horizontal"
+    },
+    "sliderFade": {
+      "type": "boolean",
+      "default": false
+    },
+    "sliderNumberPerWindow": {
+      "type": "object",
+      "default": {
+        "lg": 3
+      }
+    },
+    "sliderSpaceBetween": {
+      "type": "object",
+      "default": {
+        "lg": 10
+      }
+    },
+    "sliderDots": {
+      "type": "boolean",
+      "default": true
+    },
+    "sliderButtons": {
+      "type": "boolean",
+      "default": true
+    },
+    "sliderGrabCursor": {
+      "type": "boolean",
+      "default": true
+    },
+    "sliderCentered": {
+      "type": "boolean",
+      "default": false
+    },
+    "customCSS": {
+      "type": "string",
+      "default": ""
+    },
+    "htmlAttributes": {
+      "type": "array",
+      "default": []
+    },
+    "interactions": {
+      "type": "object",
+      "default": {}
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css"
+}

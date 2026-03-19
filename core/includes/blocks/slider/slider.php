@@ -1,6 +1,6 @@
 <?php
 /**
- * Register Cwicly block.
+ * Register Cwicly Slider block.
  *
  * @package cwicly
  */
@@ -33,19 +33,54 @@ add_action( 'init', 'cwicly_slider_register' );
  */
 function cc_slider_render_callback( $attributes, $content, $block ) {
 	if ( ! is_admin() ) {
-		wp_enqueue_style( 'Swiper', CWICLY_DIR_URL . 'assets/css/swiper.css', null, CWICLY_VERSION );
-		wp_enqueue_script( 'Swiper', CWICLY_DIR_URL . 'assets/js/swiper.js', null, CWICLY_VERSION, true );
-		wp_enqueue_script( 'cc-slider', CWICLY_DIR_URL . 'assets/js/cc-slider.min.js', array( 'Swiper' ), CWICLY_VERSION, true );
-		wp_enqueue_script( 'cc-slider-nav', CWICLY_DIR_URL . 'assets/js/cc-slider-nav.min.js', array( 'Swiper' ), CWICLY_VERSION, true );
-	}
-
-	if ( ! is_admin() && isset( $attributes['effectsTiltControl'] ) && $attributes['effectsTiltControl'] ) {
-		wp_enqueue_script( 'cc-tilter', CWICLY_DIR_URL . 'assets/js/tilter.js', null, CWICLY_VERSION, true );
+		wp_enqueue_style( 'cc-swiper', CWICLY_DIR_URL . 'assets/css/swiper.css', array(), CWICLY_VERSION );
+		wp_enqueue_script( 'cc-swiper', CWICLY_DIR_URL . 'assets/js/swiper.js', array(), CWICLY_VERSION, true );
+		wp_enqueue_script( 'cc-slider', CWICLY_DIR_URL . 'assets/js/cc-slider.min.js', array( 'cc-swiper' ), CWICLY_VERSION, true );
 	}
 
 	$conditions = \Cwicly\Helpers::block_conditions_check( $attributes, $block );
 
 	if ( $conditions ) {
-		return cc_render( $content, $attributes, $block );
+		$open  = \Cwicly\Helpers::tag_maker( $attributes, $block, true );
+		$close = \Cwicly\Helpers::tag_maker( $attributes, $block, false );
+
+		$data_attrs = ' data-slider="true"';
+		$data_attrs .= ' data-autoplay="' . ( ( $attributes['sliderAutoPlay'] ?? false ) ? 'true' : '' ) . '"';
+		$data_attrs .= ' data-autoplayduration="' . esc_attr( $attributes['sliderAutoPlayDuration'] ?? '3000' ) . '"';
+		$data_attrs .= ' data-loop="' . ( ( $attributes['sliderLoop'] ?? false ) ? 'true' : '' ) . '"';
+		$data_attrs .= ' data-slidedirection="' . esc_attr( $attributes['sliderDirection'] ?? 'horizontal' ) . '"';
+		$data_attrs .= ' data-fade="' . ( ( $attributes['sliderFade'] ?? false ) ? 'true' : '' ) . '"';
+		$data_attrs .= ' data-slidegrab="' . ( ( $attributes['sliderGrabCursor'] ?? true ) ? 'true' : '' ) . '"';
+		
+		// Responsive attributes for slides and space between
+		if ( isset( $attributes['sliderNumberPerWindow'] ) ) {
+			foreach ( $attributes['sliderNumberPerWindow'] as $bp => $val ) {
+				$data_attrs .= ' data-slides' . esc_attr( $bp ) . '="' . esc_attr( $val ) . '"';
+			}
+		}
+		if ( isset( $attributes['sliderSpaceBetween'] ) ) {
+			foreach ( $attributes['sliderSpaceBetween'] as $bp => $val ) {
+				$data_attrs .= ' data-spacebt' . esc_attr( $bp ) . '="' . esc_attr( $val ) . '"';
+			}
+		}
+
+		// Inner content structure for Swiper
+		$inner_content = '<div class="swiper"><div class="swiper-wrapper">' . cc_render( $content, $attributes, $block ) . '</div>';
+
+		// Navigation and Pagination
+		if ( $attributes['sliderDots'] ?? true ) {
+			$inner_content .= '<div class="swiper-pagination"></div>';
+		}
+		if ( $attributes['sliderButtons'] ?? true ) {
+			$id = $attributes['id'] ?? ( $attributes['uniqueID'] ?? '' );
+			$inner_content .= '<div id="' . esc_attr( $id ) . '-slider-button-prev" class="swiper-button-prev"></div>';
+			$inner_content .= '<div id="' . esc_attr( $id ) . '-slider-button-next" class="swiper-button-next"></div>';
+		}
+		
+		$inner_content .= '</div>'; // Close .swiper
+
+		return '<' . $open . $data_attrs . '>' . $inner_content . $close;
 	}
+
+	return '';
 }

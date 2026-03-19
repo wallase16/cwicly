@@ -1,6 +1,6 @@
 <?php
 /**
- * Register Cwicly block.
+ * Register Cwicly Slide block.
  *
  * @package cwicly
  */
@@ -12,15 +12,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Register block render callback.
  */
-function cwicly_slide_register() {
+function cwicly_sliderchild_register() {
 	register_block_type(
 		__DIR__,
 		array(
-			'render_callback' => 'cc_slide_render_callback',
+			'render_callback' => 'cc_sliderchild_render_callback',
 		)
 	);
 }
-add_action( 'init', 'cwicly_slide_register' );
+add_action( 'init', 'cwicly_sliderchild_register' );
 
 /**
  * Render callback.
@@ -31,14 +31,15 @@ add_action( 'init', 'cwicly_slide_register' );
  *
  * @return string
  */
-function cc_slide_render_callback( $attributes, $content, $block ) {
-	if ( ! is_admin() && isset( $attributes['effectsTiltControl'] ) && $attributes['effectsTiltControl'] ) {
-		wp_enqueue_script( 'cc-tilter', CWICLY_DIR_URL . 'assets/js/tilter.js', null, CWICLY_VERSION, true );
-	}
-
+function cc_sliderchild_render_callback( $attributes, $content, $block ) {
 	$conditions = \Cwicly\Helpers::block_conditions_check( $attributes, $block );
 
 	if ( $conditions ) {
-			return cc_render( $content, $attributes, $block );
+		$open  = \Cwicly\Helpers::tag_maker( $attributes, $block, true );
+		$close = \Cwicly\Helpers::tag_maker( $attributes, $block, false );
+
+		return '<' . $open . ' class="swiper-slide ' . ( $attributes['classID'] ?? '' ) . '">' . cc_render( $content, $attributes, $block ) . $close;
 	}
+
+	return '';
 }

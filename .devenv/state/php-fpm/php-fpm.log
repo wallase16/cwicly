@@ -18,3 +18,4 @@
 [18-Mar-2026 23:29:36] NOTICE: fpm is running, pid 39629
 [18-Mar-2026 23:29:36] NOTICE: ready to handle connections
 [18-Mar-2026 23:29:36] NOTICE: systemd monitor interval set to 10000ms
+[19-Mar-2026 09:51:50] WARNING: [pool php] server reached pm.max_children setting (5), consider raising it

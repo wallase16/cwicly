@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "cwicly/sliderchild",
+  "title": "Slide",
+  "category": "cwicly",
+  "description": "The Slide block fills the Slider block.",
+  "keywords": [
+    "slide",
+    "cwicly"
+  ],
+  "parent": [
+    "cwicly/slider"
+  ],
+  "textdomain": "cwicly",
+  "supports": {
+    "customClassName": false,
+    "html": false
+  },
+  "usesContext": [
+    "postId",
+    "isComponent",
+    "componentIndex"
+  ],
+  "attributes": {
+    "id": {
+      "type": "string"
+    },
+    "classID": {
+      "type": "string"
+    },
+    "uniqueID": {
+      "type": "string"
+    },
+    "customCSS": {
+      "type": "string",
+      "default": ""
+    },
+    "htmlAttributes": {
+      "type": "array",
+      "default": []
+    },
+    "interactions": {
+      "type": "object",
+      "default": {}
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css"
+}

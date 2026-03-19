@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "wp-scripts build",
-    "build:prod": "NODE_ENV=production wp-scripts build",
+    "build": "wp-scripts build src/index.js",
+    "build:prod": "NODE_ENV=production wp-scripts build src/index.js",
     "analyze": "wp-scripts build --webpack-bundle-analyzer",
     "start": "wp-scripts start",
     "playground": "npx @wp-playground/cli@latest start --blueprint=blueprint.json",
