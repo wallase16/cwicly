@@ -14,6 +14,8 @@ To prevent regressions and project stalls, the following constraints are mandato
 - **PHP Syntax Guard**: Every new or modified PHP file MUST pass syntax verification (`php -l`).
 - **Asset Bundle Control**: High-weight dependencies (Swiper, Leaflet, AOS) MUST be enqueued conditionally only when the block is detected.
 - **Visual Parity Loop**: Use automated test scripts (like `create-parity-test.php`) to compare the rebuilt block's DOM and layout against the original reference.
+- **ESM Strictness**: Since `package.json` uses `"type": "module"`, all JavaScript imports MUST include explicit file extensions (e.g., `import Edit from './edit.js'`). failure to do so will break the build.
+- **Explicit Entry Points**: To prevent `wp-scripts` from skipping the main application bundle when `block.json` files are present, the `build` script in `package.json` MUST explicitly define `src/index.js` as an entry point.
 
 ## 3. Mandatory Browser Verification
 - **Per-Phase Visual Audit**: At the completion of EVERY phase, you MUST use the browser subagent to:

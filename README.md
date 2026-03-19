@@ -7,34 +7,49 @@ This project upgrades the original Cwicly plugin to use the modern WordPress bui
 
 ## Getting Started
 
-### Development Environment
-This project uses **Nix** for a declarative development environment. To ensure all system dependencies (like `libssl`) are available for build tools and language servers, work within the Nix shell:
+### 1. Development Environment
+This project uses **Nix** and **devenv** for a declarative, isolated development environment.
+
 ```bash
+# Enter the nix development shell
 nix develop
+
+# Start the environment (Caddy, PHP-FPM, MySQL)
+devenv up
 ```
 
-### Build Instructions
-To build the plugin assets (always run within `nix develop`):
+### 2. Accessing the Site
+Once the environment is up, the site is accessible via the Caddy Gateway:
+- **URL**: `http://cwicly-rebuild.localhost:8000/index.php`
+- **Admin**: `http://cwicly-rebuild.localhost:8000/wp-admin/`
+- **Prefix Convention**: All services route through the gateway on port `8000`.
+
+### 3. Build Instructions
+To build plugin assets (always run within `nix develop`):
 ```bash
 npm run build
 ```
-Note: Building within `nix develop` ensures that the modern JSX transform dependencies are correctly mapped and system libraries are available.
+Note: The build is optimized for ESM and uses explicit entry points defined in `package.json`.
 
-### Testing
-#### Backend (PHP)
-Run the PHPUnit suite to verify block registration and server-side rendering:
-```bash
-./vendor/bin/phpunit
-```
+## Standard Operating Procedure (SOP)
 
-#### Frontend (Browser)
-Launch a local WordPress Playground server for visual verification:
-```bash
-npm run playground:server -- --port=8001
-```
+### Making Changes
+All development follows the **Iterative Reconstruction Mandate** defined in [gemini.md](file:///home/gideon/.gemini/antigravity/scratch/cwicly-rebuild/cwicly/gemini.md):
+1.  **Iterative Planning**: Create an `implementation_plan.md` and `task.md` before starting any phase.
+2.  **ESM Compliance**: All JavaScript imports MUST include `.js` extensions due to `"type": "module"` in `package.json`.
+3.  **Asset Bundling**: High-weight dependencies (Swiper, Leaflet) must be enqueued conditionally in PHP.
+4.  **Infrastructure**: Services must use Unix Domain Sockets (UDS) for persistence.
+
+### Verification
+- **PHP Syntax**: Validate changes via `php -l`.
+- **Visual Audit**: Every phase requires a browser-based visual verification (captured in `walkthrough.md`).
+- **Parity Tests**: Compare rebuilt block DOM against the original plugin in `sites/original/`.
 
 ## Key Architectural Changes
 - **Cwicly Store**: Reconstructed as a standalone Redux store (`cwicly/base`).
-- **Standardized Inspector**: All core blocks now use a unified tabbed interface (`Primary`, `Design`, `Advanced`).
-- **Dynamic Data Binding**: Full integration for ACF, Post Meta, and Relationship fields with live resolution via the `useDynamicData` hook and `cwicly/v1/dynamics` API.
-- **Scoped Scaling**: Responsive design and Tailwind integration extracted into shared framework components.
+- **Standardized Inspector**: Unified tabbed interface (`Primary`, `Design`, `Advanced`).
+- **Dynamic Data Binding**: Live resolution via `useDynamicData` hook and Cwicly REST API.
+- **Modern Slider Engine**: High-performance Swiper.js integration for `cwicly/slider`.
+
+## Project History & Verification
+For a detailed history of the rebuild phases and visual verification proofs, see the [walkthrough.md](file:///home/gideon/.gemini/antigravity/brain/4c5bd7c6-0191-4b2a-adad-a2d156a9b5fb/walkthrough.md).
